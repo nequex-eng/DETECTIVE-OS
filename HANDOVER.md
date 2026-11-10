@@ -27,7 +27,7 @@ DETECTIVE OS是针对真实历史刑事案件的公开资料研究、证据分�
 | 案件1 CASE-CN-1996-001 南大碎尸案 | 完成 | 8来源、28条证据（A7/B6/C5/D2/E1/F3/G1/H3）、9事件、11实体、5矛盾、5假设、8缺口 |
 | 案件2 CASE-CN-1988-001 白银连环杀人案（回溯校验） | 完成 | 8来源、10条证据（A4/B4/C1/H1）、6事件、5实体、5矛盾、5假设、6缺口 |
 | 验收测试 | 17项全过 | `tests/test_acceptance.py` 11项 + `tests/test_baiyin_validation.py` 6项 |
-| GitHub | 已推送 | 3次快照提交，39个文件，最新提交7945658 |
+| GitHub | 已推送 | 4次快照提交，40个文件，最新提交8a6da8b |
 | Pages静态站 | 已上线并实核 | `public/`由真实报告数据生成，`python3 scripts/build_site.py` |
 | Kaggle双T4实验Notebook | 文件已建，未运行 | `kaggle/detective-os-experiments.ipynb`，12格，AST全过 |
 
