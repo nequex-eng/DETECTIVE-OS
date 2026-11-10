@@ -82,16 +82,14 @@ tests/test_acceptance.py  验收测试1-10
 
 - 前端工作站（React加TypeScript，10个导航页）未做
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计）
-- 前端工作站（React加TypeScript，10个导航页）未做
-- Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，无LLM
 - Kaggle Notebook已建成（`kaggle/detective-os-experiments.ipynb`，12格，AST校验通过；预检门加实验1去重、实验2事实抽取、实验3矛盾识别、CPU复算），尚未推上Kaggle运行（需用户点头，消耗GPU额度；推送命令见`kaggle/README.md`）
-- GitHub仓库`nequex-eng/detective-os`尚未建：Muse的GitHub App调建库接口报403，无建库权限；需用户在GitHub手动新建空仓库（公开、不带README）并授权App，之后才能推
+- GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
 - 1996年协查通报与认尸启示原始版面、1996年2月至4月排查同期报道原文尚未收入（已记为缺口G7、G8）
 
 ## 下一步
 
-1. 用户建空仓库后推GitHub，接Cloudflare Pages静态站（报告数据驱动，现为双案件版）
+1. 接Cloudflare Pages静态站（报告数据驱动，现为双案件版）
 2. Kaggle Notebook推上运行，出评测报告
 3. 前端工作站与Workers API
 4. 第三个案件（再选一起未侦破案件，检验引擎在无已知答案时的表现）
