@@ -87,9 +87,13 @@ tests/test_acceptance.py  验收测试1-10
 - GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
 - 1996年协查通报与认尸启示原始版面、1996年2月至4月排查同期报道原文尚未收入（已记为缺口G7、G8）
 
-## 下一步
+## 网站
 
-1. 接Cloudflare Pages静态站（报告数据驱动，现为双案件版）
+Cloudflare Pages静态站（报告数据驱动，双案件版）：https://detective-os.pages.dev
+
+部署：`python3 deploy.py`（wrangler direct upload，public/目录）。
+
+## 下一步
 2. Kaggle Notebook推上运行，出评测报告
 3. 前端工作站与Workers API
 4. 第三个案件（再选一起未侦破案件，检验引擎在无已知答案时的表现）
