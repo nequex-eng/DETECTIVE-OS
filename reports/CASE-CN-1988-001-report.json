@@ -1,0 +1,640 @@
+{
+  "case_id": "CASE-CN-1988-001",
+  "bayesian": {
+    "posteriors": [
+      {
+        "hypothesis_id": "H1",
+        "log_posterior": -2.9159,
+        "prior": 0.3,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "A",
+            "likelihood": 0.8,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "A",
+            "likelihood": 0.85,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "A",
+            "likelihood": 0.75,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "B",
+            "likelihood": 0.65,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "B",
+            "likelihood": 0.6,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "B",
+            "likelihood": 0.7,
+            "weight": 0.8
+          }
+        ],
+        "posterior": 0.6917
+      },
+      {
+        "hypothesis_id": "H2",
+        "log_posterior": -3.8729,
+        "prior": 0.25,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "A",
+            "likelihood": 0.45,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "A",
+            "likelihood": 0.8,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "A",
+            "likelihood": 0.7,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "B",
+            "likelihood": 0.7,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "B",
+            "likelihood": 0.55,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "B",
+            "likelihood": 0.65,
+            "weight": 0.8
+          }
+        ],
+        "posterior": 0.2656
+      },
+      {
+        "hypothesis_id": "H3",
+        "log_posterior": -6.4137,
+        "prior": 0.15,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "A",
+            "likelihood": 0.5,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "A",
+            "likelihood": 0.3,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "A",
+            "likelihood": 0.5,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "B",
+            "likelihood": 0.5,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "B",
+            "likelihood": 0.4,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "B",
+            "likelihood": 0.45,
+            "weight": 0.8
+          }
+        ],
+        "posterior": 0.0209
+      },
+      {
+        "hypothesis_id": "H4",
+        "log_posterior": -6.4969,
+        "prior": 0.15,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "A",
+            "likelihood": 0.55,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "A",
+            "likelihood": 0.6,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "A",
+            "likelihood": 0.25,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "B",
+            "likelihood": 0.4,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "B",
+            "likelihood": 0.45,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "B",
+            "likelihood": 0.4,
+            "weight": 0.8
+          }
+        ],
+        "posterior": 0.0193
+      },
+      {
+        "hypothesis_id": "H5",
+        "log_posterior": -8.5565,
+        "prior": 0.15,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "A",
+            "likelihood": 0.4,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "A",
+            "likelihood": 0.05,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "A",
+            "likelihood": 0.45,
+            "weight": 1.0
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "B",
+            "likelihood": 0.5,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "B",
+            "likelihood": 0.5,
+            "weight": 0.8
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "B",
+            "likelihood": 0.35,
+            "weight": 0.8
+          }
+        ],
+        "posterior": 0.0025
+      }
+    ],
+    "disclosure": "Bayesian output is a model ranking under stated priors and likelihoods, not a probability of guilt. Priors are subjective starting points; likelihoods are analyst judgments stored in the case file. No reliable data exists to calibrate them against solved cases.",
+    "verdict": "leading: H1 (margin 0.4261)"
+  },
+  "qualitative": {
+    "H1": {
+      "support_weight": 3.0,
+      "oppose_weight": 0.8,
+      "net": 2.2,
+      "unexplained": 1,
+      "status": "open"
+    },
+    "H2": {
+      "support_weight": 2.0,
+      "oppose_weight": 1.0,
+      "net": 1.0,
+      "unexplained": 1,
+      "status": "open"
+    },
+    "H3": {
+      "support_weight": 1.0,
+      "oppose_weight": 1.0,
+      "net": 0.0,
+      "unexplained": 2,
+      "status": "open"
+    },
+    "H4": {
+      "support_weight": 1.0,
+      "oppose_weight": 1.0,
+      "net": 0.0,
+      "unexplained": 2,
+      "status": "open"
+    },
+    "H5": {
+      "support_weight": 1.0,
+      "oppose_weight": 2.0,
+      "net": -1.0,
+      "unexplained": 2,
+      "status": "open"
+    }
+  },
+  "plan": [
+    {
+      "task_id": "T01",
+      "case_id": "CASE-CN-1988-001",
+      "question": "为证据F08寻找第二个独立来源：警方画像内容经媒体报道称：嫌疑人专门选择身穿红色衣服的年轻女性作为下手目标，大部……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T02",
+      "case_id": "CASE-CN-1988-001",
+      "question": "核验矛盾CT01（不同媒体报道之间的矛盾）：2001年8月列为部督 vs 2004年8月列为重点督办",
+      "purpose": "未解矛盾会污染所有依赖它的推理",
+      "hypotheses": [],
+      "expected_info": "公安部督办文件的公开记录或权威复核。",
+      "impact_if_yes": "矛盾解决，相关证据权重恢复",
+      "impact_if_no": "矛盾确认为真实分歧，相关结论降级",
+      "source_or_channel": "原始出处、同期多家报道",
+      "estimated_value": "high: 矛盾未解",
+      "status": "open"
+    },
+    {
+      "task_id": "T03",
+      "case_id": "CASE-CN-1988-001",
+      "question": "核验矛盾CT02（不同媒体报道之间的矛盾）：2015年3月重启 vs 2016年3月重启",
+      "purpose": "未解矛盾会污染所有依赖它的推理",
+      "hypotheses": [],
+      "expected_info": "省公安厅重启侦查的公开报道原文。",
+      "impact_if_yes": "矛盾解决，相关证据权重恢复",
+      "impact_if_no": "矛盾确认为真实分歧，相关结论降级",
+      "source_or_channel": "原始出处、同期多家报道",
+      "estimated_value": "high: 矛盾未解",
+      "status": "open"
+    },
+    {
+      "task_id": "T04",
+      "case_id": "CASE-CN-1988-001",
+      "question": "核验矛盾CT03（不同媒体报道之间的矛盾）：白银9起、包头2起 vs 白银10起、包头1起",
+      "purpose": "未解矛盾会污染所有依赖它的推理",
+      "hypotheses": [],
+      "expected_info": "白银与包头两地案件清单。",
+      "impact_if_yes": "矛盾解决，相关证据权重恢复",
+      "impact_if_no": "矛盾确认为真实分歧，相关结论降级",
+      "source_or_channel": "原始出处、同期多家报道",
+      "estimated_value": "high: 矛盾未解",
+      "status": "open"
+    },
+    {
+      "task_id": "T05",
+      "case_id": "CASE-CN-1988-001",
+      "question": "核验矛盾CT04（不同媒体报道之间的矛盾）：大部分作案在白天 vs 大部分作案在夜间",
+      "purpose": "未解矛盾会污染所有依赖它的推理",
+      "hypotheses": [],
+      "expected_info": "2004年宣传提纲原文中关于作案时间的表述。",
+      "impact_if_yes": "矛盾解决，相关证据权重恢复",
+      "impact_if_no": "矛盾确认为真实分歧，相关结论降级",
+      "source_or_channel": "原始出处、同期多家报道",
+      "estimated_value": "high: 矛盾未解",
+      "status": "open"
+    },
+    {
+      "task_id": "T06",
+      "case_id": "CASE-CN-1988-001",
+      "question": "核验矛盾CT05（不同媒体报道之间的矛盾）：首案1988年5月 vs 首案1988年6月",
+      "purpose": "未解矛盾会污染所有依赖它的推理",
+      "hypotheses": [],
+      "expected_info": "首案原始案发时间记录。",
+      "impact_if_yes": "矛盾解决，相关证据权重恢复",
+      "impact_if_no": "矛盾确认为真实分歧，相关结论降级",
+      "source_or_channel": "原始出处、同期多家报道",
+      "estimated_value": "high: 矛盾未解",
+      "status": "open"
+    },
+    {
+      "task_id": "T07",
+      "case_id": "CASE-CN-1988-001",
+      "question": "寻找能区分当前前两名假设的新资料",
+      "purpose": "前两名假设目前无法区分",
+      "hypotheses": [],
+      "expected_info": "关键证据：F01, F02, F03",
+      "impact_if_yes": "前两名拉开差距",
+      "impact_if_no": "两者都被削弱，须引入新假设",
+      "source_or_channel": "公开资料、已公开的警方通报",
+      "estimated_value": "high: 直接决定排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T08",
+      "case_id": "CASE-CN-1988-001",
+      "question": "解释尚未被解释的事实F06：最后一案发生于2002年2月，此后至2016年8月未再发生同类案件；案件跨度28……",
+      "purpose": "一个假设解释不了的事实越多，可信度越低",
+      "hypotheses": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5"
+      ],
+      "expected_info": "新的解释机制或反证",
+      "impact_if_yes": "相关假设补强",
+      "impact_if_no": "相关假设被削弱或推翻",
+      "source_or_channel": "公开资料",
+      "estimated_value": "medium",
+      "status": "open"
+    },
+    {
+      "task_id": "T09",
+      "case_id": "CASE-CN-1988-001",
+      "question": "解释尚未被解释的事实F02：警方确认系列案件系同一人所为；现场留有足印、指纹、精液、DNA等身体特征线索，并……",
+      "purpose": "一个假设解释不了的事实越多，可信度越低",
+      "hypotheses": [
+        "H3",
+        "H5"
+      ],
+      "expected_info": "新的解释机制或反证",
+      "impact_if_yes": "相关假设补强",
+      "impact_if_no": "相关假设被削弱或推翻",
+      "source_or_channel": "公开资料",
+      "estimated_value": "medium",
+      "status": "open"
+    },
+    {
+      "task_id": "T10",
+      "case_id": "CASE-CN-1988-001",
+      "question": "解释尚未被解释的事实F03：凶手专挑年轻女性下手，采用尾随、盯梢或长期观察后直接进入所选女子居住地，进行强奸……",
+      "purpose": "一个假设解释不了的事实越多，可信度越低",
+      "hypotheses": [
+        "H4"
+      ],
+      "expected_info": "新的解释机制或反证",
+      "impact_if_yes": "相关假设补强",
+      "impact_if_no": "相关假设被削弱或推翻",
+      "source_or_channel": "公开资料",
+      "estimated_value": "medium",
+      "status": "open"
+    }
+  ],
+  "review": {
+    "case_id": "CASE-CN-1988-001",
+    "findings": [
+      {
+        "role": "source",
+        "finding": "证据F08只有一个来源：警方画像内容经媒体报道称：嫌疑人专门选择身穿红色衣服的年轻女……",
+        "severity": "warning",
+        "cites": [
+          "F08"
+        ]
+      },
+      {
+        "role": "timeline",
+        "finding": "时间线空白：E03到E04（2002-02-28至2004-01-01）",
+        "severity": "note",
+        "cites": []
+      },
+      {
+        "role": "timeline",
+        "finding": "时间线空白：E04到E05（2004-12-31至2015-03-01）",
+        "severity": "note",
+        "cites": []
+      },
+      {
+        "role": "timeline",
+        "finding": "时间线空白：E05到E06（2016-03-31至2016-04-01）",
+        "severity": "note",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H1有1项事实尚未解释：F06",
+        "severity": "warning",
+        "cites": [
+          "F06"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H2有1项事实尚未解释：F06",
+        "severity": "warning",
+        "cites": [
+          "F06"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H3有2项事实尚未解释：F02,F06",
+        "severity": "warning",
+        "cites": [
+          "F02",
+          "F06"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H4有2项事实尚未解释：F03,F06",
+        "severity": "warning",
+        "cites": [
+          "F03",
+          "F06"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H5有2项事实尚未解释：F02,F06",
+        "severity": "warning",
+        "cites": [
+          "F02",
+          "F06"
+        ]
+      },
+      {
+        "role": "adversarial",
+        "finding": "反证：F05（B级）反对H1：21世纪初以来，白银警方先后启动全城查指纹、抽血验DNA等排查方式，对白银市数十……",
+        "severity": "warning",
+        "cites": [
+          "F05"
+        ]
+      }
+    ],
+    "blockers": 0,
+    "passed": true
+  },
+  "contradictions": [
+    {
+      "contradiction_id": "CT01",
+      "case_id": "CASE-CN-1988-001",
+      "type": "media",
+      "type_label": "不同媒体报道之间的矛盾",
+      "evidence_ids": [
+        "F01"
+      ],
+      "source_ids": [
+        "S07",
+        "S01"
+      ],
+      "wording_a": "2001年8月列为部督",
+      "wording_b": "2004年8月列为重点督办",
+      "quote_a": "该案于2001年8月被列为公安部部督案件。（凤凰网财经）",
+      "quote_b": "2004年8月，本案被公安部列为重点督办案件。（山东高院引中国法院网）",
+      "could_be_drift": "可能是部督时间与重点督办时间被混淆：2001年列为部督案件与2004年8月列为重点督办案件可能指不同层级的督办决定，需原始文件核对。",
+      "needs_what": "公安部督办文件的公开记录或权威复核。",
+      "resolvable_now": false,
+      "resolution": ""
+    },
+    {
+      "contradiction_id": "CT02",
+      "case_id": "CASE-CN-1988-001",
+      "type": "media",
+      "type_label": "不同媒体报道之间的矛盾",
+      "evidence_ids": [
+        "F07"
+      ],
+      "source_ids": [
+        "S05",
+        "S06"
+      ],
+      "wording_a": "2015年3月重启",
+      "wording_b": "2016年3月重启",
+      "quote_a": "2015年3月，甘肃省公安厅决定重启侦查工作。（人民日报海外版）",
+      "quote_b": "2016年3月，甘肃省公安厅重启侦查工作。（多家报道）",
+      "could_be_drift": "可能是两次不同动作被混为一次：2015年3月决定重启与2016年3月重启侦查工作，或转载漂移。",
+      "needs_what": "省公安厅重启侦查的公开报道原文。",
+      "resolvable_now": false,
+      "resolution": ""
+    },
+    {
+      "contradiction_id": "CT03",
+      "case_id": "CASE-CN-1988-001",
+      "type": "media",
+      "type_label": "不同媒体报道之间的矛盾",
+      "evidence_ids": [
+        "F01"
+      ],
+      "source_ids": [
+        "S02",
+        "S01"
+      ],
+      "wording_a": "白银9起、包头2起",
+      "wording_b": "白银10起、包头1起",
+      "quote_a": "甘肃省白银市9名女性和内蒙古包头市两名女性惨遭杀害。（国际在线）",
+      "quote_b": "共致使11名女性被害人死亡（甘肃省白银市白银区10起、内蒙古自治区包头市昆都区1起）。（检方指控，经法院系统发布）",
+      "could_be_drift": "总数11起多源一致，分布口径不一：可能是白银市内案件计数口径不同（是否含包头并案），需各地案件清单核对。",
+      "needs_what": "白银与包头两地案件清单。",
+      "resolvable_now": false,
+      "resolution": ""
+    },
+    {
+      "contradiction_id": "CT04",
+      "case_id": "CASE-CN-1988-001",
+      "type": "media",
+      "type_label": "不同媒体报道之间的矛盾",
+      "evidence_ids": [
+        "F03",
+        "F08"
+      ],
+      "source_ids": [
+        "S06",
+        "S08"
+      ],
+      "wording_a": "大部分作案在白天",
+      "wording_b": "大部分作案在夜间",
+      "quote_a": "大部分作案时间选择在白天。（中文维基、界面新闻）",
+      "quote_b": "大部分作案时间选择在夜间。（网易转述）",
+      "could_be_drift": "转述漂移：不同报道对“大部分作案时间”的表述相反，可能源自不同案件的抽样或转载失真。",
+      "needs_what": "2004年宣传提纲原文中关于作案时间的表述。",
+      "resolvable_now": false,
+      "resolution": ""
+    },
+    {
+      "contradiction_id": "CT05",
+      "case_id": "CASE-CN-1988-001",
+      "type": "media",
+      "type_label": "不同媒体报道之间的矛盾",
+      "evidence_ids": [
+        "F01"
+      ],
+      "source_ids": [
+        "S01",
+        "S06"
+      ],
+      "wording_a": "首案1988年5月",
+      "wording_b": "首案1988年6月",
+      "quote_a": "1988年5月至2002年2月间……实施强奸杀人作案11起。（检方指控）",
+      "quote_b": "从1988年6月份至2002年2月份，有10起杀人兼性暴力案在甘肃省白银市出现。（中文维基）",
+      "could_be_drift": "月份口径差异：检方指控为1988年5月，另有资料称1988年6月；可能为首案发现时间与案发时间的口径不同。",
+      "needs_what": "首案原始案发时间记录。",
+      "resolvable_now": false,
+      "resolution": ""
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "嫌疑人身份：2016年8月25日之前，公开资料中无嫌疑人身份信息。",
+      "id": "G1",
+      "needed": "嫌疑人身份、DNA比对对象"
+    },
+    {
+      "gap": "2002年2月之后停手原因未知：生活变化、死亡、入狱还是迁离，公开资料无法回答。",
+      "id": "G2",
+      "needed": "嫌疑人2002年之后的行踪与生活变化"
+    },
+    {
+      "gap": "包头案件与白银案件的并案依据未见公开说明；白银与包头分布说法不一（9加2或10加1）。",
+      "id": "G3",
+      "needed": "并案依据、各地案件清单"
+    },
+    {
+      "gap": "现场物证（指纹、足印、DNA）的具体比对过程与未比中的原因未见公开说明。",
+      "id": "G4",
+      "needed": "物证清单、比对记录、排查范围说明"
+    },
+    {
+      "gap": "第一现场细节、每起案件的具体时间与地点未见系统公开。",
+      "id": "G5",
+      "needed": "各起案件的时间地点清单（不含被害人隐私细节）"
+    },
+    {
+      "gap": "嫌疑人画像的形成依据未见公开说明；“专挑红衣女性”是否为警方画像原意，尚待核实。",
+      "id": "G6",
+      "needed": "画像原始依据、2004年宣传提纲原文"
+    }
+  ],
+  "limits": [
+    "本案包只含2016年8月25日之前公开的事实（证据截止日），不含抓获、DNA-Y比对、审判等事后信息；事后已知结果只存在于独立的ground-truth.json校验文件，不进入推理。",
+    "先验概率是主观起点，排序对先验敏感：平先验下的排序须一并报告。",
+    "“专挑红衣女性”等说法来自警方画像经媒体报道的内容，是否为画像原意尚待核实。",
+    "白银与包头的案件分布、首案月份、重启侦查年份、部督年份均存在报道间矛盾，已并存记录。",
+    "本案包不记录被害人姓名与隐私细节。"
+  ]
+}
