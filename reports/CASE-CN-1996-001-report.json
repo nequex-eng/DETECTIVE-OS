@@ -774,5 +774,345 @@
     "F13（医生或屠夫职业推断）是转述的办案方向，不是独立证据；F09的推断源自F04，不重复计算。",
     "C级以下传言已隔离，永不进入推理；网传人名不建嫌疑人节点。",
     "澎湃2016年家属采访中除被害人外的姓名系化名，不得当作真实姓名使用；2021年诉讼原告姓名以法院材料为准，当前公开资料无法确认与2016年化名是否为同一人。"
-  ]
+  ],
+  "coverage": {
+    "case_id": "CASE-CN-1996-001",
+    "template_version": "1",
+    "total": 22,
+    "covered": 10,
+    "single": 9,
+    "missing": 3,
+    "only_unusable": 0,
+    "score": 0.6591,
+    "by_category": {
+      "失踪/案发": {
+        "total": 4,
+        "covered": 1,
+        "single": 2,
+        "missing": 1
+      },
+      "发现": {
+        "total": 2,
+        "covered": 1,
+        "single": 1,
+        "missing": 0
+      },
+      "身份确认": {
+        "total": 2,
+        "covered": 1,
+        "single": 1,
+        "missing": 0
+      },
+      "法医/物证": {
+        "total": 3,
+        "covered": 1,
+        "single": 0,
+        "missing": 2
+      },
+      "侦查过程": {
+        "total": 3,
+        "covered": 3,
+        "single": 0,
+        "missing": 0
+      },
+      "作案手法": {
+        "total": 2,
+        "covered": 1,
+        "single": 1,
+        "missing": 0
+      },
+      "动机": {
+        "total": 1,
+        "covered": 0,
+        "single": 1,
+        "missing": 0
+      },
+      "法律程序": {
+        "total": 2,
+        "covered": 0,
+        "single": 2,
+        "missing": 0
+      },
+      "家属与当事人": {
+        "total": 1,
+        "covered": 1,
+        "single": 0,
+        "missing": 0
+      },
+      "官方回应": {
+        "total": 2,
+        "covered": 1,
+        "single": 1,
+        "missing": 0
+      }
+    },
+    "missing_ids": [
+      "C03",
+      "C10",
+      "C11"
+    ],
+    "single_ids": [
+      "C01",
+      "C04",
+      "C05",
+      "C08",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C22"
+    ],
+    "items": [
+      {
+        "item_id": "C01",
+        "category": "失踪/案发",
+        "title": "被害人身份",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F01"
+        ]
+      },
+      {
+        "item_id": "C02",
+        "category": "失踪/案发",
+        "title": "最后行踪",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F02",
+          "F26"
+        ]
+      },
+      {
+        "item_id": "C03",
+        "category": "失踪/案发",
+        "title": "案发时间窗口",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C04",
+        "category": "失踪/案发",
+        "title": "案发地点/第一现场",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F11"
+        ]
+      },
+      {
+        "item_id": "C05",
+        "category": "发现",
+        "title": "发现时间地点与发现者",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F03"
+        ]
+      },
+      {
+        "item_id": "C06",
+        "category": "发现",
+        "title": "现场状况",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F04",
+          "F05"
+        ]
+      },
+      {
+        "item_id": "C07",
+        "category": "身份确认",
+        "title": "身份确认过程与时间",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F06",
+          "F07"
+        ]
+      },
+      {
+        "item_id": "C08",
+        "category": "身份确认",
+        "title": "认尸/协查原始材料",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F14"
+        ]
+      },
+      {
+        "item_id": "C09",
+        "category": "法医/物证",
+        "title": "法医结论",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F04",
+          "F07"
+        ]
+      },
+      {
+        "item_id": "C10",
+        "category": "法医/物证",
+        "title": "物证清单与保存现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C11",
+        "category": "法医/物证",
+        "title": "DNA/指纹比对现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C12",
+        "category": "侦查过程",
+        "title": "排查规模与范围",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F11",
+          "F17"
+        ]
+      },
+      {
+        "item_id": "C13",
+        "category": "侦查过程",
+        "title": "侦查节点",
+        "status": "covered",
+        "origins": 3,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F08",
+          "F10",
+          "F09"
+        ]
+      },
+      {
+        "item_id": "C14",
+        "category": "侦查过程",
+        "title": "嫌疑人画像/排查方向",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F13",
+          "F27"
+        ]
+      },
+      {
+        "item_id": "C15",
+        "category": "作案手法",
+        "title": "作案手法特征",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F04",
+          "F05"
+        ]
+      },
+      {
+        "item_id": "C16",
+        "category": "作案手法",
+        "title": "抛尸/藏匿方式与路线",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F05"
+        ]
+      },
+      {
+        "item_id": "C17",
+        "category": "动机",
+        "title": "动机指向",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F28"
+        ]
+      },
+      {
+        "item_id": "C18",
+        "category": "法律程序",
+        "title": "诉讼/审判进展",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F15"
+        ]
+      },
+      {
+        "item_id": "C19",
+        "category": "法律程序",
+        "title": "追诉时效/立案状态",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F08",
+          "F18"
+        ]
+      },
+      {
+        "item_id": "C20",
+        "category": "家属与当事人",
+        "title": "家属说法与诉求",
+        "status": "covered",
+        "origins": 2,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F12",
+          "F15",
+          "F16"
+        ]
+      },
+      {
+        "item_id": "C21",
+        "category": "官方回应",
+        "title": "警方/官方公开回应",
+        "status": "covered",
+        "origins": 3,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F08",
+          "F09",
+          "F10"
+        ]
+      },
+      {
+        "item_id": "C22",
+        "category": "官方回应",
+        "title": "同期原始报道",
+        "status": "single",
+        "origins": 1,
+        "only_unusable": false,
+        "evidence_ids": [
+          "F14"
+        ]
+      }
+    ]
+  }
 }

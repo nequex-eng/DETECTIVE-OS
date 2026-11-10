@@ -3,6 +3,7 @@
 Usage:
   python -m detective_os.cli run cases/case-cn-1996-001 [--db reports/detective-os.db]
   python -m detective_os.cli check cases/case-cn-1996-001
+  python -m detective_os.cli coverage cases/case-cn-1996-001
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ from detective_os.reasoning import (  # noqa: E402
     IndependentReview, InvestigationPlanner)
 from detective_os import db as dbmod  # noqa: E402
 from detective_os.report import render_markdown  # noqa: E402
+from detective_os.coverage import CoverageChecklist  # noqa: E402
 
 
 def load_case(case_dir: Path):
@@ -94,9 +96,19 @@ def run_case(case_dir: Path, out_dir: Path, db_path: Path | None):
     plan = planner.plan(case["case_id"])
     review = IndependentReview(loaded["board"], loaded["timeline"],
                                loaded["hypotheses"], loaded["contradictions"]).run(case["case_id"])
+    coverage_lines = None
+    coverage_summary = None
+    cl = CoverageChecklist.load(case_dir)
+    if cl is not None:
+        problems = cl.validate(loaded["board"])
+        if problems:
+            raise ValueError(f"coverage.json invalid: {problems}")
+        coverage_summary = cl.compute(loaded["board"], loaded["registry"])
+        coverage_lines = cl.markdown_section(coverage_summary)
     md = render_markdown(case, qual, bayes, plan, review,
                          list(loaded["contradictions"].items.values()),
-                         list(loaded["registry"].sources.values()))
+                         list(loaded["registry"].sources.values()),
+                         coverage_lines=coverage_lines)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"{case['case_id']}-report.md").write_text(md, encoding="utf-8")
     run_record = {"case_id": case["case_id"], "bayesian": bayes,
@@ -105,12 +117,13 @@ def run_case(case_dir: Path, out_dir: Path, db_path: Path | None):
                   "review": review,
                   "contradictions": [c.to_dict() for c in loaded["contradictions"].items.values()],
                   "gaps": case.get("gaps", []),
-                  "limits": case.get("limits", [])}
+                  "limits": case.get("limits", []),
+                  "coverage": coverage_summary}
     (out_dir / f"{case['case_id']}-report.json").write_text(
         json.dumps(run_record, ensure_ascii=False, indent=2), encoding="utf-8")
     if db_path:
         conn = dbmod.init_db(str(db_path))
-        run_id = f"run-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}"
+        run_id = f"run-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}"
         ev_ids = sorted(loaded["board"].items.keys())
         dbmod.record_run(conn, run_id, case["case_id"],
                          datetime.now(timezone.utc).isoformat(),
@@ -135,8 +148,31 @@ def main():
     p_run.add_argument("--db", default="reports/detective-os.db")
     p_check = sub.add_parser("check")
     p_check.add_argument("case_dir")
+    p_cov = sub.add_parser("coverage")
+    p_cov.add_argument("case_dir")
     args = ap.parse_args()
     case_dir = Path(args.case_dir)
+    if args.cmd == "coverage":
+        loaded = load_case(case_dir)
+        cl = CoverageChecklist.load(case_dir)
+        if cl is None:
+            print(f"case {loaded['case']['case_id']}: no coverage.json yet")
+            return 1
+        problems = cl.validate(loaded["board"])
+        if problems:
+            print("coverage.json invalid:")
+            for p in problems:
+                print(f"  - {p}")
+            return 1
+        s = cl.compute(loaded["board"], loaded["registry"])
+        print(f"case {s['case_id']} coverage: {s['score'] * 100:.1f}% "
+              f"({s['covered']} covered / {s['single']} single / "
+              f"{s['missing']} missing of {s['total']})")
+        for it in s["items"]:
+            flag = " (only rumour/unverified linked)" if it["only_unusable"] else ""
+            print(f"  {it['item_id']} [{it['status']}] {it['title']} "
+                  f"origins={it['origins']}{flag}")
+        return 0
     if args.cmd == "check":
         loaded = load_case(case_dir)
         print(f"case {loaded['case']['case_id']} loads clean:")
@@ -155,6 +191,18 @@ def main():
               f"relationships: {len(loaded['graph'].relationships)}")
         print(f"  contradictions: {len(loaded['contradictions'].items)}")
         print(f"  hypotheses: {len(loaded['hypotheses'].items)}")
+        cl = CoverageChecklist.load(case_dir)
+        if cl is None:
+            print("  coverage: no coverage.json (not yet built)")
+        else:
+            problems = cl.validate(loaded["board"])
+            if problems:
+                print(f"  coverage: INVALID: {problems}")
+            else:
+                s = cl.compute(loaded["board"], loaded["registry"])
+                print(f"  coverage: {s['score'] * 100:.1f}% "
+                      f"({s['covered']} covered / {s['single']} single / "
+                      f"{s['missing']} missing of {s['total']})")
         return 0
     res = run_case(case_dir, Path(args.out), Path(args.db) if args.db else None)
     print(f"verdict: {res['bayes']['verdict']}")

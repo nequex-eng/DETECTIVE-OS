@@ -1,0 +1,85 @@
+[{"stream_name":"stderr","time":6.219267928,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.219306136,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.219311859,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.219315972,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.759445767,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.759477819,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.759481537,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.759484059,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":12.890151825,"data":"python 3.13.16\n"}
+,{"stream_name":"stdout","time":12.890190005000001,"data":"torch 2.11.0+cu130 cuda True\n"}
+,{"stream_name":"stdout","time":12.890195936,"data":"cuda device count: 2\n"}
+,{"stream_name":"stdout","time":13.107515245,"data":"gpu0: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":13.107543096,"data":"gpu1: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":13.107548149,"data":"PREFLIGHT OK: T4x2 confirmed, preflight.json written\n"}
+,{"stream_name":"stdout","time":13.306775762000001,"data":"missing: ['bitsandbytes']\n"}
+,{"stream_name":"stdout","time":17.180238846,"data":"installed: ['bitsandbytes']\n"}
+,{"stream_name":"stderr","time":44.807074139,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":44.807111692,"data":"\n"}
+,{"stream_name":"stderr","time":44.807116249,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":51.145040936,"data":"clusters: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]]\n"}
+,{"stream_name":"stdout","time":51.145102219,"data":"EXP1 clusters OK {'threshold': 0.6, 'clusters': [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]], 'reprint_min_pairwise_sim': 0.6683523654937744, 'cross_max_sim': 0.44565773010253906, 'reprints_one_cluster': True, 'distinct_stay_separate': True, 'pass': True}\n"}
+,{"stream_name":"stdout","time":51.156598695,"data":"gpu0 free VRAM after unload: 14.41GB (was 14.32GB)\n"}
+,{"stream_name":"stdout","time":53.843530742,"data":"tokenizer OK: vocab=151643 tokens=25 round-trip preserved\n"}
+,{"stream_name":"stderr","time":87.068120972,"data":"[transformers] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stderr","time":87.068155335,"data":"\n"}
+,{"stream_name":"stderr","time":87.068160881,"data":"[transformers] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stderr","time":87.166187087,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":87.166227737,"data":"\n"}
+,{"stream_name":"stderr","time":87.166266226,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":87.255121842,"data":"hf_device_map devices: ['cuda:1']\n"}
+,{"stream_name":"stdout","time":87.255155842,"data":"first parameter device: cuda:1\n"}
+,{"stream_name":"stdout","time":87.255161477,"data":"after load: gpu0 free=14.4GB gpu1 free=9.3GB\n"}
+,{"stream_name":"stderr","time":93.692860534,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":93.692898823,"data":"\n"}
+,{"stream_name":"stderr","time":93.692904263,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":93.890366361,"data":"keywords 4/4: 受害人遗体碎片在其失踪9天后被发现。\n"}
+,{"stream_name":"stdout","time":93.890395491,"data":"当年1月19日清晨，受害人遗体碎片在南京华侨路被一名清洁工发现。\n"}
+,{"stream_name":"stdout","time":93.890400867,"data":"凶手将尸体切割成2000片以上。\n"}
+,{"stream_name":"stdout","time":93.890404315,"data":"凶手将尸体加热至熟以消灭作案痕迹。\n"}
+,{"stream_name":"stdout","time":100.112224134,"data":"keywords 4/4: 1988年至2002年期间，甘肃省白银市发生了9起女性遇害案件。\n"}
+,{"stream_name":"stdout","time":100.112254346,"data":"1988年至2002年期间，内蒙古包头市发生了2起女性遇害案件。\n"}
+,{"stream_name":"stdout","time":100.112259723,"data":"在这些案件中，部分受害女性曾遭受性侵害。\n"}
+,{"stream_name":"stdout","time":100.112263859,"data":"EXP2 {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'keyword_recall': 1.0, 'pass': True}\n"}
+,{"stream_name":"stderr","time":100.139378621,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":100.139399292,"data":"\n"}
+,{"stream_name":"stderr","time":100.139408963,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":118.115103682,"data":"这两种说法之间存在细微的差异，但并不构成事实矛盾。具体分析如下：\n"}
+,{"stream_name":"stdout","time":118.115144493,"data":"\n"}
+,{"stream_name":"stdout","time":118.115148703,"data":"说法A指出被害人的年龄为19岁，而说法B则提到受害者是“当时年方20岁”。这里的关键在于“当时”这个词，它暗示了时间上的变化或背景信息。在说法B中，“当时年方20岁”可能意味着受害者在事件发生时的实际年龄是20岁，这可能是由于某种原因（如生日临近）使得她的实际年龄与陈述的时间点不完全一致。\n"}
+,{"stream_name":"stdout","time":118.115152813,"data":"\n"}
+,{"stream_name":"stdout","time":118.115188687,"data":"因此，这种差异更倾向于是一种“口径差异”，而不是事实矛盾或转述漂移。两种说法都指出了受害者是刁爱青，且年龄接近，只是表述方式和时间点上略有不同。如果能够确认事件发生的具体日期，可以进一步验证这两种说法中的哪一个更准确。\n"}
+,{"stream_name":"stdout","time":118.115194297,"data":"EXP3 {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'mentions_calibre': True, 'accuses_lying': False, 'pass': True}\n"}
+,{"stream_name":"stdout","time":118.170094664,"data":"gpu1 free VRAM after unload: 14.41GB\n"}
+,{"stream_name":"stdout","time":119.004500078,"data":"CASE-CN-1988-001 order_match: True max_diff: 6.128669313298918e-05\n"}
+,{"stream_name":"stdout","time":119.004529128,"data":"CASE-CN-1996-001 order_match: True max_diff: 2.140800377753438e-05\n"}
+,{"stream_name":"stderr","time":122.520235524,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":122.520777238,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":122.520803729,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
+,{"stream_name":"stderr","time":122.520810388,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":122.520815732,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":122.520820363,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":122.520825059,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":122.52084658,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":122.520851855,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":122.520856585,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":122.520860947,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":122.520878358,"data":"Exception encountered at \"In [7]\":\n"}
+,{"stream_name":"stderr","time":122.520882585,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":122.520886941,"data":"AssertionError                            Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":122.520890889,"data":"/tmp/ipykernel_23/18056114.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":122.520895248,"data":"     40     print('CPU recompute FAILED:', repr(e))\n"}
+,{"stream_name":"stderr","time":122.520899501,"data":"     41 json.dump(report, open('/kaggle/working/exp_cpu_recompute.json', 'w'), ensure_ascii=False, indent=2)\n"}
+,{"stream_name":"stderr","time":122.520903856,"data":"---\u003e 42 assert report['pass'], 'CPU RECOMPUTE FAILED: see exp_cpu_recompute.json'\n"}
+,{"stream_name":"stderr","time":122.520908298,"data":"\n"}
+,{"stream_name":"stderr","time":122.520912274,"data":"AssertionError: CPU RECOMPUTE FAILED: see exp_cpu_recompute.json\n"}
+,{"stream_name":"stderr","time":122.520916808,"data":"\n"}
+,{"stream_name":"stderr","time":124.549501431,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":124.549545998,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":124.698299684,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":124.698324034,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":125.41944764,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":125.533188604,"data":"[NbConvertApp] Writing 321482 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":128.00106999,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":128.575548129,"data":"[NbConvertApp] Writing 588373 bytes to __results__.html\n"}
+]

@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 
-def render_markdown(case, ranking, bayes, plan, review, contra, sources):
+def render_markdown(case, ranking, bayes, plan, review, contra, sources,
+                    coverage_lines=None):
     L = []
     L.append(f"# 案件分析报告：{case['name']}")
     L.append("")
@@ -28,6 +29,8 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources):
     L.append("每条结论均可回溯到证据编号，每条证据均可回溯到来源编号。")
     L.append("C级以下（网络传言、AI推断、待核实）不进入推理，见隔离清单。")
     L.append("")
+    if coverage_lines:
+        L.extend(coverage_lines)
     L.append("## 矛盾")
     L.append("")
     for c in contra:

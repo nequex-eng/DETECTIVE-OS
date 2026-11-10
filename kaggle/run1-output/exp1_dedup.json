@@ -1,0 +1,40 @@
+{
+  "threshold": 0.85,
+  "clusters": [
+    [
+      0,
+      1,
+      3,
+      4,
+      6,
+      8
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      5
+    ],
+    [
+      7
+    ],
+    [
+      10
+    ],
+    [
+      11
+    ],
+    [
+      12
+    ]
+  ],
+  "reprint_min_pairwise_sim": 0.6683523654937744,
+  "cross_max_sim": 0.44565773010253906,
+  "reprints_one_cluster": false,
+  "distinct_stay_separate": false,
+  "pass": false,
+  "vram_free_gb_before_unload": 14.32,
+  "vram_free_gb_after_unload": 14.41,
+  "unloaded": true
+}

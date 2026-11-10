@@ -1,0 +1,19 @@
+{
+  "torch": "2.11.0+cu130",
+  "cuda_devices": 2,
+  "gpus": [
+    {
+      "index": 0,
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "free_gb": 14.46
+    },
+    {
+      "index": 1,
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "free_gb": 14.46
+    }
+  ],
+  "is_t4x2": true
+}

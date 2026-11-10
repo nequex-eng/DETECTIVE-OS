@@ -1,0 +1,65 @@
+[{"stream_name":"stderr","time":6.329988822,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.330072703,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.330081573,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.330085352,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.867237489,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.867267618,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.867271174,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.867273689,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":13.312306978,"data":"python 3.13.16\n"}
+,{"stream_name":"stdout","time":13.312332784,"data":"torch 2.11.0+cu130 cuda True\n"}
+,{"stream_name":"stdout","time":13.312337767,"data":"cuda device count: 2\n"}
+,{"stream_name":"stdout","time":13.526609776,"data":"gpu0: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":13.526634092,"data":"gpu1: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":13.526638521,"data":"PREFLIGHT OK: T4x2 confirmed, preflight.json written\n"}
+,{"stream_name":"stdout","time":13.726170562,"data":"missing: ['bitsandbytes']\n"}
+,{"stream_name":"stdout","time":18.098509079,"data":"installed: ['bitsandbytes']\n"}
+,{"stream_name":"stderr","time":45.950631127,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":45.950666122,"data":"\n"}
+,{"stream_name":"stderr","time":45.950672355,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":55.855864112,"data":"clusters: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]]\n"}
+,{"stream_name":"stdout","time":55.855905645,"data":"EXP1 clusters OK {'threshold': 0.6, 'clusters': [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]], 'reprint_min_pairwise_sim': 0.6683523654937744, 'cross_max_sim': 0.44565773010253906, 'reprints_one_cluster': True, 'distinct_stay_separate': True, 'pass': True}\n"}
+,{"stream_name":"stdout","time":55.868000409,"data":"gpu0 free VRAM after unload: 14.41GB (was 14.32GB)\n"}
+,{"stream_name":"stdout","time":60.700257932,"data":"tokenizer OK: vocab=151643 tokens=25 round-trip preserved\n"}
+,{"stream_name":"stderr","time":61.121554628,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":61.121586132,"data":"\n"}
+,{"stream_name":"stderr","time":61.121613103,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":102.619412153,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":102.619919787,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":102.619931171,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
+,{"stream_name":"stderr","time":102.619946854,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":102.619959501,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":102.619962489,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":102.619964854,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":102.619967269,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":102.619969737,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":102.619981744,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":102.619995014,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":102.619999048,"data":"Exception encountered at \"In [5]\":\n"}
+,{"stream_name":"stderr","time":102.620003071,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":102.620006964,"data":"AttributeError                            Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":102.620011317,"data":"/tmp/ipykernel_23/1300477290.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":102.620014998,"data":"      9     MODEL, device_map={'': 'cuda:1'},\n"}
+,{"stream_name":"stderr","time":102.620018247,"data":"     10     torch_dtype=torch.float16, trust_remote_code=True)\n"}
+,{"stream_name":"stderr","time":102.620021647,"data":"---\u003e 11 devices = set(str(v) for v in llm.hf_device_map.values())\n"}
+,{"stream_name":"stderr","time":102.620025096,"data":"     12 param_device = str(next(llm.parameters()).device)\n"}
+,{"stream_name":"stderr","time":102.620028518,"data":"     13 print('hf_device_map devices:', sorted(devices))\n"}
+,{"stream_name":"stderr","time":102.620031927,"data":"\n"}
+,{"stream_name":"stderr","time":102.620035356,"data":"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py in __getattr__(self, name)\n"}
+,{"stream_name":"stderr","time":102.620067481,"data":"   1966             if name in modules:\n"}
+,{"stream_name":"stderr","time":102.620074801,"data":"   1967                 return modules[name]\n"}
+,{"stream_name":"stderr","time":102.620078302,"data":"-\u003e 1968         raise AttributeError(\n"}
+,{"stream_name":"stderr","time":102.620081727,"data":"   1969             f\"'{type(self).__name__}' object has no attribute '{name}'\"\n"}
+,{"stream_name":"stderr","time":102.620085276,"data":"   1970         )\n"}
+,{"stream_name":"stderr","time":102.620088558,"data":"\n"}
+,{"stream_name":"stderr","time":102.620091819,"data":"AttributeError: 'Qwen2ForCausalLM' object has no attribute 'hf_device_map'\n"}
+,{"stream_name":"stderr","time":102.620095461,"data":"\n"}
+,{"stream_name":"stderr","time":104.641071026,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":104.641098481,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":104.782535283,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":104.782561905,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":105.493727933,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":105.604249964,"data":"[NbConvertApp] Writing 319083 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":108.060027355,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":108.63572657899999,"data":"[NbConvertApp] Writing 586314 bytes to __results__.html\n"}
+]

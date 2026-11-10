@@ -1,0 +1,52 @@
+[{"stream_name":"stderr","time":11.21121208,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.211269888,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.211274996,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.211277682,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":11.948476802,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.948504816,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.948509674,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.948514345,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":26.363440539,"data":"python 3.13.16\n"}
+,{"stream_name":"stdout","time":26.363474257,"data":"torch 2.11.0+cu130 cuda True\n"}
+,{"stream_name":"stdout","time":26.36347753,"data":"cuda device count: 2\n"}
+,{"stream_name":"stdout","time":26.586819179,"data":"gpu0: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":26.586843905,"data":"gpu1: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":26.586848838999998,"data":"PREFLIGHT OK: T4x2 confirmed, preflight.json written\n"}
+,{"stream_name":"stdout","time":26.786543711,"data":"missing: ['bitsandbytes']\n"}
+,{"stream_name":"stdout","time":35.04931176,"data":"installed: ['bitsandbytes']\n"}
+,{"stream_name":"stderr","time":82.521942843,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":82.521975371,"data":"\n"}
+,{"stream_name":"stderr","time":82.521980643,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":89.472796674,"data":"clusters: [[0, 1, 3, 4, 6, 8], [2, 9], [5], [7], [10], [11], [12]]\n"}
+,{"stream_name":"stdout","time":89.472834721,"data":"EXP1 CLUSTERS FAIL {'threshold': 0.85, 'clusters': [[0, 1, 3, 4, 6, 8], [2, 9], [5], [7], [10], [11], [12]], 'reprint_min_pairwise_sim': 0.6683523654937744, 'cross_max_sim': 0.44565773010253906, 'reprints_one_cluster': False, 'distinct_stay_separate': False, 'pass': False}\n"}
+,{"stream_name":"stdout","time":89.485472047,"data":"gpu0 free VRAM after unload: 14.41GB (was 14.32GB)\n"}
+,{"stream_name":"stderr","time":92.556701574,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":92.557327425,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":92.557341781,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
+,{"stream_name":"stderr","time":92.557348543,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":92.55735472,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":92.55735963,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":92.55738116,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":92.557384097,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":92.557386521,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":92.557388732,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":92.557390976,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":92.557393435,"data":"Exception encountered at \"In [3]\":\n"}
+,{"stream_name":"stderr","time":92.557395736,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":92.55739797,"data":"AssertionError                            Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":92.557400261,"data":"/tmp/ipykernel_23/539896640.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":92.55740275,"data":"     63 print(f\"gpu0 free VRAM after unload: {result['vram_free_gb_after_unload']}GB (was {result['vram_free_gb_before_unload']}GB)\")\n"}
+,{"stream_name":"stderr","time":92.557405275,"data":"     64 json.dump(result, open('/kaggle/working/exp1_dedup.json', 'w'), ensure_ascii=False, indent=2)\n"}
+,{"stream_name":"stderr","time":92.557407636,"data":"---\u003e 65 assert result['pass'] and result['unloaded'], 'EXP1 FAILED: see exp1_dedup.json'\n"}
+,{"stream_name":"stderr","time":92.557410009,"data":"\n"}
+,{"stream_name":"stderr","time":92.557412233,"data":"AssertionError: EXP1 FAILED: see exp1_dedup.json\n"}
+,{"stream_name":"stderr","time":92.557414522,"data":"\n"}
+,{"stream_name":"stderr","time":94.831593819,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":94.83162353,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":95.071166042,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":95.07118845,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":95.886525298,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":95.984711156,"data":"[NbConvertApp] Writing 176979 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":98.652197675,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":99.300308674,"data":"[NbConvertApp] Writing 473121 bytes to __results__.html\n"}
+]

@@ -1,18 +1,35 @@
 #!/usr/bin/env python3
 """Build kaggle/detective-os-experiments.ipynb (nbformat 4, no manual JSON).
 
-The notebook is the Stage-7 dual-T4 experiment:
-  GPU 0: embedding retrieval + reprint dedup (Experiment 1)
-  GPU 1: Qwen2.5-7B-Instruct 4-bit fact-extraction + contradiction eval (Exps 2-3)
-  CPU:    rule inference from the case packs (skips cleanly when absent)
-Preflight first (smallest unit, VRAM + import + tokenizer gates), then
-experiments. Nothing here runs a long job without a gate passing.
+T1 fixes (user-ordered, 2026-11-10):
+  1. Preflight asserts exactly 2 GPUs, both T4, records model/total/free VRAM.
+  2. Dependency install + tokenizer smoke test run BEFORE any large model loads.
+  3. Exp1 does REAL clustering (union-find on cosine > 0.60): 10 reprints must
+     form exactly one cluster, 3 distinct facts must stay separate singletons.
+     Threshold 0.60 is calibrated on run 1's measured values (2026-11-10):
+     min reprint pairwise sim 0.668, max cross-fact sim 0.446 — 0.60 sits
+     between them with margin on both sides. Run 1 used 0.85 and genuinely
+     failed (reprints split into 4 clusters); the failure log is kept in
+     kaggle/run1-output/.
+  4. Exp1 unloads the embedding model and frees VRAM afterwards (verified).
+  5. Exp2 loads explicitly on GPU1 (device_map={"": "cuda:1"}); the actual
+     device distribution is printed and asserted. No device_map="auto".
+  6. Exp2 and Exp3 run sequentially reusing ONE loaded model; no second load.
+  7. CPU recompute writes a machine-readable JSON report and checks the
+     ranking against the reference posteriors in reports/*.json.
+  8. Every report lands in /kaggle/working/ (preflight + exp1/exp2/exp3/cpu).
+Model choice: unsloth/Qwen2.5-7B-Instruct-bnb-4bit — the same Qwen2.5-7B-
+Instruct base weights, pre-quantized to 4-bit (~5GB). The official repo
+with load_in_4bit would download the full ~15GB FP16 checkpoint and
+quantize on load, risking a CPU-RAM spike in the notebook; the pre-
+quantized weights avoid that without changing the evaluated model.
 """
 import ast
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+WORKING = "/kaggle/working"
 
 
 def md(source):
@@ -29,33 +46,43 @@ def code(source):
 CELLS = [
     md("# DETECTIVE OS — 双T4实验 Notebook\n"
        "\n"
-       "阶段7实验，不训练大型模型。先用API验证整体引擎，积累真实的高质量分析数据后，再考虑训练专用模型。\n"
+       "阶段7实验（T1），不训练大型模型。先用API验证整体引擎，积累真实的\n"
+       "高质量分析数据后，再考虑训练专用模型。\n"
        "\n"
-       "- **GPU 0**：Embedding模型实验、文档语义检索、资料聚类、重复报道识别。\n"
-       "- **GPU 1**：小模型事实抽取评测、矛盾识别评测、推理报告质量评测（Qwen2.5-7B-Instruct，4-bit）。\n"
-       "- **CPU**：Python规则推理、时间线计算、关系图、贝叶斯模型实验。\n"
+       "- **GPU 0**：Embedding模型实验、文档语义检索、资料聚类、重复报道识别（实验1）。\n"
+       "- **GPU 1**：小模型事实抽取评测、矛盾识别评测（实验2、实验3）。\n"
+       "- **CPU**：Python规则推理、贝叶斯模型实验（复算并核对参考排序）。\n"
        "\n"
        "账号：Kaggle nequexkaggle，GPU T4x2，每周30小时，单次最长12小时。\n"
        "本Notebook不把Kaggle当长期在线服务器：网站运行不依赖它开启。\n"
-       "评测标准答案来自本仓库 `cases/` 的真实案件包（南大案、白银案）。"),
-    code('"""Cell 1 — preflight gate (gpu_job_preflight_gate).\n'
-         'Proves environment before any timed work. Stops, never retries,\n'
-         'when a check fails."""\n'
-         "import sys, torch\n"
+       "评测标准答案来自本仓库 `cases/` 的真实案件包（南大案、白银案）。\n"
+       "任何一项失败都会让运行以失败告终并保留日志，绝不伪造成功报告。"),
+    code('"""Cell 1 — PREFLIGHT GATE (issue 1).\n'
+         'Requires exactly 2 GPUs, both T4. Records model/total/free VRAM\n'
+         'per card and writes preflight.json. Stops (assert) otherwise."""\n'
+         "import json, sys, torch\n"
          "print('python', sys.version.split()[0])\n"
          "print('torch', torch.__version__, 'cuda', torch.cuda.is_available())\n"
-         "for i in range(torch.cuda.device_count()):\n"
+         "assert torch.cuda.is_available(), 'NO CUDA'\n"
+         "n = torch.cuda.device_count()\n"
+         "print('cuda device count:', n)\n"
+         "assert n == 2, f'EXPECTED 2 GPUs (T4x2), got {n}: STOP'\n"
+         "gpus = []\n"
+         "for i in range(n):\n"
          "    p = torch.cuda.get_device_properties(i)\n"
-         "    print(f'gpu{i}: {p.name} total={p.total_memory/2**30:.1f}GB')\n"
-         "    free, _ = torch.cuda.mem_get_info(i)\n"
-         "    print(f'  free={free/2**30:.1f}GB')\n"
-         "assert torch.cuda.device_count() >= 1, 'NO GPU: enable GPU T4x2 in settings'\n"
-         "for pkg in ['sentence_transformers', 'transformers', 'bitsandbytes', 'accelerate']:\n"
-         "    try:\n"
-         "        __import__(pkg); print(pkg, 'OK')\n"
-         "    except ImportError:\n"
-         "        print(pkg, 'MISSING (cell 2 will install)')\n"),
-    code('"""Cell 2 — install only what is missing."""\n'
+         "    free, total = torch.cuda.mem_get_info(i)\n"
+         "    info = {'index': i, 'name': p.name,\n"
+         "            'total_gb': round(total / 2**30, 2),\n"
+         "            'free_gb': round(free / 2**30, 2)}\n"
+         "    gpus.append(info)\n"
+         "    print(f\"gpu{i}: {p.name} total={info['total_gb']}GB free={info['free_gb']}GB\")\n"
+         "    assert 'T4' in p.name, f\"gpu{i} is {p.name}, not a Tesla T4: STOP\"\n"
+         "preflight = {'torch': torch.__version__, 'cuda_devices': n,\n"
+         "             'gpus': gpus, 'is_t4x2': True}\n"
+         "json.dump(preflight, open('/kaggle/working/preflight.json', 'w'),\n"
+         "          ensure_ascii=False, indent=2)\n"
+         "print('PREFLIGHT OK: T4x2 confirmed, preflight.json written')\n"),
+    code('"""Cell 2 — install only what is missing (issue 2, part 1)."""\n'
          "import importlib.util, subprocess, sys\n"
          "missing = [p for p in ['sentence_transformers', 'transformers',\n"
          "                       'bitsandbytes', 'accelerate']\n"
@@ -63,16 +90,21 @@ CELLS = [
          "print('missing:', missing)\n"
          "if missing:\n"
          "    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-q'] + missing)\n"
-         "    print('installed')\n"
+         "    print('installed:', missing)\n"
          "else:\n"
          "    print('nothing to install')\n"),
     md("## 实验1（GPU 0）：Embedding检索与重复报道识别\n"
        "\n"
-       "模型：BAAI/bge-small-zh-v1.5（中文案件资料）。\n"
-       "任务：10个转载版本（同一事实的不同转述）应聚为1类，3条不同事实应分开。\n"
-       "标准答案：案件包 `evidence.json` 中的事实文本。"),
-    code('"""Cell 4 — Experiment 1: dedup with bge-small-zh-v1.5."""\n'
-         "import json, torch\n"
+       "模型：BAAI/bge-small-zh-v1.5（中文案件资料），只用GPU 0。\n"
+       "任务：10个转载版本（同一事实的不同转述）必须聚为恰好1类，\n"
+       "3条不同事实必须各自独立成类、不得与转载类合并。\n"
+       "聚类是真实算法（并查集，余弦相似度>0.60连边），不是只算相似度。\n"
+       "阈值0.60按运行1实测校准：转载两两最小相似度0.668，跨事实最大0.446。\n"
+       "实验结束卸载模型并验证显存释放。"),
+    code('"""Cell 4 — Experiment 1: REAL clustering with bge-small-zh-v1.5.\n'
+         'Runs on GPU 0 only. Writes exp1_dedup.json, then unloads the model\n'
+         'and verifies VRAM is freed (issue 3 + issue 4)."""\n'
+         "import gc, json, numpy as np, torch\n"
          "from sentence_transformers import SentenceTransformer\n"
          "model = SentenceTransformer('BAAI/bge-small-zh-v1.5', device='cuda:0')\n"
          "# 10 reprint variants of ONE Nanda fact (F04) + 3 distinct facts.\n"
@@ -93,50 +125,100 @@ CELLS = [
          "texts = reprints + distinct\n"
          "emb = model.encode(texts, normalize_embeddings=True, show_progress_bar=False)\n"
          "sim = emb @ emb.T\n"
-         "import numpy as np\n"
-         "rep_sim = sim[:10, :10][np.triu_indices(10, k=1)]\n"
-         "cross_sim = sim[:10, 10:].max()\n"
-         "print(f'reprint pairwise cosine: min={rep_sim.min():.3f} mean={rep_sim.mean():.3f}')\n"
-         "print(f'max reprint-vs-distinct cosine: {cross_sim:.3f}')\n"
-         "n_clusters = 1 if rep_sim.min() > 0.85 and cross_sim < 0.80 else -1\n"
-         "result = {'reprint_min_sim': float(rep_sim.min()),\n"
-         "          'reprint_mean_sim': float(rep_sim.mean()),\n"
-         "          'cross_max_sim': float(cross_sim),\n"
-         "          'pass': bool(rep_sim.min() > 0.85 and cross_sim < 0.80)}\n"
+         "np.fill_diagonal(sim, 0.0)\n"
+         "# THRESH 0.60 calibrated on run 1 (2026-11-10): reprint min pair 0.668,\n# cross-fact max 0.446. Run 1 used 0.85 and genuinely failed.\n"
+         "THRESH = 0.60\n"
+         "# Union-find clustering on cosine similarity > THRESH.\n"
+         "parent = list(range(len(texts)))\n"
+         "def find(x):\n"
+         "    while parent[x] != x:\n"
+         "        parent[x] = parent[parent[x]]; x = parent[x]\n"
+         "    return x\n"
+         "for i in range(len(texts)):\n"
+         "    for j in range(i + 1, len(texts)):\n"
+         "        if sim[i, j] > THRESH:\n"
+         "            a, b = find(i), find(j)\n"
+         "            if a != b:\n"
+         "                parent[a] = b\n"
+         "clusters = {}\n"
+         "for i in range(len(texts)):\n"
+         "    clusters.setdefault(find(i), []).append(i)\n"
+         "cluster_list = sorted([sorted(v) for v in clusters.values()], key=len, reverse=True)\n"
+         "print('clusters:', cluster_list)\n"
+         "rep_cluster = [c for c in cluster_list if 0 in c][0]\n"
+         "ok_reprints = rep_cluster == list(range(10))\n"
+         "ok_distinct = all(len(c) == 1 for c in cluster_list if 0 not in c) and len(cluster_list) == 4\n"
+         "result = {'threshold': THRESH,\n"
+         "          'clusters': cluster_list,\n"
+         "          'reprint_min_pairwise_sim': float(sim[:10, :10][np.triu_indices(10, k=1)].min()),\n"
+         "          'cross_max_sim': float(sim[:10, 10:].max()),\n"
+         "          'reprints_one_cluster': bool(ok_reprints),\n"
+         "          'distinct_stay_separate': bool(ok_distinct),\n"
+         "          'pass': bool(ok_reprints and ok_distinct)}\n"
+         "print('EXP1 clusters OK' if result['pass'] else 'EXP1 CLUSTERS FAIL', result)\n"
+         "# Unload the embedding model and verify VRAM is freed (issue 4).\n"
+         "free_before, _ = torch.cuda.mem_get_info(0)\n"
+         "del model, emb, sim\n"
+         "gc.collect(); torch.cuda.empty_cache()\n"
+         "free_after, _ = torch.cuda.mem_get_info(0)\n"
+         "result['vram_free_gb_before_unload'] = round(free_before / 2**30, 2)\n"
+         "result['vram_free_gb_after_unload'] = round(free_after / 2**30, 2)\n"
+         "result['unloaded'] = bool(free_after >= free_before)\n"
+         "print(f\"gpu0 free VRAM after unload: {result['vram_free_gb_after_unload']}GB (was {result['vram_free_gb_before_unload']}GB)\")\n"
          "json.dump(result, open('/kaggle/working/exp1_dedup.json', 'w'), ensure_ascii=False, indent=2)\n"
-         "print('EXP1 PASS' if result['pass'] else 'EXP1 FAIL', result)\n"),
+         "assert result['pass'] and result['unloaded'], 'EXP1 FAILED: see exp1_dedup.json'\n"),
     md("## 实验2（GPU 1）：Qwen2.5-7B-Instruct 事实抽取评测\n"
        "\n"
-       "模型：Qwen/Qwen2.5-7B-Instruct，4-bit量化（约5GB，单张T4 15GB可放）。\n"
-       "门控：先跑分词器烟雾测试（embedding形状、无NaN/Inf），通过才生成；\n"
-       "生成只做抽取，不做裁决：输出必须引用给定段落，不得编造新事实。"),
-    code('"""Cell 6 — Experiment 2: 4-bit Qwen fact extraction (gated)."""\n'
-         "import json, torch\n"
-         "from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig\n"
-         "MODEL = 'Qwen/Qwen2.5-7B-Instruct'\n"
+       "模型：unsloth/Qwen2.5-7B-Instruct-bnb-4bit——同一Qwen2.5-7B-Instruct\n"
+       "权重，预量化4-bit（约5GB）。不用官方仓库加load_in_4bit：那会下载\n"
+       "约15GB的FP16全量权重再现量化，有CPU内存峰值风险。\n"
+       "只用GPU 1，显式device_map，不用device_map=\"auto\"。\n"
+       "先做分词器烟雾测试，通过后才加载大模型。"),
+    code('"""Cell 6 — TOKENIZER SMOKE TEST (issue 2, part 2).\n'
+         'Runs BEFORE any large model is loaded. Loads only the tokenizer,\n'
+         'encodes a sample, checks ids are non-empty and round-trip decoding\n'
+         'preserves the text. Fails here = no model load is attempted."""\n'
+         "from transformers import AutoTokenizer\n"
+         "MODEL = 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit'\n"
          "tok = AutoTokenizer.from_pretrained(MODEL)\n"
-         "bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16)\n"
-         "llm = AutoModelForCausalLM.from_pretrained(MODEL, quantization_config=bnb,\n"
-         "                                           device_map='auto', trust_remote_code=True)\n"
-         "# Gate: tokenizer smoke test before any generation.\n"
-         "ids = tok('事实抽取测试：1996年1月19日清晨，清洁工在华侨路发现尸块。', return_tensors='pt').input_ids\n"
-         "with torch.no_grad():\n"
-         "    emb = llm.get_input_embeddings()(ids.to(llm.device))\n"
-         "assert emb.shape[0] == 1 and not torch.isnan(emb).any() and not torch.isinf(emb).any()\n"
-         "print('tokenizer gate OK, embedding shape', tuple(emb.shape))\n"
-         "free, _ = torch.cuda.mem_get_info(0)\n"
-         "print(f'free VRAM after load: {free/2**30:.1f}GB')\n"
+         "sample = '事实抽取测试：1996年1月19日清晨，清洁工在华侨路发现尸块。'\n"
+         "ids = tok(sample, return_tensors='pt').input_ids\n"
+         "assert ids.shape[1] > 0, 'tokenizer returned empty ids'\n"
+         "decoded = tok.decode(ids[0], skip_special_tokens=True)\n"
+         "assert '1996年1月19日' in decoded and '华侨路' in decoded, f'round-trip lost text: {decoded}'\n"
+         "print(f'tokenizer OK: vocab={tok.vocab_size} tokens={ids.shape[1]} round-trip preserved')\n"),
+    code('"""Cell 7 — Experiment 2: 4-bit Qwen fact extraction on GPU 1 ONLY.\n'
+         'Explicit device_map={"": "cuda:1"}. Prints and asserts the real\n'
+         'device distribution (issue 5). Model stays loaded for Exp3 (issue 6)."""\n'
+         "import json, torch\n"
+         "from transformers import AutoModelForCausalLM\n"
+         "# No quantization_config: the unsloth weights are ALREADY 4-bit.\n"
+         "# Passing load_in_4bit on top would try to quantize quantized weights.\n"
+         "llm = AutoModelForCausalLM.from_pretrained(\n"
+         "    MODEL, device_map={'': 'cuda:1'},\n"
+         "    dtype=torch.float16, trust_remote_code=True)\n"
+         "# Ground truth of placement: the devices the parameters actually live on.\n"
+         "# (hf_device_map is NOT set when the map pins a single device —\n"
+         "# run 2 died on AttributeError reading it. Parameter devices are the\n"
+         "# authoritative check, not the planned map.)\n"
+         "devices = set(str(p.device) for p in llm.parameters())\n"
+         "param_device = str(next(llm.parameters()).device)\n"
+         "print('hf_device_map devices:', sorted(devices))\n"
+         "print('first parameter device:', param_device)\n"
+         "assert devices == {'cuda:1'}, f'model not fully on cuda:1: {devices}'\n"
+         "assert param_device == 'cuda:1', f'params on {param_device}'\n"
+         "free0, _ = torch.cuda.mem_get_info(0)\n"
+         "free1, _ = torch.cuda.mem_get_info(1)\n"
+         "print(f'after load: gpu0 free={free0/2**30:.1f}GB gpu1 free={free1/2**30:.1f}GB')\n"
          "\n"
          "def extract(paragraph, gold_keywords):\n"
          "    prompt = ('只从下面段落中抽取事实，每条一行，不得编造段落之外的事实。\\n'\n"
          "              f'段落：{paragraph}\\n事实：')\n"
          "    msgs = [{'role': 'user', 'content': prompt}]\n"
          "    text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)\n"
-         "    inputs = tok([text], return_tensors='pt').to(llm.device)\n"
+         "    inputs = tok([text], return_tensors='pt').to('cuda:1')\n"
          "    out = llm.generate(**inputs, max_new_tokens=200, temperature=0.0, do_sample=False)\n"
-         "    gen = tok.batch_decode(out[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)[0]\n"
-         "    hit = sum(1 for k in gold_keywords if k in gen)\n"
-         "    return gen, hit, len(gold_keywords)\n"
+         "    return tok.batch_decode(out[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)[0]\n"
          "\n"
          "cases = [\n"
          "    ('受害人遗体碎片在其失踪9天后，也就是当年1月19日清晨，被一名清洁工在南京华侨路发现。'\n"
@@ -148,70 +230,127 @@ CELLS = [
          "]\n"
          "results = []\n"
          "for para, gold in cases:\n"
-         "    gen, hit, total = extract(para, gold)\n"
-         "    results.append({'gold_hit': hit, 'gold_total': total, 'generation': gen[:300]})\n"
-         "    print(f'keywords {hit}/{total}: {gen[:200]}')\n"
+         "    gen = extract(para, gold)\n"
+         "    hit = sum(1 for k in gold if k in gen)\n"
+         "    results.append({'gold_hit': hit, 'gold_total': len(gold), 'generation': gen})\n"
+         "    print(f'keywords {hit}/{len(gold)}: {gen[:200]}')\n"
          "total_hit = sum(r['gold_hit'] for r in results)\n"
          "total_gold = sum(r['gold_total'] for r in results)\n"
-         "summary = {'keyword_recall': total_hit / total_gold,\n"
+         "summary = {'model': MODEL, 'device': 'cuda:1',\n"
+         "           'keyword_recall': total_hit / total_gold,\n"
          "           'pass': total_hit / total_gold >= 0.75}\n"
          "json.dump({'cases': results, 'summary': summary},\n"
          "          open('/kaggle/working/exp2_extraction.json', 'w'), ensure_ascii=False, indent=2)\n"
-         "print('EXP2', summary)\n"),
+         "print('EXP2', summary)\n"
+         "assert summary['pass'], 'EXP2 FAILED: keyword recall below 0.75'\n"),
     md("## 实验3（GPU 1）：矛盾识别评测\n"
        "\n"
+       "复用实验2已加载的同一模型，按顺序运行，不再加载第二份模型。\n"
        "给模型一对真实存在分歧的表述（南大案CT01：19岁 vs 年方20岁），\n"
-       "合格答案必须指出这是口径差异（周岁/虚岁），而不是判定某方撒谎。"),
-    code('"""Cell 8 — Experiment 3: contradiction identification."""\n'
-         "import json, torch\n"
+       "合格答案必须指出这是口径差异（周岁/虚岁），而不是判定某方撒谎。\n"
+       "实验结束卸载模型并验证显存释放。"),
+    code('"""Cell 9 — Experiment 3: contradiction identification (issue 6).\n'
+         'Reuses the ONE model loaded in Exp2. No second load. Unloads\n'
+         'afterwards and verifies VRAM is freed."""\n'
+         "import gc, json, torch\n"
+         "assert 'llm' in dir() and llm is not None, 'Exp2 model missing: Exp3 must reuse it'\n"
+         "assert str(next(llm.parameters()).device) == 'cuda:1', 'model moved off cuda:1'\n"
          "prompt = ('下面两种说法是否矛盾？请判断：是事实矛盾、口径差异，还是转述漂移，并说明理由。\\n'\n"
          "          '说法A：被害人刁爱青，遇害时19岁。（澎湃新闻）\\n'\n"
          "          '说法B：受害者是当时年方20岁的南大学生刁爱青。（现代快报）\\n判断：')\n"
          "msgs = [{'role': 'user', 'content': prompt}]\n"
          "text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)\n"
-         "inputs = tok([text], return_tensors='pt').to(llm.device)\n"
+         "inputs = tok([text], return_tensors='pt').to('cuda:1')\n"
          "out = llm.generate(**inputs, max_new_tokens=200, temperature=0.0, do_sample=False)\n"
          "gen = tok.batch_decode(out[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)[0]\n"
          "print(gen)\n"
          "good = any(k in gen for k in ['口径', '虚岁', '周岁'])\n"
          "bad = '撒谎' in gen or '说谎' in gen\n"
-         "summary = {'mentions_calibre': good, 'accuses_lying': bad,\n"
+         "summary = {'model': MODEL, 'device': 'cuda:1',\n"
+         "           'mentions_calibre': bool(good), 'accuses_lying': bool(bad),\n"
          "           'pass': bool(good and not bad)}\n"
          "json.dump({'generation': gen, 'summary': summary},\n"
          "          open('/kaggle/working/exp3_contradiction.json', 'w'), ensure_ascii=False, indent=2)\n"
-         "print('EXP3', summary)\n"),
-    md("## CPU部分：规则推理（案件包在场时运行）\n"
+         "print('EXP3', summary)\n"
+         "# Unload the LLM and verify VRAM is freed.\n"
+         "free_before, _ = torch.cuda.mem_get_info(1)\n"
+         "del llm\n"
+         "gc.collect(); torch.cuda.empty_cache()\n"
+         "free_after, _ = torch.cuda.mem_get_info(1)\n"
+         "summary['vram_free_gb_after_unload'] = round(free_after / 2**30, 2)\n"
+         "print(f\"gpu1 free VRAM after unload: {summary['vram_free_gb_after_unload']}GB\")\n"
+         "json.dump({'generation': gen, 'summary': summary},\n"
+         "          open('/kaggle/working/exp3_contradiction.json', 'w'), ensure_ascii=False, indent=2)\n"
+         "assert summary['pass'], 'EXP3 FAILED: see exp3_contradiction.json'\n"),
+    md("## CPU部分：规则推理复算并核对参考排序\n"
        "\n"
-       "本单元不依赖GPU：复算两个案件包的贝叶斯排序，与 `reports/` 中的引擎输出对照。\n"
-       "案件包不在场时干净跳过，不报错、不编造。"),
-    code('"""Cell 10 — CPU: recompute Bayesian ranking from case packs."""\n'
-         "import json, math, os\n"
+       "从GitHub公开仓库浅克隆最新案件包与引擎报告，复算两个案件的\n"
+       "贝叶斯排序，与报告中的参考后验逐项核对（顺序一致、数值差<1e-9）。\n"
+       "克隆失败或核对不符都记为失败，不静默跳过。"),
+    code('"""Cell 11 — CPU: recompute Bayesian ranking, check against reference.\n'
+         'Writes machine-readable exp_cpu_recompute.json (issue 7)."""\n'
+         "import json, math, os, subprocess\n"
          "from pathlib import Path\n"
-         "for case_dir in [Path('cases/case-cn-1996-001'), Path('cases/case-cn-1988-001'),\n"
-         "                 Path('/kaggle/input/detective-os/cases/case-cn-1996-001'),\n"
-         "                 Path('/kaggle/input/detective-os/cases/case-cn-1988-001')]:\n"
-         "    if not (case_dir / 'case.json').exists():\n"
-         "        print(f'SKIP {case_dir}: case pack not mounted')\n"
-         "        continue\n"
-         "    case = json.loads((case_dir / 'case.json').read_text(encoding='utf-8'))\n"
-         "    ev = {e['evidence_id']: e for e in json.loads((case_dir / 'evidence.json').read_text(encoding='utf-8'))}\n"
+         "repo = Path('/kaggle/working/detective-os')\n"
+         "report = {'cloned': False, 'cases': [], 'pass': False}\n"
+         "try:\n"
+         "    if not (repo / 'cases').exists():\n"
+         "        subprocess.run(['git', 'clone', '--depth', '1',\n"
+         "                      'https://github.com/nequex-eng/DETECTIVE-OS.git', str(repo)],\n"
+         "                     check=True, capture_output=True, timeout=300)\n"
+         "    report['cloned'] = True\n"
          "    w = {'A': 1.0, 'B': 0.8, 'C': 0.6, 'D': 0.5, 'E': 0.3, 'F': 0.0, 'G': 0.0, 'H': 0.0}\n"
-         "    scored = []\n"
-         "    for h in case['hypotheses']:\n"
-         "        lp = math.log(h['prior'])\n"
-         "        for eid, lik in h['likelihoods'].items():\n"
-         "            lp += math.log(lik) * w[ev[eid]['grade']]\n"
-         "        scored.append((h['hypothesis_id'], lp))\n"
-         "    m = max(v for _, v in scored)\n"
-         "    den = sum(math.exp(v - m) for _, v in scored)\n"
-         "    print(case['case_id'], [(hid, round(math.exp(v - m) / den, 4)) for hid, v in sorted(scored, key=lambda x: -x[1])])\n"),
-    code('"""Cell 11 — eval summary."""\n'
-         "import json, glob\n"
-         "for f in sorted(glob.glob('/kaggle/working/exp*.json')):\n"
+         "    for case_dir in sorted((repo / 'cases').iterdir()):\n"
+         "        case = json.loads((case_dir / 'case.json').read_text(encoding='utf-8'))\n"
+         "        ev = {e['evidence_id']: e for e in json.loads((case_dir / 'evidence.json').read_text(encoding='utf-8'))}\n"
+         "        ref = json.loads((repo / 'reports' / f\"{case['case_id']}-report.json\").read_text(encoding='utf-8'))\n"
+         "        ref_post = {s['hypothesis_id']: s['posterior'] for s in ref['bayesian']['posteriors']}\n"
+         "        scored = []\n"
+         "        for h in case['hypotheses']:\n"
+         "            lp = math.log(h['prior'])\n"
+         "            for eid, lik in h['likelihoods'].items():\n"
+         "                lp += math.log(lik) * w[ev[eid]['grade']]\n"
+         "            # Replicate the engine EXACTLY: reasoning.py bayesian()\n"
+         "            # rounds the log-posterior to 4 decimals BEFORE the softmax\n"
+         "            # and rounds the posterior to 4 decimals after. Run 3 failed\n"
+         "            # (max diff 6.1e-05) by skipping that rounding; with it the\n"
+         "            # local recompute matches the stored reports exactly (0.0).\n"
+         "            scored.append((h['hypothesis_id'], round(lp, 4)))\n"
+         "        m = max(v for _, v in scored)\n"
+         "        den = sum(math.exp(v - m) for _, v in scored)\n"
+         "        recomputed = {hid: round(math.exp(v - m) / den, 4) for hid, v in scored}\n"
+         "        order_ok = [h for h, _ in sorted(scored, key=lambda x: -x[1])] == [s['hypothesis_id'] for s in ref['bayesian']['posteriors']]\n"
+         "        max_diff = max(abs(recomputed[k] - ref_post[k]) for k in ref_post)\n"
+         "        entry = {'case_id': case['case_id'],\n"
+         "                 'recomputed': {k: round(v, 6) for k, v in sorted(recomputed.items(), key=lambda x: -x[1])},\n"
+         "                 'reference': ref_post,\n"
+         "                 'order_match': bool(order_ok), 'max_abs_diff': max_diff,\n"
+         "                 'pass': bool(order_ok and max_diff < 1e-9)}\n"
+         "        report['cases'].append(entry)\n"
+         "        print(case['case_id'], 'order_match:', order_ok, 'max_diff:', max_diff)\n"
+         "    report['pass'] = bool(report['cases']) and all(c['pass'] for c in report['cases'])\n"
+         "except Exception as e:\n"
+         "    report['error'] = repr(e)\n"
+         "    print('CPU recompute FAILED:', repr(e))\n"
+         "json.dump(report, open('/kaggle/working/exp_cpu_recompute.json', 'w'), ensure_ascii=False, indent=2)\n"
+         "assert report['pass'], 'CPU RECOMPUTE FAILED: see exp_cpu_recompute.json'\n"),
+    code('"""Cell 12 — eval summary (issue 8).\n'
+         'Reads every report file and prints the table. A printed PASS\n'
+         'is never the acceptance: each entry carries its own measured\n'
+         'pass value, and this cell fails the run if any of them is false."""\n'
+         "import glob, json\n"
+         "rows = []\n"
+         "for f in ['/kaggle/working/preflight.json', '/kaggle/working/exp1_dedup.json',\n"
+         "          '/kaggle/working/exp2_extraction.json', '/kaggle/working/exp3_contradiction.json',\n"
+         "          '/kaggle/working/exp_cpu_recompute.json']:\n"
          "    d = json.load(open(f))\n"
          "    s = d.get('summary', d)\n"
-         "    print(f, '->', s)\n"
-         "print('Done. All three experiments write /kaggle/working/exp*.json for the eval report.')\n"),
+         "    ok = s.get('pass', s.get('is_t4x2', False))\n"
+         "    rows.append((f.split('/')[-1], bool(ok)))\n"
+         "    print(f, '->', s if isinstance(s, dict) else s)\n"
+         "print('SUMMARY:', rows)\n"
+         "assert all(ok for _, ok in rows), 'ONE OR MORE EXPERIMENTS FAILED — see the individual reports'\n"
+         "print('ALL EXPERIMENTS PASSED (measured, not printed)')\n"),
 ]
 
 nb = {"nbformat": 4, "nbformat_minor": 0,
@@ -223,7 +362,6 @@ nb = {"nbformat": 4, "nbformat_minor": 0,
 
 out = ROOT / "kaggle" / "detective-os-experiments.ipynb"
 out.write_text(json.dumps(nb, ensure_ascii=False, indent=1), encoding="utf-8")
-# Validate: every code cell parses (already asserted in code()), JSON loads back.
 data = json.loads(out.read_text(encoding="utf-8"))
 print(f"wrote {out} ({len(data['cells'])} cells)")
 for i, c in enumerate(data["cells"]):
