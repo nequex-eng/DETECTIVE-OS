@@ -33,7 +33,7 @@
 - 案包：`cases/case-no-1970-001/`；6个独立来源、16条证据（C15/D1）、7个事件、10个实体、6条关系、4条解释分歧、8项缺口、22项覆盖清单（18项适用）。
 - 贝叶斯：H2 28.35%、H1 25.29%、H3 25.27%、H4 21.09%；前两名差0.0306，正确输出`undecided`。定性H3净1.3领先，报告保留两种口径差异，不将其解释为犯罪概率。
 - 覆盖率41.7%（3 covered/9 single/6 missing of 18 applicable）；调查计划11项；独立审查0 blocker。
-- CI：65项测试通过；案包check、报告生成、静态站构建、artifact上传全部通过。运行记录：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955504660。
+- CI：65项测试通过；案包check、报告生成、静态站构建、artifact上传全部通过。运行记录：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
 - 生产边界：没有触碰生产KV、没有启动自动调查任务、没有部署Pages。
 
 ## 迁移矩阵摘要（详见05）
