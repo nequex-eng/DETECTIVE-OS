@@ -158,7 +158,7 @@ V2委托字段：`intake.objective`、`time_range`、`evidence_cutoff_date`、`k
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，21项（含V2用户供料H级、父任务AI报告G级回归测试、抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）；`tests/test_result_serialization.py`，2项。另有`tests/test_result_serialization.py`2项。2026-11-11 GitHub Actions CI实跑54项全部通过（commit `4619e39f94d15a28bfd617f6ea85e39fb63e3c7a`，run `42951144953`）；前端11个结果工作区的DOM配对和Node语法检查通过，南大案、白银案案包校验也全部通过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，21项（含用户供料H级、父任务AI报告G级、引用核验、似然与映射分批、检查点、覆盖路径归一化）；`tests/test_result_serialization.py`，4项（调查计划序列化、引文日期时间线、来源—证据图谱）。2026-11-11 GitHub Actions CI实跑56项全部通过（commit `6e75f4fe02f4f5160abb93964e2a138498df6cf9`，run `42951847977`）；前端11个结果工作区的DOM配对与Node语法检查、Python入口编译、静态案件页生成、南大案和白银案案包校验全部通过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
