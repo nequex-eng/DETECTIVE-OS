@@ -140,7 +140,7 @@ $("form").addEventListener("submit",async ev=>{
 });
 async function loadHistory(){
   try{
-    const res=await fetch("/api/jobs?ts="+Date.now(),{cache:"no-store"});const d=await res.json();
+    const res=await fetch("/api/jobs",{cache:"no-store"});const d=await res.json();
     $("history").innerHTML=(d.jobs||[]).map(j=>`<li class="history-item"><div><a href="investigate.html?job=${encodeURIComponent(j.job_id)}" data-id="${esc(j.job_id)}">${esc(j.direction)}</a> — ${esc(j.status)} / ${esc(j.stage)}（${esc(j.created_at||"")}）</div><div class="history-actions"><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">查看任务</a>${j.status==="done"?'<a href="investigate.html?continue='+encodeURIComponent(j.job_id)+'">＋ 继续调查</a>':""}</div></li>`).join("")||"<li class='note'>还没有任务。</li>";
   }catch(e){$("history").innerHTML="<li class='note'>加载失败。</li>";}
 }
