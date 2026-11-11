@@ -12,11 +12,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ["case-cn-1996-001", "case-cn-1988-001"]
 
-STYLE = ("<style>body{background:#0d1117;color:#d7dee8;font-family:system-ui,sans-serif;"
-         "max-width:900px;margin:0 auto;padding:24px}h1{font-size:22px}h2{font-size:17px;"
-         "color:#e8b64c}a{color:#7fb3ff}table{border-collapse:collapse}"
-         "td,th{border:1px solid #333;padding:6px 10px;text-align:left}"
-         ".note{color:#9aa7b5;font-size:13px}</style>")
+STYLE = ("<style>body{background:radial-gradient(ellipse at 80% 0%,#1b2b38 0,transparent 42%),#08121d;color:#dce5ed;font-family:system-ui,sans-serif;max-width:1180px;margin:0 auto;padding:28px}"
+         "h1{font:500 clamp(28px,4vw,42px)/1.15 Georgia,serif}h2{font:500 19px Georgia,serif;color:#e0c17e}"
+         "a{color:#b7d1e7;text-decoration:none}a:hover{color:#e3c17c}table{border-collapse:collapse}"
+         "td,th{border:1px solid #33485a;padding:6px 10px;text-align:left}"
+         ".note{color:#9aaebe;font-size:12px;line-height:1.8}.eyebrow{color:#b89a62;font:700 10px ui-monospace,monospace;letter-spacing:2px}"
+         ".ops-banner{padding:22px 24px;margin:24px 0;background:linear-gradient(112deg,#14283a,#101d2b 65%,#1d211d);border:1px solid #35495b;border-left:3px solid #c39a50}"
+         ".ops-banner h2{font:500 21px Georgia,serif;color:#e4eaf0;margin:8px 0}.ops-banner p{color:#94a7b9;font-size:11px}"
+         ".action{display:inline-block;padding:10px 15px;background:#c5a05e;color:#111a22;font-size:10px;font-weight:800;letter-spacing:1px}"
+         ".job-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.job{padding:15px;background:#101e2b;border:1px solid #2a4053}"
+         ".job-main{display:block}.job-top,.job-bottom{display:flex;justify-content:space-between;gap:10px;font:9px ui-monospace,monospace;color:#8fa5b8}"
+         ".job h3{font-size:13px;color:#e1e8ef;margin:12px 0 5px}.job p{font-size:10px;color:#91a5b7;min-height:30px}"
+         ".status{font-size:9px;padding:3px 7px;border:1px solid #6c593b;color:#dfc17e}.status.done{border-color:#416b59;color:#83c6a1}.status.failed{border-color:#754c4c;color:#e29a96}"
+         ".continue-link{display:block;margin-top:10px;padding-top:10px;border-top:1px solid #2a4053;color:#d8b875;font-size:10px}"
+         ".empty{padding:22px;border:1px dashed #405365;color:#92a6b8;font-size:11px}.section-head{margin:30px 0 12px;padding-bottom:9px;border-bottom:1px solid #2b4052}"
+         "@media(max-width:700px){body{padding:16px}.job-grid{grid-template-columns:1fr}}</style>")
 
 
 def esc(s):
@@ -90,13 +100,32 @@ def main():
         for cid, r in built)
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <title>DETECTIVE OS — 案件中心</title>{STYLE}</head><body>
-<h1>DETECTIVE OS — 案件中心</h1>
-<p class="note">针对真实历史刑事案件的公开资料研究、证据分析、竞争性假设推理与调查辅助系统。
-只依据公开资料；推测不包装成事实；不根据网络传言指认现实中的个人为凶手。</p>
-<p><a href="investigate.html">开始新的自动调查 →</a>（输入调查方向，引擎自动收集、抽取、推理，出未审草稿报告）</p>
-<h2>案件</h2><ul>{links}</ul>
-<p class="note">引擎：Python标准库，8模块。验收测试17项全过（含白银案回溯校验6项）。
-第二案件白银案为已侦破案件的回溯校验：引擎只读破案前公开事实，已知结果存于独立校验文件，不进入推理。</p>
+<div class="eyebrow">INTELLIGENCE OPERATIONS CENTER / OPEN-SOURCE RESEARCH</div>
+<h1>DETECTIVE OS</h1>
+<p class="note">真实案件公开资料调查工作站。统一管理调查委托、来源采集、证据链、竞争性假设与独立审查。事实、报道、用户线索、推断和未知严格区分。</p>
+<div class="ops-banner"><div class="eyebrow">CASEWORK / LIVE OPERATIONS</div><h2>调查行动中心</h2><p>每项完成的调查都可以继续跟进。新增信源将追加到原始案卷，旧报告保留，生成独立版本。</p><a class="action" href="investigate.html">＋ 新建调查委托</a></div>
+<div class="section-head"><div class="eyebrow">LIVE TASK REGISTER</div><h2>近期调查任务 <small id="jobCount">CONNECTING…</small></h2></div>
+<div id="jobs" class="job-grid"><div class="empty">正在读取任务库……</div></div>
+<div class="section-head"><div class="eyebrow">ARCHIVED CASE FILES</div><h2>已归档案卷</h2></div><ul>{links}</ul>
+<p class="note">研究边界：公开资料不等于完整警方卷宗。转载不等于独立佐证；模型推断不等于事实；假设排序不等于真实犯罪概率。证据不足时允许不作结论。</p>
+<script>
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}}[c]));
+async function loadJobs(){{
+  const root=document.getElementById("jobs"),count=document.getElementById("jobCount");
+  try{{
+    const res=await fetch("/api/jobs",{{cache:"no-store"}});
+    if(!res.ok)throw Error("task registry unavailable");
+    const data=await res.json(),jobs=data.jobs||[];
+    count.textContent=jobs.length+" RECORDS";
+    root.innerHTML=jobs.length?jobs.map(j=>{{
+      const done=j.status==="done",failed=j.status==="failed";
+      const label=done?"COMPLETED":failed?"FAILED":j.status==="queued"?"AWAITING HANDLER":"IN PROGRESS";
+      return '<div class="job"><a class="job-main" href="investigate.html?job='+encodeURIComponent(j.job_id)+'"><div class="job-top"><span>'+esc(j.job_id.slice(0,13).toUpperCase())+'</span><span class="status '+(done?'done':failed?'failed':'')+'">'+label+'</span></div><h3>'+esc(j.direction)+'</h3><p>'+esc(j.stage_note||j.stage||"等待状态更新")+'</p><div class="job-bottom"><span>v'+esc(j.version||1)+'</span><span>'+esc(j.updated_at||j.created_at||"")+'</span></div></a>'+(done?'<a class="continue-link" href="investigate.html?continue='+encodeURIComponent(j.job_id)+'">＋ 继续调查 · 添加信源与新线索</a>':'')+'</div>';
+    }}).join(""):'<div class="empty">当前没有调查任务。创建新的调查委托后会自动显示在这里。</div>';
+  }}catch(e){{count.textContent="OFFLINE";root.innerHTML='<div class="empty">暂时无法连接任务库，稍后刷新。</div>';}}
+}}
+loadJobs();setInterval(loadJobs,15000);
+</script>
 </body></html>"""
     (out / "index.html").write_text(index, encoding="utf-8")
     print(f"built index.html ({len(built)} cases)")
