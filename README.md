@@ -22,13 +22,13 @@
 
 **T2. 第三个案件（2026-11-11完成）：1970年Isdalen身份未明女性可疑死亡案。**案包`cases/case-no-1970-001/`，6个独立来源（NRK、BBC News、奥斯陆大学研究传播、Journalisten、The Norwegian American、Life in Norway）、16条证据（C15、D1）、7个事件、10个实体、6条有来源关系、4条解释分歧、8项资料缺口、22项覆盖清单（18项适用）。四个竞争解释：自杀、他杀、协助自杀/第三方参与、意外死亡；没有建立嫌疑人节点。引擎实跑：贝叶斯H2 28.35%、H1 25.29%、H3 25.27%、H4 21.09%，前两名差0.0306，明确输出undecided；定性分数H3净1.3，两个排序口径并列披露，不把模型分数解释为犯罪概率。资料覆盖41.7%（3项已覆盖/9项单来源/6项缺失）；调查计划11项；独立审查0个blocker。报告和静态案件页已由CI生成并上传artifact。验收：check通过、报告生成、静态站构建通过、全套65项测试通过。CI运行：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
 
+**T3. React+TypeScript研究工作站（2026-11-11代码与构建验收完成，生产部署待凭证）。**新增`workbench.html`与`src/`应用，十个真实导航模块：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。数据全部由案包和结构化引擎报告生成：`scripts/build_site.py`对三个案包只读运行引擎，生成`public/data/cases/*.json`、报告Markdown和案件静态页；React工作站通过这些JSON加载，不写入生产KV、不创建调查任务。证据编号可回链证据详情，来源编号可回链来源档案；F/G/H级无来源记录明确标示，不伪造来源。`deploy.py`现会先安装依赖、TypeScript类型检查、构建Vite，再构建真实案包数据，最后才调用Wrangler。验收：`npm run typecheck`通过、Vite build通过、静态数据构建通过、68项测试全过；CI artifact包含`workbench.html`、assets、三个案包JSON与报告：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42956572177。**注意：尚未部署到生产Pages，线上站点不会因本次代码提交自动变化；等待标准Cloudflare部署凭证/上传通道后再上线实核。**
+
 **V1. 自动调查模式：前端输入调查方向即自动跑（2026-11-11已建成，端到端测试已完成，见下文“自动调查模式V1”与V0）。** intake页`public/investigate.html`→Pages Functions收请求写Cloudflare KV任务→定时跑手每10分钟轮询→`scripts/run_job.py`跑抽取、似然、映射、草稿包、引擎、报告→结果写回KV，前端轮询展示。红线已进代码：抽取证据最高C级、报告带“草稿（未审）”横幅、永不碰两个正式案包、不得按传言指认活人。端到端测试任务c23978f6（1988-2002白银连环杀人案重推）已完成：9个来源、63条事实全C级、结论H3陌生人加技能领先52.45%、覆盖率31.8%、审查6个blocker；断点续跑检查点已生效（两次虚拟机重启未丢进度）。
 
 ### 未完成任务（按顺序做，每项做完要过验收）
 
 **V0. 跑完端到端测试并收尾（2026-11-11已完成）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。实测结果：9个来源（3中文加6英文/维基）、63条事实全C级、似然315对、覆盖映射18条；结论H3陌生人加技能领先52.45%（H1 25.66%、H4 13.56%、H2 8.17%、H5 0.16%，前两名差0.2679），覆盖率31.8%（4项已覆盖/6项单来源/12项缺失，共22项），独立审查6个blocker；报告带草稿横幅，`reports/CASE-DRAFT-c23978f6-report.md`，前端`investigate.html`可见done。注意：草稿的H3（陌生人加技能）与手工白银案包的H1（单人连环、本地、尾随陌生女性）指向一致，都是陌生人加技能方向；手工包H1 69.17%是另一套假设定义下的数，两者不可直接比大小。收尾余项（不阻塞T2）：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
-
-**T3. 前端工作站（React加TypeScript）。**10个导航页：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。风格：专业深色研究工作站；每个结论可点击回溯到证据与来源。数据来源：引擎报告JSON，不得手写假数据、不得做没有实际功能的模块名。
 
 **T4. Workers API + D1 + R2。**Workers API提供案件包的读写接口；D1用本地SQLite的14张表结构（已按D1兼容子集设计）；R2存附件。绑定必须写进`wrangler.toml`（部署会重写后台单独改的绑定），部署完再GET项目核验绑定还在。验收：API返回的数据与本地报告一致；前端可切换线上线下数据源。
 
@@ -57,6 +57,10 @@
 python3 -m detective_os.cli check cases/case-cn-1996-001
 python3 -m detective_os.cli check cases/case-no-1970-001
 python3 -m detective_os.cli run cases/case-cn-1996-001
+npm install
+npm run typecheck
+npm run build
+python3 scripts/build_site.py
 python3 -m unittest discover -s tests -v
 ```
 
@@ -84,10 +88,14 @@ tests/test_acceptance.py  验收测试1-10
 tests/test_coverage.py    覆盖清单测试14项
 tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、检查点、草稿包）
 tests/test_isdal_case.py  T2第三案7项回归验收
+tests/test_workbench_build.py T3静态数据、10模块、报告回链3项验收
+src/App.tsx                React+TypeScript十模块工作站
+src/style.css              深色研究工作站响应式样式
+workbench.html             Vite工作站入口
 scripts/check_frontend.py 检查当前V1 intake表单、API、进度轮询与内嵌JS
 ```
 
-前端（React加TypeScript）、Cloudflare Workers API、D1、R2、Kaggle双T4实验Notebook按阶段推进，不在本版。
+React+TypeScript研究工作站（T3已完成代码与构建验收）；Cloudflare Workers API、D1、R2（T4待做）；Kaggle双T4实验Notebook已完成T1。
 
 ## 九个模块，全部实际运行
 
