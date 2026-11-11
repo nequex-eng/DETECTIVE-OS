@@ -16,7 +16,6 @@ job status done (or failed). Usage:
 It never touches the two real case packs. Evidence is capped at C.
 """
 import json
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -53,114 +52,6 @@ def save_checkpoint(path, payload):
                     encoding="utf-8")
 
 
-def serialize_plan_tasks(tasks):
-    """Convert engine InvestigationTask dataclasses into JSON-safe records."""
-    fields = ("task_id", "case_id", "question", "purpose", "hypotheses",
-              "expected_info", "impact_if_yes", "impact_if_no",
-              "source_or_channel", "estimated_value", "status")
-    return [{key: getattr(task, key, None) for key in fields}
-            for task in (tasks or [])]
-
-
-def build_timeline_events(evidence):
-    """Build only date-anchored events from verified verbatim source quotes.
-
-    The model's event_date field is not trusted on its own. A date must be
-    visibly present in the quote; precision is kept at the level the quote
-    actually supports.
-    """
-    events = []
-    patterns = [
-        ("day_range", re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日?\s*(?:至|到|[-—])\s*(\d{1,2})日")),
-        ("month_range", re.compile(r"(\d{4})年(\d{1,2})月\s*(?:至|到|[-—])\s*(\d{1,2})月")),
-        ("day", re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日")),
-        ("iso", re.compile(r"(\d{4})-(\d{2})-(\d{2})")),
-        ("month", re.compile(r"(\d{4})年(\d{1,2})月")),
-    ]
-    for item in evidence or []:
-        quote = str(item.get("original_quote", ""))
-        found = None
-        for kind, pattern in patterns:
-            match = pattern.search(quote)
-            if match:
-                values = [int(x) for x in match.groups()]
-                if kind == "day_range":
-                    year, month, start, end = values
-                    label = f"{year:04d}-{month:02d}-{start:02d} 至 {year:04d}-{month:02d}-{end:02d}"
-                    sort_key = (year, month, start)
-                    precision = "range"
-                elif kind == "month_range":
-                    year, start, end = values
-                    label = f"{year:04d}-{start:02d} 至 {year:04d}-{end:02d}"
-                    sort_key = (year, start, 1)
-                    precision = "range"
-                elif kind in ("day", "iso"):
-                    year, month, day = values
-                    label = f"{year:04d}-{month:02d}-{day:02d}"
-                    sort_key = (year, month, day)
-                    precision = "date"
-                else:
-                    year, month = values
-                    label = f"{year:04d}-{month:02d}"
-                    sort_key = (year, month, 1)
-                    precision = "month"
-                found = (sort_key, label, precision)
-                break
-        if not found:
-            continue
-        sort_key, label, precision = found
-        events.append({
-            "event_id": f"EV{len(events) + 1:02d}",
-            "description": str(item.get("content", "")),
-            "time": {"kind": precision, "label": label},
-            "evidence_ids": [item.get("evidence_id", "")],
-            "source_ids": [item.get("source_id", "")],
-            "original_quote": quote,
-        })
-        events[-1]["_sort_key"] = sort_key
-    events.sort(key=lambda event: event["_sort_key"])
-    for event in events:
-        event.pop("_sort_key", None)
-    for index, event in enumerate(events, 1):
-        event["event_id"] = f"EV{index:02d}"
-    return events
-
-
-def build_traceability_graph(sources, evidence):
-    """Create a factual source↔evidence graph, not speculative people links."""
-    nodes = []
-    edges = []
-    source_ids = set()
-    for source in sources or []:
-        sid = str(source.get("source_id", ""))
-        if not sid:
-            continue
-        source_ids.add(sid)
-        nodes.append({
-            "entity_id": "SRC-" + sid,
-            "name": str(source.get("title") or source.get("publisher") or sid),
-            "kind": "source",
-        })
-    for item in evidence or []:
-        eid = str(item.get("evidence_id", ""))
-        sid = str(item.get("source_id", ""))
-        if not eid:
-            continue
-        nodes.append({
-            "entity_id": "EVD-" + eid,
-            "name": f"{eid} [{item.get('grade', 'H')}] " + str(item.get("content", ""))[:100],
-            "kind": "evidence",
-        })
-        if sid in source_ids:
-            edges.append({
-                "from": "EVD-" + eid,
-                "relation": "cites_source",
-                "to": "SRC-" + sid,
-                "evidence_ids": [eid],
-            })
-    return {"entities": nodes, "relationships": edges}
-
-
 def load_checkpoint(path, collected_mtime):
     """A checkpoint is valid only for the collected.json it was built
     from; a re-collection (new mtime) invalidates all of them."""
@@ -179,58 +70,17 @@ def main():
         return 1
     job_id = sys.argv[1]
     run_dir = ROOT / "runs" / job_id
-    run_dir.mkdir(parents=True, exist_ok=True)
     collected_path = run_dir / "collected.json"
-    # Read the structured user intake before requiring agent-collected data.
-    live = job_get(job_id)
-    intake = live.get("intake", {}) if isinstance(live, dict) else {}
-    material = str(intake.get("materials", "")).strip()
-    parent_id = str(intake.get("parent_job_id", "")).strip()
-    parent_report = ""
-    if parent_id:
-        parent_job = job_get(parent_id)
-        parent_report = str((parent_job.get("result") or {}).get("report_md", "")).strip()
     if not collected_path.exists():
-        if not material and not parent_report:
-            print(f"no collected.json for {job_id}; public-source collection is still required")
-            return 1
-        # A user can submit source text without URLs and still run the
-        # engine. It is kept as unverified manual input (H-grade), never C.
-        seed = {"direction": live.get("direction", ""),
-                "sources": [], "texts": {},
-                "paths_tried": [{"path": "user_supplied", "status": "tried",
-                                 "note": "仅有用户供料；尚无独立公开来源"}]}
-        collected_path.write_text(json.dumps(seed, ensure_ascii=False, indent=2),
-                                  encoding="utf-8")
+        print(f"no collected.json for {job_id}; collect sources first")
+        return 1
     data = json.loads(collected_path.read_text(encoding="utf-8"))
-    sources = list(data["sources"])
-    texts = dict(data["texts"])
-    paths_tried = list(data.get("paths_tried", []))
-    direction = data.get("direction") or live.get("direction", "")
-    # User text is preserved as a separate manual source and later graded H
-    # until an independent public source verifies it.
-    if parent_report and not any(s.get("source_id") == "PAR01" for s in sources):
-        sources.append({
-            "source_id": "PAR01", "title": "父任务AI分析报告（仅作上下文）",
-            "publisher": "DETECTIVE OS", "published_at": "",
-            "url": "", "source_type": "ai_report", "is_reprint": False,
-            "reprint_of": "", "origin_url": "", "reliability": "AI-generated inference",
-            "last_verified": "", "notes": "上一轮AI报告，仅供追踪调查方向，不作为事实或证据。"
-        })
-        texts["PAR01"] = parent_report[:30000]
-        paths_tried.append({"path": "user_supplied", "status": "tried",
-                            "note": "上一轮AI报告仅作上下文，不计入证据"})
-    if material and not any(s.get("source_id") == "USR01" for s in sources):
-        sources.append({
-            "source_id": "USR01", "title": "用户提交的补充材料",
-            "publisher": "用户提供", "published_at": "",
-            "url": "", "source_type": "manual", "is_reprint": False,
-            "reprint_of": "", "origin_url": "", "reliability": "unverified",
-            "last_verified": "", "notes": "用户提交文本；未经独立来源核验，不作为已确认事实。"
-        })
-        texts["USR01"] = material
-        paths_tried.append({"path": "user_supplied", "status": "tried",
-                            "note": "用户提交材料已纳入，待独立来源核验"})
+    sources = data["sources"]
+    texts = data["texts"]
+    paths_tried = data.get("paths_tried", [])
+    # The job's direction comes from the collected file (written by the
+    # runner from the job doc) so this script never needs the API read.
+    direction = data.get("direction", "")
     short = job_id[:8]
     case_id = f"CASE-DRAFT-{short}"
     collected_mtime = collected_path.stat().st_mtime
@@ -330,46 +180,11 @@ def main():
             "posteriors": [{"hypothesis_id": p["hypothesis_id"],
                             "posterior": p["posterior"], "prior": p["prior"]}
                            for p in summary["bayes"]["posteriors"]],
-            "source_count": len(sources),
-            "fact_count": len(candidates),
-            "sources": [{"source_id": s.get("source_id", ""),
-                         "title": s.get("title", ""),
-                         "publisher": s.get("publisher", ""),
-                         "published_at": s.get("published_at", ""),
-                         "url": s.get("url", ""),
-                         "source_type": s.get("source_type", "")}
-                        for s in sources],
-            "evidence": [{"evidence_id": e.get("evidence_id", ""),
-                          "content": e.get("content", ""),
-                          "original_quote": e.get("original_quote", ""),
-                          "source_id": e.get("source_id", ""),
-                          "source_location": e.get("source_location", ""),
-                          "grade": e.get("grade", "H"),
-                          "verification_status": e.get("verification_status", "")}
-                         for e in pack.get("evidence", [])],
             "coverage": {"score_pct": score_pct,
                          "covered": cov["covered"],
                          "single": cov["single"], "missing": cov["missing"],
-                         "total": cov["total"],
-                         "missing_ids": cov.get("missing_ids", []),
-                         "single_ids": cov.get("single_ids", []),
-                         "items": cov.get("items", [])},
+                         "total": cov["total"]},
             "review_blockers": summary["review"]["blockers"],
-            "review_passed": summary["review"].get("passed", False),
-            "review_findings": summary["review"].get("findings", []),
-            # Expose structured engine records to the UI. Empty arrays are
-            # intentional: the draft collector must not fabricate timeline,
-            # graph edges, or contradictions it has not actually established.
-            "hypotheses_detail": pack["case"].get("hypotheses", []),
-            "timeline_events": pack.get("events") or build_timeline_events(pack.get("evidence", [])),
-            "entities": {
-                "entities": (pack.get("entities") or {}).get("entities", []) +
-                            build_traceability_graph(sources, pack.get("evidence", []))["entities"],
-                "relationships": (pack.get("entities") or {}).get("relationships", []) +
-                                 build_traceability_graph(sources, pack.get("evidence", []))["relationships"],
-            },
-            "contradictions": pack.get("contradictions", []),
-            "investigation_plan": serialize_plan_tasks(summary.get("plan_tasks", [])),
             "report_md": report_md,
         }
         (run_dir / "result.json").write_text(

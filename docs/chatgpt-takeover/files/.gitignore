@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+reports/*.db
+.venv/
+kaggle/run*-output/detective-os/
+kaggle/run*-monitor.log
+.wrangler/

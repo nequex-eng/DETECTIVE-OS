@@ -12,12 +12,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ["case-cn-1996-001", "case-cn-1988-001"]
 
-STYLE = """<style>
-:root{color-scheme:dark;--bg:#09111b;--panel:#121e2c;--line:#2a3a4d;--muted:#8fa2b7;--text:#e6edf5;--gold:#e7b84f;--blue:#84baff;--green:#74d9b5}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 18% -8%,#1a3045 0,transparent 42%),var(--bg);color:var(--text);font:14px/1.65 system-ui,-apple-system,sans-serif;max-width:1180px;padding:28px;margin:0 auto}
-a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border:1px solid #8c743d;border-radius:12px;display:grid;place-items:center;color:var(--gold);font-size:22px;background:#241f15}.eyebrow,.kicker{font-size:10px;letter-spacing:.17em;color:var(--gold);font-weight:700}h1{font-size:22px;margin:0}h2{font-size:16px;color:var(--gold)}h3{font-size:17px;margin:6px 0}.muted,.note{color:var(--muted);font-size:12px}.hero{margin:24px 0;padding:30px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,#172a3e,#101a27)}.hero h2{font-size:30px;line-height:1.25;color:var(--text);margin:8px 0 12px}.hero p{color:#b5c3d1;max-width:780px}.btn{display:inline-block;padding:11px 17px;border-radius:9px;background:var(--gold);color:#17130b;font-weight:750;margin:10px 8px 0 0}.btn.secondary{background:#22364b;border:1px solid #405a75;color:#e3edf8}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.case-card,.panel{display:block;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px;color:var(--text)}.case-card:hover{border-color:#987a3e;text-decoration:none;transform:translateY(-1px)}.case-meta{color:var(--muted);font-size:11px;margin-top:10px}.stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}.stats strong{display:block;font-size:20px;color:var(--gold)}.safety{border-left:3px solid var(--gold);background:#211f19;padding:11px 14px;border-radius:0 8px 8px 0;color:#c7c0ad;font-size:12px;margin:17px 0}.section{margin:24px 0}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.panel{padding:16px}.panel b{color:var(--gold)}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:9px;text-align:left}th{color:var(--muted)}.footer{padding:25px 0;text-align:center;color:var(--muted);font-size:11px}
-@media(max-width:720px){body{padding:14px}.hero{padding:20px}.hero h2{font-size:24px}.cards,.grid3{grid-template-columns:1fr}.topnav{display:none}}
-</style>"""
+STYLE = ("<style>body{background:#0d1117;color:#d7dee8;font-family:system-ui,sans-serif;"
+         "max-width:900px;margin:0 auto;padding:24px}h1{font-size:22px}h2{font-size:17px;"
+         "color:#e8b64c}a{color:#7fb3ff}table{border-collapse:collapse}"
+         "td,th{border:1px solid #333;padding:6px 10px;text-align:left}"
+         ".note{color:#9aa7b5;font-size:13px}</style>")
 
 
 def esc(s):
@@ -84,34 +83,20 @@ def main():
         r = case_page(case_id)
         if r:
             built.append((case_id, r))
-    cards = "".join(
-        f'<a class="case-card" href="{cid}.html">'
-        f'<div class="kicker">{esc(r["case"]["case_id"])}</div>'
-        f'<h3>{esc(r["case"]["name"])}</h3>'
-        f'<div>{esc(r["report"]["bayesian"]["verdict"])}</div>'
-        f'<div class="case-meta">证据{len(json.loads((ROOT / "cases" / cid / "evidence.json").read_text(encoding="utf-8")))}条 · '
-        f'来源{len(json.loads((ROOT / "cases" / cid / "sources.json").read_text(encoding="utf-8")))}个 · '
-        f'{esc(r["case"]["status"])}</div></a>'
+    links = "".join(
+        f"<li><a href=\"{cid}.html\">{esc(r['case']['name'])}</a> — "
+        f"{esc(r['case']['case_id'])}，结论：{esc(r['report']['bayesian']['verdict'])}，"
+        f"证据{len(json.loads((ROOT / 'cases' / cid / 'evidence.json').read_text(encoding='utf-8')))}条</li>"
         for cid, r in built)
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="DETECTIVE OS真实案件公开资料研究、证据管理与可追溯推理工作站">
-<title>DETECTIVE OS — Real Case Intelligence</title>{STYLE}</head><body>
-<header class="top"><div class="brand"><div class="mark">⌕</div><div><div class="eyebrow">REAL CASE INTELLIGENCE</div><h1>DETECTIVE OS</h1></div></div>
-<div class="topnav"><a href="investigate.html">调查工作站</a>　<a href="https://github.com/nequex-eng/DETECTIVE-OS">GitHub</a></div></header>
-<section class="hero"><div class="eyebrow">PUBLIC-SOURCE INVESTIGATION ENGINE</div>
-<h2>把线索变成可核验的证据链。</h2>
-<p>面向真实历史刑事案件的公开资料研究、证据分析、时间线重建、矛盾识别、竞争性假设与反方审查。每一项结论都应能回溯到来源；不知道的事情，就明确标记为未知。</p>
-<a class="btn" href="investigate.html">创建调查委托 →</a><a class="btn secondary" href="#cases">浏览案件档案</a>
-<div class="safety">研究范围仅限合法公开资料。AI推断和用户供料不作为已核实证据；不根据网络传言指认现实个人为凶手。自动报告均为未审草稿。</div></section>
-<section class="section"><div class="kicker">HOW IT WORKS</div><h2>一份委托，完整调查流程</h2>
-<div class="grid3"><div class="panel"><b>01 · Collect</b><p>检索公开资料，打开原始页面，识别转载链与来源独立性。</p></div>
-<div class="panel"><b>02 · Structure</b><p>抽取事实、原文引用、证据等级、时间线与待核实缺口。</p></div>
-<div class="panel"><b>03 · Challenge</b><p>比较竞争假设，主动寻找反证，生成覆盖率与审查报告。</p></div></div></section>
-<section class="section" id="cases"><div class="kicker">CASE ARCHIVE</div><h2>案件档案</h2><div class="cards">{cards}</div></section>
-<section class="section"><div class="kicker">ENGINE RULES</div><h2>不把推断伪装成事实</h2>
-<p class="note">证据分级、转载去重、引用核验、证据截止日期与独立审查共同约束自动分析。资料缺失不是失败；结论不确定时，系统必须拒绝过早选定。</p></section>
-<footer class="footer">DETECTIVE OS · REAL CASE INTELLIGENCE & INVESTIGATION ENGINE</footer>
+<title>DETECTIVE OS — 案件中心</title>{STYLE}</head><body>
+<h1>DETECTIVE OS — 案件中心</h1>
+<p class="note">针对真实历史刑事案件的公开资料研究、证据分析、竞争性假设推理与调查辅助系统。
+只依据公开资料；推测不包装成事实；不根据网络传言指认现实中的个人为凶手。</p>
+<p><a href="investigate.html">开始新的自动调查 →</a>（输入调查方向，引擎自动收集、抽取、推理，出未审草稿报告）</p>
+<h2>案件</h2><ul>{links}</ul>
+<p class="note">引擎：Python标准库，8模块。验收测试17项全过（含白银案回溯校验6项）。
+第二案件白银案为已侦破案件的回溯校验：引擎只读破案前公开事实，已知结果存于独立校验文件，不进入推理。</p>
 </body></html>"""
     (out / "index.html").write_text(index, encoding="utf-8")
     print(f"built index.html ({len(built)} cases)")

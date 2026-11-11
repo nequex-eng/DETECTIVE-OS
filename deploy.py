@@ -15,12 +15,6 @@ ACCOUNT_ID = "3c76b79d615b6bc886fe564307682767"
 
 
 def main():
-    build = subprocess.run([sys.executable, str(
-        os.path.join(PROJECT_DIR, "scripts", "build_site.py"))],
-        cwd=PROJECT_DIR)
-    if build.returncode:
-        print("deploy: static site build failed")
-        return build.returncode
     entry = dynamic_credential_entry("custom.cloudflare", "access_token")
     surrogate = str(entry.get("surrogate", "")).strip()
     if not surrogate.startswith("hsurr:"):

@@ -121,9 +121,8 @@ def extract_candidates(source_text: str, source_id: str, direction: str,
     `caller` defaults to the retrying MiniMax caller; tests pass a stub.
     Every returned item passed verify_quote against the source text.
     """
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     user = (f"调查方向：{direction}\n来源编号：{source_id}\n"
             f"报道原文：\n{source_text[:12000]}")
     raw = caller([{"role": "system", "content": EXTRACT_SYSTEM},
@@ -176,9 +175,8 @@ def propose_likelihoods(evidence: list, caller=None,
     from M3 (it chokes on the long JSON output); batches of 10 stay
     reliable.
     """
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     if not evidence:
         return {}
     hyps = "\n".join(f"{h}：{d}" for h, d, *_ in HYPOTHESIS_TEMPLATE)
@@ -236,9 +234,8 @@ def map_categories(evidence: list, caller=None,
     {evidence_id: [item_id, ...]}; anything invalid is dropped.
     """
     from detective_os.coverage import template_items
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     if not evidence:
         return {}
     items = template_items()
@@ -349,23 +346,17 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
       clamped to [0.2, 0.8]; anything unmapped stays 0.5.
     - categories: {evidence_id: [item_id, ...]} from map_categories;
       falls back to the extractor's single category tag.
-    - Public-report extracts are capped at grade C; user-supplied manual
-      sources remain grade H; prior AI reports remain grade G. Both manual
-      input and AI inference carry zero weight. No automated path assigns A/B.
+    - Every evidence item is grade C, or H when its quote could not be
+      tied to a dated, sourced statement. Never A/B.
     """
     likelihoods = likelihoods or {}
     categories = categories or {}
-    source_by_id = {s.get("source_id"): s for s in sources}
     evidence = []
     for i, c in enumerate(candidates, 1):
         eid = f"F{i:02d}"
         cats = categories.get(eid)
         if not cats and c.get("category"):
             cats = [c["category"]]
-        source = source_by_id.get(c["source_id"], {})
-        source_type = source.get("source_type")
-        user_supplied = source_type == "manual"
-        ai_generated = source_type == "ai_report"
         evidence.append({
             "evidence_id": eid, "content": c["content"],
             "evidence_type": c.get("evidence_type", "fact"),
@@ -373,21 +364,11 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "source_location": c.get("source_location", ""),
             "publication_date": "",
             "event_date": c.get("event_date", ""),
-            "grade": "G" if ai_generated else "H" if user_supplied else "C",
-            "reliability_assessment": (
-                "G级：引用来自上一轮AI生成报告，仅作调查上下文，不是独立证据。"
-                if ai_generated else
-                "H级：用户提供材料，引用仅与提交文本匹配，尚未找到独立来源核验。"
-                if user_supplied else
-                "草稿：LLM从公开报道抽取，逐字引用已核验，待人工复核定级。"),
-            "verification_status": "ai-inference" if ai_generated else
-                                  "unverified" if user_supplied else "single-source",
+            "grade": "C",
+            "reliability_assessment": "草稿：LLM从报道原文抽取，逐字引用已核验，待人工复核定级。",
+            "verification_status": "single-source",
             "supports": [], "contradicts": [],
-            "analyst_notes": (
-                "AI-REPORT: prior generated analysis; context only, weight zero."
-                if ai_generated else
-                "USER-SUPPLIED: unverified; not countable evidence."
-                if user_supplied else "DRAFT: auto-extracted, unreviewed."),
+            "analyst_notes": "DRAFT: auto-extracted, unreviewed.",
             "_categories": list(cats or []),
         })
     hypotheses = []

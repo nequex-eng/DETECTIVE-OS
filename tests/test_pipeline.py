@@ -235,40 +235,5 @@ class TestMapCategories(unittest.TestCase):
             self.assertEqual(summary["coverage"]["total"], 22)
 
 
-class TestUserSuppliedMaterial(unittest.TestCase):
-    def test_user_material_is_unverified_h_grade(self):
-        pack = build_draft_pack(
-            "CASE-DRAFT-USER", "用户材料草稿", "测试方向", "job-user",
-            [{"source_id": "USR01", "title": "用户提交的补充材料",
-              "publisher": "用户提供", "published_at": "", "url": "",
-              "source_type": "manual", "is_reprint": False,
-              "reprint_of": "", "notes": "未经独立核验"}],
-            [{"content": "一条待核实陈述。", "quote": "一条待核实陈述。",
-              "source_id": "USR01", "source_location": "用户粘贴文本",
-              "evidence_type": "statement", "event_date": "",
-              "category": "C13"}],
-            [{"path": "user_supplied", "status": "tried"}])
-        ev = pack["evidence"][0]
-        self.assertEqual(ev["grade"], "H")
-        self.assertEqual(ev["verification_status"], "unverified")
-        self.assertIn("用户提供材料", ev["reliability_assessment"])
-
-    def test_parent_ai_report_remains_zero_weight_g_grade(self):
-        pack = build_draft_pack(
-            "CASE-DRAFT-PARENT", "父任务上下文", "测试方向", "job-parent",
-            [{"source_id": "PAR01", "title": "父任务AI报告",
-              "publisher": "DETECTIVE OS", "published_at": "", "url": "",
-              "source_type": "ai_report", "is_reprint": False,
-              "reprint_of": "", "notes": "仅作上下文"}],
-            [{"content": "上一轮报告中的推断。", "quote": "上一轮报告中的推断。",
-              "source_id": "PAR01", "source_location": "父任务报告",
-              "evidence_type": "inference", "event_date": "",
-              "category": "C13"}],
-            [{"path": "user_supplied", "status": "tried"}])
-        ev = pack["evidence"][0]
-        self.assertEqual(ev["grade"], "G")
-        self.assertEqual(ev["verification_status"], "ai-inference")
-
-
 if __name__ == "__main__":
     unittest.main()
