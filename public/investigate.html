@@ -98,7 +98,6 @@ function showJob(j){
     if(res.posteriors)h+=`<table><tr><th>假设</th><th>后验</th><th>先验</th></tr>`+res.posteriors.map(p=>`<tr><td>${esc(p.hypothesis_id)}</td><td>${esc(p.posterior)}</td><td>${esc(p.prior)}</td></tr>`).join("")+"</table>";
     if(res.coverage)h+=`<p>资料覆盖：${esc(res.coverage.score_pct)}%（${esc(res.coverage.covered)}项已覆盖/${esc(res.coverage.single)}项单来源/${esc(res.coverage.missing)}项缺失，共${esc(res.coverage.total)}项）</p>`;
     if(res.review_blockers!=null)h+=`<p>独立审查：${esc(res.review_blockers)}个blocker</p>`;
-    if(res.summary)h+=`<div class="panel"><h2>案件总结</h2>${mdToHtml(res.summary)}</div>`;
     if(res.report_md)h+=mdToHtml(res.report_md);
     h+=`<p><a class="continue-action" href="investigate.html?continue=${encodeURIComponent(j.job_id)}">＋ 继续调查：添加新信源和线索 →</a></p>`;
     r.innerHTML=h;
