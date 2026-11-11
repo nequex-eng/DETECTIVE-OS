@@ -53,29 +53,35 @@ export async function onRequestPost(context) {
       error: "该案已有续办任务正在执行，请先查看任务 " + active.job_id,
       active_job_id: active.job_id
     }, 409);
+    const completed = lineage.filter(item => item.status === "done" && item.result);
+    const latest = completed.reduce((best, item) =>
+      Number(item.result?.version || item.version || 1) >
+      Number(best?.result?.version || best?.version || 1) ? item : best, null);
     const version = lineage.reduce((max, item) =>
       Math.max(max, Number(item.result?.version || item.version || 1)), 1) + 1;
+    const parentJobId = latest?.job_id || rootJobId;
+    const parentVersion = Number(latest?.result?.version || latest?.version || 1);
     const now = new Date().toISOString();
     const job = {
       job_id: crypto.randomUUID(),
       direction: baseline.direction,
       language: "zh",
       region: "南京，中国",
-      hints: "【继续调查】基于正式静态案卷v1增量跟进；只处理新增信源，不得重跑旧来源。",
+      hints: "【继续调查】基于既有案卷版本进行增量跟进；只处理新增信源，不得重跑旧来源。",
       version,
-      parent_job_id: rootJobId,
+      parent_job_id: parentJobId,
       root_job_id: rootJobId,
       intake: {
-        objective: "在正式案卷v1基础上进行增量跟进，核查新增信源并更新分析。",
-        parent_job_id: rootJobId,
-        baseline_case_id: baseline.case_id,
+        objective: "在既有正式案卷或最新续办版本基础上增量跟进，核查新增信源并更新分析。",
+        parent_job_id: parentJobId,
+        baseline_case_id: latest ? "" : baseline.case_id,
         source_urls: sourceUrls,
         user_source_text: sourceText,
         materials,
         questions,
         known_facts: knownFacts,
-        parent_report_context: "",
-        parent_version: 1,
+        parent_report_context: latest?.result?.report_md || latest?.result?.summary || "",
+        parent_version: parentVersion,
         exclusions: [],
         time_range: "",
         evidence_cutoff_date: ""
