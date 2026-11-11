@@ -71,11 +71,11 @@ def build_timeline_events(evidence):
     """
     events = []
     patterns = [
-        ("day_range", re.compile(r"(\\d{4})年(\\d{1,2})月(\\d{1,2})日?\\s*(?:至|到|[-—])\\s*(\\d{1,2})日")),
-        ("month_range", re.compile(r"(\\d{4})年(\\d{1,2})月\\s*(?:至|到|[-—])\\s*(\\d{1,2})月")),
-        ("day", re.compile(r"(\\d{4})年(\\d{1,2})月(\\d{1,2})日")),
-        ("iso", re.compile(r"(\\d{4})-(\\d{2})-(\\d{2})")),
-        ("month", re.compile(r"(\\d{4})年(\\d{1,2})月")),
+        ("day_range", re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日?\s*(?:至|到|[-—])\s*(\d{1,2})日")),
+        ("month_range", re.compile(r"(\d{4})年(\d{1,2})月\s*(?:至|到|[-—])\s*(\d{1,2})月")),
+        ("day", re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日")),
+        ("iso", re.compile(r"(\d{4})-(\d{2})-(\d{2})")),
+        ("month", re.compile(r"(\d{4})年(\d{1,2})月")),
     ]
     for item in evidence or []:
         quote = str(item.get("original_quote", ""))
