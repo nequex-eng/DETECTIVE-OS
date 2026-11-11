@@ -1,0 +1,59 @@
+"""T3 acceptance tests for the data-driven React workbench build."""
+import json
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+PUBLIC = ROOT / "public"
+DATA = PUBLIC / "data" / "cases"
+
+
+class TestWorkbenchBuild(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.index = json.loads((DATA / "index.json").read_text(encoding="utf-8"))
+
+    def test_react_workbench_is_built_and_has_ten_navigation_modules(self):
+        page = PUBLIC / "workbench.html"
+        assets = PUBLIC / "workbench-assets"
+        self.assertTrue(page.exists(), "Vite must emit public/workbench.html")
+        self.assertTrue(assets.exists(), "Vite must emit hashed workbench assets")
+        app = (ROOT / "src" / "App.tsx").read_text(encoding="utf-8")
+        for view in ('"cases"', '"sources"', '"evidence"', '"timeline"', '"graph"',
+                     '"contradictions"', '"hypotheses"', '"plan"', '"review"', '"report"'):
+            self.assertIn(view, app)
+
+    def test_case_index_and_all_case_payloads_are_real_and_traceable(self):
+        self.assertEqual(len(self.index), 3)
+        self.assertEqual(
+            {x["case_id"] for x in self.index},
+            {"CASE-CN-1996-001", "CASE-CN-1988-001", "CASE-NO-1970-001"})
+        for row in self.index:
+            payload = json.loads(
+                (DATA / (row["case_id"] + ".json")).read_text(encoding="utf-8"))
+            self.assertEqual(payload["case"]["case_id"], row["case_id"])
+            self.assertTrue(payload["reportMarkdown"])
+            self.assertTrue(payload["bayesian"]["posteriors"])
+            self.assertTrue(payload["sources"])
+            self.assertTrue(payload["evidence"])
+            source_ids = {s["source_id"] for s in payload["sources"]}
+            evidence_ids = {e["evidence_id"] for e in payload["evidence"]}
+            for ev in payload["evidence"]:
+                self.assertIn(ev["source_id"], source_ids)
+            for edge in payload["relationships"]:
+                self.assertIn(edge["from_id"], {e["entity_id"] for e in payload["entities"]})
+                self.assertIn(edge["to_id"], {e["entity_id"] for e in payload["entities"]})
+            self.assertTrue((PUBLIC / payload["reportUrl"].lstrip("/")).exists())
+
+    def test_isdal_workbench_payload_contains_six_sources_and_sixteen_evidence(self):
+        payload = json.loads((DATA / "CASE-NO-1970-001.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(payload["sources"]), 6)
+        self.assertEqual(len(payload["evidence"]), 16)
+        self.assertEqual(len(payload["events"]), 7)
+        self.assertEqual(len(payload["contradictions"]), 4)
+        self.assertEqual(payload["bayesian"]["verdict"].split(":")[0], "undecided")
+        self.assertFalse(any(e.get("is_suspect") for e in payload["entities"]))
+
+
+if __name__ == "__main__":
+    unittest.main()
