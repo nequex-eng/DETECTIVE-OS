@@ -287,13 +287,27 @@ export default function App() {
     const relationships = data?.relationships || [];
     const [graphQuery, setGraphQuery] = useState("");
     const [kindFilter, setKindFilter] = useState("ALL");
+    const [relationFilter, setRelationFilter] = useState("ALL");
+    const [confidenceFilter, setConfidenceFilter] = useState("ALL");
+    const [neighborMode, setNeighborMode] = useState(false);
     const [showLabels, setShowLabels] = useState(true);
     const selectedEntity = entities.find((entity) => entity.entity_id === selectedEntityId);
     const kinds = Array.from(new Set(entities.map((x) => String(x.kind || "unknown"))));
-    const visible = entities.filter((x) => (kindFilter === "ALL" || x.kind === kindFilter) &&
+    const relationKinds = Array.from(new Set(relationships.map((x) => String(x.relation || "未分类"))));
+    const tone=(x:Row)=>/推断|inferred/i.test(String(x.status||x.confidence||""))?"inferred":/争议|disputed/i.test(String(x.status||x.confidence||""))?"disputed":/待核|unverified|reported/i.test(String(x.status||x.confidence||""))?"unverified":"documented";
+    const baseVisible = entities.filter((x) => (kindFilter === "ALL" || x.kind === kindFilter) &&
       (!graphQuery || (String(x.name || "") + " " + String(x.entity_id || "")).toLowerCase().includes(graphQuery.toLowerCase())));
+    const neighborhoodIds = new Set<string>([selectedEntityId]);
+    if (neighborMode && selectedEntityId) relationships.forEach((edge) => {
+      if (edge.from_id === selectedEntityId) neighborhoodIds.add(edge.to_id);
+      if (edge.to_id === selectedEntityId) neighborhoodIds.add(edge.from_id);
+    });
+    const visible = neighborMode && selectedEntityId
+      ? baseVisible.filter((x) => neighborhoodIds.has(x.entity_id)) : baseVisible;
     const ids = new Set(visible.map((x) => x.entity_id));
-    const edges = relationships.filter((x) => ids.has(x.from_id) && ids.has(x.to_id));
+    const edges = relationships.filter((x) => ids.has(x.from_id) && ids.has(x.to_id) &&
+      (relationFilter === "ALL" || String(x.relation || "未分类") === relationFilter) &&
+      (confidenceFilter === "ALL" || tone(x) === confidenceFilter));
     const degree = new Map<string,number>();
     edges.forEach((x) => { degree.set(x.from_id,(degree.get(x.from_id)||0)+1); degree.set(x.to_id,(degree.get(x.to_id)||0)+1); });
     const ordered = [...visible].sort((x,y)=>(degree.get(y.entity_id)||0)-(degree.get(x.entity_id)||0));
@@ -301,10 +315,9 @@ export default function App() {
     const pos = new Map<string,{x:number;y:number}>();
     ordered.forEach((x,i) => { const ring=Math.floor(i/10)+1, n=Math.min(10,ordered.length-(ring-1)*10), angle=(i%10)/Math.max(1,n)*Math.PI*2-1.57+ring*.12, radius=90+ring*115; pos.set(x.entity_id,{x:cx+Math.cos(angle)*radius,y:cy+Math.sin(angle)*radius}); });
     const linked = selectedEntity ? relationships.filter((x)=>x.from_id===selectedEntityId||x.to_id===selectedEntityId) : [];
-    const tone=(x:Row)=>/推断|inferred/i.test(String(x.status||x.confidence||""))?"inferred":/争议|disputed/i.test(String(x.status||x.confidence||""))?"disputed":/待核|unverified|reported/i.test(String(x.status||x.confidence||""))?"unverified":"documented";
     return <>
       <SectionHeading eyebrow="INTELLIGENCE LINK ANALYSIS / 05" title="关系图谱" description="实体网络、关系溯源与实体档案。只显示案包中有记录的关系；推断、争议和待核实关系使用独立样式。" />
-      <div className="graph-command"><input value={graphQuery} onChange={(e)=>setGraphQuery(e.target.value)} placeholder="搜索实体名称或编号…"/><select value={kindFilter} onChange={(e)=>setKindFilter(e.target.value)}><option value="ALL">全部实体类型</option>{kinds.map(k=><option key={k} value={k}>{k}</option>)}</select><button className="quiet-button" onClick={()=>{setGraphQuery("");setKindFilter("ALL");setSelectedEntityId("");}}>重置</button></div>
+      <div className="graph-command"><input value={graphQuery} onChange={(e)=>setGraphQuery(e.target.value)} placeholder="搜索实体名称或编号…"/><select value={kindFilter} onChange={(e)=>setKindFilter(e.target.value)}><option value="ALL">全部实体类型</option>{kinds.map(k=><option key={k} value={k}>{k}</option>)}</select><select value={relationFilter} onChange={(e)=>setRelationFilter(e.target.value)}><option value="ALL">全部关系类型</option>{relationKinds.map(k=><option key={k} value={k}>{k}</option>)}</select><select value={confidenceFilter} onChange={(e)=>setConfidenceFilter(e.target.value)}><option value="ALL">全部可信状态</option><option value="documented">有来源记录</option><option value="unverified">待核实</option><option value="inferred">推断</option><option value="disputed">争议</option></select><button className="quiet-button" onClick={()=>setNeighborMode(!neighborMode)} disabled={!selectedEntityId}>{neighborMode?"显示全部实体":"仅看选中实体邻居"}</button><button className="quiet-button" onClick={()=>{setGraphQuery("");setKindFilter("ALL");setRelationFilter("ALL");setConfidenceFilter("ALL");setNeighborMode(false);setSelectedEntityId("");}}>重置</button></div>
       <div className="graph-kpis"><span>实体 <b>{visible.length}</b> / {entities.length}</span><span>关系 <b>{edges.length}</b> / {relationships.length}</span><span>孤立节点 <b>{visible.filter(x=>!(degree.get(x.entity_id)||0)).length}</b></span><span>核心实体 <b>{ordered.slice(0,3).map(x=>x.name).join("、")||"—"}</b></span></div>
       {entities.length ? <div className="intel-graph-layout">
         <aside className="graph-entity-rail"><div className="graph-rail-title">ENTITY INDEX</div>{visible.map(x=><button key={x.entity_id} className={"graph-entity-row "+(selectedEntityId===x.entity_id?"active":"")} onClick={()=>setSelectedEntityId(x.entity_id)}><b>{x.name}</b><small>{x.kind||"unknown"} · {degree.get(x.entity_id)||0} links</small></button>)}</aside>
