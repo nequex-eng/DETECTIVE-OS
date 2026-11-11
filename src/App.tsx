@@ -110,8 +110,16 @@ export default function App() {
   }, [activeCaseId]);
 
   const activeIndex = index.find((x) => x.case_id === activeCaseId);
-  const evidenceMap = useMemo(() => new Map((data?.evidence || []).map((e) => [e.evidence_id, e])), [data]);
-  const sourceMap = useMemo(() => new Map((data?.sources || []).map((s) => [s.source_id, s])), [data]);
+  const evidenceMap = useMemo(() => {
+    const map = new Map<string, Row>();
+    (data?.evidence || []).forEach((item) => map.set(item.evidence_id, item));
+    return map;
+  }, [data]);
+  const sourceMap = useMemo(() => {
+    const map = new Map<string, Row>();
+    (data?.sources || []).forEach((item) => map.set(item.source_id, item));
+    return map;
+  }, [data]);
 
   function openEvidence(id: string) {
     if (!id) return;
@@ -279,7 +287,8 @@ export default function App() {
   function HypothesesPage() {
     const posteriors = data?.bayesian?.posteriors || [];
     const qualitative = Array.isArray(data?.qualitative) ? data?.qualitative : (data?.qualitative?.scores || []);
-    const qualMap = new Map(qualitative.map((q: Row) => [q.hypothesis_id, q]));
+    const qualMap = new Map<string, Row>();
+    qualitative.forEach((q: Row) => qualMap.set(q.hypothesis_id, q));
     return <>
       <SectionHeading eyebrow="COMPETING EXPLANATIONS / 07" title="假设实验室" description="后验排序、定性分数、支持与反对证据分别展示。似然是分析判断，不等于真实犯罪概率。" />
       <div className="notice verdict-notice">贝叶斯结论：<b>{data?.bayesian?.verdict || "尚未生成"}</b><span>{data?.bayesian?.disclosure || ""}</span></div>
