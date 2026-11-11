@@ -5,7 +5,7 @@ type TabId =
   | "contradictions" | "hypotheses" | "plan" | "review" | "report";
 
 type Row = Record<string, any>;
-type LiveJob = { job_id: string; direction: string; language?: string; status: string; stage: string; stage_note?: string; created_at?: string; updated_at?: string; result?: Row | null; error?: string | null; };
+type LiveJob = { job_id: string; direction: string; language?: string; status: string; stage: string; stage_note?: string; created_at?: string; updated_at?: string; result?: Row | null; error?: string | null; parent_job_id?: string | null; version?: number; source_count?: number | null; fact_count?: number | null; };
 type CaseIndexItem = {
   case_id: string;
   name: string;
@@ -188,7 +188,7 @@ export default function App() {
         return <div className="live-job-wrap" key={job.job_id}>
           <a className="live-job-card" href={"/investigate.html?job=" + encodeURIComponent(job.job_id)}>
             <div className="live-job-top"><span className="case-id">{job.job_id.slice(0, 13).toUpperCase()}</span><span className={"job-status " + (done ? "is-done" : failed ? "is-failed" : "is-active")}>{statusLabel}</span></div>
-            <h4>{job.direction}</h4><p>{job.stage_note || job.stage || "等待状态更新"}</p>
+            <h4>{job.direction}</h4>{job.parent_job_id && <div className="job-lineage">续办版本v{job.version || 2} · 承接原任务{job.parent_job_id.slice(0, 8)}</div>}<p>{job.stage_note || job.stage || "等待状态更新"}</p>
             <div className="live-job-bottom"><span>{job.stage || "queued"}</span><span>{stamp ? new Date(stamp).toLocaleString("zh-CN", { hour12: false }) : "时间未记录"}</span></div>
             {done && <div className="job-result-hint">调查报告已生成 · 打开任务档案 →</div>}
             {failed && <div className="job-result-hint failed">{job.error || "需要检查执行错误"} · 查看详情 →</div>}
