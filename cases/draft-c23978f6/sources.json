@@ -34,5 +34,71 @@
     "source_type": "news",
     "title": "甘肃白银连环杀人案重启侦查：14年间9名女子被残杀在家中",
     "url": "https://www.thepaper.cn/newsDetail_forward_1512654?commTag=true"
+  },
+  {
+    "is_reprint": false,
+    "notes": "新华社英文通稿：执行死刑报道",
+    "published_at": "2019-01-03",
+    "publisher": "Xinhua",
+    "reprint_of": null,
+    "source_id": "src-xinhua-20190103",
+    "source_type": "news",
+    "title": "Serial killer executed in northwest China",
+    "url": "http://www.xinhuanet.com/english/2019-01/03/c_137717341.htm"
+  },
+  {
+    "is_reprint": false,
+    "notes": "中国日报：一审宣判死刑报道",
+    "published_at": "2018-03-31",
+    "publisher": "China Daily",
+    "reprint_of": null,
+    "source_id": "src-chinadaily-20180331",
+    "source_type": "news",
+    "title": "Serial killer gets death penalty for 11 murders",
+    "url": "http://www.chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html"
+  },
+  {
+    "is_reprint": false,
+    "notes": "CGTN：提起公诉报道，引用新华社与新京报",
+    "published_at": "2017-04-25",
+    "publisher": "CGTN",
+    "reprint_of": null,
+    "source_id": "src-cgtn-20170425",
+    "source_type": "news",
+    "title": "Chinese “Jack the Ripper” prosecuted after 28 years at large",
+    "url": "https://news.cgtn.com/news/3d517a4e78597a4d/share.html"
+  },
+  {
+    "is_reprint": false,
+    "notes": "中国日报：抓获报道（页面抓取仅得导语段）",
+    "published_at": "2016-08-29",
+    "publisher": "China Daily",
+    "reprint_of": null,
+    "source_id": "src-chinadaily-20160829",
+    "source_type": "news",
+    "title": "DNA tests lead police to Gansu 'Ripper'",
+    "url": "http://www.chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm"
+  },
+  {
+    "is_reprint": false,
+    "notes": "中文维基百科条目：二次汇编，内引新京报、澎湃新闻、光明网、央视等原始报道；11起案件时序与调查过程的主要事实来源。身份证号码已从存档文本中删除。",
+    "published_at": "2026-11-08",
+    "publisher": "Wikipedia (Chinese)",
+    "reprint_of": null,
+    "source_id": "src-wiki-zh",
+    "source_type": "encyclopedia",
+    "title": "白银市连环杀人案",
+    "url": "https://zh.wikipedia.org/wiki/%E7%99%BD%E9%93%B6%E5%B8%82%E8%BF%9E%E7%8E%AF%E6%9D%80%E4%BA%BA%E6%A1%88"
+  },
+  {
+    "is_reprint": false,
+    "notes": "TRT World：抓获报道，综合中国媒体与通讯社",
+    "published_at": "2016-08-29",
+    "publisher": "TRT World",
+    "reprint_of": null,
+    "source_id": "src-trt-20160829",
+    "source_type": "news",
+    "title": "Main suspect in China's 'Jack the Ripper' case arrested",
+    "url": "https://www.trtworld.com/article/13084984"
   }
 ]

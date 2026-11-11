@@ -132,6 +132,42 @@ class TestCheckpoints(unittest.TestCase):
                                                   123.0))
 
 
+class TestNormalizePaths(unittest.TestCase):
+    def test_freeform_notes_become_valid_paths(self):
+        from detective_os.coverage import COLLECTION_PATHS, PATH_STATUSES
+        from detective_os.pipeline import _normalize_paths
+        raw = [{"path": "browser.search news vertical: 白银案", "status": "ok"},
+               {"path": "browser.open xinhuanet.com/english/2019-01/03/x.htm",
+                "status": "partial"},
+               {"path": "web_search", "status": "found"},
+               {"path": "something entirely unknown", "status": "weird"}]
+        norm, kept = _normalize_paths(raw)
+        self.assertTrue(all(p["path"] in COLLECTION_PATHS for p in norm))
+        self.assertTrue(all(p["status"] in PATH_STATUSES for p in norm))
+        pairs = [(p["path"], p["status"]) for p in norm]
+        self.assertIn(("web_search", "found"), pairs)
+        self.assertIn(("direct_source", "tried"), pairs)
+        self.assertIn("browser.search news vertical", kept[0])
+
+    def test_draft_pack_coverage_validates(self):
+        from detective_os.coverage import CoverageChecklist
+        pack = build_draft_pack(
+            "CASE-DRAFT-x", "x（草稿）", "x", "job1",
+            [{"source_id": "S01", "title": "t", "publisher": "p",
+              "published_at": "", "url": "u", "source_type": "news",
+              "is_reprint": False, "reprint_of": "", "notes": ""}],
+            [{"content": "事实。", "quote": "事实。",
+              "source_id": "S01", "source_location": "",
+              "evidence_type": "fact", "event_date": "",
+              "category": "C13"}],
+            [{"path": "browser.search news vertical: 白银案", "status": "ok"},
+             {"path": "browser.open example.com/x", "status": "partial"}])
+        cov = CoverageChecklist.from_dict(pack["coverage"])
+        from types import SimpleNamespace
+        board = SimpleNamespace(items={"F01": object()})
+        self.assertEqual(cov.validate(board), [])
+
+
 class TestMapCategories(unittest.TestCase):
     def test_valid_mapping_kept_invalid_dropped(self):
         ev = [{"evidence_id": "F01", "content": "警方悬赏20万元征集线索。"},

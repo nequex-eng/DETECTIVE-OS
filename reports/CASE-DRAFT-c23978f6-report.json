@@ -3,318 +3,14 @@
   "bayesian": {
     "posteriors": [
       {
-        "hypothesis_id": "H1",
-        "log_posterior": -11.1002,
-        "prior": 0.2,
-        "trace": [
-          {
-            "evidence_id": "F01",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F02",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F03",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F04",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F05",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F06",
-            "grade": "C",
-            "likelihood": 0.65,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F07",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F08",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F09",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F10",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F11",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F12",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F13",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F14",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F15",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F16",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F17",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F18",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F19",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F20",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F21",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F22",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F23",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F24",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          }
-        ],
-        "posterior": 0.2281
-      },
-      {
-        "hypothesis_id": "H2",
-        "log_posterior": -11.1002,
-        "prior": 0.2,
-        "trace": [
-          {
-            "evidence_id": "F01",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F02",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F03",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F04",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F05",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F06",
-            "grade": "C",
-            "likelihood": 0.65,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F07",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F08",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F09",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F10",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F11",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F12",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F13",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F14",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F15",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F16",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F17",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F18",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F19",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F20",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F21",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F22",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F23",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F24",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          }
-        ],
-        "posterior": 0.2281
-      },
-      {
         "hypothesis_id": "H3",
-        "log_posterior": -11.1002,
+        "log_posterior": -25.9873,
         "prior": 0.2,
         "trace": [
           {
             "evidence_id": "F01",
             "grade": "C",
-            "likelihood": 0.55,
+            "likelihood": 0.5,
             "weight": 0.6
           },
           {
@@ -338,13 +34,13 @@
           {
             "evidence_id": "F05",
             "grade": "C",
-            "likelihood": 0.55,
+            "likelihood": 0.5,
             "weight": 0.6
           },
           {
             "evidence_id": "F06",
             "grade": "C",
-            "likelihood": 0.65,
+            "likelihood": 0.5,
             "weight": 0.6
           },
           {
@@ -356,7 +52,7 @@
           {
             "evidence_id": "F08",
             "grade": "C",
-            "likelihood": 0.6,
+            "likelihood": 0.5,
             "weight": 0.6
           },
           {
@@ -374,7 +70,7 @@
           {
             "evidence_id": "F11",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.57,
             "weight": 0.6
           },
           {
@@ -386,25 +82,25 @@
           {
             "evidence_id": "F13",
             "grade": "C",
-            "likelihood": 0.6,
+            "likelihood": 0.55,
             "weight": 0.6
           },
           {
             "evidence_id": "F14",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.61,
             "weight": 0.6
           },
           {
             "evidence_id": "F15",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.58,
             "weight": 0.6
           },
           {
             "evidence_id": "F16",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.68,
             "weight": 0.6
           },
           {
@@ -422,183 +118,31 @@
           {
             "evidence_id": "F19",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.6,
             "weight": 0.6
           },
           {
             "evidence_id": "F20",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.54,
             "weight": 0.6
           },
           {
             "evidence_id": "F21",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F22",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F23",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F24",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          }
-        ],
-        "posterior": 0.2281
-      },
-      {
-        "hypothesis_id": "H4",
-        "log_posterior": -11.1002,
-        "prior": 0.2,
-        "trace": [
-          {
-            "evidence_id": "F01",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F02",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F03",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F04",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F05",
-            "grade": "C",
-            "likelihood": 0.55,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F06",
             "grade": "C",
             "likelihood": 0.65,
             "weight": 0.6
           },
           {
-            "evidence_id": "F07",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F08",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F09",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F10",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F11",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F12",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F13",
-            "grade": "C",
-            "likelihood": 0.6,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F14",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F15",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F16",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F17",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F18",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F19",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F20",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
-            "evidence_id": "F21",
-            "grade": "C",
-            "likelihood": 0.5,
-            "weight": 0.6
-          },
-          {
             "evidence_id": "F22",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.62,
             "weight": 0.6
           },
           {
             "evidence_id": "F23",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.64,
             "weight": 0.6
           },
           {
@@ -606,46 +150,280 @@
             "grade": "C",
             "likelihood": 0.5,
             "weight": 0.6
-          }
-        ],
-        "posterior": 0.2281
-      },
-      {
-        "hypothesis_id": "H5",
-        "log_posterior": -12.0556,
-        "prior": 0.2,
-        "trace": [
-          {
-            "evidence_id": "F01",
-            "grade": "C",
-            "likelihood": 0.4,
-            "weight": 0.6
           },
           {
-            "evidence_id": "F02",
+            "evidence_id": "F25",
             "grade": "C",
             "likelihood": 0.5,
             "weight": 0.6
           },
           {
-            "evidence_id": "F03",
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.63,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.63,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F32",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F33",
             "grade": "C",
             "likelihood": 0.5,
             "weight": 0.6
           },
           {
-            "evidence_id": "F04",
+            "evidence_id": "F34",
             "grade": "C",
             "likelihood": 0.5,
             "weight": 0.6
           },
           {
-            "evidence_id": "F05",
+            "evidence_id": "F35",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F36",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F37",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F38",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F39",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F40",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F41",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F42",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F43",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F44",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F45",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F46",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F47",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F48",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F49",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F50",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F51",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F52",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F53",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F54",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F55",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F56",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F57",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F58",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F59",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F60",
             "grade": "C",
             "likelihood": 0.45,
             "weight": 0.6
           },
           {
+            "evidence_id": "F61",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F62",
+            "grade": "C",
+            "likelihood": 0.25,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F63",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.5245
+      },
+      {
+        "hypothesis_id": "H1",
+        "log_posterior": -26.7023,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
             "evidence_id": "F06",
             "grade": "C",
             "likelihood": 0.5,
@@ -660,7 +438,1165 @@
           {
             "evidence_id": "F08",
             "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.56,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.66,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.62,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.43,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.56,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.36,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.56,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.58,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F32",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F33",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F34",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F35",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F36",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F37",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F38",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F39",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F40",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F41",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F42",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F43",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F44",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F45",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F46",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F47",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F48",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F49",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F50",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F51",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F52",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F53",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F54",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F55",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F56",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F57",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F58",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F59",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F60",
+            "grade": "C",
             "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F61",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F62",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F63",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.2566
+      },
+      {
+        "hypothesis_id": "H4",
+        "log_posterior": -27.3402,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.31,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.56,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.61,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.63,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.63,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.61,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F32",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F33",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F34",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F35",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F36",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F37",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F38",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F39",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F40",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F41",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F42",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F43",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F44",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F45",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F46",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F47",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F48",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F49",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F50",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F51",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F52",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F53",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F54",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F55",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F56",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F57",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F58",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F59",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F60",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F61",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F62",
+            "grade": "C",
+            "likelihood": 0.25,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F63",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.1356
+      },
+      {
+        "hypothesis_id": "H2",
+        "log_posterior": -27.847,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.34,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.34,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.56,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.49,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F32",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F33",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F34",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F35",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F36",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F37",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F38",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F39",
+            "grade": "C",
+            "likelihood": 0.54,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F40",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F41",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F42",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F43",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F44",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F45",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F46",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F47",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F48",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F49",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F50",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F51",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F52",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F53",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F54",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F55",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F56",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F57",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F58",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F59",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F60",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F61",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F62",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F63",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0817
+      },
+      {
+        "hypothesis_id": "H5",
+        "log_posterior": -31.7605,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
             "weight": 0.6
           },
           {
@@ -684,7 +1620,7 @@
           {
             "evidence_id": "F12",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.48,
             "weight": 0.6
           },
           {
@@ -696,61 +1632,61 @@
           {
             "evidence_id": "F14",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.4,
             "weight": 0.6
           },
           {
             "evidence_id": "F15",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.4,
             "weight": 0.6
           },
           {
             "evidence_id": "F16",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.45,
             "weight": 0.6
           },
           {
             "evidence_id": "F17",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.48,
             "weight": 0.6
           },
           {
             "evidence_id": "F18",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.48,
             "weight": 0.6
           },
           {
             "evidence_id": "F19",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.4,
             "weight": 0.6
           },
           {
             "evidence_id": "F20",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.4,
             "weight": 0.6
           },
           {
             "evidence_id": "F21",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.48,
             "weight": 0.6
           },
           {
             "evidence_id": "F22",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.42,
             "weight": 0.6
           },
           {
             "evidence_id": "F23",
             "grade": "C",
-            "likelihood": 0.5,
+            "likelihood": 0.43,
             "weight": 0.6
           },
           {
@@ -758,13 +1694,247 @@
             "grade": "C",
             "likelihood": 0.5,
             "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.43,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.2,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.43,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.43,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F32",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F33",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F34",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F35",
+            "grade": "C",
+            "likelihood": 0.44,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F36",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F37",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F38",
+            "grade": "C",
+            "likelihood": 0.42,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F39",
+            "grade": "C",
+            "likelihood": 0.43,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F40",
+            "grade": "C",
+            "likelihood": 0.48,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F41",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F42",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F43",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F44",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F45",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F46",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F47",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F48",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F49",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F50",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F51",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F52",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F53",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F54",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F55",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F56",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F57",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F58",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F59",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F60",
+            "grade": "C",
+            "likelihood": 0.25,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F61",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F62",
+            "grade": "C",
+            "likelihood": 0.4,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F63",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
           }
         ],
-        "posterior": 0.0877
+        "posterior": 0.0016
       }
     ],
     "disclosure": "Bayesian output is a model ranking under stated priors and likelihoods, not a probability of guilt. Priors are subjective starting points; likelihoods are analyst judgments stored in the case file. No reliable data exists to calibrate them against solved cases.",
-    "verdict": "undecided: top two within 0.0000 (< 0.1 margin); refuse to crown a winner"
+    "verdict": "leading: H3 (margin 0.2679)"
   },
   "qualitative": {
     "H1": {
@@ -807,7 +1977,7 @@
     {
       "task_id": "T01",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F01寻找第二个独立来源：1988年至2002年，犯罪嫌疑人在甘肃省白银市及内蒙古包头市连续强奸残杀女性1……",
+      "question": "为证据F01寻找第二个独立来源：1988年至2002年，高承勇在甘肃省白银市及内蒙古包头市连续强奸残杀女性11人……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -820,7 +1990,7 @@
     {
       "task_id": "T02",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F02寻找第二个独立来源：2001年，该案被公安部列为督办案件。……",
+      "question": "为证据F02寻找第二个独立来源：1988年5月26日下午5时许，白银公司23岁的女职工白某被害于白银区永丰街家中……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -833,7 +2003,7 @@
     {
       "task_id": "T03",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F03寻找第二个独立来源：2004年，白银市警方向外界公布详细案情并悬赏20万人民币。……",
+      "question": "为证据F03寻找第二个独立来源：1994年7月27日下午2时50分，白银供电局19岁女临时工石某在其单身宿舍遇害……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -846,7 +2016,7 @@
     {
       "task_id": "T04",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F04寻找第二个独立来源：2016年3月，甘肃省公安厅重启侦查工作。……",
+      "question": "为证据F04寻找第二个独立来源：1996年至1997年，高承勇前往包头市打工，包头有2人先后遇害，案件细节未公布……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -859,7 +2029,7 @@
     {
       "task_id": "T05",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F05寻找第二个独立来源：一名涉嫌经济犯罪的高姓男子的DNA为破案提供了线索。……",
+      "question": "为证据F05寻找第二个独立来源：1998年1月16日下午4时许居民发现杨某在家中遇害，调查证实杨某被害时间为1月……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -872,7 +2042,7 @@
     {
       "task_id": "T06",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F06寻找第二个独立来源：提取高承勇指纹和DNA时，警方发现他的指纹和命案现场指纹高度吻合。……",
+      "question": "为证据F06寻找第二个独立来源：1998年1月19日下午5时45分，家住白银区水川路的27岁女青年邓某在家中遇害……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -885,7 +2055,7 @@
     {
       "task_id": "T07",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F07寻找第二个独立来源：2016年8月26日，52岁的犯罪嫌疑人高承勇落网。……",
+      "question": "为证据F07寻找第二个独立来源：1998年7月30日下午6时许，白银供电局职工曾某8岁的女儿苗苗在家中遇害。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -898,7 +2068,7 @@
     {
       "task_id": "T08",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F08寻找第二个独立来源：经初步审讯，高承勇供认其在1988年5月至2002年2月间实施强奸杀人的犯罪事实……",
+      "question": "为证据F08寻找第二个独立来源：1998年11月30日上午11时许，白银公司女青年崔某在白银区东山路的家中被杀害……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -911,7 +2081,7 @@
     {
       "task_id": "T09",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F09寻找第二个独立来源：2016年11月24日，高承勇已被移送起诉。……",
+      "question": "为证据F09寻找第二个独立来源：2000年11月20日上午11时许，白银棉纺厂28岁的女工罗某在家中被人杀害。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -924,7 +2094,7 @@
     {
       "task_id": "T10",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F10寻找第二个独立来源：2017年4月24日，白银市检察院通报对高承勇提起公诉。……",
+      "question": "为证据F10寻找第二个独立来源：2001年5月22日上午9时许，白银区妇幼保健站28岁的女护士张某在白银区水川路……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -937,7 +2107,7 @@
     {
       "task_id": "T11",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F11寻找第二个独立来源：2017年7月18日至19日，白银市连环杀人案在白银市白银区人民法院第一法庭不公……",
+      "question": "为证据F11寻找第二个独立来源：2002年2月9日中午1时许，25岁的女子朱某在白银区陶乐春宾馆客房中被害。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -950,7 +2120,7 @@
     {
       "task_id": "T12",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F12寻找第二个独立来源：甘肃省白银市中级人民法院定于2018年3月30日10时公开宣判高承勇抢劫、故意杀……",
+      "question": "为证据F12寻找第二个独立来源：2018年3月30日，白银市中级人民法院公开宣判高承勇抢劫、故意杀人、强奸、侮辱……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -963,7 +2133,7 @@
     {
       "task_id": "T13",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F13寻找第二个独立来源：1988年至2002年，高承勇在甘肃省白银市及内蒙古包头市连续强奸残杀女性11人……",
+      "question": "为证据F13寻找第二个独立来源：一名被定罪杀害11名女性的男子于周四在西北中国甘肃省被处决，地方当局称。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -976,7 +2146,7 @@
     {
       "task_id": "T14",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F14寻找第二个独立来源：1988年5月26日下午5时许，白银公司23岁的女职工白某被害于白银区永丰街家中……",
+      "question": "为证据F14寻找第二个独立来源：高承勇于1988年5月至2002年2月期间在甘肃省和邻近的内蒙古自治区杀害了11……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -989,7 +2159,7 @@
     {
       "task_id": "T15",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F15寻找第二个独立来源：1994年7月27日下午2时50分，白银供电局19岁女临时工石某在其单身宿舍遇害……",
+      "question": "为证据F15寻找第二个独立来源：高承勇在甘肃省白银市和内蒙古包头市实施一系列抢劫和强奸后杀害了受害者。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1002,7 +2172,7 @@
     {
       "task_id": "T16",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F16寻找第二个独立来源：1996年至1997年，高承勇前往包头市打工，包头有2人先后遇害，案件细节未公布……",
+      "question": "为证据F16寻找第二个独立来源：警方追捕该罪犯28年，直到高承勇的一名亲属犯罪并于2015年接受DNA检测，这导……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1015,7 +2185,7 @@
     {
       "task_id": "T17",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F17寻找第二个独立来源：1998年1月16日下午4时许，居民发现白银区胜利街29岁的女青年杨某在家中遇害……",
+      "question": "为证据F17寻找第二个独立来源：白银市中级人民法院于3月30日判处高承勇死刑。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1028,7 +2198,7 @@
     {
       "task_id": "T18",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F18寻找第二个独立来源：1998年1月19日下午5时45分，家住白银区水川路的27岁女青年邓某在家中遇害……",
+      "question": "为证据F18寻找第二个独立来源：最高人民法院复核并批准了高承勇的死刑判决。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1041,7 +2211,7 @@
     {
       "task_id": "T19",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F19寻找第二个独立来源：1998年7月30日下午6时许，白银供电局职工曾某8岁的女儿苗苗（化名）在家中遇……",
+      "question": "为证据F19寻找第二个独立来源：高成勇在1988年5月至2002年2月间于内蒙古自治区白银和包头杀害11名女性受……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1054,7 +2224,7 @@
     {
       "task_id": "T20",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F20寻找第二个独立来源：1998年11月30日上午11时许，白银公司女青年崔某在白银区东山路的家中被杀害……",
+      "question": "为证据F20寻找第二个独立来源：一名被称为中国“开膛手杰克”的连环杀手因在14年内于中国北方杀害10名女子和一名……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1067,7 +2237,7 @@
     {
       "task_id": "T21",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F21寻找第二个独立来源：2000年11月20日上午11时许，白银棉纺厂28岁的女工罗某在家中被人杀害。……",
+      "question": "为证据F21寻找第二个独立来源：高成勇当时53岁，于星期五上午在甘肃省白银市中级人民法院因杀人、强奸、抢劫和毁尸……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1080,7 +2250,7 @@
     {
       "task_id": "T22",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F22寻找第二个独立来源：2001年5月22日上午9时许，白银区妇幼保健站28岁的女护士张某在白银区水川路……",
+      "question": "为证据F22寻找第二个独立来源：判决称，高成勇在1988年5月至2002年2月间于内蒙古自治区白银和包头杀害11……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1093,7 +2263,7 @@
     {
       "task_id": "T23",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F23寻找第二个独立来源：2002年2月9日中午1时许，25岁的女子朱某在白银区陶乐春宾馆客房中被害。……",
+      "question": "为证据F23寻找第二个独立来源：1988年至2002年，甘肃省白银市和内蒙古自治区包头市有11名无辜年轻女性遭抢……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1106,7 +2276,514 @@
     {
       "task_id": "T24",
       "case_id": "CASE-DRAFT-c23978f6",
-      "question": "为证据F24寻找第二个独立来源：2016年8月26日，民警在白银市工业学校一小卖部内将高承勇抓获。……",
+      "question": "为证据F24寻找第二个独立来源：甘肃省检察机关确认，53岁的高成勇于2017年4月25日被提起公诉。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T25",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F25寻找第二个独立来源：新华社报道称，这名连环杀人者于2016年8月被逮捕，此前其一名亲属犯罪并于201……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T26",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F26寻找第二个独立来源：高成勇的律师朱爱军称，高成勇没有反抗并充分配合，承认自己所作的一切，且没有要求上……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T27",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F27寻找第二个独立来源：高成勇向警方供称，他于1988年试图从一名熟睡的23岁女子处偷走收音机，并在该女……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T28",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F28寻找第二个独立来源：高成勇称，第一起谋杀后，他因杀戮获得满足，并在随后14年又实施了10起谋杀，其中……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T29",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F29寻找第二个独立来源：高成勇称，如果他觉得受害者有吸引力就会强奸对方，否则就割开对方的喉咙。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T30",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F30寻找第二个独立来源：高成勇称，他会肢解任何反抗的人，以此进行报复。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T31",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F31寻找第二个独立来源：当地警察王阳（化名）称，调查期间，这名连环杀人者能回忆起所有谋杀案的详尽细节。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T32",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F32寻找第二个独立来源：王阳（化名）称，这名连环杀人者表现得非常冷静，没有表现出悔恨或内疚。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T33",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F33寻找第二个独立来源：高成勇已婚并有两个孩子。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T34",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F34寻找第二个独立来源：高成勇的家人因感到羞耻而拒绝与他的律师见面。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T35",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F35寻找第二个独立来源：DNA检测引导警方找到甘肃的“Ripper”。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T36",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F36寻找第二个独立来源：该报道署名Cui Jia，来源为China Daily，更新时间为2016年8月……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T37",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F37寻找第二个独立来源：一名52岁男子被指涉嫌在15年内实施11起谋杀，并在一家杂货店被抓获。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T38",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F38寻找第二个独立来源：甘肃省警方抓获了一名被控在中国北部强奸并杀害11名受害者的连环杀手，其中一名受害……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T39",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F39寻找第二个独立来源：Gao Chengyong现年52岁，于周五在白银一家杂货店被拘留。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T40",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F40寻找第二个独立来源：白银一家杂货店发生了其中九起杀人案。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T41",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F41寻找第二个独立来源：官方称该案为甘蒙“8·05”系列强奸杀人残害女性案，简称“白银案”，是1988年……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T42",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F42寻找第二个独立来源：2004年，甘肃省白银市公安局出面证实案件真实存在。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T43",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F43寻找第二个独立来源：1988年6月至2002年2月，甘肃省白银市出现10起杀人兼性暴力案。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T44",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F44寻找第二个独立来源：白银公司23岁的女职工白某于1988年5月26日下午3时许在白银市白银区永丰街1……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T45",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F45寻找第二个独立来源：白银市供电局19岁女临时工石某于1994年7月27日下午2时50分在其单身宿舍遇……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T46",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F46寻找第二个独立来源：1997年3月28日上午8时许，包头市21岁女青年李某被害，受害人仰面躺着、被绳……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T47",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F47寻找第二个独立来源：1998年7月30日下午2时许，白银市供电局职工曾某8岁的女儿姚某某在家中遇害，……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T48",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F48寻找第二个独立来源：2001年8月，此案被中华人民共和国公安部列为督办案件。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T49",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F49寻找第二个独立来源：2004年8月5日，公安部组织专家会诊，将白银、包头两地案件并案，确定为甘蒙“8……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T50",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F50寻找第二个独立来源：2004年，甘肃省白银市公安局公布《白银市公安局侦破系列强奸杀人案件宣传提纲》，……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T51",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F51寻找第二个独立来源：2018年3月30日，甘肃省白银市中级人民法院一审判决高承勇犯抢劫罪、故意杀人罪……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T52",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F52寻找第二个独立来源：2019年1月3日，经中华人民共和国最高人民法院核准，高承勇在甘肃省白银市被执行……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T53",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F53寻找第二个独立来源：据中国媒体报道，52岁的高成勇在甘肃白银与妻子经营的一家杂货店被拘留。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T54",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F54寻找第二个独立来源：中国公安部称，高成勇被捕后承认在1988年至2002年间于甘肃及邻近的内蒙古地区……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T55",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F55寻找第二个独立来源：据报道，高成勇涉嫌以身穿红衣的年轻女性为目标，跟随受害者回家实施强奸和杀害，并经……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T56",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F56寻找第二个独立来源：最年轻的受害者为8岁。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T57",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F57寻找第二个独立来源：部分受害者的生殖器官也被摘除。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T58",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F58寻找第二个独立来源：警方在2004年称，嫌犯有性变态并仇恨女性。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T59",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F59寻找第二个独立来源：警方首次串联这些案件，并为能促成逮捕的信息悬赏20万元（约4万美元）。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T60",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F60寻找第二个独立来源：警方当时称，他孤僻、不合群，但有耐心。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T61",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F61寻找第二个独立来源：《中国日报》称，高成勇的一名亲属因涉嫌轻微犯罪在白银被软禁，其DNA被采集和检测……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T62",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F62寻找第二个独立来源：报道称，警方认定他们追查了28年的凶手是其亲属，且高成勇的DNA与案件匹配。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T63",
+      "case_id": "CASE-DRAFT-c23978f6",
+      "question": "为证据F63寻找第二个独立来源：对于杀戮在2002年停止的原因，当时没有立即的解释。……",
       "purpose": "单来源主张是全案最脆弱的环节",
       "hypotheses": [],
       "expected_info": "独立来源或否定",
@@ -1122,7 +2799,7 @@
     "findings": [
       {
         "role": "source",
-        "finding": "证据F01只有一个来源：1988年至2002年，犯罪嫌疑人在甘肃省白银市及内蒙古包头……",
+        "finding": "证据F01只有一个来源：1988年至2002年，高承勇在甘肃省白银市及内蒙古包头市连……",
         "severity": "warning",
         "cites": [
           "F01"
@@ -1130,7 +2807,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F02只有一个来源：2001年，该案被公安部列为督办案件。……",
+        "finding": "证据F02只有一个来源：1988年5月26日下午5时许，白银公司23岁的女职工白某被……",
         "severity": "warning",
         "cites": [
           "F02"
@@ -1138,7 +2815,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F03只有一个来源：2004年，白银市警方向外界公布详细案情并悬赏20万人民币。……",
+        "finding": "证据F03只有一个来源：1994年7月27日下午2时50分，白银供电局19岁女临时工……",
         "severity": "warning",
         "cites": [
           "F03"
@@ -1146,7 +2823,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F04只有一个来源：2016年3月，甘肃省公安厅重启侦查工作。……",
+        "finding": "证据F04只有一个来源：1996年至1997年，高承勇前往包头市打工，包头有2人先后……",
         "severity": "warning",
         "cites": [
           "F04"
@@ -1154,7 +2831,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F05只有一个来源：一名涉嫌经济犯罪的高姓男子的DNA为破案提供了线索。……",
+        "finding": "证据F05只有一个来源：1998年1月16日下午4时许居民发现杨某在家中遇害，调查证……",
         "severity": "warning",
         "cites": [
           "F05"
@@ -1162,7 +2839,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F06只有一个来源：提取高承勇指纹和DNA时，警方发现他的指纹和命案现场指纹高度……",
+        "finding": "证据F06只有一个来源：1998年1月19日下午5时45分，家住白银区水川路的27岁……",
         "severity": "warning",
         "cites": [
           "F06"
@@ -1170,7 +2847,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F07只有一个来源：2016年8月26日，52岁的犯罪嫌疑人高承勇落网。……",
+        "finding": "证据F07只有一个来源：1998年7月30日下午6时许，白银供电局职工曾某8岁的女儿……",
         "severity": "warning",
         "cites": [
           "F07"
@@ -1178,7 +2855,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F08只有一个来源：经初步审讯，高承勇供认其在1988年5月至2002年2月间实……",
+        "finding": "证据F08只有一个来源：1998年11月30日上午11时许，白银公司女青年崔某在白银……",
         "severity": "warning",
         "cites": [
           "F08"
@@ -1186,7 +2863,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F09只有一个来源：2016年11月24日，高承勇已被移送起诉。……",
+        "finding": "证据F09只有一个来源：2000年11月20日上午11时许，白银棉纺厂28岁的女工罗……",
         "severity": "warning",
         "cites": [
           "F09"
@@ -1194,7 +2871,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F10只有一个来源：2017年4月24日，白银市检察院通报对高承勇提起公诉。……",
+        "finding": "证据F10只有一个来源：2001年5月22日上午9时许，白银区妇幼保健站28岁的女护……",
         "severity": "warning",
         "cites": [
           "F10"
@@ -1202,7 +2879,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F11只有一个来源：2017年7月18日至19日，白银市连环杀人案在白银市白银区……",
+        "finding": "证据F11只有一个来源：2002年2月9日中午1时许，25岁的女子朱某在白银区陶乐春……",
         "severity": "warning",
         "cites": [
           "F11"
@@ -1210,7 +2887,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F12只有一个来源：甘肃省白银市中级人民法院定于2018年3月30日10时公开宣……",
+        "finding": "证据F12只有一个来源：2018年3月30日，白银市中级人民法院公开宣判高承勇抢劫、……",
         "severity": "warning",
         "cites": [
           "F12"
@@ -1218,7 +2895,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F13只有一个来源：1988年至2002年，高承勇在甘肃省白银市及内蒙古包头市连……",
+        "finding": "证据F13只有一个来源：一名被定罪杀害11名女性的男子于周四在西北中国甘肃省被处决，……",
         "severity": "warning",
         "cites": [
           "F13"
@@ -1226,7 +2903,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F14只有一个来源：1988年5月26日下午5时许，白银公司23岁的女职工白某被……",
+        "finding": "证据F14只有一个来源：高承勇于1988年5月至2002年2月期间在甘肃省和邻近的内……",
         "severity": "warning",
         "cites": [
           "F14"
@@ -1234,7 +2911,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F15只有一个来源：1994年7月27日下午2时50分，白银供电局19岁女临时工……",
+        "finding": "证据F15只有一个来源：高承勇在甘肃省白银市和内蒙古包头市实施一系列抢劫和强奸后杀害……",
         "severity": "warning",
         "cites": [
           "F15"
@@ -1242,7 +2919,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F16只有一个来源：1996年至1997年，高承勇前往包头市打工，包头有2人先后……",
+        "finding": "证据F16只有一个来源：警方追捕该罪犯28年，直到高承勇的一名亲属犯罪并于2015年……",
         "severity": "warning",
         "cites": [
           "F16"
@@ -1250,7 +2927,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F17只有一个来源：1998年1月16日下午4时许，居民发现白银区胜利街29岁的……",
+        "finding": "证据F17只有一个来源：白银市中级人民法院于3月30日判处高承勇死刑。……",
         "severity": "warning",
         "cites": [
           "F17"
@@ -1258,7 +2935,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F18只有一个来源：1998年1月19日下午5时45分，家住白银区水川路的27岁……",
+        "finding": "证据F18只有一个来源：最高人民法院复核并批准了高承勇的死刑判决。……",
         "severity": "warning",
         "cites": [
           "F18"
@@ -1266,7 +2943,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F19只有一个来源：1998年7月30日下午6时许，白银供电局职工曾某8岁的女儿……",
+        "finding": "证据F19只有一个来源：高成勇在1988年5月至2002年2月间于内蒙古自治区白银和……",
         "severity": "warning",
         "cites": [
           "F19"
@@ -1274,7 +2951,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F20只有一个来源：1998年11月30日上午11时许，白银公司女青年崔某在白银……",
+        "finding": "证据F20只有一个来源：一名被称为中国“开膛手杰克”的连环杀手因在14年内于中国北方……",
         "severity": "warning",
         "cites": [
           "F20"
@@ -1282,7 +2959,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F21只有一个来源：2000年11月20日上午11时许，白银棉纺厂28岁的女工罗……",
+        "finding": "证据F21只有一个来源：高成勇当时53岁，于星期五上午在甘肃省白银市中级人民法院因杀……",
         "severity": "warning",
         "cites": [
           "F21"
@@ -1290,7 +2967,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F22只有一个来源：2001年5月22日上午9时许，白银区妇幼保健站28岁的女护……",
+        "finding": "证据F22只有一个来源：判决称，高成勇在1988年5月至2002年2月间于内蒙古自治……",
         "severity": "warning",
         "cites": [
           "F22"
@@ -1298,7 +2975,7 @@
       },
       {
         "role": "source",
-        "finding": "证据F23只有一个来源：2002年2月9日中午1时许，25岁的女子朱某在白银区陶乐春……",
+        "finding": "证据F23只有一个来源：1988年至2002年，甘肃省白银市和内蒙古自治区包头市有1……",
         "severity": "warning",
         "cites": [
           "F23"
@@ -1306,10 +2983,322 @@
       },
       {
         "role": "source",
-        "finding": "证据F24只有一个来源：2016年8月26日，民警在白银市工业学校一小卖部内将高承勇……",
+        "finding": "证据F24只有一个来源：甘肃省检察机关确认，53岁的高成勇于2017年4月25日被提……",
         "severity": "warning",
         "cites": [
           "F24"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F25只有一个来源：新华社报道称，这名连环杀人者于2016年8月被逮捕，此前其一……",
+        "severity": "warning",
+        "cites": [
+          "F25"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F26只有一个来源：高成勇的律师朱爱军称，高成勇没有反抗并充分配合，承认自己所作……",
+        "severity": "warning",
+        "cites": [
+          "F26"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F27只有一个来源：高成勇向警方供称，他于1988年试图从一名熟睡的23岁女子处……",
+        "severity": "warning",
+        "cites": [
+          "F27"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F28只有一个来源：高成勇称，第一起谋杀后，他因杀戮获得满足，并在随后14年又实……",
+        "severity": "warning",
+        "cites": [
+          "F28"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F29只有一个来源：高成勇称，如果他觉得受害者有吸引力就会强奸对方，否则就割开对……",
+        "severity": "warning",
+        "cites": [
+          "F29"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F30只有一个来源：高成勇称，他会肢解任何反抗的人，以此进行报复。……",
+        "severity": "warning",
+        "cites": [
+          "F30"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F31只有一个来源：当地警察王阳（化名）称，调查期间，这名连环杀人者能回忆起所有……",
+        "severity": "warning",
+        "cites": [
+          "F31"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F32只有一个来源：王阳（化名）称，这名连环杀人者表现得非常冷静，没有表现出悔恨……",
+        "severity": "warning",
+        "cites": [
+          "F32"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F33只有一个来源：高成勇已婚并有两个孩子。……",
+        "severity": "warning",
+        "cites": [
+          "F33"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F34只有一个来源：高成勇的家人因感到羞耻而拒绝与他的律师见面。……",
+        "severity": "warning",
+        "cites": [
+          "F34"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F35只有一个来源：DNA检测引导警方找到甘肃的“Ripper”。……",
+        "severity": "warning",
+        "cites": [
+          "F35"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F36只有一个来源：该报道署名Cui Jia，来源为China Daily，更新……",
+        "severity": "warning",
+        "cites": [
+          "F36"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F37只有一个来源：一名52岁男子被指涉嫌在15年内实施11起谋杀，并在一家杂货……",
+        "severity": "warning",
+        "cites": [
+          "F37"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F38只有一个来源：甘肃省警方抓获了一名被控在中国北部强奸并杀害11名受害者的连……",
+        "severity": "warning",
+        "cites": [
+          "F38"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F39只有一个来源：Gao Chengyong现年52岁，于周五在白银一家杂货店……",
+        "severity": "warning",
+        "cites": [
+          "F39"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F40只有一个来源：白银一家杂货店发生了其中九起杀人案。……",
+        "severity": "warning",
+        "cites": [
+          "F40"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F41只有一个来源：官方称该案为甘蒙“8·05”系列强奸杀人残害女性案，简称“白……",
+        "severity": "warning",
+        "cites": [
+          "F41"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F42只有一个来源：2004年，甘肃省白银市公安局出面证实案件真实存在。……",
+        "severity": "warning",
+        "cites": [
+          "F42"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F43只有一个来源：1988年6月至2002年2月，甘肃省白银市出现10起杀人兼……",
+        "severity": "warning",
+        "cites": [
+          "F43"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F44只有一个来源：白银公司23岁的女职工白某于1988年5月26日下午3时许在……",
+        "severity": "warning",
+        "cites": [
+          "F44"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F45只有一个来源：白银市供电局19岁女临时工石某于1994年7月27日下午2时……",
+        "severity": "warning",
+        "cites": [
+          "F45"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F46只有一个来源：1997年3月28日上午8时许，包头市21岁女青年李某被害，……",
+        "severity": "warning",
+        "cites": [
+          "F46"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F47只有一个来源：1998年7月30日下午2时许，白银市供电局职工曾某8岁的女……",
+        "severity": "warning",
+        "cites": [
+          "F47"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F48只有一个来源：2001年8月，此案被中华人民共和国公安部列为督办案件。……",
+        "severity": "warning",
+        "cites": [
+          "F48"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F49只有一个来源：2004年8月5日，公安部组织专家会诊，将白银、包头两地案件……",
+        "severity": "warning",
+        "cites": [
+          "F49"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F50只有一个来源：2004年，甘肃省白银市公安局公布《白银市公安局侦破系列强奸……",
+        "severity": "warning",
+        "cites": [
+          "F50"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F51只有一个来源：2018年3月30日，甘肃省白银市中级人民法院一审判决高承勇……",
+        "severity": "warning",
+        "cites": [
+          "F51"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F52只有一个来源：2019年1月3日，经中华人民共和国最高人民法院核准，高承勇……",
+        "severity": "warning",
+        "cites": [
+          "F52"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F53只有一个来源：据中国媒体报道，52岁的高成勇在甘肃白银与妻子经营的一家杂货……",
+        "severity": "warning",
+        "cites": [
+          "F53"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F54只有一个来源：中国公安部称，高成勇被捕后承认在1988年至2002年间于甘……",
+        "severity": "warning",
+        "cites": [
+          "F54"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F55只有一个来源：据报道，高成勇涉嫌以身穿红衣的年轻女性为目标，跟随受害者回家……",
+        "severity": "warning",
+        "cites": [
+          "F55"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F56只有一个来源：最年轻的受害者为8岁。……",
+        "severity": "warning",
+        "cites": [
+          "F56"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F57只有一个来源：部分受害者的生殖器官也被摘除。……",
+        "severity": "warning",
+        "cites": [
+          "F57"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F58只有一个来源：警方在2004年称，嫌犯有性变态并仇恨女性。……",
+        "severity": "warning",
+        "cites": [
+          "F58"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F59只有一个来源：警方首次串联这些案件，并为能促成逮捕的信息悬赏20万元（约4……",
+        "severity": "warning",
+        "cites": [
+          "F59"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F60只有一个来源：警方当时称，他孤僻、不合群，但有耐心。……",
+        "severity": "warning",
+        "cites": [
+          "F60"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F61只有一个来源：《中国日报》称，高成勇的一名亲属因涉嫌轻微犯罪在白银被软禁，……",
+        "severity": "warning",
+        "cites": [
+          "F61"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F62只有一个来源：报道称，警方认定他们追查了28年的凶手是其亲属，且高成勇的D……",
+        "severity": "warning",
+        "cites": [
+          "F62"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F63只有一个来源：对于杀戮在2002年停止的原因，当时没有立即的解释。……",
+        "severity": "warning",
+        "cites": [
+          "F63"
         ]
       },
       {
@@ -1368,47 +3357,47 @@
     "case_id": "CASE-DRAFT-c23978f6",
     "template_version": "1",
     "total": 22,
-    "covered": 0,
-    "single": 0,
-    "missing": 22,
+    "covered": 4,
+    "single": 6,
+    "missing": 12,
     "only_unusable": 0,
-    "score": 0.0,
+    "score": 0.3182,
     "by_category": {
       "失踪/案发": {
         "total": 4,
-        "covered": 0,
-        "single": 0,
-        "missing": 4
+        "covered": 2,
+        "single": 1,
+        "missing": 1
       },
       "发现": {
         "total": 2,
         "covered": 0,
-        "single": 0,
-        "missing": 2
+        "single": 1,
+        "missing": 1
       },
       "身份确认": {
         "total": 2,
         "covered": 0,
-        "single": 0,
-        "missing": 2
+        "single": 1,
+        "missing": 1
       },
       "法医/物证": {
         "total": 3,
         "covered": 0,
-        "single": 0,
-        "missing": 3
+        "single": 1,
+        "missing": 2
       },
       "侦查过程": {
         "total": 3,
         "covered": 0,
-        "single": 0,
-        "missing": 3
+        "single": 1,
+        "missing": 2
       },
       "作案手法": {
         "total": 2,
-        "covered": 0,
+        "covered": 1,
         "single": 0,
-        "missing": 2
+        "missing": 1
       },
       "动机": {
         "total": 1,
@@ -1418,9 +3407,9 @@
       },
       "法律程序": {
         "total": 2,
-        "covered": 0,
+        "covered": 1,
         "single": 0,
-        "missing": 2
+        "missing": 1
       },
       "家属与当事人": {
         "total": 1,
@@ -1431,44 +3420,50 @@
       "官方回应": {
         "total": 2,
         "covered": 0,
-        "single": 0,
-        "missing": 2
+        "single": 1,
+        "missing": 1
       }
     },
     "missing_ids": [
-      "C01",
       "C02",
-      "C03",
-      "C04",
-      "C05",
       "C06",
-      "C07",
       "C08",
       "C09",
       "C10",
-      "C11",
       "C12",
-      "C13",
       "C14",
-      "C15",
       "C16",
       "C17",
-      "C18",
       "C19",
       "C20",
-      "C21",
       "C22"
     ],
-    "single_ids": [],
+    "single_ids": [
+      "C01",
+      "C05",
+      "C07",
+      "C11",
+      "C13",
+      "C21"
+    ],
     "items": [
       {
         "item_id": "C01",
         "category": "失踪/案发",
         "title": "被害人身份",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F02",
+          "F03",
+          "F06",
+          "F07",
+          "F08",
+          "F09",
+          "F10",
+          "F11"
+        ]
       },
       {
         "item_id": "C02",
@@ -1483,28 +3478,47 @@
         "item_id": "C03",
         "category": "失踪/案发",
         "title": "案发时间窗口",
-        "status": "missing",
-        "origins": 0,
+        "status": "covered",
+        "origins": 2,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F01",
+          "F04",
+          "F05",
+          "F14"
+        ]
       },
       {
         "item_id": "C04",
         "category": "失踪/案发",
         "title": "案发地点/第一现场",
-        "status": "missing",
-        "origins": 0,
+        "status": "covered",
+        "origins": 2,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F02",
+          "F03",
+          "F04",
+          "F06",
+          "F07",
+          "F08",
+          "F09",
+          "F10",
+          "F11",
+          "F14",
+          "F15"
+        ]
       },
       {
         "item_id": "C05",
         "category": "发现",
         "title": "发现时间地点与发现者",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F05"
+        ]
       },
       {
         "item_id": "C06",
@@ -1519,10 +3533,13 @@
         "item_id": "C07",
         "category": "身份确认",
         "title": "身份确认过程与时间",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F61",
+          "F62"
+        ]
       },
       {
         "item_id": "C08",
@@ -1555,10 +3572,13 @@
         "item_id": "C11",
         "category": "法医/物证",
         "title": "DNA/指纹比对现状",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F61",
+          "F62"
+        ]
       },
       {
         "item_id": "C12",
@@ -1573,10 +3593,12 @@
         "item_id": "C13",
         "category": "侦查过程",
         "title": "侦查节点",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F63"
+        ]
       },
       {
         "item_id": "C14",
@@ -1591,10 +3613,13 @@
         "item_id": "C15",
         "category": "作案手法",
         "title": "作案手法特征",
-        "status": "missing",
-        "origins": 0,
+        "status": "covered",
+        "origins": 2,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F01",
+          "F15"
+        ]
       },
       {
         "item_id": "C16",
@@ -1618,10 +3643,13 @@
         "item_id": "C18",
         "category": "法律程序",
         "title": "诉讼/审判进展",
-        "status": "missing",
-        "origins": 0,
+        "status": "covered",
+        "origins": 2,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F12",
+          "F13"
+        ]
       },
       {
         "item_id": "C19",
@@ -1645,10 +3673,12 @@
         "item_id": "C21",
         "category": "官方回应",
         "title": "警方/官方公开回应",
-        "status": "missing",
-        "origins": 0,
+        "status": "single",
+        "origins": 1,
         "only_unusable": false,
-        "evidence_ids": []
+        "evidence_ids": [
+          "F13"
+        ]
       },
       {
         "item_id": "C22",

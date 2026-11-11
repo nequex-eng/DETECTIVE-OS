@@ -277,6 +277,61 @@ def map_categories(evidence: list, caller=None,
     return out
 
 
+def _normalize_paths(paths_tried):
+    """Map free-form collection notes to the coverage checklist's
+    canonical {path, status} vocabulary.
+
+    The collector writes free-form notes ("browser.search news
+    vertical: ...", "browser.open xinhuanet.com/...") with statuses
+    like "ok"/"partial", but CoverageChecklist.validate() only accepts
+    the 10 COLLECTION_PATHS names and the 4 PATH_STATUSES. Copying the
+    notes verbatim made every draft pack fail validation at the engine
+    step (E2E run 8, 2026-11-11). Unknown entries fall back to
+    web_search/tried; the raw strings are returned too, so the caller
+    can keep them in the analyst note instead of silently dropping
+    them. Returns (normalized_list, raw_strings).
+    """
+    out = []
+    raw = []
+    for p in paths_tried or []:
+        name = str(p.get("path", ""))
+        status = str(p.get("status", ""))
+        raw.append(f"{name} ({status})" if status else name)
+        low = name.lower()
+        if "local_language" in low:
+            path = "local_language"
+        elif "open" in low or "direct_source" in low:
+            path = "direct_source"
+        elif "archive" in low or "wayback" in low:
+            path = "web_archive"
+        elif "court" in low:
+            path = "court_db"
+        elif "news_db" in low or "gdelt" in low:
+            path = "news_db"
+        elif "book" in low or "podcast" in low or "documentary" in low:
+            path = "books_media"
+        elif "user_supplied" in low:
+            path = "user_supplied"
+        elif "community" in low:
+            path = "community_lead"
+        elif "foia" in low or "公开申请" in name:
+            path = "foia"
+        else:
+            path = "web_search"
+        st = {"found": "found", "ok": "found", "tried": "tried",
+              "partial": "tried", "nothing": "nothing",
+              "not_applicable": "not_applicable"}.get(status, "tried")
+        out.append({"path": path, "status": st})
+    seen = set()
+    deduped = []
+    for e in out:
+        key = (e["path"], e["status"])
+        if key not in seen:
+            seen.add(key)
+            deduped.append(e)
+    return deduped, raw
+
+
 def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
                      sources: list, candidates: list, paths_tried: list,
                      likelihoods: dict | None = None,
@@ -341,6 +396,7 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
         "hypotheses": hypotheses,
     }
     coverage_items = []
+    norm_paths, raw_paths = _normalize_paths(paths_tried)
     for t in template_items():
         linked = [e["evidence_id"] for e in evidence
                   if t["item_id"] in e.get("_categories", [])]
@@ -348,8 +404,9 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "item_id": t["item_id"], "category": t["category"],
             "title": t["title"], "question": t["question"],
             "evidence_ids": linked,
-            "paths_tried": [dict(p) for p in paths_tried],
-            "analyst_note": "DRAFT: auto-linked by category mapping.",
+            "paths_tried": [dict(p) for p in norm_paths],
+            "analyst_note": "DRAFT: auto-linked by category mapping. "
+                            "Raw collection notes: " + "; ".join(raw_paths),
             "not_applicable": False,
         })
     for e in evidence:

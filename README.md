@@ -20,11 +20,11 @@
 
 **T1. Kaggle Notebook推上运行，出评测报告（2026-11-10已完成）。**运行地址：https://www.kaggle.com/code/nequexkaggle/detective-os-t4。共4次运行，版本4全部通过：预检（2张Tesla T4）→实验1去重通过（阈值0.60，10个转载聚为1类）→实验2事实抽取通过（关键词召回8/8=1.0，设备cuda:1）→实验3矛盾识别通过（CT01指出口径差异，未判定撒谎）→CPU复算通过（两案排序一致，数值差0.0）。失败记录：运行1实验1阈值0.85过严（改0.60）；运行2实验2死于hf_device_map验证行bug（改查参数实际所在设备）；运行3 CPU复算数值差6.1e-05（根因：引擎在softmax前把对数后验舍入到4位小数，复算格跳过了这步；补上舍入后差值0.0）。运行4排队约90分钟，内核约157秒。额度合计约0.23 GPU小时。报告在kaggle/run1-output/至run4-output/（每份含T1-RUN*-REPORT.md）。
 
-**V1. 自动调查模式：前端输入调查方向即自动跑（2026-11-11已建成，端到端测试进行中，见下文“自动调查模式V1”）。** intake页`public/investigate.html`→Pages Functions收请求写Cloudflare KV任务→定时跑手每10分钟轮询→`scripts/run_job.py`跑抽取、似然、映射、草稿包、引擎、报告→结果写回KV，前端轮询展示。红线已进代码：抽取证据最高C级、报告带“草稿（未审）”横幅、永不碰两个正式案包、不得按传言指认活人。端到端测试任务c23978f6（1988-2002白银连环杀人案重推）进行中：9个来源、69条事实已抽取、似然已拟合、覆盖映射进行中；断点续跑检查点已生效（两次虚拟机重启未丢进度）。
+**V1. 自动调查模式：前端输入调查方向即自动跑（2026-11-11已建成，端到端测试已完成，见下文“自动调查模式V1”与V0）。** intake页`public/investigate.html`→Pages Functions收请求写Cloudflare KV任务→定时跑手每10分钟轮询→`scripts/run_job.py`跑抽取、似然、映射、草稿包、引擎、报告→结果写回KV，前端轮询展示。红线已进代码：抽取证据最高C级、报告带“草稿（未审）”横幅、永不碰两个正式案包、不得按传言指认活人。端到端测试任务c23978f6（1988-2002白银连环杀人案重推）已完成：9个来源、63条事实全C级、结论H3陌生人加技能领先52.45%、覆盖率31.8%、审查6个blocker；断点续跑检查点已生效（两次虚拟机重启未丢进度）。
 
 ### 未完成任务（按顺序做，每项做完要过验收）
 
-**V0. 跑完端到端测试并收尾（最优先，V1的最后一公里）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。当前状态（2026-11-11约10:24）：第8轮`scripts/run_job.py`正在跑，任务状态extracting，抽取69条事实、似然拟合已完成并存检查点，覆盖映射进行中；`runs/c23978f6-56f1-4789-b488-b36c4b9117a7/`里有`collected.json`（9个来源）、`candidates.json`、`likelihoods.json`。做法：先`python3 scripts/job.py get c23978f6-56f1-4789-b488-b36c4b9117a7`查 live 状态——若已是done，直接核验；若仍在extracting/reasoning，等它跑完或查进程；若是failed，先看error再`job.py update … --status collecting …`复位后重跑`run_job.py`（它会从检查点续跑，不用重抽）。验收：Function GET显示status done且result非空；`runs/…/result.json`有verdict、posteriors、coverage（score_pct>0，映射已链接，旧版0%是链接bug，见下文）、review_blockers；`reports/CASE-DRAFT-c23978f6-report.md`带草稿横幅、证据全为C级；`investigate.html`上能看到该任务done；对照手工白银案包抽查关键事实（1988–2002跨度、11起、2004年悬赏20万）。另两件收尾：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
+**V0. 跑完端到端测试并收尾（2026-11-11已完成）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。实测结果：9个来源（3中文加6英文/维基）、63条事实全C级、似然315对、覆盖映射18条；结论H3陌生人加技能领先52.45%（H1 25.66%、H4 13.56%、H2 8.17%、H5 0.16%，前两名差0.2679），覆盖率31.8%（4项已覆盖/6项单来源/12项缺失，共22项），独立审查6个blocker；报告带草稿横幅，`reports/CASE-DRAFT-c23978f6-report.md`，前端`investigate.html`可见done。注意：草稿的H3（陌生人加技能）与手工白银案包的H1（单人连环、本地、尾随陌生女性）指向一致，都是陌生人加技能方向；手工包H1 69.17%是另一套假设定义下的数，两者不可直接比大小。收尾余项（不阻塞T2）：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
 
 **T2. 第三个案件（再选一起未侦破案件）。**目的：检验引擎在没有已知答案时的表现（白银案是有答案的校验，南大案与第三案是无答案的实战）。选案标准：公开资料丰富（≥2独立来源、≥1主流或官方）、有明确的矛盾点、不得涉及未成年人隐私细节。做法：照抄案件1的建包流程（先实读来源、再分级证据、再写矛盾与假设）；每条事实都要有证据编号、原文引用、来源位置、可信度理由。验收：`check`通过、测试新增该案的回归测试、报告生成、结论为无法判断时不得强行选定。
 
@@ -147,11 +147,12 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 - Cloudflare边缘403 urllib默认User-Agent：调自家Pages API须显式设浏览器式User-Agent（`job.py`已设`detective-os-runner/1.0`）。
 - `run_job.py`的done更新与末尾打印：曾用`cov['score_pct']`在已写result.json后抛KeyError。已修：用局部变量`score_pct`。
 - 虚拟机重启会杀死长任务（V1全程约12–15分钟，两次被重启打断）。已修：三份检查点加断点续跑；跑手正文仍要改成调`run_job.py`（见V0）。
+- 覆盖路径归一化：收集步骤写自由文本路径（“browser.search news vertical: …”“browser.open …”）与状态ok/partial，`build_draft_pack`原样抄进coverage.json导致引擎步校验失败（E2E第8轮）。已修：`pipeline._normalize_paths`把路径归一到10个标准收集路径、状态归一到4个标准状态，原始文本保留在analyst_note里；测试覆盖归一化与草稿包校验。
 - `bayesian()`的舍入是定死的：对数后验先舍入到4位小数再softmax，后验再舍入到4位小数；复算必须原样复制，阈值1e-9（T1运行3的教训）。
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，17项，全部通过（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、草稿包端到端）。合计48项全过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，19项，全部通过（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。合计50项全过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
@@ -168,7 +169,7 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 
 ## 未完成事项
 
-- V0端到端测试收尾（任务c23978f6，见接手任务书V0）：映射进行中，跑完核验并更新定时任务正文、删KV探针键
+- V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
 - 前端工作站（React加TypeScript，10个导航页）未做
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射

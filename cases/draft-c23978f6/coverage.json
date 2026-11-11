@@ -7,25 +7,39 @@
       "category": "失踪/案发",
       "title": "被害人身份",
       "question": "被害人是谁：姓名、年龄、职业或学校、籍贯？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F02",
+        "F03",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -36,22 +50,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -59,25 +78,35 @@
       "category": "失踪/案发",
       "title": "案发时间窗口",
       "question": "遇害或案发的时间范围能否确定？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F01",
+        "F04",
+        "F05",
+        "F14"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -85,25 +114,42 @@
       "category": "失踪/案发",
       "title": "案发地点/第一现场",
       "question": "第一现场在哪里？有无原始记录？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F02",
+        "F03",
+        "F04",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F14",
+        "F15"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -111,25 +157,32 @@
       "category": "发现",
       "title": "发现时间地点与发现者",
       "question": "何时、何地、何人发现？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F05"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -140,22 +193,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -163,25 +221,33 @@
       "category": "身份确认",
       "title": "身份确认过程与时间",
       "question": "如何确认死者身份？何时确认？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F61",
+        "F62"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -192,22 +258,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -218,22 +289,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -244,22 +320,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -267,25 +348,33 @@
       "category": "法医/物证",
       "title": "DNA/指纹比对现状",
       "question": "DNA、指纹比对做过没有？结果如何？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F61",
+        "F62"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -296,22 +385,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -319,25 +413,32 @@
       "category": "侦查过程",
       "title": "侦查节点",
       "question": "专案组、重启、悬赏等关键节点的时间线？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F63"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -348,22 +449,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -371,25 +477,33 @@
       "category": "作案手法",
       "title": "作案手法特征",
       "question": "手法特征的可靠描述有哪些？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F01",
+        "F15"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -400,22 +514,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -426,22 +545,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -449,25 +573,33 @@
       "category": "法律程序",
       "title": "诉讼/审判进展",
       "question": "诉讼、审判、执行进展如何？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F12",
+        "F13"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -478,22 +610,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -504,22 +641,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -527,25 +669,32 @@
       "category": "官方回应",
       "title": "警方/官方公开回应",
       "question": "警方与官方的公开回应及时间？",
-      "evidence_ids": [],
+      "evidence_ids": [
+        "F13"
+      ],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     },
     {
@@ -556,22 +705,27 @@
       "evidence_ids": [],
       "paths_tried": [
         {
-          "note": "新闻搜索+直接读源头",
           "path": "web_search",
           "status": "found"
         },
         {
-          "note": "直接打开三家报道原文",
           "path": "direct_source",
           "status": "found"
         },
         {
-          "note": "中文案件，英文查询未单独立项",
           "path": "local_language",
           "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "tried"
         }
       ],
-      "analyst_note": "DRAFT: auto-linked by extractor category tag.",
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: web_search (found); direct_source (found); local_language (found); browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社 (ok); browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院 (ok); browser.search news vertical: 白银连环杀人案 11起 澎湃新闻 (ok); browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年 (partial); browser.search: 新华社 2016-08-29 白银告破 DNA (ok); browser.search: 白银案 11起案件 时间表 (ok); browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28 (partial); browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm (ok); browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html (ok); browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html (ok); browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm (partial); browser.open zh.wikipedia.org/wiki/白银市连环杀人案 (ok); browser.open trtworld.com/article/13084984 (ok)",
       "not_applicable": false
     }
   ]
