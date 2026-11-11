@@ -85,7 +85,9 @@ Create `runs/<job_id>/collected.json` with this structure:
 }
 ```
 
-Use unique source IDs. Each `texts` key must match a source ID. For follow-up jobs, keep the parent source corpus intact and add only newly inspected sources; `run_job.py` performs canonical-URL deduplication and stable source-ID reassignment.\n\nThe accepted collection path names are: `web_search`, `direct_source`, `news_db`, `web_archive`, `court_db`, `local_language`, `books_media`, `user_supplied`, `community_lead`, `foia`. Status values: `tried`, `found`, `nothing`, `not_applicable`. The normalizer can repair free-form path notes, but use canonical values when possible.
+Use unique source IDs. Each `texts` key must match a source ID. For follow-up jobs, keep the parent source corpus intact and add only newly inspected sources; `run_job.py` performs canonical-URL deduplication and stable source-ID reassignment.
+
+The accepted collection path names are: `web_search`, `direct_source`, `news_db`, `web_archive`, `court_db`, `local_language`, `books_media`, `user_supplied`, `community_lead`, `foia`. Status values: `tried`, `found`, `nothing`, `not_applicable`. The normalizer can repair free-form path notes, but use canonical values when possible.
 
 ## Execute and verify
 
