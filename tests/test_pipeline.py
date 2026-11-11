@@ -162,6 +162,18 @@ class TestFollowupMerge(unittest.TestCase):
             "S01": "old A text", "S02": "old B text", "S03": "new C text"})
         self.assertEqual(remap, {"S02": "S03"})
 
+    def test_new_source_id_follows_highest_parent_id_even_with_gaps(self):
+        mod = self._load_run_job()
+        sources, texts, new_ids, _ = mod.merge_followup_sources(
+            [{"source_id": "S01", "url": "https://example.com/a"},
+             {"source_id": "S03", "url": "https://example.com/c"}],
+            {"S01": "A", "S03": "C"},
+            [{"source_id": "S01", "url": "https://example.com/d"}],
+            {"S01": "D"})
+        self.assertEqual(new_ids, ["S04"])
+        self.assertEqual([s["source_id"] for s in sources], ["S01", "S03", "S04"])
+        self.assertEqual(texts["S04"], "D")
+
     def test_case_summary_marks_facts_as_candidates_and_states_version(self):
         mod = self._load_run_job()
         summary = mod.build_case_summary(
