@@ -12,3 +12,5 @@ reports/*-report.json
 reports/*-report.md
 public/data/
 public/workbench-assets/
+
+public/workbench.html
