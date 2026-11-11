@@ -169,9 +169,9 @@
     "evidence_id": "F09",
     "content": "1970年警方对死者年龄的初步估计为25至40岁；后续牙齿同位素研究推测其约于1930年前后出生，死亡时年龄估计范围有所变化。",
     "evidence_type": "fact",
-    "source_id": "S02",
-    "original_quote": "She appeared to be aged between 25 and 40 years",
-    "source_location": "BBC正文警方初始描述；后续牙齿同位素段落",
+    "source_id": "S05",
+    "original_quote": "In 2017, stable isotope analysis of her teeth indicated that she had been born in about 1930 in or near Nuremberg, Germany",
+    "source_location": "The Norwegian American正文“Modern forensics yielded new, valuable information about the case”",
     "publication_date": "2017-05-13",
     "event_date": "1970-11-29",
     "grade": "C",
@@ -184,7 +184,7 @@
       "H4"
     ],
     "contradicts": [],
-    "analyst_notes": "这是年龄估计方法与区间差异，不是身份或死因证据。"
+    "analyst_notes": "年龄与出生地来自后续同位素分析的新闻摘要；1970年警方外观估计与后续检测范围部分重叠。"
   },
   {
     "evidence_id": "F10",
@@ -269,9 +269,9 @@
     "evidence_id": "F14",
     "content": "NRK与警方、法医及研究人员在2016年重新调查死者的生物痕迹，找回此前被认为遗失的组织样本与下颌骨，并开展DNA和牙齿同位素研究。",
     "evidence_type": "fact",
-    "source_id": "S03",
-    "original_quote": "Nylige undersøkelser av kvinnens levninger har likevel vist mer enn bare alder.",
-    "source_location": "forskning.no正文“Mediene åpnet saken på nytt”",
+    "source_id": "S05",
+    "original_quote": "In 2016, a DNA profile obtained from the woman's teeth tied her ancestry to Western Continental Europe.",
+    "source_location": "The Norwegian American正文“Modern forensics yielded new, valuable information about the case”",
     "publication_date": "2018-10-28",
     "event_date": "2016-2017",
     "grade": "C",
@@ -284,7 +284,7 @@
       "H4"
     ],
     "contradicts": [],
-    "analyst_notes": "后续技术分析缩小了地域/年龄范围，但没有公开确认身份。"
+    "analyst_notes": "DNA ancestry和同位素分析的报道摘要；数据库无匹配不等于已确认身份。"
   },
   {
     "evidence_id": "F15",
