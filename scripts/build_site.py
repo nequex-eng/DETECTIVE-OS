@@ -159,15 +159,47 @@ def main():
         f"结论：{esc(row['verdict'])}，证据{row['evidence_count']}条</li>"
         for row in index_rows)
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>DETECTIVE OS — 案件中心</title>{STYLE}</head><body>
-<h1>DETECTIVE OS — 案件中心</h1>
-<p class="note">针对真实历史刑事案件的公开资料研究、证据分析、竞争性假设推理与调查辅助系统。
-只依据公开资料；推测不包装成事实；不根据网络传言指认现实中的个人为凶手。</p>
-<div class="actions"><a class="action" href="workbench.html">打开十模块研究工作站 →</a><a class="action" href="investigate.html">开始自动调查 →</a></div>
-<h2>案件</h2><ul>{links}</ul>
-<p class="note">所有统计、排序、调查计划和审查结果均由结构化引擎生成；没有报告的案件不填充演示数据。
-研究工作站为只读静态数据视图，不会创建调查任务或修改生产KV。</p>
-</body></html>"""
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08121d">
+<title>DETECTIVE OS — Intelligence Operations</title>
+<style>
+:root{{--bg:#08121d;--panel:#101e2b;--line:#2a4053;--text:#e1e8ef;--muted:#8fa3b6;--gold:#c9a35f}}
+*{{box-sizing:border-box}}body{{margin:0;background:radial-gradient(ellipse at 80% 0%,#1b2b38 0,transparent 42%),var(--bg);color:var(--text);font:14px/1.6 Inter,system-ui,sans-serif}}
+a{{color:inherit;text-decoration:none}}.shell{{max-width:1320px;margin:auto;padding:30px 34px 60px}}
+header{{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:20px}}
+.brand{{display:flex;align-items:center;gap:13px}}.seal{{width:46px;height:46px;display:grid;place-items:center;border:1px solid #8d7449;color:#e3c27f;font:700 16px Georgia,serif}}
+.brand b{{display:block;font-size:13px;letter-spacing:2.2px}}.brand small{{display:block;color:#71879a;font-size:9px;letter-spacing:1.6px;margin-top:4px}}
+.classified{{font:10px ui-monospace,monospace;letter-spacing:1.5px;color:#c6a76c;border:1px solid #6c593b;padding:7px 10px}}
+.hero{{padding:54px 0 35px;display:grid;grid-template-columns:1.5fr 1fr;gap:35px;align-items:end}}
+.eyebrow{{color:#b89a62;font:700 10px ui-monospace,monospace;letter-spacing:2px}}
+h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p{{max-width:690px;color:#9aabba;font-size:13px;line-height:1.9;margin:0}}
+.hero-side{{border-left:1px solid #405163;padding:8px 0 8px 20px;color:#8ea2b4;font-size:11px;line-height:1.9}}
+.actions{{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 32px}}.action{{padding:11px 16px;border:1px solid #8e7448;background:#c6a15f;color:#111b24;font-size:10px;font-weight:800;letter-spacing:1px}}.action.secondary{{background:#142638;color:#c6d5e2;border-color:#3c5367}}
+.section{{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:10px;margin:30px 0 14px}}.section h2{{font:500 19px Georgia,serif;margin:5px 0 0}}.section span{{font:9px ui-monospace,monospace;color:#788da0;letter-spacing:1px}}
+.live-grid,.archive-grid{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+.job,.archive-card{{background:linear-gradient(140deg,#122333,#0e1a26);border:1px solid #2a4053;padding:16px;display:block;min-width:0}}
+.job:hover,.archive-card:hover{{border-color:#a8874f}}.job-top,.job-bottom{{display:flex;justify-content:space-between;gap:10px;align-items:center}}
+.job-id,.archive-card span{{font:9px ui-monospace,monospace;color:#8da5b9;letter-spacing:.7px}}
+.status{{font-size:9px;padding:3px 7px;border:1px solid #6c593b;color:#dfc17e}}.status.done{{border-color:#416b59;color:#83c6a1}}.status.failed{{border-color:#754c4c;color:#e29a96}}
+.job h3{{font-size:13px;margin:13px 0 5px}}.job p{{color:#93a7b9;font-size:10px;min-height:30px;margin:0 0 12px}}.job-bottom{{border-top:1px solid #26394a;padding-top:8px;color:#73899d;font:9px ui-monospace,monospace}}
+.empty{{border:1px dashed #34495b;padding:23px;color:#91a5b8;font-size:11px}}.empty b{{display:block;color:#dce5ed;font:16px Georgia,serif;margin-bottom:5px}}
+.archive-card b{{display:block;font:15px Georgia,serif;margin:10px 0}}.archive-card small{{display:block;color:#8196a9;font-size:9px;letter-spacing:1px}}.archive-card em{{display:block;color:#c4a66d;font-size:10px;font-style:normal;margin-top:10px;line-height:1.6}}
+.notice{{margin-top:35px;padding:14px 16px;border-left:2px solid #8c744b;background:#111d28;color:#8fa2b3;font-size:10px;line-height:1.8}}
+@media(max-width:700px){{.shell{{padding:18px 15px 40px}}header{{align-items:flex-start}}.hero{{grid-template-columns:1fr;padding:38px 0 25px;gap:15px}}.hero-side{{border-left:0;border-top:1px solid #405163;padding:12px 0 0}}.live-grid,.archive-grid{{grid-template-columns:1fr}}.classified{{font-size:8px}}}}
+</style></head><body><div class="shell">
+<header><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><div class="classified">RESEARCH OPERATIONS / OPEN SOURCE</div></header>
+<section class="hero"><div><div class="eyebrow">INTELLIGENCE OPERATIONS CENTER</div><h1>Evidence first.<br>Conclusions earned.</h1><p>面向真实历史案件的公开资料调查与证据分析工作站。统一管理调查委托、资料采集、证据链、竞争性假设与独立审查。事实、报道、推断与未知严格区分。</p></div><div class="hero-side">CASE INTELLIGENCE DIVISION<br>OPEN-SOURCE RESEARCH DESK<br>TRACEABLE · AUDITABLE · EVIDENCE-LED</div></section>
+<div class="actions"><a class="action" href="investigate.html">＋ CREATE INVESTIGATION</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
+<div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
+<div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
+<div class="section"><div><div class="eyebrow">ARCHIVED CASE FILES</div><h2>已归档案卷</h2></div><span>{len(index_rows)} CASE FILES</span></div>
+<div class="archive-grid">{links}</div>
+<div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于真实犯罪概率。证据不足时允许不作结论。</div>
+</div>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}}[c]));
+async function loadJobs(){{const root=document.getElementById("jobs"),count=document.getElementById("jobCount");try{{const r=await fetch("/api/jobs?ts="+Date.now(),{{cache:"no-store"}});if(!r.ok)throw Error("registry unavailable");const d=await r.json(),jobs=d.jobs||[];count.textContent=jobs.length+" RECENT RECORDS";root.innerHTML=jobs.length?jobs.map(j=>{{const done=j.status==="done",failed=j.status==="failed",label=done?"COMPLETED":failed?"FAILED":j.status==="queued"?"AWAITING HANDLER":"IN PROGRESS";return '<a class="job" href="investigate.html?job='+encodeURIComponent(j.job_id)+'"><div class="job-top"><span class="job-id">'+esc(j.job_id.slice(0,16).toUpperCase())+'</span><span class="status '+(done?'done':failed?'failed':'')+'">'+label+'</span></div><h3>'+esc(j.direction)+'</h3><p>'+esc(j.stage_note||j.stage||'Status pending')+'</p><div class="job-bottom"><span>'+esc(j.stage||'queued')+'</span><span>'+esc(j.updated_at||j.created_at||'')+'</span></div></a>'}}).join(""):'<div class="empty"><b>当前没有调查任务</b>创建新的调查委托后，任务会自动显示在这里。<br><a href="investigate.html">创建第一项调查 →</a></div>'}}catch(e){{count.textContent="TASK REGISTRY OFFLINE";root.innerHTML='<div class="empty"><b>暂时无法连接任务库</b>静态案卷仍可访问，请稍后刷新。</div>'}}}}
+loadJobs();setInterval(loadJobs,15000);
+</script></body></html>"""
     (public / "index.html").write_text(index, encoding="utf-8")
     print(f"built index.html ({len(built)} cases) and data/cases/index.json")
 
