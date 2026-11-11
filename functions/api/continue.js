@@ -46,6 +46,7 @@ export async function onRequestPost(context) {
         materials,
         questions,
         known_facts: knownFacts,
+        parent_report_context: cleanText(parent.result.report_md, 12000),
         exclusions: [],
         time_range: "",
         evidence_cutoff_date: ""
