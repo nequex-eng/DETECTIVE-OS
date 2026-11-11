@@ -22,7 +22,7 @@
   },
   {
     "evidence_id": "F02",
-    "content": "遗体正面严重烧伤，背部烧伤程度明显较轻；现场衣物标签被剪除，部分物品上的识别标记也被刮除。",
+    "content": "遗体正面严重烧伤。",
     "evidence_type": "physical",
     "source_id": "S02",
     "original_quote": "The body was burned all over the front",
@@ -38,7 +38,7 @@
     "contradicts": [
       "H1"
     ],
-    "analyst_notes": "烧伤分布与去标识行为的含义不确定；不能单独证明第三方参与。"
+    "analyst_notes": "只记录引文直接支持的正面烧伤观察；不据此推断火灾机制或第三方参与。"
   },
   {
     "evidence_id": "F03",
@@ -306,5 +306,21 @@
     ],
     "contradicts": [],
     "analyst_notes": "身份未明不等于已证明谋杀；本案研究对象包括死因与身份两项未决问题。"
+  },
+  {
+    "evidence_id": "F16",
+    "content": "死者衣物上的标签被移除，导致常规品牌与产地识别线索缺失。",
+    "evidence_type": "physical",
+    "source_id": "S06",
+    "original_quote": "Most disturbingly, all the labels had been meticulously removed from the woman's clothes",
+    "source_location": "Life in Norway正文“The Investigation Begins”",
+    "publication_date": "2024-09-01",
+    "event_date": "1970-11-29",
+    "grade": "C",
+    "reliability_assessment": "C级：独立媒体回顾对标签移除现象的报道；未直接取得警方物证清单或原始照片。",
+    "verification_status": "verified",
+    "supports": [],
+    "contradicts": [],
+    "analyst_notes": "这是身份线索被移除的观察，不单独证明谋杀，也不能确认行为由死者本人或第三方实施。"
   }
 ]
