@@ -188,8 +188,8 @@ V2委托字段：`intake.objective`、`time_range`、`evidence_cutoff_date`、`k
 
 - V0收尾余项：删除KV探针键`probe-direct`；将`detective-os-job-watch`正文替换为`docs/runner-v2-instructions.md`，读回确认并完成无新案件模拟任务。
 - 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、Cloudflare Pages生产部署与真实用户端验收仍未完成。
-- 自动跑手：完整V2任务正文已在`docs/runner-v2-instructions.md`；仍需同步到定时任务并实测后台实际读取V2结构化委托、优先打开指定来源链接并处理调查问题。
-- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。
+- 自动跑手：完整V2任务正文已在`docs/runner-v2-instructions.md`；仍需按`docs/production-handoff-no-new-case.md`同步到定时任务并读回确认；本轮不得创建任何新案件。
+- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机按`docs/production-handoff-no-new-case.md`执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`；该手册明确禁止创建测试案件。
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）。
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射。
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）。
