@@ -27,7 +27,8 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertEqual(len(self.index), 6)
         self.assertEqual(
             {x["case_id"] for x in self.index},
-            {"CASE-CN-1996-001", "CASE-CN-1988-001", "CASE-NO-1970-001",\n             "CASE-DRAFT-6c31bb54", "CASE-DRAFT-9d0c95d6", "CASE-DRAFT-c23978f6"})
+            {"CASE-CN-1996-001", "CASE-CN-1988-001", "CASE-NO-1970-001",
+             "CASE-DRAFT-6c31bb54", "CASE-DRAFT-9d0c95d6", "CASE-DRAFT-c23978f6"})
         for row in self.index:
             payload = json.loads(
                 (DATA / (row["case_id"] + ".json")).read_text(encoding="utf-8"))
