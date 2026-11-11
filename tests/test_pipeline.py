@@ -253,6 +253,22 @@ class TestUserSuppliedMaterial(unittest.TestCase):
         self.assertEqual(ev["verification_status"], "unverified")
         self.assertIn("用户提供材料", ev["reliability_assessment"])
 
+    def test_parent_ai_report_remains_zero_weight_g_grade(self):
+        pack = build_draft_pack(
+            "CASE-DRAFT-PARENT", "父任务上下文", "测试方向", "job-parent",
+            [{"source_id": "PAR01", "title": "父任务AI报告",
+              "publisher": "DETECTIVE OS", "published_at": "", "url": "",
+              "source_type": "ai_report", "is_reprint": False,
+              "reprint_of": "", "notes": "仅作上下文"}],
+            [{"content": "上一轮报告中的推断。", "quote": "上一轮报告中的推断。",
+              "source_id": "PAR01", "source_location": "父任务报告",
+              "evidence_type": "inference", "event_date": "",
+              "category": "C13"}],
+            [{"path": "user_supplied", "status": "tried"}])
+        ev = pack["evidence"][0]
+        self.assertEqual(ev["grade"], "G")
+        self.assertEqual(ev["verification_status"], "ai-inference")
+
 
 if __name__ == "__main__":
     unittest.main()
