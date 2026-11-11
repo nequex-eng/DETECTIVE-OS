@@ -11,18 +11,30 @@ ROOT = Path(__file__).resolve().parent
 ACCOUNT_ID = "3c76b79d615b6bc886fe564307682767"
 
 
-def resolve_token():
-    token = str(os.environ.get("CLOUDFLARE_API_TOKEN", "")).strip()
+def resolve_cloudflare_token(env=None, credential_loader=None):
+    """Resolve the standard CI token first, then the Muse surrogate fallback."""
+    values = os.environ if env is None else env
+    token = str(values.get("CLOUDFLARE_API_TOKEN", "")).strip()
     if token:
         return token
+    loader = credential_loader
+    if loader is None:
+        try:
+            sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
+            from dynamic_credentials import dynamic_credential_entry
+            loader = dynamic_credential_entry
+        except Exception:
+            return ""
     try:
-        sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
-        from dynamic_credentials import dynamic_credential_entry
-        entry = dynamic_credential_entry("custom.cloudflare", "access_token")
-        surrogate = str(entry.get("surrogate", "")).strip()
-        return surrogate if surrogate.startswith("hsurr:") else ""
+        entry = loader("custom.cloudflare", "access_token")
     except Exception:
         return ""
+    surrogate = str(entry.get("surrogate", "")).strip()
+    return surrogate if surrogate.startswith("hsurr:") else ""
+
+
+def resolve_token():
+    return resolve_cloudflare_token(os.environ)
 
 
 def run(command, label, env=None):
