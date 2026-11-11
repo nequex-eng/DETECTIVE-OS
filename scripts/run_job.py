@@ -313,8 +313,13 @@ def read_static_case_checkpoint(case_id):
     evidence = load_json(case_dir / "evidence.json", [])
     coverage = load_json(case_dir / "coverage.json", {})
     report = load_json(ROOT / "reports" / f"{case.get('case_id', '')}-report.json", {})
-    if not case or not sources or not evidence or not report:
-        raise RuntimeError("正式案卷基线文件不完整，无法启动增量续办")
+    if not case or not sources or not evidence:
+        raise RuntimeError("静态案卷基线文件不完整，无法启动增量续办")
+    if not isinstance(report, dict) or not report:
+        report = {
+            "case_id": case.get("case_id"),
+            "verdict": "原始v1报告未随跑手工作区提供；本轮仍以仓库中的静态案卷v1为只读基线"
+        }
 
     eligible = [item for item in evidence
                 if str(item.get("grade", "")).upper() in ("A", "B", "C", "D", "E")
