@@ -1,0 +1,154 @@
+[
+  {
+    "event_id": "E01",
+    "title": "死者在挪威多地以不同身份登记住宿",
+    "time": {
+      "kind": "range",
+      "label": "1970年3月至11月",
+      "earliest": "1970-03-01",
+      "latest": "1970-11-23"
+    },
+    "persons": [
+      "身份未明女性"
+    ],
+    "places": [
+      "奥斯陆",
+      "卑尔根",
+      "斯塔万格",
+      "特隆赫姆"
+    ],
+    "evidence_ids": [
+      "F06",
+      "F07"
+    ],
+    "notes": "多个登记姓名被警方通过笔迹分析关联；姓名均不得视为真实身份。"
+  },
+  {
+    "event_id": "E02",
+    "title": "死者最后一次已知旅馆住宿结束",
+    "time": {
+      "kind": "date",
+      "label": "1970年11月23日",
+      "earliest": "1970-11-23",
+      "latest": "1970-11-23"
+    },
+    "persons": [
+      "身份未明女性"
+    ],
+    "places": [
+      "Hotel Hordaheimen, Bergen"
+    ],
+    "evidence_ids": [
+      "F07"
+    ],
+    "notes": "旅馆登记离店时间，不等于精确死亡时间。"
+  },
+  {
+    "event_id": "E03",
+    "title": "死者在Isdalen被发现死亡",
+    "time": {
+      "kind": "date",
+      "label": "1970年11月29日",
+      "earliest": "1970-11-29",
+      "latest": "1970-11-29"
+    },
+    "persons": [
+      "身份未明女性",
+      "发现者（不公开姓名）"
+    ],
+    "places": [
+      "Isdalen, Bergen"
+    ],
+    "evidence_ids": [
+      "F01",
+      "F02"
+    ],
+    "notes": "发现者为一名男子及其两名女儿；本档案不收录未成年人个人信息。"
+  },
+  {
+    "event_id": "E04",
+    "title": "警方完成初步尸检并倾向自杀结论",
+    "time": {
+      "kind": "range",
+      "label": "1970年11月至12月",
+      "earliest": "1970-11-29",
+      "latest": "1970-12-24"
+    },
+    "persons": [
+      "Bergen Police"
+    ],
+    "places": [
+      "Bergen"
+    ],
+    "evidence_ids": [
+      "F03",
+      "F04",
+      "F11"
+    ],
+    "notes": "尸检结果与死亡方式解释必须区分。"
+  },
+  {
+    "event_id": "E05",
+    "title": "警方在卑尔根火车站找到与死者关联的两只行李箱",
+    "time": {
+      "kind": "range",
+      "label": "1970年12月",
+      "earliest": "1970-12-01",
+      "latest": "1970-12-31"
+    },
+    "persons": [
+      "身份未明女性",
+      "Bergen Police"
+    ],
+    "places": [
+      "Bergen railway station"
+    ],
+    "evidence_ids": [
+      "F05"
+    ],
+    "notes": "眼镜指纹与死者匹配；行李箱本身不能证明死因。"
+  },
+  {
+    "event_id": "E06",
+    "title": "NRK取得此前保密的POT文件并开展档案调查",
+    "time": {
+      "kind": "date",
+      "label": "2015年秋",
+      "earliest": "2015-09-01",
+      "latest": "2015-11-30"
+    },
+    "persons": [
+      "NRK调查团队"
+    ],
+    "places": [
+      "Norway"
+    ],
+    "evidence_ids": [
+      "F13"
+    ],
+    "notes": "文件存在不等于间谍理论得到证实。"
+  },
+  {
+    "event_id": "E07",
+    "title": "NRK与警方、研究人员重新调查生物痕迹",
+    "time": {
+      "kind": "range",
+      "label": "2016年至2017年",
+      "earliest": "2016-01-01",
+      "latest": "2017-12-31"
+    },
+    "persons": [
+      "NRK",
+      "Kripos",
+      "University of Bergen"
+    ],
+    "places": [
+      "Bergen"
+    ],
+    "evidence_ids": [
+      "F10",
+      "F14"
+    ],
+    "notes": "后续检测提供年龄与地域线索，未确认身份。"
+  }
+]

@@ -1,0 +1,310 @@
+[
+  {
+    "evidence_id": "F01",
+    "content": "1970年11月29日，一名男子与两个女儿在挪威卑尔根附近的Isdalen山谷发现一具严重烧伤的女性遗体。",
+    "evidence_type": "fact",
+    "source_id": "S02",
+    "original_quote": "On the morning of 29 November 1970, a man and his two young daughters see a body in Isdalen Valley.",
+    "source_location": "BBC正文“Clue one: The body in Death Valley”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-11-29",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC对发现经过的报道；未直接查阅警方现场勘验原件。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "发现日期与地点可作时间线锚点；不能由遗体被烧伤推断他杀。"
+  },
+  {
+    "evidence_id": "F02",
+    "content": "遗体正面严重烧伤，背部烧伤程度明显较轻；现场衣物标签被剪除，部分物品上的识别标记也被刮除。",
+    "evidence_type": "physical",
+    "source_id": "S02",
+    "original_quote": "The body was burned all over the front",
+    "source_location": "BBC正文“Clue one”及“Clue two”现场描述",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-11-29",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC转述现场与物品检查结果；原始现场照片和勘验记录未收入。",
+    "verification_status": "verified",
+    "supports": [
+      "H2"
+    ],
+    "contradicts": [
+      "H1"
+    ],
+    "analyst_notes": "烧伤分布与去标识行为的含义不确定；不能单独证明第三方参与。"
+  },
+  {
+    "evidence_id": "F03",
+    "content": "尸检报告认为死者摄入大量巴比妥类安眠药，并发生一氧化碳中毒；警方在1970年倾向将死亡解释为自杀。",
+    "evidence_type": "physical",
+    "source_id": "S02",
+    "original_quote": "The autopsy concludes the woman died from a combination of carbon monoxide poisoning, and ingesting a large number of sleeping pills.",
+    "source_location": "BBC正文“Clue six: The autopsy”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-12",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC对尸检结论的报道；完整尸检报告及毒物浓度未公开收入。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [
+      "H2"
+    ],
+    "analyst_notes": "毒物与一氧化碳结果不能独立确定服药是否自愿，也不能确定点火者身份。"
+  },
+  {
+    "evidence_id": "F04",
+    "content": "死者右侧颈部有一处原因不明的瘀伤，报道指出可能由击打或跌倒造成。",
+    "evidence_type": "physical",
+    "source_id": "S02",
+    "original_quote": "an unexplained bruise on the right side of her neck, that could have been the result of a blow or a fall.",
+    "source_location": "BBC正文“Clue six: The autopsy”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-12",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC转述尸检发现与可能解释；无原始法医报告供独立复核。",
+    "verification_status": "verified",
+    "supports": [
+      "H2",
+      "H3"
+    ],
+    "contradicts": [
+      "H1"
+    ],
+    "analyst_notes": "报道明确保留击打与跌倒两种解释，不得只选择其中一种。"
+  },
+  {
+    "evidence_id": "F05",
+    "content": "警方在卑尔根火车站寄存处找到两只行李箱，其中一副眼镜上的指纹与死者指纹匹配；箱内有假发、衣物、外币及旅行物品。",
+    "evidence_type": "physical",
+    "source_id": "S02",
+    "original_quote": "a fingerprint on one of the pairs matches the woman's.",
+    "source_location": "BBC正文“Clue three: The suitcases”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-12",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC对警方行李检查结果的报道；未取得指纹比对原始记录。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "指纹匹配将行李与死者关联，但不能说明死因或是否有同伴。"
+  },
+  {
+    "evidence_id": "F06",
+    "content": "死者在挪威多家旅馆登记时使用多个姓名与不同身份信息；警方通过笔迹比对将部分登记表关联为同一女性。",
+    "evidence_type": "document",
+    "source_id": "S02",
+    "original_quote": "Police matched the different forms together by conducting handwriting analysis",
+    "source_location": "BBC正文“Clue four: The hotel forms”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-03/1970-11",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC对警方旅馆登记表和笔迹比对工作的报道；原始登记表仅以报道图片展示部分内容。",
+    "verification_status": "verified",
+    "supports": [
+      "H2",
+      "H3"
+    ],
+    "contradicts": [],
+    "analyst_notes": "多重身份是真实调查线索；其动机未知，不能据此推断间谍身份或犯罪参与者。"
+  },
+  {
+    "evidence_id": "F07",
+    "content": "旅馆记录显示死者最后一次已知住宿为卑尔根Hordaheimen旅馆，记录时间为1970年11月19日至23日；其后至发现遗体之间存在约六天空白。",
+    "evidence_type": "document",
+    "source_id": "S02",
+    "original_quote": "Elisabeth Leenhouwfr, from Ostend, stayed in Hotel Hordaheimen, Bergen, from 19-23 November",
+    "source_location": "BBC正文“Clue four: The hotel forms”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-11-23",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC列示旅馆登记资料；别名与实际身份未获确认。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "登记离店不等于确定死亡时间；23日至29日的行踪未知。"
+  },
+  {
+    "evidence_id": "F08",
+    "content": "警方破解部分笔记后，将其中字母与数字组合解释为日期和地点记录，认为它更像旅行路线备忘，而非已证实的情报密码。",
+    "evidence_type": "document",
+    "source_id": "S02",
+    "original_quote": "it appears to be a record of the places the woman visited.",
+    "source_location": "BBC正文“Clue five: The note”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-10",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC转述警方对笔记的解读；未取得笔记原件与完整密码分析报告。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "笔记的行程解释不等于已排除所有其他解释；间谍说法仍属假设。"
+  },
+  {
+    "evidence_id": "F09",
+    "content": "1970年警方对死者年龄的初步估计为25至40岁；后续牙齿同位素研究推测其约于1930年前后出生，死亡时年龄估计范围有所变化。",
+    "evidence_type": "fact",
+    "source_id": "S05",
+    "original_quote": "In 2017, stable isotope analysis of her teeth indicated that she had been born in about 1930 in or near Nuremberg, Germany",
+    "source_location": "The Norwegian American正文“Modern forensics yielded new, valuable information about the case”",
+    "publication_date": "2017-05-13",
+    "event_date": "1970-11-29",
+    "grade": "C",
+    "reliability_assessment": "C级：BBC并列报道1970年警方初始年龄估计与后续同位素研究；两种估计区间部分重叠。",
+    "verification_status": "disputed",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "年龄与出生地来自后续同位素分析的新闻摘要；1970年警方外观估计与后续检测范围部分重叠。"
+  },
+  {
+    "evidence_id": "F10",
+    "content": "奥斯陆大学研究传播文章称，死者牙齿存在多处金冠等复杂修复，受访法医齿科专家认为相关牙科治疗并非在挪威完成；这只能提示可能的就医地域，不能确认国籍。",
+    "evidence_type": "physical",
+    "source_id": "S03",
+    "original_quote": "Dette tannarbeidet ble ikke gjort i Norge",
+    "source_location": "forskning.no正文“Isdalskvinnen”及专家访谈",
+    "publication_date": "2018-10-28",
+    "event_date": "2017",
+    "grade": "C",
+    "reliability_assessment": "C级：奥斯陆大学供稿的专家采访；牙科记录与原始检测报告未公开。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "牙科治疗地点不等于出生地、国籍或职业。"
+  },
+  {
+    "evidence_id": "F11",
+    "content": "奥斯陆大学文章指出，警方当年无法确定死者究竟遭到谋杀还是自杀，最终在1970年圣诞节前作出自杀结论；死者真实身份始终未获确认。",
+    "evidence_type": "fact",
+    "source_id": "S03",
+    "original_quote": "Politiet var usikre om de stod overfor drap eller selvdrap, og konkluderte med det siste rett før jul.",
+    "source_location": "forskning.no正文“Isdalskvinnen”",
+    "publication_date": "2018-10-28",
+    "event_date": "1970-12",
+    "grade": "C",
+    "reliability_assessment": "C级：奥斯陆大学研究传播文章对警方当年调查结论的回顾；不是警方原始结案文书。",
+    "verification_status": "verified",
+    "supports": [
+      "H1"
+    ],
+    "contradicts": [
+      "H2"
+    ],
+    "analyst_notes": "记录的是警方当年结论，不代表该结论已被现代独立复核证实。"
+  },
+  {
+    "evidence_id": "F12",
+    "content": "前办案警察法律顾问Carl Halvor Aas在BBC采访中表示，他不相信死者是自杀；这是个人回忆与判断，不是法医结论。",
+    "evidence_type": "statement",
+    "source_id": "S02",
+    "original_quote": "I do not believe it was suicide",
+    "source_location": "BBC正文“Clue six: The autopsy”对Carl Halvor Aas的采访",
+    "publication_date": "2017-05-13",
+    "event_date": "2017-05-13",
+    "grade": "D",
+    "reliability_assessment": "D级：前办案人员个人陈述；其对现场的记忆有价值，但不能替代原始证据。",
+    "verification_status": "verified",
+    "supports": [
+      "H2"
+    ],
+    "contradicts": [
+      "H1"
+    ],
+    "analyst_notes": "仅作为具名受访者的观点保存，不升级为警方集体结论。"
+  },
+  {
+    "evidence_id": "F13",
+    "content": "NRK项目团队于2015年取得对140份此前保密的挪威监视警察机构（POT）文件的查阅权，并据此继续调查死者身份与生物痕迹；文件的存在不证明死者是情报人员。",
+    "evidence_type": "document",
+    "source_id": "S04",
+    "original_quote": "Høsten 2015 fikk NRK innsyn i de 140 hemmelige dokumentene fra Overvåkingspolitiet (POT).",
+    "source_location": "Journalisten正文“Ville åpne graven”",
+    "publication_date": "2016-11-17",
+    "event_date": "2015",
+    "grade": "C",
+    "reliability_assessment": "C级：新闻行业媒体采访NRK项目负责人，报道其查阅档案的过程；未公开复核140份文件全文。",
+    "verification_status": "verified",
+    "supports": [
+      "H2"
+    ],
+    "contradicts": [],
+    "analyst_notes": "仅证明NRK查阅了相关档案；档案内容与死者身份/死因之间的关系仍未知。"
+  },
+  {
+    "evidence_id": "F14",
+    "content": "NRK与警方、法医及研究人员在2016年重新调查死者的生物痕迹，找回此前被认为遗失的组织样本与下颌骨，并开展DNA和牙齿同位素研究。",
+    "evidence_type": "fact",
+    "source_id": "S05",
+    "original_quote": "In 2016, a DNA profile obtained from the woman's teeth tied her ancestry to Western Continental Europe.",
+    "source_location": "The Norwegian American正文“Modern forensics yielded new, valuable information about the case”",
+    "publication_date": "2018-10-28",
+    "event_date": "2016-2017",
+    "grade": "C",
+    "reliability_assessment": "C级：奥斯陆大学专家采访与NRK公开项目交叉；检测原始报告未收入。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "DNA ancestry和同位素分析的报道摘要；数据库无匹配不等于已确认身份。"
+  },
+  {
+    "evidence_id": "F15",
+    "content": "NRK项目负责人称，警方投入大量资源调查，但始终未能确认死者身份；案件因此持续成为未解身份与可疑死亡事件。",
+    "evidence_type": "statement",
+    "source_id": "S04",
+    "original_quote": "Politiet brukte store ressurser på saken, men klarte aldri å finne ut hvem hun var.",
+    "source_location": "Journalisten正文对NRK项目的介绍",
+    "publication_date": "2016-11-17",
+    "event_date": "1970-2016",
+    "grade": "C",
+    "reliability_assessment": "C级：新闻行业媒体对NRK调查项目的报道；身份未明也由BBC与奥斯陆大学文章交叉印证。",
+    "verification_status": "verified",
+    "supports": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "contradicts": [],
+    "analyst_notes": "身份未明不等于已证明谋杀；本案研究对象包括死因与身份两项未决问题。"
+  }
+]
