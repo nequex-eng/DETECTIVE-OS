@@ -179,6 +179,16 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 - GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
 - 1996年协查通报与认尸启示原始版面、1996年2月至4月排查同期报道原文尚未收入（已记为缺口G7、G8）
 
+## 2026-11-11：任务库、工作站与案卷续办修复
+
+- KV任务库存在一条旧的残缺记录（缺少job_id与direction）。任务列表API现在逐条校验并跳过无效记录，单条坏记录不再使整个任务列表不可用；正常任务继续显示。
+- 研究工作站增加`/workbench`清洁URL重定向到`/workbench.html`；案卷页面也提供无扩展名入口。
+- 案卷详情页与首页、工作站统一字体、配色、间距和卡片样式。
+- CASE-CN-1996-001详情页新增“继续调查”入口。用户可提交新信源URL、粘贴原文、上传TXT/MD/CSV/JSON文件、补充线索和重点问题。
+- 首次从正式静态案卷续办时，跑手以仓库中的v1案卷为只读基线，保留原来源编号与A-E级事实，只抽取新增来源，输出独立v2报告；后续续办承接最新已完成版本。F/G/H级记录继续隔离，原正式案卷和原报告不覆盖。
+- 新增测试`tests/test_static_case_followup.py`，验证1996案卷基线装载、来源编号、证据隔离、似然与覆盖分类映射。
+- **运行前置条件**：Muse定时任务`detective-os-job-watch`必须同步`docs/runner-v2-instructions.md`中的`baseline_case_id` / `case-pack:`分支。同步操作说明见`docs/chatgpt-takeover/muse-cron-t8-static-case-followup.md`。未完成cron读回核验前，不声称自动续办链路已端到端验收。
+
 ## 网站
 
 Cloudflare Pages静态站（报告数据驱动，双案件版）：https://detective-os.pages.dev
