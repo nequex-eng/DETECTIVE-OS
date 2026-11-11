@@ -21,6 +21,8 @@ jobs:
         run: python3 scripts/check_frontend.py
       - name: Compile Python entry points
         run: python3 -m py_compile scripts/build_site.py scripts/job.py scripts/run_job.py
+      - name: Build static case center and case pages
+        run: python3 scripts/build_site.py
       - name: Run unit and acceptance tests
         run: python3 -m unittest discover -s tests -v
       - name: Validate first case pack
