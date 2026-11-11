@@ -19,6 +19,8 @@ jobs:
           node-version: "22"
       - name: Check investigation workspace JavaScript and panes
         run: python3 scripts/check_frontend.py
+      - name: Compile Python entry points
+        run: python3 -m py_compile scripts/build_site.py scripts/job.py scripts/run_job.py
       - name: Run unit and acceptance tests
         run: python3 -m unittest discover -s tests -v
       - name: Validate first case pack
