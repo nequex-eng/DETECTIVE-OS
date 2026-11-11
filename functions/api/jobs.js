@@ -16,9 +16,17 @@ export async function onRequestGet(context) {
   const url = new URL(context.request.url);
   const id = url.searchParams.get("id");
   if (id) {
-    const raw = await env.JOBS.get("job:" + id);
-    if (!raw) return json({ error: "没有这个任务" }, 404);
-    return json(JSON.parse(raw));
+    try {
+      const raw = await env.JOBS.get("job:" + id);
+      if (!raw) return json({ error: "没有这个任务" }, 404);
+      const job = JSON.parse(raw);
+      if (!job || job.job_id !== id || typeof job.direction !== "string") {
+        return json({ error: "任务记录无效或已损坏" }, 404);
+      }
+      return json(job);
+    } catch (_) {
+      return json({ error: "任务记录暂时不可读取" }, 503);
+    }
   }
   try {
     const list = await env.JOBS.list({ prefix: "job:", limit: 1000 });
