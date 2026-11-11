@@ -75,12 +75,27 @@ def main():
         print(f"no collected.json for {job_id}; collect sources first")
         return 1
     data = json.loads(collected_path.read_text(encoding="utf-8"))
-    sources = data["sources"]
-    texts = data["texts"]
-    paths_tried = data.get("paths_tried", [])
-    # The job's direction comes from the collected file (written by the
-    # runner from the job doc) so this script never needs the API read.
-    direction = data.get("direction", "")
+    sources = list(data["sources"])
+    texts = dict(data["texts"])
+    paths_tried = list(data.get("paths_tried", []))
+    # Read the structured user intake as well as the agent-collected sources.
+    # User text is preserved as a separate manual source and later graded H
+    # until an independent public source verifies it.
+    live = job_get(job_id)
+    intake = live.get("intake", {}) if isinstance(live, dict) else {}
+    direction = data.get("direction") or live.get("direction", "")
+    material = str(intake.get("materials", "")).strip()
+    if material and not any(s.get("source_id") == "USR01" for s in sources):
+        sources.append({
+            "source_id": "USR01", "title": "用户提交的补充材料",
+            "publisher": "用户提供", "published_at": "",
+            "url": "", "source_type": "manual", "is_reprint": False,
+            "reprint_of": "", "origin_url": "", "reliability": "unverified",
+            "last_verified": "", "notes": "用户提交文本；未经独立来源核验，不作为已确认事实。"
+        })
+        texts["USR01"] = material
+        paths_tried.append({"path": "user_supplied", "status": "tried",
+                            "note": "用户提交材料已纳入，待独立来源核验"})
     short = job_id[:8]
     case_id = f"CASE-DRAFT-{short}"
     collected_mtime = collected_path.stat().st_mtime
