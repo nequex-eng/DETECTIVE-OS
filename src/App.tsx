@@ -5,6 +5,7 @@ type TabId =
   | "contradictions" | "hypotheses" | "plan" | "review" | "report";
 
 type Row = Record<string, any>;
+type LiveJob = { job_id: string; direction: string; language?: string; status: string; stage: string; stage_note?: string; created_at?: string; updated_at?: string; result?: Row | null; error?: string | null; };
 type CaseIndexItem = {
   case_id: string;
   name: string;
@@ -77,6 +78,8 @@ function Metric({ label, value, note }: { label: string; value: string; note?: s
 
 export default function App() {
   const [index, setIndex] = useState<CaseIndexItem[]>([]);
+  const [jobs, setJobs] = useState<LiveJob[]>([]);
+  const [jobsError, setJobsError] = useState("");
   const [activeCaseId, setActiveCaseId] = useState("");
   const [data, setData] = useState<CaseData | null>(null);
   const [tab, setTab] = useState<TabId>("cases");
@@ -97,6 +100,29 @@ export default function App() {
         setLoading(false);
       })
       .catch((e: Error) => { setError(e.message); setLoading(false); });
+  }, []);
+
+  useEffect(() => {
+    let alive = true;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const refresh = async () => {
+      try {
+        const response = await fetch("/api/jobs?ts=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error("实时任务暂不可用");
+        const payload = await response.json();
+        if (!alive) return;
+        const rows: LiveJob[] = Array.isArray(payload.jobs) ? payload.jobs : [];
+        setJobs(rows);
+        setJobsError("");
+        const active = rows.some((job) => !["done", "failed"].includes(job.status));
+        if (active && !timer) timer = setInterval(refresh, 10000);
+        if (!active && timer) { clearInterval(timer); timer = undefined; }
+      } catch (e) {
+        if (alive) setJobsError(e instanceof Error ? e.message : "任务列表读取失败");
+      }
+    };
+    refresh();
+    return () => { alive = false; if (timer) clearInterval(timer); };
   }, []);
 
   useEffect(() => {
@@ -143,12 +169,31 @@ export default function App() {
   function CaseCenter() {
     return <>
       <SectionHeading eyebrow="RESEARCH INDEX / 01" title="案件中心" description="只展示已经载入的真实案包与引擎输出。没有报告的案件不会填充演示数据。" />
-      <div className="metrics-grid">
-        <Metric label="案包数量" value={String(index.length)} note="当前静态数据集" />
-        <Metric label="当前案件证据" value={String(data?.evidence.length || 0)} note="含分级与来源编号" />
-        <Metric label="独立审查" value={data?.review?.passed ? "通过" : "待审"} note={String(data?.review?.blockers ?? "—") + " blockers"} />
-        <Metric label="资料覆盖" value={data?.coverage ? pct(data.coverage.score) : "—"} note="只计算适用项" />
+      <div className="ops-banner">
+        <div><span className="eyebrow">OPERATIONS / LIVE CASE QUEUE</span><h3>调查行动中心</h3><p>实时任务与已归档案卷统一呈现。任务记录保存在服务器端，刷新或重新进入不会丢失。</p></div>
+        <a className="ops-primary" href="/investigate.html">＋ 新建调查委托</a>
       </div>
+      <div className="metrics-grid">
+        <Metric label="实时调查任务" value={String(jobs.length)} note="来自 Cloudflare 任务库" />
+        <Metric label="正在执行" value={String(jobs.filter(j => !["done","failed"].includes(j.status)).length)} note="排队、采集或分析中" />
+        <Metric label="已完成任务" value={String(jobs.filter(j => j.status === "done").length)} note="保留历史记录" />
+        <Metric label="已归档案卷" value={String(index.length)} note="结构化研究案包" />
+      </div>
+      <div className="ops-section-head"><div><span className="eyebrow">LIVE OPERATIONS</span><h3>近期调查任务</h3></div><a href="/investigate.html">任务管理与新建 →</a></div>
+      {jobsError && <div className="notice">{jobsError}。静态案卷仍可正常访问。</div>}
+      {jobs.length ? <div className="live-job-grid">{jobs.map(job => {
+        const done = job.status === "done", failed = job.status === "failed";
+        const statusLabel = done ? "调查完成" : failed ? "执行失败" : job.status === "queued" ? "等待接手" : "执行中";
+        const stamp = job.updated_at || job.created_at;
+        return <a className="live-job-card" href={"/investigate.html?job=" + encodeURIComponent(job.job_id)} key={job.job_id}>
+          <div className="live-job-top"><span className="case-id">{job.job_id.slice(0, 13).toUpperCase()}</span><span className={"job-status " + (done ? "is-done" : failed ? "is-failed" : "is-active")}>{statusLabel}</span></div>
+          <h4>{job.direction}</h4><p>{job.stage_note || job.stage || "等待状态更新"}</p>
+          <div className="live-job-bottom"><span>{job.stage || "queued"}</span><span>{stamp ? new Date(stamp).toLocaleString("zh-CN", { hour12: false }) : "时间未记录"}</span></div>
+          {done && <div className="job-result-hint">调查报告已生成 · 打开任务档案 →</div>}
+          {failed && <div className="job-result-hint failed">{job.error || "需要检查执行错误"} · 查看详情 →</div>}
+        </a>;
+      })}</div> : <div className="ops-empty"><b>当前没有调查任务</b><span>创建新的调查委托后，任务会自动出现在这里，并持续更新状态。</span><a href="/investigate.html">创建第一项调查 →</a></div>}
+      <div className="ops-section-head archive-head"><div><span className="eyebrow">ARCHIVED CASE FILES</span><h3>已归档案卷</h3></div><span>{index.length} FILES</span></div>
       <div className="case-grid">
         {index.map((item) => <button className={"case-card " + (item.case_id === activeCaseId ? "selected" : "")} key={item.case_id}
           onClick={() => { setActiveCaseId(item.case_id); setTab("cases"); }}>
@@ -381,7 +426,7 @@ export default function App() {
         onClick={() => { setTab(item.id); setQuery(""); setSelectedEvidence(""); setSelectedSource(""); }}>
         <span className="nav-index">{item.icon}</span><span><b>{item.label}</b><small>{item.sub}</small></span>
       </button>)}</nav>
-      <div className="sidebar-bottom"><span className="live-dot" /> STATIC CASE DATASET <small>NO LIVE CASE JOBS</small></div>
+      <div className="sidebar-bottom"><span className="live-dot" /> SECURE OPERATIONS LINK <small>LIVE QUEUE · ARCHIVED FILES</small></div>
     </aside>
     <main className="main-shell">
       <header className="topbar">
@@ -390,7 +435,7 @@ export default function App() {
           <label className="case-picker"><span>ACTIVE CASE</span><select value={activeCaseId} onChange={(e) => { setActiveCaseId(e.target.value); setTab("cases"); }}>
             {index.map((x) => <option key={x.case_id} value={x.case_id}>{x.case_id}</option>)}
           </select></label>
-          <span className="environment-pill">READ ONLY · V1</span>
+          <a className="environment-pill" href="/investigate.html">NEW INVESTIGATION ↗</a>
         </div>
       </header>
       <div className="workspace">
