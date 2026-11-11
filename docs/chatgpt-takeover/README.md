@@ -33,7 +33,7 @@
 - 新增React+TypeScript十模块工作站：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。
 - 工作站数据由三个案包与引擎报告构建，不使用假数据；来源和证据编号可回链；F/G/H级无来源记录明确标示。
 - `scripts/build_site.py`对三个案包只读运行引擎，生成静态JSON、Markdown报告与案件页；`deploy.py`先构建前端和数据再调用Wrangler。
-- TypeScript检查、Vite构建、静态数据构建和68项测试全部通过。artifact：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42956572177。
+- TypeScript检查、Vite构建、静态数据构建和71项测试全部通过。artifact：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42956754165。
 - 生产Pages尚未部署；缺标准Cloudflare部署凭证/上传通道。没有声称线上已更新。
 
 ## T2第三案验收结果（2026-11-11）
@@ -41,7 +41,7 @@
 - 案包：`cases/case-no-1970-001/`；6个独立来源、16条证据（C15/D1）、7个事件、10个实体、6条关系、4条解释分歧、8项缺口、22项覆盖清单（18项适用）。
 - 贝叶斯：H2 28.35%、H1 25.29%、H3 25.27%、H4 21.09%；前两名差0.0306，正确输出`undecided`。定性H3净1.3领先，报告保留两种口径差异，不将其解释为犯罪概率。
 - 覆盖率41.7%（3 covered/9 single/6 missing of 18 applicable）；调查计划11项；独立审查0 blocker。
-- CI：68项测试通过；案包check、报告生成、静态站构建、artifact上传全部通过。运行记录：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
+- CI：71项测试通过；案包check、报告生成、静态站构建、artifact上传全部通过。运行记录：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
 - 生产边界：没有触碰生产KV、没有启动自动调查任务、没有部署Pages。
 
 ## 迁移矩阵摘要（详见05）
@@ -53,7 +53,7 @@
 ## 权限缺口摘要（详见04）
 
 - 现有Cloudflare API Token（存在Muse的安全连接里，原始值取不出来）只有Pages与KV权限；D1、R2调用返回鉴权错误10000。`scripts/schema.sql`（D1 jobs表）已写好但从未执行。
-- `.github/workflows/ci.yml`现已存在并可运行：检查V1 intake与React十模块、安装前端依赖、TypeScript类型检查、Vite构建、验证三个案包、生成引擎报告与静态数据、构建案件页、运行68项测试并上传完整workbench artifact。该CI不部署Pages，也不写生产KV。
+- `.github/workflows/ci.yml`现已存在并可运行：检查V1 intake与React十模块、安装前端依赖、TypeScript类型检查、Vite构建、验证三个案包、生成引擎报告与静态数据、构建案件页、运行71项测试并上传完整workbench artifact。该CI不部署Pages，也不写生产KV。
 - Cloudflare生产部署仍无可用的GitHub Actions部署凭证：当前项目仍为Direct Upload/ad_hoc部署，Muse的动态凭证不能作为GitHub Secret使用。04给出最小权限Token规格与创建、配置步骤，由用户或ChatGPT在Cloudflare控制台与GitHub网页端完成。
 
 ## 模拟验收入口（详见06）
