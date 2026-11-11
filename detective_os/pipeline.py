@@ -351,12 +351,15 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
     """
     likelihoods = likelihoods or {}
     categories = categories or {}
+    source_by_id = {s.get("source_id"): s for s in sources}
     evidence = []
     for i, c in enumerate(candidates, 1):
         eid = f"F{i:02d}"
         cats = categories.get(eid)
         if not cats and c.get("category"):
             cats = [c["category"]]
+        source = source_by_id.get(c["source_id"], {})
+        user_supplied = source.get("source_type") == "manual"
         evidence.append({
             "evidence_id": eid, "content": c["content"],
             "evidence_type": c.get("evidence_type", "fact"),
@@ -364,11 +367,16 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "source_location": c.get("source_location", ""),
             "publication_date": "",
             "event_date": c.get("event_date", ""),
-            "grade": "C",
-            "reliability_assessment": "草稿：LLM从报道原文抽取，逐字引用已核验，待人工复核定级。",
-            "verification_status": "single-source",
+            "grade": "H" if user_supplied else "C",
+            "reliability_assessment": (
+                "H级：用户提供材料，引用仅与提交文本匹配，尚未找到独立来源核验。"
+                if user_supplied else
+                "草稿：LLM从公开报道抽取，逐字引用已核验，待人工复核定级。"),
+            "verification_status": "unverified" if user_supplied else "single-source",
             "supports": [], "contradicts": [],
-            "analyst_notes": ("USER-SUPPLIED: unverified; not countable evidence." if user_supplied else "DRAFT: auto-extracted, unreviewed."),
+            "analyst_notes": (
+                "USER-SUPPLIED: unverified; not countable evidence."
+                if user_supplied else "DRAFT: auto-extracted, unreviewed."),
             "_categories": list(cats or []),
         })
     hypotheses = []
