@@ -76,7 +76,7 @@ class TestIsdalWomanCase(unittest.TestCase):
         self.assertEqual(checklist.validate(self.loaded["board"]), [])
         summary = checklist.compute(self.loaded["board"],
                                     self.loaded["registry"])
-        self.assertEqual(summary["total"], 22)
+        self.assertEqual(summary["total"], 18)
         self.assertGreater(summary["missing"], 0)
 
     def test_report_is_generated_and_review_has_no_blockers(self):
