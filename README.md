@@ -200,7 +200,7 @@ V2委托字段：`intake.objective`、`time_range`、`evidence_cutoff_date`、`k
 
 Cloudflare Pages静态站（报告数据驱动，双案件版）：https://detective-os.pages.dev
 
-部署：`python3 deploy.py`（wrangler direct upload，public/目录）。
+部署：`python3 deploy.py`（自动先运行`scripts/build_site.py`生成案件中心和案件页，再由Wrangler direct upload整个`public/`目录及Functions）。
 
 ## 下一步
 
