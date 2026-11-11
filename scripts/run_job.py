@@ -515,6 +515,9 @@ def main():
             direction, candidates, verdict, coverage,
             engine_summary["review"]["blockers"], version, new_fact_count)
         report_md = md_path.read_text(encoding="utf-8")
+        first_line, separator, remainder = report_md.partition("\n")
+        version_line = f"> 报告版本：v{version}；承接任务：{parent_id}" if parent_id else "> 报告版本：v1（初始调查）"
+        report_md = first_line + separator + "\n" + version_line + "\n\n" + remainder
         report_md += "\n\n" + case_summary + "\n"
         md_path.write_text(report_md, encoding="utf-8")
 
