@@ -52,6 +52,15 @@ def save_checkpoint(path, payload):
                     encoding="utf-8")
 
 
+def serialize_plan_tasks(tasks):
+    """Convert engine InvestigationTask dataclasses into JSON-safe records."""
+    fields = ("task_id", "case_id", "question", "purpose", "hypotheses",
+              "expected_info", "impact_if_yes", "impact_if_no",
+              "source_or_channel", "estimated_value", "status")
+    return [{key: getattr(task, key, None) for key in fields}
+            for task in (tasks or [])]
+
+
 def load_checkpoint(path, collected_mtime):
     """A checkpoint is valid only for the collected.json it was built
     from; a re-collection (new mtime) invalidates all of them."""
@@ -248,6 +257,14 @@ def main():
             "review_blockers": summary["review"]["blockers"],
             "review_passed": summary["review"].get("passed", False),
             "review_findings": summary["review"].get("findings", []),
+            # Expose structured engine records to the UI. Empty arrays are
+            # intentional: the draft collector must not fabricate timeline,
+            # graph edges, or contradictions it has not actually established.
+            "hypotheses_detail": pack["case"].get("hypotheses", []),
+            "timeline_events": pack.get("events", []),
+            "entities": pack.get("entities", {"entities": [], "relationships": []}),
+            "contradictions": pack.get("contradictions", []),
+            "investigation_plan": serialize_plan_tasks(summary.get("plan_tasks", [])),
             "report_md": report_md,
         }
         (run_dir / "result.json").write_text(
