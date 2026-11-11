@@ -185,13 +185,16 @@ export default function App() {
         const done = job.status === "done", failed = job.status === "failed";
         const statusLabel = done ? "调查完成" : failed ? "执行失败" : job.status === "queued" ? "等待接手" : "执行中";
         const stamp = job.updated_at || job.created_at;
-        return <a className="live-job-card" href={"/investigate.html?job=" + encodeURIComponent(job.job_id)} key={job.job_id}>
-          <div className="live-job-top"><span className="case-id">{job.job_id.slice(0, 13).toUpperCase()}</span><span className={"job-status " + (done ? "is-done" : failed ? "is-failed" : "is-active")}>{statusLabel}</span></div>
-          <h4>{job.direction}</h4><p>{job.stage_note || job.stage || "等待状态更新"}</p>
-          <div className="live-job-bottom"><span>{job.stage || "queued"}</span><span>{stamp ? new Date(stamp).toLocaleString("zh-CN", { hour12: false }) : "时间未记录"}</span></div>
-          {done && <div className="job-result-hint">调查报告已生成 · 打开任务档案 →</div>}
-          {failed && <div className="job-result-hint failed">{job.error || "需要检查执行错误"} · 查看详情 →</div>}
-        </a>;
+        return <div className="live-job-wrap" key={job.job_id}>
+          <a className="live-job-card" href={"/investigate.html?job=" + encodeURIComponent(job.job_id)}>
+            <div className="live-job-top"><span className="case-id">{job.job_id.slice(0, 13).toUpperCase()}</span><span className={"job-status " + (done ? "is-done" : failed ? "is-failed" : "is-active")}>{statusLabel}</span></div>
+            <h4>{job.direction}</h4><p>{job.stage_note || job.stage || "等待状态更新"}</p>
+            <div className="live-job-bottom"><span>{job.stage || "queued"}</span><span>{stamp ? new Date(stamp).toLocaleString("zh-CN", { hour12: false }) : "时间未记录"}</span></div>
+            {done && <div className="job-result-hint">调查报告已生成 · 打开任务档案 →</div>}
+            {failed && <div className="job-result-hint failed">{job.error || "需要检查执行错误"} · 查看详情 →</div>}
+          </a>
+          {done && <a className="continue-job-link" href={"/investigate.html?continue=" + encodeURIComponent(job.job_id)}>＋ 继续调查 · 添加信源与新线索</a>}
+        </div>;
       })}</div> : <div className="ops-empty"><b>当前没有调查任务</b><span>创建新的调查委托后，任务会自动出现在这里，并持续更新状态。</span><a href="/investigate.html">创建第一项调查 →</a></div>}
       <div className="ops-section-head archive-head"><div><span className="eyebrow">ARCHIVED CASE FILES</span><h3>已归档案卷</h3></div><span>{index.length} FILES</span></div>
       <div className="case-grid">
