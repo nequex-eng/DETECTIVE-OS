@@ -26,7 +26,7 @@ The deploy script now runs `scripts/build_site.py` first, then Wrangler deploys 
 Verify:
 - `https://detective-os.pages.dev/` loads the redesigned case center.
 - `https://detective-os.pages.dev/investigate.html` loads the V2 intake form and all 11 result tabs.
-- In a completed existing task, clicking an evidence ID from hypotheses/timeline/coverage/graph jumps to the evidence row; clicking its source ID jumps to the source archive.
+- In a completed existing task, clicking an evidence ID from hypotheses/timeline/coverage/graph automatically switches to the sources tab and jumps to the evidence row; clicking its source ID jumps to the source archive.
 - `GET https://detective-os.pages.dev/api/jobs` returns JSON.
 - Submit an intentionally invalid test body such as `{"direction":"x"}` to `POST /api/investigate`; expect HTTP 400 and verify no new KV job was created. Do not submit a valid test investigation.
 
