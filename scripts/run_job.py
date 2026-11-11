@@ -76,8 +76,13 @@ def main():
     live = job_get(job_id)
     intake = live.get("intake", {}) if isinstance(live, dict) else {}
     material = str(intake.get("materials", "")).strip()
+    parent_id = str(intake.get("parent_job_id", "")).strip()
+    parent_report = ""
+    if parent_id:
+        parent_job = job_get(parent_id)
+        parent_report = str((parent_job.get("result") or {}).get("report_md", "")).strip()
     if not collected_path.exists():
-        if not material:
+        if not material and not parent_report:
             print(f"no collected.json for {job_id}; public-source collection is still required")
             return 1
         # A user can submit source text without URLs and still run the
@@ -95,6 +100,17 @@ def main():
     direction = data.get("direction") or live.get("direction", "")
     # User text is preserved as a separate manual source and later graded H
     # until an independent public source verifies it.
+    if parent_report and not any(s.get("source_id") == "PAR01" for s in sources):
+        sources.append({
+            "source_id": "PAR01", "title": "父任务AI分析报告（仅作上下文）",
+            "publisher": "DETECTIVE OS", "published_at": "",
+            "url": "", "source_type": "ai_report", "is_reprint": False,
+            "reprint_of": "", "origin_url": "", "reliability": "AI-generated inference",
+            "last_verified": "", "notes": "上一轮AI报告，仅供追踪调查方向，不作为事实或证据。"
+        })
+        texts["PAR01"] = parent_report[:30000]
+        paths_tried.append({"path": "user_supplied", "status": "tried",
+                            "note": "上一轮AI报告仅作上下文，不计入证据"})
     if material and not any(s.get("source_id") == "USR01" for s in sources):
         sources.append({
             "source_id": "USR01", "title": "用户提交的补充材料",
