@@ -52,6 +52,123 @@ def save_checkpoint(path, payload):
                     encoding="utf-8")
 
 
+def serialize_plan_tasks(tasks):
+    """Convert InvestigationTask objects into JSON-safe public records."""
+    fields = (
+        "task_id", "case_id", "question", "purpose", "hypotheses",
+        "expected_info", "impact_if_yes", "impact_if_no",
+        "source_or_channel", "estimated_value", "status",
+    )
+    out = []
+    for task in tasks or []:
+        row = {}
+        for name in fields:
+            value = getattr(task, name, None)
+            if isinstance(value, Path):
+                value = str(value)
+            row[name] = value
+        out.append(row)
+    return out
+
+
+def build_timeline_events(evidence):
+    """Build only dates explicitly visible in each verbatim source quote.
+
+    Content summaries and model-suggested event_date values are not used
+    to create timeline dates. A range is preserved as a range.
+    """
+    import re
+    from datetime import date
+
+    def iso(y, m, d):
+        try:
+            return date(int(y), int(m), int(d)).isoformat()
+        except (TypeError, ValueError):
+            return None
+
+    range_re = re.compile(
+        r"(?P<y>\\d{4})年(?P<m>\\d{1,2})月(?P<d1>\\d{1,2})日"
+        r"\\s*(?:至|到|—|－|-|~|～)\\s*"
+        r"(?:(?P<y2>\\d{4})年)?(?:(?P<m2>\\d{1,2})月)?"
+        r"(?P<d2>\\d{1,2})日?")
+    date_re = re.compile(r"(?P<y>\\d{4})年(?P<m>\\d{1,2})月(?P<d>\\d{1,2})日")
+    iso_re = re.compile(r"(?<!\\d)(?P<y>\\d{4})-(?P<m>\\d{2})-(?P<d>\\d{2})(?!\\d)")
+    events = []
+    for item in evidence or []:
+        quote = str(item.get("original_quote", ""))
+        if not quote:
+            continue
+        evidence_id = str(item.get("evidence_id", ""))
+        match = range_re.search(quote)
+        if match:
+            y1, m1, d1 = match.group("y", "m", "d1")
+            y2 = match.group("y2") or y1
+            m2 = match.group("m2") or m1
+            start, end = iso(y1, m1, d1), iso(y2, m2, match.group("d2"))
+            if start and end:
+                events.append({
+                    "event_id": f"EVT-{evidence_id}",
+                    "title": str(item.get("content", "")),
+                    "time": {"kind": "range", "label": f"{start}至{end}",
+                             "earliest": start, "latest": end},
+                    "evidence_ids": [evidence_id],
+                    "source_ids": [item.get("source_id", "")] if item.get("source_id") else [],
+                })
+            continue
+        match = date_re.search(quote)
+        if match:
+            y, m, d = match.group("y", "m", "d")
+        else:
+            match = iso_re.search(quote)
+            if not match:
+                continue
+            y, m, d = match.group("y", "m", "d")
+        value = iso(y, m, d)
+        if value:
+            events.append({
+                "event_id": f"EVT-{evidence_id}",
+                "title": str(item.get("content", "")),
+                "time": {"kind": "date", "label": value,
+                         "earliest": value, "latest": value},
+                "evidence_ids": [evidence_id],
+                "source_ids": [item.get("source_id", "")] if item.get("source_id") else [],
+            })
+    events.sort(key=lambda row: (row["time"]["earliest"], row["event_id"]))
+    return events
+
+
+def build_traceability_graph(sources, evidence):
+    """Create source/evidence nodes and citation edges only for known IDs."""
+    source_ids = {str(source.get("source_id", "")) for source in sources or []}
+    entities = []
+    relationships = []
+    for source in sources or []:
+        sid = str(source.get("source_id", ""))
+        if not sid:
+            continue
+        entities.append({
+            "entity_id": f"SRC-{sid}", "kind": "source",
+            "name": str(source.get("title", sid)),
+            "publisher": str(source.get("publisher", "")),
+        })
+    for item in evidence or []:
+        eid = str(item.get("evidence_id", ""))
+        if not eid:
+            continue
+        entities.append({
+            "entity_id": f"EVD-{eid}", "kind": "evidence",
+            "name": str(item.get("content", "")),
+            "grade": str(item.get("grade", "")),
+        })
+        sid = str(item.get("source_id", ""))
+        if sid and sid in source_ids:
+            relationships.append({
+                "from": f"EVD-{eid}", "to": f"SRC-{sid}",
+                "relation": "cites",
+            })
+    return {"entities": entities, "relationships": relationships}
+
+
 def load_checkpoint(path, collected_mtime):
     """A checkpoint is valid only for the collected.json it was built
     from; a re-collection (new mtime) invalidates all of them."""
