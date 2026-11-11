@@ -133,7 +133,11 @@ async function prepareCaseContinuation(id){
     $("continueBanner").style.display="block";$("continuationFields").style.display="block";
     $("formHeading").textContent="继续调查 · "+(pack.case?.name||id);
     $("direction").value=pack.case?.name||id;$("direction").readOnly=true;
-    $("language").value="zh";$("region").value="南京，中国";
+    $("language").value="zh";$("region").value=({
+      "case-cn-1996-001":"南京，中国",
+      "case-cn-1988-001":"白银，甘肃，中国",
+      "case-no-1970-001":"卑尔根，挪威"
+    })[id]||"";
     $("submitBtn").textContent="提交增量续办委托";
     $("parentSummary").textContent="基线案卷："+pack.case?.case_id+" · v1正式案卷 · "+(pack.sources||[]).length+"个来源 · "+(pack.evidence||[]).filter(e=>["A","B","C","D","E"].includes(e.grade)).length+"条A-E级证据";
     $("formMsg").textContent="本轮只采集新增信源；原始案卷与报告保持不变，完成后生成v2报告。";
