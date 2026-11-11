@@ -16,7 +16,12 @@ sys.path.insert(0, str(ROOT))
 
 from detective_os.cli import run_case
 
-CASES = ["case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"]
+def discover_case_ids():
+    """Discover all registered case packs instead of maintaining a hard-coded allowlist."""
+    return sorted(
+        p.name for p in (ROOT / "cases").iterdir()
+        if p.is_dir() and (p / "case.json").is_file()
+    )
 
 STYLE = ("<style>"
          ":root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#dce5ef;background:#080f19;--bg:#080f19;--panel:#101b29;--panel2:#132235;--line:#23364a;--muted:#8ea0b4;--text:#dce5ef;--gold:#d9ae58;--blue:#79aee8}"
@@ -103,7 +108,7 @@ def case_page(data):
     page = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080f19"><title>DETECTIVE OS — {esc(case['name'])}</title>{STYLE}</head><body><div class="shell">
 <header class="site-header"><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><nav class="nav"><a href="index.html">案件中心</a><a href="workbench.html">研究工作站</a><a href="investigate.html">自动调查</a></nav></header>
-<div class="eyebrow">ARCHIVED CASE FILE / PUBLIC-SOURCE RESEARCH</div>
+<div class="eyebrow">{'DRAFT CASE FILE / REVIEW REQUIRED' if str(case.get('status','')).startswith('draft') else 'CASE FILE / PUBLIC-SOURCE RESEARCH'}</div>
 <h1 class="page-title">{esc(case['name'])}</h1>
 <p class="meta">案件编号：{esc(case['case_id'])}　｜　状态：{esc(case['status'])}</p>
 <p class="note">本页由案包与引擎真实输出生成，非手写结论。只依据公开资料，不代表警方卷宗；推测不包装成事实，不根据网络传言指认现实中的个人为凶手。</p>
@@ -132,7 +137,7 @@ def main():
 
     built = []
     index_rows = []
-    for case_id in CASES:
+    for case_id in discover_case_ids():
         data = build_case_data(case_id)
         case = data["case"]
         case_file = cases_dir / f"{case['case_id']}.json"
@@ -197,7 +202,7 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 <div class="actions"><a class="action" href="investigate.html">＋ CREATE INVESTIGATION</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
 <div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
-<div class="section"><div><div class="eyebrow">ARCHIVED CASE FILES</div><h2>已归档案卷</h2></div><span>{len(index_rows)} CASE FILES</span></div>
+<div class="section"><div><div class="eyebrow">CASE REGISTRY</div><h2>案件档案</h2></div><span>{len(index_rows)} REGISTERED CASES</span></div>
 <div class="archive-grid">{links}</div>
 <div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于真实犯罪概率。证据不足时允许不作结论。</div>
 </div>
