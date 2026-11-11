@@ -300,6 +300,70 @@ def read_parent_checkpoint(parent_run_dir, parent_result):
             parent_likelihoods, parent_categories)
 
 
+def read_static_case_checkpoint(case_id):
+    """Build an immutable v1 baseline from an archived formal case pack.
+
+    Only A-E evidence is carried forward; F/G/H records remain quarantined.
+    Source IDs are preserved, and old evidence IDs are remapped deterministically
+    to the draft pack's sequential IDs.
+    """
+    case_dir = ROOT / "cases" / case_id
+    case = load_json(case_dir / "case.json", {})
+    sources = load_json(case_dir / "sources.json", [])
+    evidence = load_json(case_dir / "evidence.json", [])
+    coverage = load_json(case_dir / "coverage.json", {})
+    report = load_json(ROOT / "reports" / f"{case.get('case_id', '')}-report.json", {})
+    if not case or not sources or not evidence or not report:
+        raise RuntimeError("正式案卷基线文件不完整，无法启动增量续办")
+
+    eligible = [item for item in evidence
+                if str(item.get("grade", "")).upper() in ("A", "B", "C", "D", "E")
+                and item.get("content") and item.get("original_quote")
+                and item.get("source_id")]
+    candidates = []
+    id_map = {}
+    for index, item in enumerate(eligible, 1):
+        new_id = f"F{index:02d}"
+        id_map[str(item.get("evidence_id", ""))] = new_id
+        candidates.append({
+            "content": item.get("content", ""),
+            "quote": item.get("original_quote", ""),
+            "source_location": item.get("source_location", ""),
+            "evidence_type": item.get("evidence_type", "fact"),
+            "event_date": item.get("event_date", ""),
+            "category": "",
+            "source_id": item.get("source_id", "")
+        })
+
+    likelihoods = {}
+    for hypothesis in case.get("hypotheses", []):
+        hid = str(hypothesis.get("hypothesis_id", ""))
+        for old_id, value in (hypothesis.get("likelihoods") or {}).items():
+            if str(old_id) in id_map:
+                likelihoods[f"{hid}|{id_map[str(old_id)]}"] = value
+
+    categories = {}
+    for item in coverage.get("items", []):
+        category_id = item.get("item_id")
+        for old_id in item.get("evidence_ids", []):
+            new_id = id_map.get(str(old_id))
+            if new_id:
+                categories.setdefault(new_id, []).append(category_id)
+
+    paths = []
+    for item in coverage.get("items", []):
+        for path in item.get("paths_tried", []):
+            if path not in paths:
+                paths.append(path)
+    parent_collected = {"paths_tried": paths}
+    report["case_id"] = case.get("case_id")
+    report["case_name"] = case.get("name")
+    report["verdict"] = (report.get("bayesian") or {}).get("verdict", "未记录")
+    if not candidates:
+        raise RuntimeError("正式案卷中没有可用于增量续办的A-E级证据")
+    return (parent_collected, sources, {}, candidates, likelihoods, categories, report, case)
+
+
 def main():
     if len(sys.argv) < 2:
         print("usage: run_job.py <job_id>")
@@ -333,19 +397,32 @@ def main():
     root_job_id = job_id
     version = 1
     if parent_id:
-        parent = job_get(parent_id)
-        if parent.get("status") != "done" or not parent.get("result"):
-            raise RuntimeError("原调查任务不存在或未完成，不能继续调查")
-        parent_result = parent["result"]
-        if not isinstance(parent_result, dict):
-            raise RuntimeError("原调查结果格式异常，不能继续调查")
-        parent_run_dir = ROOT / "runs" / parent_id
-        (parent_collected, parent_sources, parent_texts, parent_candidates,
-         parent_likelihoods, parent_categories) = read_parent_checkpoint(
-            parent_run_dir, parent_result)
+        if str(parent_id).startswith("case-pack:"):
+            baseline_case_id = intake.get("baseline_case_id")
+            if not baseline_case_id:
+                raise RuntimeError("静态案卷续办任务缺少baseline_case_id")
+            (parent_collected, parent_sources, parent_texts, parent_candidates,
+             parent_likelihoods, parent_categories, parent_result, baseline_case) = (
+                read_static_case_checkpoint(baseline_case_id))
+            parent = {"status": "done", "root_job_id": parent_id, "version": 1}
+            parent_result["root_job_id"] = live.get("root_job_id") or parent_id
+            parent_result["version"] = 1
+            parent_result["case_name"] = baseline_case.get("name")
+            parent_result["draft_pack_path"] = ""
+        else:
+            parent = job_get(parent_id)
+            if parent.get("status") != "done" or not parent.get("result"):
+                raise RuntimeError("原调查任务不存在或未完成，不能继续调查")
+            parent_result = parent["result"]
+            if not isinstance(parent_result, dict):
+                raise RuntimeError("原调查结果格式异常，不能继续调查")
+            parent_run_dir = ROOT / "runs" / parent_id
+            (parent_collected, parent_sources, parent_texts, parent_candidates,
+             parent_likelihoods, parent_categories) = read_parent_checkpoint(
+                parent_run_dir, parent_result)
         parent_paths = parent_collected.get("paths_tried", [])
         previous_verdict = parent_result.get("verdict")
-        root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or parent_id
+        root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or live.get("root_job_id") or parent_id
         version = int(live.get("version") or (int(parent_result.get("version") or parent.get("version") or 1) + 1))
 
     new_sources = data.get("sources", [])
