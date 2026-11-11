@@ -67,6 +67,35 @@ def main():
         if marker not in source:
             raise SystemExit(f"Missing V1 investigation behavior: {marker}")
 
+    # T3 React/TypeScript workbench contract: ten real data views, not inert labels.
+    app_source = (ROOT / "src" / "App.tsx").read_text(encoding="utf-8")
+    required_views = (
+        '"cases"', '"sources"', '"evidence"', '"timeline"', '"graph"',
+        '"contradictions"', '"hypotheses"', '"plan"', '"review"', '"report"',
+    )
+    for view in required_views:
+        if view not in app_source:
+            raise SystemExit(f"Missing workbench navigation view: {view}")
+    required_data_flows = (
+        'fetch("/data/cases/index.json")',
+        'fetch("/data/cases/" + encodeURIComponent(activeCaseId) + ".json")',
+        'function openEvidence',
+        'function openSource',
+        'function CaseCenter',
+        'function SourcesPage',
+        'function EvidencePage',
+        'function TimelinePage',
+        'function GraphPage',
+        'function ContradictionsPage',
+        'function HypothesesPage',
+        'function PlanPage',
+        'function ReviewPage',
+        'function ReportPage',
+    )
+    for marker in required_data_flows:
+        if marker not in app_source:
+            raise SystemExit(f"Missing workbench data flow: {marker}")
+
     with tempfile.TemporaryDirectory() as td:
         for index, code in enumerate(parser.parts):
             target = Path(td) / f"inline-{index}.js"
