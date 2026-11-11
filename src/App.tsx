@@ -302,8 +302,8 @@ export default function App() {
       if (edge.from_id === selectedEntityId) neighborhoodIds.add(edge.to_id);
       if (edge.to_id === selectedEntityId) neighborhoodIds.add(edge.from_id);
     });
-    const visible = neighborMode && selectedEntityId
-      ? baseVisible.filter((x) => neighborhoodIds.has(x.entity_id)) : baseVisible;
+    const visible = (neighborMode && selectedEntityId
+      ? baseVisible.filter((x) => neighborhoodIds.has(x.entity_id)) : baseVisible).slice(0, 180);
     const ids = new Set(visible.map((x) => x.entity_id));
     const edges = relationships.filter((x) => ids.has(x.from_id) && ids.has(x.to_id) &&
       (relationFilter === "ALL" || String(x.relation || "未分类") === relationFilter) &&
