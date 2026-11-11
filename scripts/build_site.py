@@ -10,9 +10,12 @@ import json
 import shutil
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+import sys
+sys.path.insert(0, str(ROOT))
+
 from detective_os.cli import run_case
 
-ROOT = Path(__file__).resolve().parent.parent
 CASES = ["case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"]
 
 STYLE = ("<style>body{background:#0d1117;color:#d7dee8;font-family:system-ui,sans-serif;"
