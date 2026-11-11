@@ -53,7 +53,7 @@ class TestWorkbenchBuild(unittest.TestCase):
         index = (PUBLIC / "index.html").read_text(encoding="utf-8")
         self.assertIn("张俊杰（草稿任务记录）", index)
         self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
-        self.assertIn("尚未恢复为完整结构化案包", index)
+        self.assertIn("不能伪装成正式案卷或归档", index)
 
     def test_isdal_workbench_payload_contains_six_sources_and_sixteen_evidence(self):
         payload = json.loads((DATA / "CASE-NO-1970-001.json").read_text(encoding="utf-8"))
