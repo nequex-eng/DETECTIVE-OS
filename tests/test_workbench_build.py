@@ -49,13 +49,15 @@ class TestWorkbenchBuild(unittest.TestCase):
                 self.assertIn(edge["to_id"], {e["entity_id"] for e in payload["entities"]})
             self.assertTrue((PUBLIC / payload["reportUrl"].lstrip("/")).exists())
 
-    def test_recovered_task_drafts_are_discoverable_without_faking_case_packs(self):
+    def test_completed_investigations_are_auto_archived_without_review_queue(self):
         index = (PUBLIC / "index.html").read_text(encoding="utf-8")
-        self.assertIn("张俊杰（草稿任务记录）", index)
-        self.assertIn('href="draft-9d0c95d6.html"', index)
-        self.assertIn('href="draft-6c31bb54.html"', index)
+        self.assertIn("已完成调查 · 自动归档", index)
+        self.assertIn("COMPLETE · 自动归档", index)
+        self.assertNotIn("待调查 · 草稿案卷", index)
+        self.assertNotIn("调查完成 · 等待复核", index)
+        self.assertIn("张俊杰（已完成任务）", index)
         self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
-        self.assertIn("不能伪装成正式案卷或归档", index)
+        self.assertIn("结构化案卷完整度：未完成", index)
 
     def test_isdal_workbench_payload_contains_six_sources_and_sixteen_evidence(self):
         payload = json.loads((DATA / "CASE-NO-1970-001.json").read_text(encoding="utf-8"))
