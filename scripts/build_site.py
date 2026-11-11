@@ -108,9 +108,9 @@ def case_page(data):
     page = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080f19"><title>DETECTIVE OS — {esc(case['name'])}</title>{STYLE}</head><body><div class="shell">
 <header class="site-header"><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><nav class="nav"><a href="index.html">案件中心</a><a href="workbench.html">研究工作站</a><a href="investigate.html">自动调查</a></nav></header>
-<div class="eyebrow">{'DRAFT CASE FILE / REVIEW REQUIRED' if str(case.get('status','')).startswith('draft') else 'CASE FILE / PUBLIC-SOURCE RESEARCH'}</div>
+<div class="eyebrow">CASE FILE / COMPLETE · AUTO-ARCHIVED</div>
 <h1 class="page-title">{esc(case['name'])}</h1>
-<p class="meta">案件编号：{esc(case['case_id'])}　｜　状态：{esc(case['status'])}</p>
+<p class="meta">案件编号：{esc(case['case_id'])}　｜　案件状态：{esc(case['status'])}　｜　调查任务：COMPLETE · 自动归档</p>
 <p class="note">本页由案包与引擎真实输出生成，非手写结论。只依据公开资料，不代表警方卷宗；推测不包装成事实，不根据网络传言指认现实中的个人为凶手。</p>
 <section class="panel followup"><div><div class="eyebrow">CONTINUE CASEWORK / 增量续办</div><h2>继续调查这个案件</h2><p>提交新的来源链接、上传TXT/MD/CSV/JSON资料、粘贴原文、补充线索并提出核查问题。系统以当前正式案卷为v1基线，只抽取新增来源，生成独立的v2报告，不覆盖原始案卷。</p></div><a class="action primary" href="investigate.html?case={case['case_id'].lower().replace('case-', 'case-')}">＋ 继续调查 · 上传资料与线索 →</a></section>
 <h2>假设排序（贝叶斯，结论：{esc(report['bayesian'].get('verdict', '尚未生成'))}）</h2>
@@ -165,41 +165,31 @@ def main():
     (cases_dir / "index.json").write_text(
         json.dumps(index_rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    def lifecycle(row):
-        if str(row.get("status", "")).startswith("draft"):
-            return "draft"
-        if row.get("review_passed") and row.get("evidence_count", 0) and row.get("source_count", 0):
-            return "archived"
-        return "review"
-
     def render_case_rows(rows):
         if not rows:
-            return '<div class="empty">当前分类暂无案件。</div>'
+            return '<div class="empty">当前暂无已完成并归档的案卷。</div>'
         cards = []
         for row in rows:
             href = row.get("slug", row["case_id"].lower()) + ".html"
-            stage = {"draft": "草稿 · 待调查", "review": "调查资料已生成 · 待复核", "archived": "阶段归档 · 可继续增量调查"}[lifecycle(row)]
             cards.append(
                 f'<a class="archive-card" href="{esc(href)}">'
-                f'<small>{esc(row["case_id"])} · {stage}</small>'
+                f'<small>{esc(row["case_id"])} · COMPLETE · 自动归档</small>'
                 f'<b>{esc(row["name"])}</b>'
-                f'<span>来源 {row["source_count"]} · 证据 {row["evidence_count"]} · '
-                f'复核{"通过" if row["review_passed"] else "未通过/未完成"}</span>'
-                f'<em>引擎输出：{esc(row["verdict"])}</em></a>'
+                f'<span>来源 {row["source_count"]} · 证据 {row["evidence_count"]}</span>'
+                f'<em>案件状态：{esc(row["status"])}<br>引擎输出：{esc(row["verdict"])}</em></a>'
             )
         return "".join(cards)
 
-    drafts = [x for x in index_rows if lifecycle(x) == "draft"]
-    review_queue = [x for x in index_rows if lifecycle(x) == "review"]
-    archived = [x for x in index_rows if lifecycle(x) == "archived"]
+    # A generated report marks this investigation stage complete. Archive automatically;
+    # whether the underlying case is solved is a separate field and never gates archival.
+    archived = list(index_rows)
     task_drafts = read_json(ROOT / "cases" / "task-registry.json")
-    task_draft_cards = "".join(
+    task_archive_cards = "".join(
         f'<a class="archive-card" href="investigate.html?job={esc(task["job_id"])}">'
-        f'<small>{esc(task["case_id"])} · 自动调查任务草稿 · 待人工复核</small>'
+        f'<small>{esc(task["case_id"])} · COMPLETE · 任务自动归档</small>'
         f'<b>{esc(task["name"])}</b>'
-        f'<span>来源记录 {task["source_count"]} · 抽取事实 {task["fact_count"]} · '
-        f'复核阻断项 {task["review_blockers"]} · 覆盖率 {task["coverage_pct"]}%</span>'
-        f'<em>{esc(task["limitations"])}　打开原始任务报告 →</em></a>'
+        f'<span>来源记录 {task["source_count"]} · 抽取事实 {task["fact_count"]}</span>'
+        f'<em>任务执行已完成；结构化案卷完整度：未完成。{esc(task["limitations"])}　打开任务报告 →</em></a>'
         for task in task_drafts
     )
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
@@ -235,15 +225,9 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 <div class="actions"><a class="action" href="investigate.html">＋ CREATE INVESTIGATION</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
 <div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
-<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 01</div><h2>待调查 · 草稿案卷</h2></div><span>{len(drafts)} DRAFTS</span></div>
-<div class="archive-grid">{render_case_rows(drafts)}</div>
-<div class="section"><div><div class="eyebrow">TASK RECORDS / RECOVERED</div><h2>已完成任务 · 尚未形成完整案卷</h2></div><span>{len(task_drafts)} TASK DRAFTS</span></div>
-<div class="archive-grid">{task_draft_cards or '<div class="empty">暂无待恢复的调查任务记录。</div>'}</div>
-<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 02</div><h2>调查完成 · 等待复核</h2></div><span>{len(review_queue)} IN REVIEW</span></div>
-<div class="archive-grid">{render_case_rows(review_queue)}</div>
-<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 03</div><h2>阶段归档 · 可追溯案卷</h2></div><span>{len(archived)} ARCHIVED</span></div>
-<div class="archive-grid">{render_case_rows(archived)}</div>
-<p class="note">归档表示本阶段资料、报告和复核已满足归档条件，不代表案件已经侦破。未破案件也可以形成阶段归档；新增资料通过“继续调查”建立新版本，不覆盖旧案卷。</p>
+<div class="section"><div><div class="eyebrow">COMPLETED INVESTIGATIONS / AUTO ARCHIVE</div><h2>已完成调查 · 自动归档</h2></div><span>{len(archived) + len(task_drafts)} COMPLETE</span></div>
+<div class="archive-grid">{render_case_rows(archived)}{task_archive_cards}</div>
+<p class="note">任务显示 COMPLETE 即自动归档，不设置人工复核队列。归档只表示本阶段调查任务已结束，不代表案件已经侦破。案件仍可保持未破、身份未明或其他真实状态；继续调查会建立新版本，不覆盖原始记录。部分旧任务可能只有报告记录，未必已恢复成完整结构化案卷。</p>
 <div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于真实犯罪概率。证据不足时允许不作结论。</div>
 </div>
 <script>
