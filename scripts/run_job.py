@@ -373,7 +373,8 @@ def main():
             "paths_tried": paths_tried,
             "continuation": {
                 "parent_job_id": parent_id,
-                "merged_previous_sources": bool(merge_base.get("source_texts")),\n                "recovered_parent_collection": bool(parent_collection),
+                "merged_previous_sources": bool(merge_base.get("source_texts")),
+                "recovered_parent_collection": bool(parent_collection),
                 "parent_report_used_as_context": bool(parent_result.get("report_md")),
                 "user_materials_are_unverified": bool(intake.get("materials") or intake.get("known_facts"))
             },
