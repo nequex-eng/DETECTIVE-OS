@@ -13,7 +13,7 @@ draft pack -> engine + coverage -> draft report -> result.json ->
 job status done (or failed). Usage:
   python3 scripts/run_job.py <job_id>
 
-It never touches the two real case packs. Evidence is capped at C.
+It never modifies archived case packs. Newly extracted evidence is capped at C; eligible baseline evidence retains its original A-E grade.
 """
 import json
 import subprocess
