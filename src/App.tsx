@@ -313,7 +313,38 @@ export default function App() {
     const ordered = [...visible].sort((x,y)=>(degree.get(y.entity_id)||0)-(degree.get(x.entity_id)||0));
     const W=1200,H=820,cx=600,cy=410;
     const pos = new Map<string,{x:number;y:number}>();
-    ordered.forEach((x,i) => { const ring=Math.floor(i/10)+1, n=Math.min(10,ordered.length-(ring-1)*10), angle=(i%10)/Math.max(1,n)*Math.PI*2-1.57+ring*.12, radius=90+ring*115; pos.set(x.entity_id,{x:cx+Math.cos(angle)*radius,y:cy+Math.sin(angle)*radius}); });
+    const nodes = ordered.slice(0, 180);
+    const coords = nodes.map((node,i) => {
+      const angle = i / Math.max(1,nodes.length) * Math.PI * 2;
+      const radius = Math.min(330, 95 + Math.sqrt(nodes.length) * 23);
+      return {x:cx + Math.cos(angle) * radius, y:cy + Math.sin(angle) * radius, vx:0, vy:0};
+    });
+    const nodeIndex = new Map(nodes.map((node,i)=>[node.entity_id,i]));
+    const springs = edges.flatMap(edge => {
+      const a=nodeIndex.get(edge.from_id), b=nodeIndex.get(edge.to_id);
+      return a===undefined || b===undefined ? [] : [{a,b}];
+    });
+    // Deterministic force-directed layout: repulsion separates entities; recorded links pull neighbors together.
+    for (let iteration=0; iteration<90 && nodes.length>1; iteration++) {
+      const forces = coords.map(()=>({x:0,y:0}));
+      for(let i=0;i<coords.length;i++) for(let j=i+1;j<coords.length;j++) {
+        const dx=coords[i].x-coords[j].x, dy=coords[i].y-coords[j].y;
+        const d2=Math.max(100,dx*dx+dy*dy), d=Math.sqrt(d2), force=1800/d2;
+        const fx=dx/d*force, fy=dy/d*force;
+        forces[i].x+=fx; forces[i].y+=fy; forces[j].x-=fx; forces[j].y-=fy;
+      }
+      springs.forEach(({a,b})=>{
+        const dx=coords[b].x-coords[a].x, dy=coords[b].y-coords[a].y, d=Math.max(1,Math.hypot(dx,dy));
+        const force=(d-165)*0.0018, fx=dx/d*force, fy=dy/d*force;
+        forces[a].x+=fx; forces[a].y+=fy; forces[b].x-=fx; forces[b].y-=fy;
+      });
+      coords.forEach((p,i)=>{
+        forces[i].x+=(cx-p.x)*0.0009; forces[i].y+=(cy-p.y)*0.0009;
+        p.vx=(p.vx+forces[i].x)*0.82; p.vy=(p.vy+forces[i].y)*0.82;
+        p.x=Math.max(55,Math.min(W-55,p.x+p.vx)); p.y=Math.max(55,Math.min(H-55,p.y+p.vy));
+      });
+    }
+    nodes.forEach((node,i)=>pos.set(node.entity_id,{x:coords[i].x,y:coords[i].y}));
     const linked = selectedEntity ? relationships.filter((x)=>x.from_id===selectedEntityId||x.to_id===selectedEntityId) : [];
     return <>
       <SectionHeading eyebrow="INTELLIGENCE LINK ANALYSIS / 05" title="关系图谱" description="实体网络、关系溯源与实体档案。只显示案包中有记录的关系；推断、争议和待核实关系使用独立样式。" />
