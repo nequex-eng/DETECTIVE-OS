@@ -2,7 +2,7 @@ name: DETECTIVE OS CI
 
 on:
   push:
-    branches: [main, t2-isdal-woman-casepack]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -24,7 +24,7 @@ jobs:
       - name: Validate Isdal Woman case pack
         run: python3 -m detective_os.cli check cases/case-no-1970-001
       - name: Run Isdal Woman engine and generate report
-        run: python3 -m detective_os.cli run cases/case-no-1970-001 --out reports --db :memory:
+        run: 'python3 -m detective_os.cli run cases/case-no-1970-001 --out reports --db :memory:'
       - name: Build static case center and case pages
         run: python3 scripts/build_site.py
       - name: Upload T2 generated report and page
