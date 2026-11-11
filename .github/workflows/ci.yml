@@ -19,6 +19,12 @@ jobs:
           node-version: "22"
       - name: Check investigation workspace JavaScript and panes
         run: python3 scripts/check_frontend.py
+      - name: Install React workbench dependencies
+        run: npm install --no-audit --no-fund
+      - name: Typecheck React workbench
+        run: npm run typecheck
+      - name: Build React workbench
+        run: npm run build
       - name: Compile Python entry points
         run: python3 -m py_compile deploy.py scripts/build_site.py scripts/job.py scripts/run_job.py
       - name: Validate Isdal Woman case pack
@@ -27,14 +33,19 @@ jobs:
         run: 'python3 -m detective_os.cli run cases/case-no-1970-001 --out reports --db :memory:'
       - name: Build static case center and case pages
         run: python3 scripts/build_site.py
-      - name: Upload T2 generated report and page
+      - name: Upload workbench, case data, and reports
         uses: actions/upload-artifact@v4
         with:
-          name: t2-isdal-woman-report
+          name: detective-os-workbench-build
           path: |
             reports/CASE-NO-1970-001-report.md
             reports/CASE-NO-1970-001-report.json
             public/case-no-1970-001.html
+            public/workbench.html
+            public/workbench-assets/
+            public/data/cases/
+            public/data/reports/
+            public/index.html
       - name: Run unit and acceptance tests
         run: python3 -m unittest discover -s tests -v
       - name: Validate first case pack
