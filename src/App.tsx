@@ -314,7 +314,7 @@ export default function App() {
     const W=1200,H=820,cx=600,cy=410;
     const pos = new Map<string,{x:number;y:number}>();
     const nodes = ordered.slice(0, 180);
-    const coords = nodes.map((node,i) => {
+    const coords = nodes.map((_,i) => {
       const angle = i / Math.max(1,nodes.length) * Math.PI * 2;
       const radius = Math.min(330, 95 + Math.sqrt(nodes.length) * 23);
       return {x:cx + Math.cos(angle) * radius, y:cy + Math.sin(angle) * radius, vx:0, vy:0};
