@@ -363,7 +363,9 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
         if not cats and c.get("category"):
             cats = [c["category"]]
         source = source_by_id.get(c["source_id"], {})
-        user_supplied = source.get("source_type") == "manual"
+        source_type = source.get("source_type")
+        user_supplied = source_type == "manual"
+        ai_generated = source_type == "ai_report"
         evidence.append({
             "evidence_id": eid, "content": c["content"],
             "evidence_type": c.get("evidence_type", "fact"),
@@ -371,14 +373,19 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "source_location": c.get("source_location", ""),
             "publication_date": "",
             "event_date": c.get("event_date", ""),
-            "grade": "H" if user_supplied else "C",
+            "grade": "G" if ai_generated else "H" if user_supplied else "C",
             "reliability_assessment": (
+                "G级：引用来自上一轮AI生成报告，仅作调查上下文，不是独立证据。"
+                if ai_generated else
                 "H级：用户提供材料，引用仅与提交文本匹配，尚未找到独立来源核验。"
                 if user_supplied else
                 "草稿：LLM从公开报道抽取，逐字引用已核验，待人工复核定级。"),
-            "verification_status": "unverified" if user_supplied else "single-source",
+            "verification_status": "ai-inference" if ai_generated else
+                                  "unverified" if user_supplied else "single-source",
             "supports": [], "contradicts": [],
             "analyst_notes": (
+                "AI-REPORT: prior generated analysis; context only, weight zero."
+                if ai_generated else
                 "USER-SUPPLIED: unverified; not countable evidence."
                 if user_supplied else "DRAFT: auto-extracted, unreviewed."),
             "_categories": list(cats or []),
