@@ -26,9 +26,9 @@
 
 **V0. 跑完端到端测试并收尾（2026-11-11已完成）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。实测结果：9个来源（3中文加6英文/维基）、63条事实全C级、似然315对、覆盖映射18条；结论H3陌生人加技能领先52.45%（H1 25.66%、H4 13.56%、H2 8.17%、H5 0.16%，前两名差0.2679），覆盖率31.8%（4项已覆盖/6项单来源/12项缺失，共22项），独立审查6个blocker；报告带草稿横幅，`reports/CASE-DRAFT-c23978f6-report.md`，前端`investigate.html`可见done。注意：草稿的H3（陌生人加技能）与手工白银案包的H1（单人连环、本地、尾随陌生女性）指向一致，都是陌生人加技能方向；手工包H1 69.17%是另一套假设定义下的数，两者不可直接比大小。收尾余项（不阻塞T2）：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
 
-**T2. 第三个案件（再选一起未侦破案件）。**目的：检验引擎在没有已知答案时的表现（白银案是有答案的校验，南大案与第三案是无答案的实战）。选案标准：公开资料丰富（≥2独立来源、≥1主流或官方）、有明确的矛盾点、不得涉及未成年人隐私细节。做法：照抄案件1的建包流程（先实读来源、再分级证据、再写矛盾与假设）；每条事实都要有证据编号、原文引用、来源位置、可信度理由。验收：`check`通过、测试新增该案的回归测试、报告生成、结论为无法判断时不得强行选定。
+**T2. 第三个案件（暂停，等待前台工作站升级完成）。**用户明确要求暂不启动新案。恢复时再选择公开资料丰富（≥2独立来源、≥1主流或官方）、有明确矛盾点且不涉及未成年人隐私细节的未侦破案件。验收标准不变：逐条实读来源、证据分级、原文引用、来源位置、矛盾与竞争假设；`check`通过、回归测试通过、报告生成；无法判断时不得强行选定。
 
-**T3. 前端工作站（React加TypeScript）。**10个导航页：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。风格：专业深色研究工作站；每个结论可点击回溯到证据与来源。数据来源：引擎报告JSON，不得手写假数据、不得做没有实际功能的模块名。
+**T3. 前端工作站（执行顺序提前；V2 Intake已完成首轮，完整工作站继续开发）。**当前先完成用户委托输入、自动任务创建、进度与结果工作区，再扩展10个导航页：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。风格：专业深色研究工作站；每个结论可点击回溯到证据与来源。数据来源：引擎真实输出JSON，不得手写假数据、不得做没有实际功能的模块名。
 
 **T4. Workers API + D1 + R2。**Workers API提供案件包的读写接口；D1用本地SQLite的14张表结构（已按D1兼容子集设计）；R2存附件。绑定必须写进`wrangler.toml`（部署会重写后台单独改的绑定），部署完再GET项目核验绑定还在。验收：API返回的数据与本地报告一致；前端可切换线上线下数据源。
 
@@ -125,11 +125,17 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 - 南大案CASE-CN-1996-001：覆盖率65.9%（10项已覆盖/9项单来源/3项缺失，共22项）。缺失：C03案发时间窗口、C10物证清单与保存现状、C11 DNA/指纹比对现状。
 - 白银案CASE-CN-1988-001：覆盖率52.4%（7项已覆盖/8项单来源/6项缺失，共21项，C16抛尸方式不适用已排除）。缺失：C05发现过程、C07身份确认过程、C17动机指向、C18诉讼进展、C20家属说法、C22同期原始报道（只有H级待核实材料，不计入覆盖）。
 
-## 自动调查模式V1（2026-11-11，端到端测试中）
+## 自动调查模式V2（2026-11-11，前台委托与结果工作区升级中）
 
-用户在前端输入一个调查方向（案件名或一句话）即开始自动跑。链路：`public/investigate.html`表单（方向、语言、地区、提示）→POST `/api/investigate`（`functions/api/investigate.js`，校验后写KV，键`job:<uuid>`，状态queued）→定时跑手`detective-os-job-watch`每10分钟轮询→`scripts/job.py poll/get/update`→`scripts/run_job.py <job_id>`跑抽取、似然、映射、草稿包、引擎、报告→结果写回KV→前端每5秒GET `/api/jobs?id=`轮询展示。读接口`functions/api/jobs.js`只读、无写入口，公网改不了任务状态。任务文档字段：job_id、direction、language、region、hints、status（queued/collecting/extracting/reasoning/done/failed）、stage、stage_note、events、result、error、created_at、updated_at。前端：https://detective-os.pages.dev/investigate.html。
+用户不再只能提交一句案件名。新版`public/investigate.html`为响应式深色调查工作站，输入包括：案件方向、地区、主要语言、调查时间范围、调查目标、已知背景、待回答问题、指定来源URL、粘贴材料、排除范围和其他说明；支持TXT/Markdown本地文本导入。用户可从最近任务恢复查看、实时轮询进度，并在完成后查看结论、假设比较、来源与证据、覆盖清单、独立审查、完整报告和运行日志；可创建关联父任务的补充调查。
 
-机械部分在代码里，判断部分留给跑手与引擎规则：`detective_os/pipeline.py`（`plan_queries`生成查询清单；`extract_candidates`走MiniMax抽事实，每条引文逐字核验；`propose_likelihoods`按5类假设模板拟合P(证据|假设)，分批每批10条；`map_categories`把证据对应到覆盖清单条目，分批每批15条；`build_draft_pack`用统一先验0.2、似然夹到[0.2,0.8]、证据全C级；`run_draft`跑引擎加覆盖率并在报告前加草稿横幅）；`detective_os/llm.py`（MiniMax-M3，见下文凭证一节）。断点续跑：`runs/<job_id>/`下`candidates.json`、`likelihoods.json`、`categories.json`三份检查点，以`collected.json`的mtime校验（重新收集即失效）；重跑`run_job.py`会自动续跑，任务若在failed态先用`job.py update`复位到collecting。
+链路：前端表单→POST `/api/investigate`→结构化`intake`写入KV任务，同时将结构化委托镜像进旧字段`hints`，兼容现有每10分钟跑手`detective-os-job-watch`的V1读取方式→跑手读取任务完整内容，优先处理指定来源URL和调查问题、收集公开来源并写`runs/<job_id>/collected.json`→`scripts/run_job.py <job_id>`完成抽取、似然、覆盖映射、草稿包、引擎、报告→结构化结果写回KV→前端每5秒轮询。任务API的读接口`functions/api/jobs.js`只读、无写入口，公网不能伪造任务状态。
+
+V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`、`exclusions`、`source_urls`、`materials`、`parent_job_id`。用户粘贴材料会由`run_job.py`单独登记为`USR01`手动来源；`pipeline.build_draft_pack`将其标为H级待核实、权重0，不会因引文与用户粘贴文本匹配就升级成C级证据。公开报道抽取仍最高C级。结果JSON增加来源数、事实数、来源档案、证据明细、覆盖清单和独立审查发现，供前端工作区直接展示。
+
+**自动执行验收注意：**Pages端已创建完整委托并入KV队列；真正的资料搜索仍由外部定时跑手执行，而非Pages静态页面自己搜索。API将结构化委托镜像到`hints`以兼容旧跑手；正式宣称端到端闭环前，仍须检查`detective-os-job-watch`正文是否读取并执行`[STRUCTURED USER INTAKE V2]`中的指定URL、时间范围、问题与排除条件，并用一次无新案件的模拟任务验收。前端：https://detective-os.pages.dev/investigate.html。
+
+机械部分在代码里，判断部分留给跑手与引擎规则：`detective_os/pipeline.py`（`plan_queries`生成查询清单；`extract_candidates`走MiniMax抽事实并逐字核验引文；`propose_likelihoods`按5类假设模板拟合似然，分批每批10条；`map_categories`映射覆盖清单，分批每批15条；`build_draft_pack`使用统一先验0.2、似然夹到[0.2,0.8]；公开报道抽取最高C级，用户供料H级且权重为0；`run_draft`执行引擎、覆盖率和草稿报告）。断点续跑：`runs/<job_id>/`下`candidates.json`、`likelihoods.json`、`categories.json`三份检查点，以`collected.json`的mtime校验；重跑`run_job.py`自动续跑。
 
 ### 凭证：位置与取用方式（值不在仓库里，绝不许写进来）
 
@@ -152,7 +158,7 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，19项，全部通过（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。合计50项全过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，19项，全部通过（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。此前基线合计50项全过；V2新增用户供料H级回归测试1项，尚待CI实际运行后确认：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
@@ -170,7 +176,7 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 ## 未完成事项
 
 - V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
-- 前端工作站（React加TypeScript，10个导航页）未做
+- 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、部署与真实用户端验收仍未完成。
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）
