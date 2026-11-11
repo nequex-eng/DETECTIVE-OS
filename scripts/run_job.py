@@ -240,20 +240,28 @@ def main():
     new_sources = data.get("sources", [])
     new_texts = data.get("texts", {})
     if parent_id:
-        sources, texts, new_source_ids, remap = merge_followup_sources(
-            parent_sources, parent_texts, new_sources, new_texts)
-        if not new_source_ids:
-            raise RuntimeError(
-                "本轮没有新增的独立来源。请跑手继续搜索并打开新来源；"
-                "重复转载或仅有用户粘贴文本不能作为新增证据。")
-        paths_tried = list(parent_paths) + list(data.get("paths_tried", []))
-        data = {
-            "direction": direction, "sources": sources, "texts": texts,
-            "paths_tried": paths_tried, "parent_job_id": parent_id,
-            "new_source_ids": new_source_ids, "source_id_remap": remap
-        }
-        collected_path.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        if data.get("parent_job_id") == parent_id and data.get("new_source_ids"):
+            # A previous attempt already wrote the merged corpus. Reuse its
+            # stable IDs and checkpoints instead of merging it a second time.
+            sources = data.get("sources", [])
+            texts = data.get("texts", {})
+            new_source_ids = data.get("new_source_ids", [])
+            paths_tried = data.get("paths_tried", [])
+        else:
+            sources, texts, new_source_ids, remap = merge_followup_sources(
+                parent_sources, parent_texts, new_sources, new_texts)
+            if not new_source_ids:
+                raise RuntimeError(
+                    "本轮没有新增的独立来源。请跑手继续搜索并打开新来源；"
+                    "重复转载或仅有用户粘贴文本不能作为新增证据。")
+            paths_tried = list(parent_paths) + list(data.get("paths_tried", []))
+            data = {
+                "direction": direction, "sources": sources, "texts": texts,
+                "paths_tried": paths_tried, "parent_job_id": parent_id,
+                "new_source_ids": new_source_ids, "source_id_remap": remap
+            }
+            collected_path.write_text(
+                json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         case_id = parent_result.get("case_id") or f"CASE-DRAFT-{root_job_id[:8]}"
         case_name = parent_result.get("case_name") or direction + "（草稿）"
     else:
