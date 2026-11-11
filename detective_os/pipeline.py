@@ -346,8 +346,9 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
       clamped to [0.2, 0.8]; anything unmapped stays 0.5.
     - categories: {evidence_id: [item_id, ...]} from map_categories;
       falls back to the extractor's single category tag.
-    - Every evidence item is grade C, or H when its quote could not be
-      tied to a dated, sourced statement. Never A/B.
+    - Public-report extracts are capped at grade C; user-supplied manual
+      sources remain grade H until independently verified. No automated path
+      assigns A/B.
     """
     likelihoods = likelihoods or {}
     categories = categories or {}
