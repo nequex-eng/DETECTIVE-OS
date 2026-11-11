@@ -345,7 +345,7 @@ def main():
         parent_paths = parent_collected.get("paths_tried", [])
         previous_verdict = parent_result.get("verdict")
         root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or parent_id
-        version = int(parent_result.get("version") or parent.get("version") or 1) + 1
+        version = int(live.get("version") or (int(parent_result.get("version") or parent.get("version") or 1) + 1))
 
     new_sources = data.get("sources", [])
     new_texts = data.get("texts", {})
