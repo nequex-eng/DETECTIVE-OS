@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CASES = ["case-cn-1996-001", "case-cn-1988-001"]
+CASES = ["case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"]
 
 STYLE = ("<style>body{background:#0d1117;color:#d7dee8;font-family:system-ui,sans-serif;"
          "max-width:900px;margin:0 auto;padding:24px}h1{font-size:22px}h2{font-size:17px;"
