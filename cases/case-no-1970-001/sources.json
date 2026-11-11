@@ -62,5 +62,21 @@
     "reliability": "medium",
     "last_verified": "2026-11-11",
     "notes": "挪威新闻行业媒体采访NRK项目负责人，报道NRK查阅解密的POT文件及与警方协作；只证明资料查阅过程，不证明死者是间谍。"
+  },
+  {
+    "source_id": "S05",
+    "title": "Bergen’s cold case heats up",
+    "publisher": "The Norwegian American",
+    "author": "Lori Ann Reinhall",
+    "published_at": "2019-04-02",
+    "url": "https://www.norwegianamerican.com/bergens-cold-case-isdal-woman/",
+    "source_type": "news",
+    "accessible": true,
+    "is_reprint": false,
+    "reprint_of": "",
+    "origin_url": "",
+    "reliability": "medium",
+    "last_verified": "2026-11-11",
+    "notes": "独立英文报道，综合NRK/BBC与法医研究；适合交叉核对DNA和同位素研究的公开摘要，不作为原始检测报告。"
   }
 ]
