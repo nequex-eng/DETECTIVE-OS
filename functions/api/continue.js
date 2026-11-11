@@ -78,6 +78,7 @@ export async function onRequestPost(context) {
       hints: followupHints,
       version: nextVersion,
       parent_job_id: parentId,
+      root_job_id: rootJobId,
       intake: {
         objective: "在原调查基础上继续跟进，核查新增信源和线索，并更新证据分析。",
         parent_job_id: parentId,
