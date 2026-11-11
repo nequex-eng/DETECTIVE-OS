@@ -42,6 +42,8 @@ li{margin:4px 0}
 <div id="continuationFields" style="display:none">
   <label>新增信源链接（每行一个）</label>
   <textarea id="sourceUrls" rows="3" placeholder="https://example.com/new-report"></textarea>
+  <label>上传资料文件（TXT、MD、CSV、JSON）</label>
+  <input id="sourceFiles" type="file" multiple accept=".txt,.md,.csv,.json">
   <label>新增信源原文（可粘贴文章或档案文本，需独立核验）</label>
   <textarea id="sourceText" rows="5" maxlength="20000" placeholder="粘贴信源标题、发布机构、日期及正文。此文本作为检索线索，不直接进入证据库。"></textarea>
   <label>本轮重点核查问题</label>
@@ -69,10 +71,10 @@ li{margin:4px 0}
 <script>
 const $ = id => document.getElementById(id);
 let pollTimer = null;
-let parentJob = null;
+let parentJob = null;\nlet parentCase = null;
 const params = new URLSearchParams(location.search);
 const continueId = params.get("continue");
-const requestedJob = params.get("job");
+const requestedJob = params.get("job");\nconst requestedCase = params.get("case");
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function mdToHtml(md){
   const lines=String(md).split("\n");let html="",inList=false;
@@ -114,6 +116,21 @@ function startPolling(id){
   if(pollTimer)clearInterval(pollTimer);
   loadJob(id).then(done=>{if(done)return;pollTimer=setInterval(async()=>{const done2=await loadJob(id);if(done2)clearInterval(pollTimer);},5000);});
 }
+async function prepareCaseContinuation(id){
+  try{
+    const res=await fetch("/data/cases/"+encodeURIComponent(id)+".json?ts="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw Error("读取静态案卷失败");
+    const pack=await res.json();
+    parentCase=pack;
+    $("continueBanner").style.display="block";$("continuationFields").style.display="block";
+    $("formHeading").textContent="继续调查 · "+(pack.case?.name||id);
+    $("direction").value=pack.case?.name||id;$("direction").readOnly=true;
+    $("language").value="zh";$("region").value="南京，中国";
+    $("submitBtn").textContent="提交增量续办委托";
+    $("parentSummary").textContent="基线案卷："+pack.case?.case_id+" · v1正式案卷 · "+(pack.sources||[]).length+"个来源 · "+(pack.evidence||[]).filter(e=>["A","B","C","D","E"].includes(e.grade)).length+"条A-E级证据";
+    $("formMsg").textContent="本轮只采集新增信源；原始案卷与报告保持不变，完成后生成v2报告。";
+  }catch(e){$("formMsg").textContent=e.message||"无法载入原始案卷。";}
+}
 async function prepareContinuation(id){
   try{
     const res=await fetch("/api/jobs?id="+encodeURIComponent(id)+"&ts="+Date.now(),{cache:"no-store"});
@@ -136,14 +153,14 @@ $("form").addEventListener("submit",async ev=>{
     const body=isFollowup?{
       parent_job_id:parentJob.job_id,
       source_urls:$("sourceUrls").value.split("\n").map(x=>x.trim()).filter(Boolean),
-      source_text:$("sourceText").value.trim(),materials:$("materials").value.trim(),
+      source_text:combinedSourceText,materials:$("materials").value.trim()+(uploaded.length?"\n上传文件："+uploaded.map(f=>f.name).join("、"):""),
       questions:$("questions").value.trim(),known_facts:$("hints").value.trim()
     }:{
       direction:$("direction").value.trim(),language:$("language").value,
       region:$("region").value.trim(),hints:$("hints").value.trim()
     };
     const requestOptions={method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)};
-    const res=isFollowup?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
+    const res=parentCase?await fetch("/api/continue-case",requestOptions):isFollowup?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
     const d=await res.json();
     if(!res.ok){$("formMsg").textContent=d.error||"提交失败";btn.disabled=false;return;}
     $("formMsg").textContent=isFollowup?"续办任务已创建，等待跑手接手。原任务和报告保持不变。":"任务已创建，等待跑手接手。";
