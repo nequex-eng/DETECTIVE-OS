@@ -337,7 +337,13 @@ def read_static_case_checkpoint(case_id):
             "evidence_type": item.get("evidence_type", "fact"),
             "event_date": item.get("event_date", ""),
             "category": "",
-            "source_id": item.get("source_id", "")
+            "source_id": item.get("source_id", ""),
+            "baseline_grade": item.get("grade", "C"),
+            "baseline_reliability_assessment": item.get("reliability_assessment", ""),
+            "baseline_verification_status": item.get("verification_status", ""),
+            "baseline_supports": list(item.get("supports") or []),
+            "baseline_contradicts": list(item.get("contradicts") or []),
+            "baseline_analyst_notes": item.get("analyst_notes", "")
         })
 
     likelihoods = {}
@@ -361,6 +367,18 @@ def read_static_case_checkpoint(case_id):
             if path not in paths:
                 paths.append(path)
     parent_collected = {"paths_tried": paths}
+    baseline_hypotheses = []
+    for hypothesis in case.get("hypotheses", []):
+        row = dict(hypothesis)
+        old_likelihoods = row.get("likelihoods") or {}
+        row["likelihoods"] = {
+            id_map[old_id]: value for old_id, value in old_likelihoods.items()
+            if old_id in id_map
+        }
+        for field in ("supports", "opposes", "unexplained"):
+            row[field] = [id_map[old_id] for old_id in (row.get(field) or [])
+                          if old_id in id_map]
+        baseline_hypotheses.append(row)
     report["case_id"] = case.get("case_id")
     report["case_name"] = case.get("name")
     report["verdict"] = (report.get("bayesian") or {}).get("verdict", "未记录")
@@ -395,6 +413,7 @@ def main():
     parent_candidates = []
     parent_likelihoods = {}
     parent_categories = {}
+    parent_hypotheses = []
     parent_sources = []
     parent_texts = {}
     parent_paths = []
@@ -425,6 +444,7 @@ def main():
             (parent_collected, parent_sources, parent_texts, parent_candidates,
              parent_likelihoods, parent_categories) = read_parent_checkpoint(
                 parent_run_dir, parent_result)
+            parent_hypotheses = parent_result.get("baseline_hypotheses") or []
         parent_paths = parent_collected.get("paths_tried", [])
         previous_verdict = parent_result.get("verdict")
         root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or live.get("root_job_id") or parent_id
@@ -526,7 +546,8 @@ def main():
         # the LLM to score/map the newly added evidence.
         draft = build_draft_pack(
             case_id, case_name, direction, job_id, sources, candidates, paths_tried,
-            likelihoods=parent_likelihoods, categories=parent_categories)
+            likelihoods=parent_likelihoods, categories=parent_categories,
+            baseline_hypotheses=parent_hypotheses or None)
         old_count = len(parent_candidates)
         new_evidence = draft["evidence"][old_count:]
 
@@ -558,7 +579,8 @@ def main():
 
         pack = build_draft_pack(
             case_id, case_name, direction, job_id, sources, candidates, paths_tried,
-            likelihoods=likelihoods, categories=categories)
+            likelihoods=likelihoods, categories=categories,
+            baseline_hypotheses=parent_hypotheses or None)
 
         if parent_id:
             root_short = root_job_id[:8]
@@ -611,6 +633,7 @@ def main():
             "candidates": candidates,
             "likelihoods": {f"{h}|{e}": v for (h, e), v in likelihoods.items()},
             "categories": categories, "paths_tried": paths_tried,
+            "baseline_hypotheses": parent_hypotheses,
             "summary": case_summary, "report_md": report_md
         }
         (run_dir / "result.json").write_text(
