@@ -253,6 +253,8 @@ def main():
     ck_likelihoods = run_dir / "likelihoods.json"
     ck_categories = run_dir / "categories.json"
     try:
+        if parent_id and (not parent_result or parent.get("status") != "done"):
+            raise RuntimeError("无法读取已完成的原调查结果，续办任务停止以避免丢失基线")
         # Resume-aware first update: a run killed mid-flight (VM
         # restart) leaves the job at extracting/reasoning; demanding
         # "collecting" would refuse and the checkpoints below would
