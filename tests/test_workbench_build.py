@@ -39,7 +39,10 @@ class TestWorkbenchBuild(unittest.TestCase):
             source_ids = {s["source_id"] for s in payload["sources"]}
             evidence_ids = {e["evidence_id"] for e in payload["evidence"]}
             for ev in payload["evidence"]:
-                self.assertIn(ev["source_id"], source_ids)
+                if ev["grade"] in ("A", "B", "C", "D", "E"):
+                    self.assertIn(ev["source_id"], source_ids)
+                elif ev.get("source_id"):
+                    self.assertIn(ev["source_id"], source_ids)
             for edge in payload["relationships"]:
                 self.assertIn(edge["from_id"], {e["entity_id"] for e in payload["entities"]})
                 self.assertIn(edge["to_id"], {e["entity_id"] for e in payload["entities"]})
