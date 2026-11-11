@@ -381,10 +381,12 @@ def read_static_case_checkpoint(case_id):
         baseline_hypotheses.append(row)
     report["case_id"] = case.get("case_id")
     report["case_name"] = case.get("name")
-    report["verdict"] = (report.get("bayesian") or {}).get("verdict", "未记录")
+    report["verdict"] = ((report.get("bayesian") or {}).get("verdict")
+                         or report.get("verdict") or "未记录")
     if not candidates:
         raise RuntimeError("正式案卷中没有可用于增量续办的A-E级证据")
-    return (parent_collected, sources, {}, candidates, likelihoods, categories, report, case)
+    return (parent_collected, sources, {}, candidates, likelihoods, categories,
+            report, case, baseline_hypotheses)
 
 
 def main():
@@ -426,8 +428,9 @@ def main():
             if not baseline_case_id:
                 raise RuntimeError("静态案卷续办任务缺少baseline_case_id")
             (parent_collected, parent_sources, parent_texts, parent_candidates,
-             parent_likelihoods, parent_categories, parent_result, baseline_case) = (
-                read_static_case_checkpoint(baseline_case_id))
+             parent_likelihoods, parent_categories, parent_result, baseline_case,
+             parent_hypotheses) = read_static_case_checkpoint(baseline_case_id)
+            parent_result["baseline_hypotheses"] = parent_hypotheses
             parent = {"status": "done", "root_job_id": parent_id, "version": 1}
             parent_result["root_job_id"] = live.get("root_job_id") or parent_id
             parent_result["version"] = 1
