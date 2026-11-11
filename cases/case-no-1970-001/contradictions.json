@@ -27,12 +27,12 @@
     ],
     "source_ids": [
       "S02",
-      "S03"
+      "S05"
     ],
     "wording_a": "1970年警方初始年龄估计25至40岁",
     "wording_b": "后续牙齿同位素研究推测出生于1930年前后（约±4年）",
     "quote_a": "She appeared to be aged between 25 and 40 years",
-    "quote_b": "tyder på at hun ble født rundt 1930",
+    "quote_b": "In 2017, stable isotope analysis of her teeth indicated that she had been born in about 1930 in or near Nuremberg, Germany",
     "could_be_drift": "估计区间部分重叠，且采用外观判断与牙齿同位素两种不同方法；不应写成确定的年龄冲突。",
     "needs_what": "原始警方年龄评估、完整同位素报告及其误差范围。",
     "resolvable_now": false,
