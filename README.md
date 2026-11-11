@@ -131,7 +131,7 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 
 链路：前端表单→POST `/api/investigate`→结构化`intake`写入KV任务，同时将结构化委托镜像进旧字段`hints`，兼容现有每10分钟跑手`detective-os-job-watch`的V1读取方式→跑手读取任务完整内容，优先处理指定来源URL和调查问题、收集公开来源并写`runs/<job_id>/collected.json`→`scripts/run_job.py <job_id>`完成抽取、似然、覆盖映射、草稿包、引擎、报告→结构化结果写回KV→前端每5秒轮询。任务API的读接口`functions/api/jobs.js`只读、无写入口，公网不能伪造任务状态。
 
-V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`、`exclusions`、`source_urls`、`materials`、`parent_job_id`。用户粘贴材料会由`run_job.py`单独登记为`USR01`手动来源；`pipeline.build_draft_pack`将其标为H级待核实、权重0，不会因引文与用户粘贴文本匹配就升级成C级证据。公开报道抽取仍最高C级。结果JSON增加来源数、事实数、来源档案、证据明细、覆盖清单和独立审查发现，供前端工作区直接展示。
+V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`、`exclusions`、`source_urls`、`materials`、`parent_job_id`。用户粘贴材料会由`run_job.py`单独登记为`USR01`手动来源；`pipeline.build_draft_pack`将其标为H级待核实、权重0，不会因引文与用户粘贴文本匹配就升级成C级证据。关联父任务时，上一轮AI报告以`PAR01`单独载入并标为G级推断、权重0，仅供上下文追踪。公开报道抽取仍最高C级。结果JSON增加来源数、事实数、来源档案、证据明细、覆盖清单和独立审查发现，供前端工作区直接展示。
 
 **自动执行验收注意：**Pages端已创建完整委托并入KV队列；真正的资料搜索仍由外部定时跑手执行，而非Pages静态页面自己搜索。API将结构化委托镜像到`hints`以兼容旧跑手；正式宣称端到端闭环前，仍须检查`detective-os-job-watch`正文是否读取并执行`[STRUCTURED USER INTAKE V2]`中的指定URL、时间范围、问题与排除条件，并用一次无新案件的模拟任务验收。前端：https://detective-os.pages.dev/investigate.html。
 
@@ -158,7 +158,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，20项（含V2用户供料H级回归测试）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。2026-11-11 GitHub Actions CI实跑51项全部通过（commit `f0eb85dfd5f67292f6acf7a82231c986f46d2fd1`，run `42949598573`）；南大案、白银案案包校验也全部通过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，21项（含V2用户供料H级、父任务AI报告G级回归测试）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。2026-11-11 GitHub Actions CI实跑52项全部通过（commit `1c01e2d1c2b82de213db8d68b92aaccb99c533ef`，run `42950019414`）；南大案、白银案案包校验也全部通过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
