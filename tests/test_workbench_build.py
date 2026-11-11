@@ -64,7 +64,8 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertIn('new URLSearchParams(window.location.search)', app)
         self.assertIn('params.get("case")', app)
         self.assertIn('params.get("tab")', app)
-        for case_id in ("case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"):
+        for row in self.index:
+            case_id = row["slug"]
             page = (PUBLIC / (case_id + ".html")).read_text(encoding="utf-8")
             self.assertIn("workbench.html?case=CASE-", page)
             self.assertIn("tab=timeline", page)
