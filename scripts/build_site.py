@@ -177,7 +177,7 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 .section{{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:10px;margin:30px 0 14px}}.section h2{{font:500 19px Georgia,serif;margin:5px 0 0}}.section span{{font:9px ui-monospace,monospace;color:#788da0;letter-spacing:1px}}
 .live-grid,.archive-grid{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 .job,.archive-card{{background:linear-gradient(140deg,#122333,#0e1a26);border:1px solid #2a4053;padding:16px;display:block;min-width:0}}
-.job:hover,.archive-card:hover{{border-color:#a8874f}}.job-top,.job-bottom{{display:flex;justify-content:space-between;gap:10px;align-items:center}}
+.job:hover,.archive-card:hover{{border-color:#a8874f}}.job-main{{display:block;padding:0}}.continue-link{{display:block;margin-top:12px;padding-top:10px;border-top:1px solid #2a4053;color:#d8b875;font-size:10px}}.continue-link:hover{{color:#f0d49a}}.job-top,.job-bottom{{display:flex;justify-content:space-between;gap:10px;align-items:center}}
 .job-id,.archive-card span{{font:9px ui-monospace,monospace;color:#8da5b9;letter-spacing:.7px}}
 .status{{font-size:9px;padding:3px 7px;border:1px solid #6c593b;color:#dfc17e}}.status.done{{border-color:#416b59;color:#83c6a1}}.status.failed{{border-color:#754c4c;color:#e29a96}}
 .job h3{{font-size:13px;margin:13px 0 5px}}.job p{{color:#93a7b9;font-size:10px;min-height:30px;margin:0 0 12px}}.job-bottom{{border-top:1px solid #26394a;padding-top:8px;color:#73899d;font:9px ui-monospace,monospace}}
