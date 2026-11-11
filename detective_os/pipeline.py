@@ -368,7 +368,7 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "reliability_assessment": "草稿：LLM从报道原文抽取，逐字引用已核验，待人工复核定级。",
             "verification_status": "single-source",
             "supports": [], "contradicts": [],
-            "analyst_notes": "DRAFT: auto-extracted, unreviewed.",
+            "analyst_notes": ("USER-SUPPLIED: unverified; not countable evidence." if user_supplied else "DRAFT: auto-extracted, unreviewed."),
             "_categories": list(cats or []),
         })
     hypotheses = []
