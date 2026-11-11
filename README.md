@@ -158,7 +158,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，20项（V2新增用户供料H级回归测试1项，待运行）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。此前基线合计50项全过；V2新增1项用户供料H级回归测试，CI工作流已添加，但尚未取得运行结果，不将其记为通过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，20项（含V2用户供料H级回归测试）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。2026-11-11 GitHub Actions CI实跑51项全部通过（commit `f0eb85dfd5f67292f6acf7a82231c986f46d2fd1`，run `42949598573`）；南大案、白银案案包校验也全部通过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
@@ -176,8 +176,8 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 ## 未完成事项
 
 - V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
-- 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、部署与真实用户端验收仍未完成。
-- Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
+- 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、Cloudflare Pages生产部署与真实用户端验收仍未完成。
+- 自动跑手：需检查并更新`detective-os-job-watch`任务正文，确保它实际读取V2结构化委托、优先打开指定来源链接并处理调查问题；否则只能保证任务入队，不能保证后台采纳所有新字段。\n- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。\n- Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）
 - GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
