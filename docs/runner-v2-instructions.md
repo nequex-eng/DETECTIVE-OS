@@ -29,9 +29,9 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
    - `intake.exclusions`
    - `intake.source_urls`
    - `intake.materials`
-   - `intake.parent_job_id`
+   - `intake.parent_job_id`\n   - `intake.parent_report_context`
 
-The API also mirrors these fields into `hints` under `[STRUCTURED USER INTAKE V2]` for compatibility with older runner instructions. Treat the structured `intake` object as authoritative.
+The API mirrors structured intake fields into `hints` for compatibility with older runner instructions. Treat the structured `intake` object as authoritative. A follow-up job is a new linked job with `parent_job_id`; never overwrite or mark the parent job running.
 
 ## Collection instructions
 
@@ -84,7 +84,7 @@ Create `runs/<job_id>/collected.json` with this structure:
 }
 ```
 
-Use unique source IDs. Each `texts` key must match a source ID. The accepted collection path names are: `web_search`, `direct_source`, `news_db`, `web_archive`, `court_db`, `local_language`, `books_media`, `user_supplied`, `community_lead`, `foia`. Status values: `tried`, `found`, `nothing`, `not_applicable`. The normalizer can repair free-form path notes, but use canonical values when possible.
+Use unique source IDs. Each `texts` key must match a source ID. For follow-up jobs, keep the parent source corpus intact and add only newly inspected sources; `run_job.py` performs canonical-URL deduplication and stable source-ID reassignment.\n\nThe accepted collection path names are: `web_search`, `direct_source`, `news_db`, `web_archive`, `court_db`, `local_language`, `books_media`, `user_supplied`, `community_lead`, `foia`. Status values: `tried`, `found`, `nothing`, `not_applicable`. The normalizer can repair free-form path notes, but use canonical values when possible.
 
 ## Execute and verify
 
