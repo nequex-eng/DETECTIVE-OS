@@ -1,3 +1,9 @@
 name = "detective-os"
 pages_build_output_dir = "public"
 compatibility_date = "2026-11-10"
+
+# Auto-run jobs store (KV; D1 is not available to the current API token,
+# which returns auth error 10000 on D1 calls — KV is the v1 equivalent).
+[[kv_namespaces]]
+binding = "JOBS"
+id = "ae900386f76f465896f5e307baf12917"

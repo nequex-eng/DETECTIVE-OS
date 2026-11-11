@@ -1,0 +1,38 @@
+[
+  {
+    "is_reprint": false,
+    "notes": "转载人民日报、央视新闻的宣判报道；与S02同源（2018-03-30宣判通稿），复核时注意。",
+    "origin_url": "",
+    "published_at": "2018-03-30",
+    "publisher": "人民政协网",
+    "reprint_of": "",
+    "source_id": "S01",
+    "source_type": "news",
+    "title": "死刑！刚刚，“白银连环杀人案”一审宣判",
+    "url": "http://www.rmzxw.com.cn/c/2018-03-30/2011580_1.shtml?n2m=1"
+  },
+  {
+    "is_reprint": false,
+    "notes": "综合人民日报、央视新闻、中国新闻网、北京青年报、人民法院报微信、新华社；与S01同源（2018-03-30宣判通稿），另有自采的9案时间线。",
+    "origin_url": "",
+    "published_at": "2018-03-30",
+    "publisher": "文汇报",
+    "reprint_of": "",
+    "source_id": "S02",
+    "source_type": "news",
+    "title": "“白银连环杀人案”一审宣判，被告人高承勇被判死刑",
+    "url": "https://wenhui.whb.cn/zhuzhan/sz/20180330/193759.html"
+  },
+  {
+    "is_reprint": false,
+    "notes": "破案前报道（2016-08-12），重启侦查阶段的详细案情回顾，含9案清单与警方画像信息。",
+    "origin_url": "",
+    "published_at": "2016-08-12",
+    "publisher": "澎湃新闻",
+    "reprint_of": "",
+    "source_id": "S03",
+    "source_type": "news",
+    "title": "甘肃白银连环杀人案重启侦查：14年间9名女子被残杀在家中",
+    "url": "https://www.thepaper.cn/newsDetail_forward_1512654?commTag=true"
+  }
+]

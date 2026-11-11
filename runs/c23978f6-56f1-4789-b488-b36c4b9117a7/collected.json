@@ -1,0 +1,200 @@
+{
+  "direction": "1988-2002白银连环杀人案",
+  "paths_tried": [
+    {
+      "note": "新闻搜索+直接读源头",
+      "path": "web_search",
+      "status": "found"
+    },
+    {
+      "note": "直接打开三家报道原文",
+      "path": "direct_source",
+      "status": "found"
+    },
+    {
+      "note": "中文案件，英文查询未单独立项",
+      "path": "local_language",
+      "status": "found"
+    },
+    {
+      "note": "返回新华社/中国日报/维基等多源",
+      "path": "browser.search news vertical: 白银连环杀人案 高承勇 2016 新华社",
+      "status": "ok"
+    },
+    {
+      "note": "返回中国日报/新华社/维基",
+      "path": "browser.search news vertical: 白银连环杀人案 2018 宣判 白银市中级人民法院",
+      "status": "ok"
+    },
+    {
+      "note": "返回维基/CGTN/凤凰大风号",
+      "path": "browser.search news vertical: 白银连环杀人案 11起 澎湃新闻",
+      "status": "ok"
+    },
+    {
+      "note": "未直接返回澎湃原文链接，改用维基汇编+其他权威源",
+      "path": "browser.search: 澎湃新闻 2016-08-29 八任公安局长接力28年",
+      "status": "partial"
+    },
+    {
+      "note": "返回中国日报2016-08-29抓获报道链接",
+      "path": "browser.search: 新华社 2016-08-29 白银告破 DNA",
+      "status": "ok"
+    },
+    {
+      "note": "返回维基11起时序",
+      "path": "browser.search: 白银案 11起案件 时间表",
+      "status": "ok"
+    },
+    {
+      "note": "未返回澎湃原文；返回TRT World与成都商报，已取TRT全文",
+      "path": "browser.search: 澎湃新闻 高承勇 小卖部 2016-08-28",
+      "status": "partial"
+    },
+    {
+      "note": "新华社执行死刑通稿全文",
+      "path": "browser.open xinhuanet.com/english/2019-01/03/c_137717341.htm",
+      "status": "ok"
+    },
+    {
+      "note": "中国日报宣判报道全文",
+      "path": "browser.open chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html",
+      "status": "ok"
+    },
+    {
+      "note": "CGTN公诉报道全文",
+      "path": "browser.open news.cgtn.com/news/3d517a4e78597a4d/share.html",
+      "status": "ok"
+    },
+    {
+      "note": "页面抓取仅得导语段，已按实际抓取文本存档",
+      "path": "browser.open chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm",
+      "status": "partial"
+    },
+    {
+      "note": "中文维基全文，已删身份证号码",
+      "path": "browser.open zh.wikipedia.org/wiki/白银市连环杀人案",
+      "status": "ok"
+    },
+    {
+      "note": "TRT World抓获报道全文",
+      "path": "browser.open trtworld.com/article/13084984",
+      "status": "ok"
+    }
+  ],
+  "sources": [
+    {
+      "is_reprint": false,
+      "notes": "转载人民日报、央视新闻的宣判报道；与S02同源（2018-03-30宣判通稿），复核时注意。",
+      "origin_url": "",
+      "published_at": "2018-03-30",
+      "publisher": "人民政协网",
+      "reprint_of": "",
+      "source_id": "S01",
+      "source_type": "news",
+      "title": "死刑！刚刚，“白银连环杀人案”一审宣判",
+      "url": "http://www.rmzxw.com.cn/c/2018-03-30/2011580_1.shtml?n2m=1"
+    },
+    {
+      "is_reprint": false,
+      "notes": "综合人民日报、央视新闻、中国新闻网、北京青年报、人民法院报微信、新华社；与S01同源（2018-03-30宣判通稿），另有自采的9案时间线。",
+      "origin_url": "",
+      "published_at": "2018-03-30",
+      "publisher": "文汇报",
+      "reprint_of": "",
+      "source_id": "S02",
+      "source_type": "news",
+      "title": "“白银连环杀人案”一审宣判，被告人高承勇被判死刑",
+      "url": "https://wenhui.whb.cn/zhuzhan/sz/20180330/193759.html"
+    },
+    {
+      "is_reprint": false,
+      "notes": "破案前报道（2016-08-12），重启侦查阶段的详细案情回顾，含9案清单与警方画像信息。",
+      "origin_url": "",
+      "published_at": "2016-08-12",
+      "publisher": "澎湃新闻",
+      "reprint_of": "",
+      "source_id": "S03",
+      "source_type": "news",
+      "title": "甘肃白银连环杀人案重启侦查：14年间9名女子被残杀在家中",
+      "url": "https://www.thepaper.cn/newsDetail_forward_1512654?commTag=true"
+    },
+    {
+      "is_reprint": false,
+      "notes": "新华社英文通稿：执行死刑报道",
+      "published_at": "2019-01-03",
+      "publisher": "Xinhua",
+      "reprint_of": null,
+      "source_id": "src-xinhua-20190103",
+      "source_type": "news",
+      "title": "Serial killer executed in northwest China",
+      "url": "http://www.xinhuanet.com/english/2019-01/03/c_137717341.htm"
+    },
+    {
+      "is_reprint": false,
+      "notes": "中国日报：一审宣判死刑报道",
+      "published_at": "2018-03-31",
+      "publisher": "China Daily",
+      "reprint_of": null,
+      "source_id": "src-chinadaily-20180331",
+      "source_type": "news",
+      "title": "Serial killer gets death penalty for 11 murders",
+      "url": "http://www.chinadaily.com.cn/a/201803/31/WS5abed91aa3105cdcf65157a2_1.html"
+    },
+    {
+      "is_reprint": false,
+      "notes": "CGTN：提起公诉报道，引用新华社与新京报",
+      "published_at": "2017-04-25",
+      "publisher": "CGTN",
+      "reprint_of": null,
+      "source_id": "src-cgtn-20170425",
+      "source_type": "news",
+      "title": "Chinese “Jack the Ripper” prosecuted after 28 years at large",
+      "url": "https://news.cgtn.com/news/3d517a4e78597a4d/share.html"
+    },
+    {
+      "is_reprint": false,
+      "notes": "中国日报：抓获报道（页面抓取仅得导语段）",
+      "published_at": "2016-08-29",
+      "publisher": "China Daily",
+      "reprint_of": null,
+      "source_id": "src-chinadaily-20160829",
+      "source_type": "news",
+      "title": "DNA tests lead police to Gansu 'Ripper'",
+      "url": "http://www.chinadaily.com.cn/cndy/2016-08/29/content_26622389.htm"
+    },
+    {
+      "is_reprint": false,
+      "notes": "中文维基百科条目：二次汇编，内引新京报、澎湃新闻、光明网、央视等原始报道；11起案件时序与调查过程的主要事实来源。身份证号码已从存档文本中删除。",
+      "published_at": "2026-11-08",
+      "publisher": "Wikipedia (Chinese)",
+      "reprint_of": null,
+      "source_id": "src-wiki-zh",
+      "source_type": "encyclopedia",
+      "title": "白银市连环杀人案",
+      "url": "https://zh.wikipedia.org/wiki/%E7%99%BD%E9%93%B6%E5%B8%82%E8%BF%9E%E7%8E%AF%E6%9D%80%E4%BA%BA%E6%A1%88"
+    },
+    {
+      "is_reprint": false,
+      "notes": "TRT World：抓获报道，综合中国媒体与通讯社",
+      "published_at": "2016-08-29",
+      "publisher": "TRT World",
+      "reprint_of": null,
+      "source_id": "src-trt-20160829",
+      "source_type": "news",
+      "title": "Main suspect in China's 'Jack the Ripper' case arrested",
+      "url": "https://www.trtworld.com/article/13084984"
+    }
+  ],
+  "texts": {
+    "S01": "1988年至2002年，犯罪嫌疑人在甘肃省白银市及内蒙古包头市连续强奸残杀女性11人，作案跨度14年，受害人中年龄最小的仅8岁，犯罪分子作案手段极其残忍，一度在当地造成恐慌。该案侦破跨度28年，被称为“世纪悬案”。2001年，该案被公安部列为督办案件。2004年，白银市警方向外界公布详细案情，并悬赏20万人民币，希望能够取得线索，但一直未获突破性进展。2016年3月，甘肃省公安厅重启侦查工作。一名涉嫌经济犯罪的高姓男子的DNA为破案提供了线索：通过该男子染色体Y-DNA检验，警方发现城河村高氏家族有作案嫌疑，于是挨个录入指纹。提取高承勇指纹和DNA时，警方发现，他的指纹和命案现场指纹高度吻合。2016年8月26日，52岁的犯罪嫌疑人高承勇落网。经初步审讯，高承勇对其在1988年5月至2002年2月间实施强奸杀人的犯罪事实供认不讳。2016年11月24日，高承勇已被移送起诉。2017年4月24日，白银市检察院通报：对高承勇提起公诉。2017年7月18日至19日，白银市连环杀人案在白银市白银区人民法院第一法庭不公开开庭审理。2018年3月27日，甘肃省白银市中级人民法院发布公告称，该院定于2018年3月30日10时，在该院一楼大审判法庭公开宣判被告人高承勇抢劫、故意杀人、强奸、侮辱尸体一案。",
+    "S02": "今天上午10时，甘肃省白银市中级人民法院对被告人高承勇抢劫、故意杀人、强奸、侮辱尸体附带民事诉讼一案进行一审公开宣判。被告人高承勇犯抢劫罪、故意杀人罪、强奸罪及侮辱尸体罪，被判处死刑，剥夺政治权利终身，并处没收个人全部财产。另判决被告人高承勇赔偿附带民事诉讼原告人物质损失。高承勇当庭表示服判，不提起上诉。1964年11月10日，高承勇出生，户籍所在地：甘肃兰州市榆中县青城镇城河村；1984年，高承勇高考落榜，复读后再次落榜，此后曾外出打工，贩卖过管制刀具；1986年-1987年期间，高承勇与张氏女子结婚，婚后曾在青海、内蒙古打工；1988年5月26日，24岁的高承勇首次杀人。同年，高承勇大儿子出生；2002年2月9日，38岁的高承勇最后一次作案。同年，高承勇儿子读中学。1988年至2002年，高承勇在甘肃省白银市及内蒙古包头市连续强奸残杀女性11人，作案跨度14年，受害人中年龄最小的仅8岁，犯罪分子作案手段极其残忍，一度在当地造成恐慌。该案侦破跨度28年，被称为“世纪悬案”。1988年5月26日下午5时许，白银公司23岁的女职工白某被害于白银区永丰街家中（简称“88·5·26”案件）。1994年7月27日下午2时50分，白银供电局19岁女临时工石某在其单身宿舍遇害（简称“94·7·27”案件）。1996年——1997年 高承勇前往包头市打工，包头有2人先后遇害，案件细节未公布。1998年1月16日下午4时许，居民发现白银区胜利街29岁的女青年杨某在家中遇害（简称“98·1·16”案件），调查证实杨某被害时间为1月13日。1998年1月19日下午5时45分，家住白银区水川路的27岁女青年邓某在家中遇害（简称“98·1·19”案件）。1998年7月30日下午6时许，白银供电局职工曾某8岁的女儿苗苗（化名）在家中遇害（简称“98·7·30”案件）。1998年11月30日上午11时许，白银公司女青年崔某在白银区东山路的家中被杀害（简称“98·11·30”案件）。2000年11月20日上午11时许，白银棉纺厂28岁的女工罗某在家中被人杀害（简称“00·11·20”案件）。2001年5月22日上午9时许，白银区妇幼保健站28岁的女护士张某在白银区水川路的家中被害（简称“01·5·22”案件）。2002年2月9日中午1时许，25岁的女子朱某在白银区陶乐春宾馆客房中被害（简称“02·2·09”案件）。1988年首案后，白银公安部门调集警力，对案发地原始范围内所有15岁至30岁的男性，白银区有前科的人员逐一进行了摸底审查。1998年，甘肃省公安厅协调专家会诊，刻画嫌疑人体貌特征。专案组依据作案手段和指纹比对，将多起杀人案并案进行侦查。2001年8月，公安部将该案定为部督案件，在以后的几年中，扩大外延排查区域，对白银市三县两区、多个系统单位及兰州市榆中、皋兰两县等符合年龄段的男性开展新一轮专案排查。2004年8月5日，公安部组织专家对案件进行会诊，将白银、包头两地案件并案，确定为甘蒙“8·05\"系列强奸杀人残害女性案。2015年下半年，随着DNA技术发展，高承勇的一名亲属因违法犯罪被采集到血样，比对DNA发现白银系列凶杀案嫌犯线索。2016年8月26日，民警在白银市工业学校一小卖部内将高承勇抓获。2017年4月24日，甘肃省白银市人民检察院依法对被告人高承勇提起公诉。2017年7月18日，甘肃省白银市中级人民法院开庭审理白银市连环杀人案。因涉及隐私，该案作不公开审理。7月19日，庭审结束后，高承勇向受害人家属三鞠躬致歉。2018年3月30日，白银市中级人民法院公开宣判被告人高承勇抢劫、故意杀人、强奸、侮辱尸体一案，判处被告人高承勇犯抢劫罪、故意杀人罪、强奸罪、及侮辱尸体罪，被判处死刑，剥夺政治权利终身，并处没收个人全部财产。另判决被告人高承勇赔偿附带民事诉讼原告人物质损失。高承勇当庭表示服判，不提起上诉。",
+    "S03": "1998年11月30日，他的姐姐崔金萍惨死在家中。公安机关勘验结果显示：颈部被切开，上身有22处刀伤，下身赤裸，双乳、双手及阴部缺失。从1988年至2002年，在甘肃省白银市城区，包括崔金萍在内的9名女性陆续在家中被残忍杀害。警方确认，案件系同一人所为。虽然嫌犯留下了足印、指纹、精液、DNA等各种身体特征线索，甚至有模拟画像，但警方一直没能将其抓获。这一系列案中，案发最长的一起距今已28年。在民间，它与南京大学碎尸案等被并称作中国数宗特大悬案之一。北京时间从甘肃警方人士处获悉，今年4月，公安部已要求白银当地警方抽调精干力量，力争能够将此桩在公安部编号为“805”案的连环杀人案疑凶抓捕归案。根据警方资料，1988年5月26日，居住在白银市白银区永丰街177-1号的白银公司23岁的女职工白某被害于家中（“88.5.26”案件）。警方勘验时发现，受害人“颈部被切开，上衣被推至双乳之上，下身赤裸，上身共有刀伤26处”。据法医勘验，“小白鞋”遇害的时间是下午5时许，凶手是盯准目标尾随溜门进入了她的家中。1994年7月27日下午2时50分许，白银供电局一名女性临时工石某被人杀害于其单身宿舍内（“94.7.27”案件），被害时年仅19岁。警方现场勘验发现，受害人“颈部被切开，上身共有刀伤36处”。1998年，类似案件密集出现，达到惊人的4起之多。1月16日、1月19日、7月30日、11月30日，连续有4具“家中女尸”被发现。其中7月30日遇害的是一位年仅8岁的女童。法医勘验时发现，受害人“下身赤裸，颈部系有皮带，阴部被撕裂并检出精子”。11月30日遇害的，正是白银公司氟化盐厂女青年职工崔金萍。当日中午，其母王彩花回家做饭，发现早上才下夜班回家的女儿，已经倒在客厅地上一片血泊中，其颈部被切开，上身有22处刀伤，下身赤裸，两只乳房、两只手、两只耳朵都没有了。2000年11月20日，28岁的白银棉纺厂女工罗某在该厂平房家属区家中被人杀害（“00.11.20”案件），“颈部被切开，裤子被扒至膝盖处，双手缺失”。2001年5月22日，家住白银区水川路28-1-12号的一家医疗机构28岁的女护士张某在家中被害（“01.5.22”案件），其“颈部等处有锐器伤16处，并遭强奸”。2002年2月9日，住在人民路陶乐春宾馆的三楼长包房客户朱某在房中被害（“02.2.09”案件），被害时25岁，“颈部被切开，上衣被推至双乳之上，下身赤裸，遭到强奸”。十几年来反复出现的这些割喉杀人、强奸、切走器官的命案，令白银市民毛骨悚然，有一段时间里，女性不敢独自上下班、上下学，需要男性亲属护送；甚至连白银市各中学的晚自习时间也进行了调整，学校不敢放学生太晚回家，怕出意外。2004年，白银警方经《兰州晨报》发布称，警方对接连发生的残害女性的案件高度重视，并成立了专案组进行侦破。经过反复分析鉴定确认，“88.5.26”、“94.7.27”、“98.7.30”、“98.11.30”、“01.5.22”案件现场所提取的各枚指纹交叉认定同一；“98.7.30”、“01.5.22”、“02.2.09”案件受害人阴道内提取的分泌物及相关精斑检材的DNA认定同一；“98.1.16”、“98.1.19”、“00.11.20”案件的作案手段与上述案件相同，所以，专案组将以上9起残害女性的案件并案侦查，定性为“性变态杀人案件”。白银警方称，经专案组人员长时间的调查和对多种证据的反复论证，此杀人狂的基本特征已经确定：嫌疑人约在1964年至1971年之间出生，男性，年龄在33岁—40岁之间，身高约1.68米至1.76米。此人应在白银长期居住，有较严重的性变态心理，或者生理缺陷，特别是具有性功能间歇性障碍症，对女性怀有仇恨心态，在白银市区有独居条件，还与内蒙古包头市有一定的联系。“恶魔一日不除，社会就多添了一份威胁和不安全因素。”为早日破案，白银警方承诺对提供线索者奖励现金20万元。不过，这个像极“开膛手杰克”的中国版的连环杀人案公开悬赏迄今已十二年，警方仍是久悬未破，并未有人拿到这提供线索的奖金。事实上，直到2004年，基于传言众多、社会影响太大，再不公布案情已无法向社会交代，白银市公安局才公布了一份《白银市公安局侦破系列强奸杀人案件宣传提纲》，证实了“白银确实出了个杀人狂”不是一个社会传言。本世纪初以来，白银警方曾先后启动全城查指纹、抽血验DNA等排查案犯方式，最后也没能找到真凶。警方束手无策，让民众在互联网上有了支招破案的愿望。",
+    "src-cgtn-20170425": "Chinese “Jack the Ripper” prosecuted after 28 years at large - CGTN. From 1988 to 2002, 11 innocent young women were robbed, raped, disfigured and murdered in northwest China’s Baiyin city in Gansu Province and Baotou city in Inner Mongolia Autonomous Region, in a serial murder remaining a mystery for over 28 years. But on April 25, 53-year-old Gao Chengyong was finally prosecuted for the crimes, confirmed the local procuratorate in Gansu. The murderer was arrested in August last year, after one of his relatives committed a crime and underwent DNA testing in 2015, according to Xinhua News. “He didn’t resist and fully cooperated,” said Zhu Aijun, Gao’s lawyer. “He admitted everything he did and didn’t ask for an appeal.” Gao confessed to the police that he committed the first murder in 1988 by accident, when he tried to steal a radio from a 23-year-old woman asleep and ended up killing her after she woke up. After the first homicide, Gao gained a sense of satisfaction from killing and carried out 10 more murders in the following 14 years, among them an 8-year-old girl. If he found the victim attractive, Gao would rape the victim; otherwise he would just cut the victim’s throat. Asked about why he disfigured a victim, Gao said he would dismember whoever resisted him as an act of revenge, reported The Beijing News. During the investigation, the serial killer could recall exhaustive details of all the murders he committed, said Wang Yang (pseudonym), a local police officer. “And he was way too calm, showing no regrets or guilt.” According to US Federal Bureau of Investigation, the majority of serial killers have families instead of being social misfits who live alone, contrary to local police’s belief during the case’s initial investigation phase. In fact, Gao was married and has two children. The family, feeling ashamed, refused to meet with Gao’s lawyer.",
+    "src-chinadaily-20160829": "DNA tests lead police to Gansu 'Ripper'. By Cui Jia | China Daily | Updated: 2016-08-29 07:32. 52-year-old suspected of 11 murders over 15 years is snared in grocery store. Police in Gansu province have captured a suspected serial killer accused of the rape and murder of 11 victims, one of them an 8-year-old girl, in northern China. Gao Chengyong, 52, was detained on Friday in a grocery store in Baiyin, in which nine of the killings occurred.",
+    "src-chinadaily-20180331": "Serial killer gets death penalty for 11 murders - Chinadaily.com.cn. Published: 2018-03-31T08:40:55+08:00. Gao Chengyong, who killed 11 female victims in Baiyin and Baotou in the Inner Mongolia autonomous region between May 1988 and February 2002, is given the death penalty at the Baiyin Intermediate People's Court in Gansu province on March 30, 2018. A serial killer dubbed China's \"Jack the Ripper\" was sentenced to death on Friday for murdering 10 women and an 8-year-old girl over a period of 14 years in northern China. Gao Chengyong, 53, was given the penalty at the Baiyin Intermediate People's Court in Gansu province on Friday morning－about 30 years after he committed the first killing－for multiple charges of homicide, rape, robbery and mutilation of corpses. The verdict said Gao killed 11 female victims in Baiyin and Baotou in the Inner Mongolia autonomous region between May 1988 and February 2002, with the youngest victim being just 8 years old.",
+    "src-trt-20160829": "Main suspect in China's 'Jack the Ripper' case arrested - TRT World. Published: 2016-08-29. Gao Chengyong, 52, was detained at the grocery store he runs with his wife in Baiyin, in the northwest province of Gansu, Chinese media reported. China's Ministry of Public Security says after his arrest Gao had confessed to 11 murders in Gansu and the neighbouring region of Inner Mongolia between 1988 and 2002. Gao allegedly targeted young women wearing red and followed them home to rape and kill them, often cutting their throat and mutilating their bodies, according to reports. The youngest victim was eight years old. Some victims also had their reproductive organs removed. \"The suspect has a sexual perversion and hates women,\" police said in 2004, when they linked the crimes for the first time and offered a reward of 200,000 yuan (around $40,000) for information leading to an arrest. \"He's reclusive and unsociable, but patient,\" they said at the time. Gao was identified after a relative was put under house arrest in Baiyin over allegations of a minor crime and had his DNA collected and tested, the China Daily said. Police concluded the killer they had been hunting for 28 years was a relation, and Gao's DNA was a match, it added. There were no immediate explanations as to why the killings stopped in 2002. SOURCE: TRTWorld and agencies.",
+    "src-wiki-zh": "白银市连环杀人案，官方称甘蒙“8·05”系列强奸杀人残害女性案，简称“白银案”，是自1988年至2002年的14年间，发生于中华人民共和国甘肃省和内蒙古自治区的跨省系列强奸杀人案。此案中甘肃省白银市10名女性遭入室强奸再杀害，期间内蒙古自治区包头市昆都仑区也发生类似案件。本案造成当地女性恐慌，亦有女性认为只是都市传说，至2004年甘肃省白银市公安局出面证实案件真实存在。2016年8月，警方通过DNA排查寻找到嫌犯高承勇。高承勇供述了在白银、包头两地作案11起、杀死11人。2018年甘肃省白银市中级人民法院一审判处高承勇死刑，剥夺政治权利终身。2019年1月3日，高承勇被执行死刑。案情简介：从1988年6月份至2002年2月份，有10起杀人兼性暴力案在甘肃省白银市出现。凶手专门选择年轻女子作为下手的目标，大部分作案时间选择在白天，采用尾随、盯梢或者长期观察后，直接进入所选女子居住地，进行强奸杀害，或者杀害姦尸。凶手杀人后，都要切割受害人不同身体部位的器官或者组织带走。21世纪初以来，甘肃白银警方曾先后启动全城查指纹、抽血验DNA等排查案犯方式，但一直没能找到真凶，该案也成为中国数宗特大悬案之一。此案凶手高承勇直到第一起案件案发28年后才被抓获。犯案时序：第1起：1988年5月26日下午3时许，白银公司23岁的女职工白某（人称“小白鞋”）被害于甘肃省白银市白银区永丰街177-1号家中。警方勘验发现，受害人“颈部被切开，脖子几乎断掉，上衣被推至双乳之上，下身赤裸，上身共有刀伤26处”。受害者左腿内侧有一个血手印，其中右手食指的指纹很清晰，另有一处指纹在门把手处。现场显然被清理过，足迹很模糊，凶手离开得很从容。第2起：1994年7月27日下午2时50分，白银市供电局19岁女临时工石某在其单身宿舍遇害。受害人“颈部被切开，上身共有刀伤36处”。第3起：1997年3月28日上午8时许，内蒙古自治区包头市21岁女青年李某被害，受害人“仰面躺在床上，被绳索捆绑，口中被塞入扫帚，上衣未脱光，裤子被扒下，下体裸露。留下了精斑”。第4起：1998年1月13日下午4时许，居民发现白银市白银区胜利街29岁的女青年杨某在家中遇害，调查证实杨某被害时间为1月13日，1月16日其遗体被发现。受害人“颈部被切开，全身赤裸，上身共有刀伤16处，双耳及头顶部有13×24厘米皮肉缺失”。第5起：1998年1月19日下午4时许，家住白银市白银区水川路的27岁女青年邓某在家中遇害。受害人“上衣被推至双乳之上，裤子被扒至膝盖处，颈部被刺割，上身共有刀伤8处，左乳头及背部30×24厘米皮肉缺失”。第6起：1998年7月30日下午2时许，白银市供电局职工曾某8岁的女儿姚某某在家中遇害。受害人“下身赤裸，颈部系有军用皮带，阴部被撕裂并检出精子”。凶手作案后将受害人尸体藏在衣柜中，作案现场桌上放着一杯水，窗帘都被拉上了。第7起：1998年11月30日上午10时许，前一晚上完夜班回家的白银公司氟化盐厂23岁女青年职工崔某某在白银市白银区东山路59-6-4号的家中被杀害。受害人“颈部被切开，上身有22处刀伤，下身赤裸，双乳、双手及阴部缺失”。第8起：2000年11月20日上午10时许，白银棉纺厂28岁的女工罗某在家中被人杀害。受害人“颈部被切开，裤子被扒至膝盖处，双手缺失”。第9起：2001年5月22日上午9时许，白银市白银区妇幼保健站28岁的女护士张某在甘肃省白银市白银区水川路28-1-12号的家中被害。受害人“颈部等处有锐器伤16处，并遭强奸”。第10起：2001年5月23日11时许，白银市白银区凯宏楼宾馆21岁的常某在工作房间内遇害。受害人“颈、胸、腹、背等部位被捅刺五十余刀”。第11起：2002年2月5日上午10时许，25岁的长包房客户朱某某在甘肃省白银市白银区陶乐春宾馆三楼客房中被害，2月9日其遗体被发现。受害人“颈部被切开，上衣被推至双乳之上，下身赤裸，遭到强奸”。警方调查：接连发生的杀害女性的案件引起了甘肃省白银市人民政府重视，成立了专案组。2001年8月，此案被中华人民共和国公安部列为督办案件。2004年8月5日，公安部组织专家对案件进行会诊，将白银、包头两地案件并案，确定为甘蒙“8·05”系列强奸杀人残害女性案。确定凶手基本特征：调查人员确定犯罪嫌疑人的基本特征：约在1964年至1971年之间出生，男性，年龄大约在33岁—40岁之间，身高1.68米至1.76米。推测是在甘肃省白银市长期居住，有“较严重的性变态心理”或者“生理缺陷”，特别是具有“性功能间歇性障碍症”，对女性怀有仇恨心态。调查还发现，该嫌疑人在白银市区有独居条件，还与内蒙古自治区包头市有一定的联系，其性格特征基本趋向于内向、抑郁、冷漠，不善交际，孤僻不合群，做事极有耐心，并且具有非常明显的双重性人格，做事隐蔽性极强。嫌疑人作案时多选择青年女性为目标，强奸后杀害，作案时间大多选择在星期一至星期五的上班时间，作案手段多采取尾随、敲门等手段入室行凶。公开信息：2004年，甘肃省白银市公安局公布了一份《白银市公安局侦破系列强奸杀人案件宣传提纲》，警方在公布案情的同时，悬赏20万元向全社会征集线索，以期早日破案。甘肃省白银市公安局为此承诺：凡是提供线索直接破案或者直接将嫌疑人扭送公安机关的，公安机关将对提供线索者一次性奖励现金20万元，并对举报人情况绝对保密。白银市公安局于2016年4月公佈連環殺手的拼圖，决定重新調查。案件告破：首案发生28年后，最终帮助警方抓到高承勇的关键信息来自指纹。警方排查该案时，通过DNA-Y染色体检验并通过数据库比对，在2016年8月23日发现当地一位行贿罪在押高姓人员的DNA-Y染色体特征值与疑犯的类似，进一步复核检验确认，发现青城镇城河村高氏家族有作案嫌疑，疑犯应是与其同一家族的男性成员。随后，警方启动家系排查，利用获得的青城高氏家谱对其家族上下直系男性挨个抽血，进行筛排分析，尤其是警方已经掌握的嫌犯的大致年龄，最后确定此人的远房侄子高承勇，有时间空间和具备作案条件。2016年8月26日，52岁的犯罪嫌疑人高承勇在白银工业学校内的小卖部被抓获。经详细DNA、指纹检验，确认其为凶犯，同时高承勇初步交代了在白银、包头两地作案11起、杀死11人的犯罪事实，甘蒙“8·05”系列强奸杀人残害女性案成功告破。其供述称第一次作案是盗窃未遂而杀人。凶手：高承勇（1964年11月10日—2019年1月3日），甘肃省兰州市榆中县青城镇城河村人（户籍所在地），城河村实则距白银市仅36公里，距榆中县县城反而较远。育有两子。高承勇持续作案那十几年，他就居住在老家，每次作案，就从榆中县到白银市区，作完案，回家继续生活。尽管所有白银市区男性户籍居民，也都曾被录入指纹、抽血验DNA，警方试图通过这种方法排查案犯，但最终查无此人。如今他们才知道问题出在哪里——高承勇户籍所在的兰州农村，因为排查困难，当时并没有录入指纹。因为害怕，高承勇之前也刻意避开了所有的指纹采集。高承勇辩护律师、甘肃仁泽律师事务所律师朱爱军在接受媒体采访时表示，2016年9月，他曾在看守所内与高承勇有过一次深谈。坐在他对面的高承勇，俨然是个老人了，头发灰白，衣服破了口子，但语气如往日般平静。他认罪，但無悔意。只有在提起供电局被杀的8岁小女孩时，他的表情和语气有起伏，说他认为自己是个恶人，比较疯狂。这是他唯一一次对自己做出评价。做完这起案件他感觉渴得厉害，喝了一整杯的水。其他的案子都没有。所有的案子里头，这起案件是他回忆起来最有所触动的。因为无法承担民事赔偿，他提出捐献器官。起诉与审判：2017年4月24日，甘肃省白银市检察院发布消息称，将在近期以故意杀人罪、强奸罪、抢劫罪及侮辱尸体罪对被告人高承勇提起公诉。2017年7月18日，甘肃省白银市中级人民法院对高承勇进行不公开开庭审理，高承勇对自己的犯罪行为供认不讳。2018年3月30日，甘肃省白银市中级人民法院一审公开宣判，认定被告人高承勇犯抢劫罪，判处死刑，剥夺政治权利终身，并处没收个人全部财产；犯故意杀人罪，判处死刑，剥夺政治权利终身；犯强奸罪，判处有期徒刑十年，剥夺政治权利三年；犯侮辱尸体罪，判处有期徒刑三年，决定执行死刑，剥夺政治权利终身，并处没收个人全部财产。高承勇当庭表示服从判决不上诉。2019年1月3日，经中华人民共和国最高人民法院核准，高承勇在甘肃省白银市被执行死刑，终年54岁。社会影响：坊间传言：在2004年之前，白银市连环杀人事件更像是流传在坊间的都市传说。2004年，基于传言众多、社会影响大，甘肃省白银市公安局公布了一份《甘肃省白银市公安局侦破系列强奸杀人案件宣传提纲》，证实了“白银连环杀人案”不是社会传言，然而此时距离第一名受害者遇害已经过去整整16年。",
+    "src-xinhua-20190103": "Serial killer executed in northwest China. Source: Xinhua | 2019-01-03 16:51:41 | Editor: Liangyu. LANZHOU, Jan. 3 (Xinhua) -- A man convicted of killing 11 women was executed Thursday in northwest China's Gansu Province, local authorities said. Gao Chengyong, 53, killed 11 women between May 1988 and February 2002 in Gansu Province and neighboring Inner Mongolia Autonomous Region. Gao killed the victims after committing a series of robberies and rapes in the city of Baiyin in Gansu and the city of Baotou in Inner Mongolia. Police had been hunting the criminal for 28 years until one of Gao's relatives committed a crime and underwent DNA testing in 2015, which led to his arrest in August 2016. He was sentenced to death by the Intermediate People's Court of Baiyin City on March 30. Gao's death sentence has been reviewed and approved by the Supreme People's Court, the country's top court."
+  }
+}
