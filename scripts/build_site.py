@@ -18,13 +18,18 @@ from detective_os.cli import run_case
 
 CASES = ["case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"]
 
-STYLE = ("<style>body{background:#0d1117;color:#d7dee8;font-family:system-ui,sans-serif;"
-         "max-width:1000px;margin:0 auto;padding:24px}h1{font-size:22px}h2{font-size:17px;"
-         "color:#e8b64c}a{color:#7fb3ff}table{border-collapse:collapse;width:100%}"
-         "td,th{border:1px solid #333;padding:7px 10px;text-align:left}"
-         ".note{color:#9aa7b5;font-size:13px;line-height:1.7}.actions{display:flex;gap:16px;"
-         "margin:18px 0}.action{display:inline-block;background:#263b52;padding:10px 14px;"
-         "border-radius:6px;text-decoration:none}</style>")
+STYLE = ("<style>"
+         ":root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:#dce5ef;background:#080f19;--bg:#080f19;--panel:#101b29;--panel2:#132235;--line:#23364a;--muted:#8ea0b4;--text:#dce5ef;--gold:#d9ae58;--blue:#79aee8}"
+         "*{box-sizing:border-box}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 80% 0%,#17283a 0,transparent 40%),var(--bg);color:var(--text);font:14px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif}"
+         "a{color:#91bff1;text-decoration:none}a:hover{color:#c2ddff}.shell{max-width:1320px;margin:auto;padding:26px 34px 60px}"
+         ".site-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 0 18px;margin-bottom:26px;gap:18px}"
+         ".brand{display:flex;align-items:center;gap:13px}.seal{width:44px;height:42px;display:grid;place-items:center;border:1px solid #8d7449;color:#e3c27f;font-weight:800;font-size:15px;letter-spacing:-1px}.brand b{display:block;font-size:12px;letter-spacing:1.8px}.brand small{display:block;color:#71879a;font-size:9px;letter-spacing:1.5px;margin-top:3px}"
+         ".nav{display:flex;gap:9px;flex-wrap:wrap}.nav a,.action{display:inline-flex;align-items:center;padding:9px 13px;border:1px solid #344b60;background:#122235;color:#c5d4e2;font-size:11px;border-radius:4px}.nav a:hover,.action:hover{border-color:#9a7b48;color:#f1d69d}"
+         ".eyebrow{font-size:9px;color:#b89a62;letter-spacing:1.8px;font-weight:700}.page-title{font-size:clamp(25px,3vw,36px);line-height:1.25;margin:8px 0 8px;font-weight:650;letter-spacing:-.5px}.meta,.note{color:var(--muted);font-size:12px;line-height:1.8}"
+         ".panel{background:linear-gradient(145deg,#111f2e,#0e1926);border:1px solid var(--line);border-radius:7px;padding:19px 21px;margin:17px 0}.followup{border-color:#79633f;background:linear-gradient(120deg,#182a39,#111d2a);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.followup h2{margin:4px 0 6px;color:#f0d49a;font-size:19px}.followup p{margin:0;color:#a5b6c6;font-size:12px;max-width:760px}.action.primary{background:#c6a15f;border-color:#c6a15f;color:#101820;font-weight:700}.action.primary:hover{background:#e0bd7b;color:#101820}"
+         "h2{font-size:18px;color:#e0c17f;margin:28px 0 12px}h3{font-size:15px}table{border-collapse:collapse;width:100%;background:#101c2a;border:1px solid var(--line);border-radius:6px;overflow:hidden}td,th{border-bottom:1px solid #26394b;padding:10px 12px;text-align:left;font-size:12px}th{color:#c5a66d;background:#142538;font-weight:650}td{color:#d0dce7}li{margin:7px 0;color:#c4d0dc;line-height:1.7}ul{padding-left:22px}.report-link{display:inline-block;margin-top:8px;color:#91bff1}"
+         "@media(max-width:700px){.shell{padding:18px 15px 40px}.site-header{align-items:flex-start;flex-direction:column}.nav{width:100%}.followup{align-items:flex-start}.panel{padding:16px}}"
+         "</style>")
 
 
 def esc(value):
@@ -96,12 +101,13 @@ def case_page(data):
     coverage_line = (f"资料覆盖率{coverage.get('score', 0) * 100:.1f}%"
                      if coverage else "资料覆盖尚未计算")
     page = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>DETECTIVE OS — {esc(case['name'])}</title>{STYLE}</head><body>
-<p><a href="index.html">← 案件中心</a> · <a href="workbench.html">打开研究工作站 →</a></p>
-<h1>DETECTIVE OS — {esc(case['name'])}</h1>
-<p>案件编号：{esc(case['case_id'])}｜状态：{esc(case['status'])}</p>
-<p class="note">本页由案包与引擎真实输出生成，非手写结论。只依据公开资料，不代表警方卷宗；
-推测不包装成事实，不根据网络传言指认现实中的个人为凶手。</p>
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080f19"><title>DETECTIVE OS — {esc(case['name'])}</title>{STYLE}</head><body><div class="shell">
+<header class="site-header"><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><nav class="nav"><a href="index.html">案件中心</a><a href="workbench.html">研究工作站</a><a href="investigate.html">自动调查</a></nav></header>
+<div class="eyebrow">ARCHIVED CASE FILE / PUBLIC-SOURCE RESEARCH</div>
+<h1 class="page-title">{esc(case['name'])}</h1>
+<p class="meta">案件编号：{esc(case['case_id'])}　｜　状态：{esc(case['status'])}</p>
+<p class="note">本页由案包与引擎真实输出生成，非手写结论。只依据公开资料，不代表警方卷宗；推测不包装成事实，不根据网络传言指认现实中的个人为凶手。</p>
+<section class="panel followup"><div><div class="eyebrow">CONTINUE CASEWORK / 增量续办</div><h2>继续调查这个案件</h2><p>提交新的来源链接、上传TXT/MD/CSV/JSON资料、粘贴原文、补充线索并提出核查问题。系统以当前正式案卷为v1基线，只抽取新增来源，生成独立的v2报告，不覆盖原始案卷。</p></div><a class="action primary" href="investigate.html?case={case['case_id'].lower().replace('case-', 'case-')}">＋ 继续调查 · 上传资料与线索 →</a></section>
 <h2>假设排序（贝叶斯，结论：{esc(report['bayesian'].get('verdict', '尚未生成'))}）</h2>
 <table><tr><th>假设</th><th>后验</th><th>先验</th></tr>{rows}</table>
 <p class="note">{esc(report['bayesian'].get('disclosure', ''))}</p>
@@ -112,7 +118,7 @@ def case_page(data):
 <p><a href=\"{esc(data['reportUrl'])}\">下载引擎报告Markdown</a></p>
 <h2>回答不了的问题</h2>
 <p>公开资料无法回答警方掌握但未公布的证据、完整法医原始报告和全部排查记录。不得据此假装还原完整刑侦卷宗。</p>
-</body></html>"""
+</div></body></html>"""
     return page
 
 
