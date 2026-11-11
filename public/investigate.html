@@ -116,7 +116,9 @@ $("form").addEventListener("submit",async ev=>{
     const d=await res.json();
     if(!res.ok){$("formMsg").textContent=d.error||"提交失败";btn.disabled=false;return;}
     $("formMsg").textContent="任务已创建，开始自动跑。页面会每5秒刷新进度。";
-    btn.disabled=false; loadHistory(); startPolling(d.job_id);
+    btn.disabled=false; loadHistory();
+const requestedJob = new URLSearchParams(window.location.search).get("job");
+if(requestedJob) startPolling(requestedJob); startPolling(d.job_id);
   }catch(e){$("formMsg").textContent="提交失败，请检查网络后重试。";btn.disabled=false;}
 });
 async function loadHistory(){
