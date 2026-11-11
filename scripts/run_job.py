@@ -240,7 +240,7 @@ def main():
     followup_focus = "\n".join(x for x in [
         str(intake.get("known_facts", "")).strip(),
         str(intake.get("questions", "")).strip(),
-        str(intake.get("materials", "")).strip()
+        ("用户补充材料（仅作线索）：\\n" + str(intake.get("materials", "")).strip()),\n        ("原报告背景（仅作研究上下文，不是证据）：\\n" + str(intake.get("parent_report_context", "")).strip())
     ] if x)
     extraction_direction = direction
     if followup_focus:
