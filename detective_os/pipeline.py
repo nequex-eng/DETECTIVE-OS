@@ -350,8 +350,8 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
     - categories: {evidence_id: [item_id, ...]} from map_categories;
       falls back to the extractor's single category tag.
     - Public-report extracts are capped at grade C; user-supplied manual
-      sources remain grade H until independently verified. No automated path
-      assigns A/B.
+      sources remain grade H; prior AI reports remain grade G. Both manual
+      input and AI inference carry zero weight. No automated path assigns A/B.
     """
     likelihoods = likelihoods or {}
     categories = categories or {}
