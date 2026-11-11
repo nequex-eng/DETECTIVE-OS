@@ -149,6 +149,7 @@ def main():
         coverage = data.get("coverage") or {}
         index_rows.append({
             "case_id": case["case_id"],
+            "slug": case_id,
             "name": case["name"],
             "status": case["status"],
             "verdict": data["bayesian"].get("verdict", "尚未生成"),
@@ -176,7 +177,7 @@ def main():
             return '<div class="empty">当前分类暂无案件。</div>'
         cards = []
         for row in rows:
-            href = row["case_id"].lower() + ".html"
+            href = row.get("slug", row["case_id"].lower()) + ".html"
             stage = {"draft": "草稿 · 待调查", "review": "调查资料已生成 · 待复核", "archived": "阶段归档 · 可继续增量调查"}[lifecycle(row)]
             cards.append(
                 f'<a class="archive-card" href="{esc(href)}">'
