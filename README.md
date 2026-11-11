@@ -172,7 +172,7 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 ## 未完成事项
 
 - V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
-- 前端工作站（React加TypeScript，10个导航页）未做
+- 前端工作站（React加TypeScript，10个导航页）已实现；归档案卷详情页已增加时间线、关系图谱、矛盾实验室的案件专属深链，工作站按URL参数自动选择案件与模块；生产部署由CI全测试通过后自动执行。
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）
@@ -194,6 +194,15 @@ tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、�
 Cloudflare Pages静态站（报告数据驱动，双案件版）：https://detective-os.pages.dev
 
 部署：`python3 deploy.py`（wrangler direct upload，public/目录）。
+
+## 2026-11-11：归档案卷分析入口接通
+
+- 每个静态归档案卷详情页的导航现在直接提供“时间线”“关系图谱”“矛盾实验室”入口，并携带当前案卷的case_id与目标tab。
+- React工作站读取URL参数，自动选择对应案件并打开指定分析模块；不再落到默认第一案或案件中心。
+- 三个模块继续使用`data/cases/<case_id>.json`中的真实events、entities/relationships与contradictions数据；空数据明确显示缺失，不造演示关系或矛盾。
+- 新增验收测试，逐个检查三起正式案卷的详情页深链，以及工作站对case/tab参数的解析。
+- CI新增生产部署job：仅main分支push且完整测试job成功后，使用`CLOUDFLARE_API_TOKEN`运行`python3 deploy.py`部署Pages；PR不部署。
+- 当前实现状态：代码已提交；等待CI测试与生产部署结果核验。
 
 ## 下一步
 
