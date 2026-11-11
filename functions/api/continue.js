@@ -22,6 +22,34 @@ export async function onRequestPost(context) {
     if (parent.status !== "done" || !parent.result) {
       return json({ error: "只有已经完成且有报告的调查才能继续跟进" }, 409);
     }
+    const rootJobId = parent.result.root_job_id || parent.root_job_id || parentId;
+    const taskKeys = await env.JOBS.list({ prefix: "job:", limit: 1000 });
+    const lineage = [];
+    for (const key of taskKeys.keys) {
+      const itemRaw = await env.JOBS.get(key.name);
+      if (!itemRaw) continue;
+      const item = JSON.parse(itemRaw);
+      const itemRoot = item.root_job_id || item.result?.root_job_id || item.parent_job_id || item.job_id;
+      if (itemRoot === rootJobId) lineage.push(item);
+    }
+    const activeChild = lineage.find(item =>
+      item.job_id !== parentId && ["queued", "collecting", "extracting", "reasoning"].includes(item.status));
+    if (activeChild) {
+      return json({ error: "该案已有续办任务正在执行，请先查看任务 " + activeChild.job_id,
+                    active_job_id: activeChild.job_id }, 409);
+    }
+    const latestVersionJob = lineage.reduce((best, item) => {
+      const version = Number(item.result?.version || item.version || 1);
+      const bestVersion = Number(best?.result?.version || best?.version || 1);
+      return version > bestVersion ? item : best;
+    }, null);
+    const latestVersion = Number(latestVersionJob?.result?.version ||
+      latestVersionJob?.version || 1);
+    const parentVersion = Number(parent.result.version || parent.version || 1);
+    if (parentVersion < latestVersion) {
+      return json({ error: "请从最新报告版本继续调查（v" + latestVersion + "），避免覆盖已有版本",
+                    latest_job_id: latestVersionJob?.job_id || rootJobId }, 409);
+    }
     const sourceUrls = Array.isArray(body.source_urls)
       ? body.source_urls.map(v => cleanText(v, 2000)).filter(v => /^https?:\/\//i.test(v)).slice(0, 20)
       : [];
@@ -33,7 +61,7 @@ export async function onRequestPost(context) {
       return json({ error: "请至少添加一个新信源、补充信息或跟进问题" }, 400);
     }
     const now = new Date().toISOString();
-    const nextVersion = Number(parent.result.version || 1) + 1;
+    const nextVersion = latestVersion + 1;
     const followupHints = [
       "【继续调查】原任务：" + parentId + "；目标版本：v" + nextVersion,
       sourceUrls.length ? "【新增信源URL】\n" + sourceUrls.join("\n") : "",
