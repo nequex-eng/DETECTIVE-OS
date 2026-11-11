@@ -1,45 +1,19 @@
-// DETECTIVE OS — POST /api/investigate: take an investigation direction
-// and queue an auto-run job. The runner (agent + pipeline) picks it up,
-// runs collect -> dedup -> extract -> reason -> draft report, and writes
-// progress back to KV. This endpoint only creates jobs; it never runs
-// the pipeline and never touches the engine.
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { "content-type": "application/json; charset=utf-8" }
-  });
+// DETECTIVE OS — structured investigation intake API.
+function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store"}});}
+function clean(v,n){return typeof v==="string"?v.trim().slice(0,n):"";}
+function lines(v,max,n){const a=Array.isArray(v)?v:String(v||"").split(/\r?\n/);return [...new Set(a.map(x=>clean(x,n)).filter(Boolean))].slice(0,max);}
+export async function onRequestPost(context){
+ try{
+  const env=context.env||{};if(!env.JOBS)return json({error:"任务存储还没接好"},503);
+  const size=Number(context.request.headers.get("content-length")||0);if(size>45000)return json({error:"提交内容超过45KB限制"},413);
+  const b=await context.request.json(),direction=clean(b.direction,500);
+  if(direction.length<3)return json({error:"请输入至少3个字的调查方向"},400);
+  const language=/^[a-z]{2,5}$/.test(clean(b.language,5))?clean(b.language,5):"zh";
+  const now=new Date().toISOString();
+  const intake={version:2,objective:clean(b.objective,2000),time_range:clean(b.time_range,200),known_facts:clean(b.known_facts,5000),questions:clean(b.questions,5000),exclusions:clean(b.exclusions,2000),source_urls:lines(b.source_urls,20,1000).filter(u=>/^https?:\/\//i.test(u)),materials:clean(b.materials,30000),parent_job_id:clean(b.parent_job_id,80),submitted_at:now};
+  const job={job_id:crypto.randomUUID(),direction,language,region:clean(b.region,200),hints:clean(b.hints,5000),intake,status:"queued",stage:"queued",stage_note:"调查委托已收到，等待后台跑手执行",progress:{percent:0,label:"排队中"},metrics:{sources:0,facts:0,contradictions:0},events:[{t:now,stage:"queued",message:"完整调查委托已创建，等待后台自动执行"}],result:null,error:null,created_at:now,updated_at:now};
+  await env.JOBS.put("job:"+job.job_id,JSON.stringify(job));
+  return json({job_id:job.job_id,status:job.status,intake_version:2},201);
+ }catch(e){return json({error:"请求格式有误，请检查输入后重试"},400);}
 }
-
-export async function onRequestPost(context) {
-  try {
-    const env = context.env || {};
-    if (!env.JOBS) return json({ error: "任务存储还没接好，请稍后再试" }, 503);
-    const body = await context.request.json();
-    const direction = typeof body.direction === "string" ? body.direction.trim() : "";
-    if (!direction) return json({ error: "请先输入调查方向" }, 400);
-    if (direction.length > 500) return json({ error: "调查方向请控制在500字以内" }, 400);
-    const language = typeof body.language === "string" && /^[a-z]{2,5}$/.test(body.language.trim())
-      ? body.language.trim() : "zh";
-    const region = typeof body.region === "string" ? body.region.trim().slice(0, 200) : "";
-    const hints = typeof body.hints === "string" ? body.hints.trim().slice(0, 500) : "";
-    const now = new Date().toISOString();
-    const job = {
-      job_id: crypto.randomUUID(),
-      direction, language, region, hints,
-      status: "queued", stage: "queued",
-      stage_note: "已收到，等待跑手接手",
-      events: [{ t: now, stage: "queued", message: "任务已创建，等待跑手接手" }],
-      result: null, error: null,
-      created_at: now, updated_at: now
-    };
-    await env.JOBS.put("job:" + job.job_id, JSON.stringify(job));
-    return json({ job_id: job.job_id, status: job.status }, 201);
-  } catch (e) {
-    return json({ error: "请求有误，请再试一次" }, 400);
-  }
-}
-
-export async function onRequest(context) {
-  if (context.request.method === "POST") return onRequestPost(context);
-  return json({ error: "只接受POST" }, 405);
-}
+export async function onRequest(context){if(context.request.method==="POST")return onRequestPost(context);return json({error:"只接受POST"},405);}
