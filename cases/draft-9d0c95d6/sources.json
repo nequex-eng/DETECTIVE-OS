@@ -1,0 +1,62 @@
+[
+  {
+    "is_reprint": false,
+    "notes": "辉达官方新闻中心一手声明，2026-11-08董事会独立调查的原始来源。",
+    "origin_url": "",
+    "published_at": "2026-11-08",
+    "publisher": "NVIDIA Newsroom",
+    "reprint_of": "",
+    "source_id": "S01",
+    "source_type": "official_statement",
+    "title": "Statement From NVIDIA Board of Directors",
+    "url": "https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors"
+  },
+  {
+    "is_reprint": true,
+    "notes": "新西兰RNZ转载路透社报道（文末标注- Reuters -），与S01同源核对董事会声明措辞；含黄仁勋致员工信引文（经Axios/路透看到的草稿邮件）。",
+    "origin_url": "",
+    "published_at": "2026-11-09",
+    "publisher": "RNZ (Reuters)",
+    "reprint_of": "Reuters",
+    "source_id": "S02",
+    "source_type": "news",
+    "title": "Nvidia opens probe after report that CEO Jensen Huang was target of foreign intelligence",
+    "url": "https://www.rnz.co.nz/news/world/2456613/nvidia-opens-probe-after-report-that-ceo-jensen-huang-was-target-of-foreign-intelligence"
+  },
+  {
+    "is_reprint": false,
+    "notes": "联合新闻网编译整理包，信源为纽约时报、金融时报等；含完整时间轴与三条调查线（董事会/众议院/司法部）；与S02/S04交叉核对。",
+    "origin_url": "",
+    "published_at": "2026-11-09",
+    "publisher": "联合新闻网（联合报）",
+    "reprint_of": "",
+    "source_id": "S03",
+    "source_type": "news",
+    "title": "整理包／黃仁勳婚外情時間軸：黃樂是誰、川普為何早知情、輝達會換執行長嗎？",
+    "url": "https://udn.com/news/story/125066/9866003"
+  },
+  {
+    "is_reprint": false,
+    "notes": "印度时报旗下Gadgets Now独立解释性报道，逐项梳理纽约时报10月29日与11月6日两篇报道、金融时报备忘录、新加坡内政部回应与国会要求；明确标注哪些主张未经公开证实。",
+    "origin_url": "",
+    "published_at": "2026-11-09",
+    "publisher": "Gadgets Now (Times of India)",
+    "reprint_of": "",
+    "source_id": "S04",
+    "source_type": "news",
+    "title": "Who Is Alice Huang? US Memo Alleges Jensen Huang Romance With Suspected Spy",
+    "url": "https://gadgetsnow.indiatimes.com/tech-news/who-is-alice-huang-us-memo-alleges-jensen-huang-romance-with-suspected-spy/articleshow/135655430.cms?frmapp=yes"
+  },
+  {
+    "is_reprint": false,
+    "notes": "福克斯商业频道报道中国外交部否认；文末注明Reuters contributed。",
+    "origin_url": "",
+    "published_at": "2026-11-09",
+    "publisher": "Fox Business",
+    "reprint_of": "",
+    "source_id": "S05",
+    "source_type": "news",
+    "title": "China denies spy plot targeting Nvidia CEO Jensen Huang, calls allegations ‘smear’",
+    "url": "https://foxbusiness.com/technology/china-denies-spy-plot-targeting-nvidia-ceo-jensen-huang-calls-allegations-smear"
+  }
+]

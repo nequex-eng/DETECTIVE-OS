@@ -1,0 +1,1052 @@
+{
+  "case_id": "CASE-DRAFT-6c31bb54",
+  "bayesian": {
+    "posteriors": [
+      {
+        "hypothesis_id": "H1",
+        "log_posterior": -5.8387,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.3115
+      },
+      {
+        "hypothesis_id": "H2",
+        "log_posterior": -5.9531,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.2779
+      },
+      {
+        "hypothesis_id": "H5",
+        "log_posterior": -5.9613,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.2756
+      },
+      {
+        "hypothesis_id": "H3",
+        "log_posterior": -7.3127,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0713
+      },
+      {
+        "hypothesis_id": "H4",
+        "log_posterior": -7.4271,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0636
+      }
+    ],
+    "disclosure": "Bayesian output is a model ranking under stated priors and likelihoods, not a probability of guilt. Priors are subjective starting points; likelihoods are analyst judgments stored in the case file. No reliable data exists to calibrate them against solved cases.",
+    "verdict": "undecided: top two within 0.0336 (< 0.1 margin); refuse to crown a winner"
+  },
+  "qualitative": {
+    "H1": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H2": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H3": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H4": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H5": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    }
+  },
+  "plan": [
+    {
+      "task_id": "T01",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F01寻找第二个独立来源：Li Mingzhao与妻子Chen Zhen自1996年起用尽全部积蓄寻找儿子……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T02",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F02寻找第二个独立来源：母亲记得Pengpeng的眉骨上有一道疤痕，并称他两岁时曾跌倒在地。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T03",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F03寻找第二个独立来源：Li先生回忆称，他把儿子Pengpeng带到水泥厂工作，一名姓Yang的同事主动……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T04",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F04寻找第二个独立来源：Pengpeng那天晚上没有回家。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T05",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F05寻找第二个独立来源：夫妇二人去了Mr Yang的家中，但他已经逃走。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T06",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F06寻找第二个独立来源：Li先生一直没有更换手机号码，几十年来夫妇二人一直住在同一间破旧砖房中，等待儿子……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T07",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F07寻找第二个独立来源：2010年，警方在四川抓获了绑架者；夫妇二人得知儿子已被卖给另一名同样姓Yang……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T08",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F08寻找第二个独立来源：据警方声明，警方在八年后抓获第二名绑架者，并查明Pengpeng被卖给了一对夫妇……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T09",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F09寻找第二个独立来源：警方请绘图员Lin Yuhui根据李先生儿子四岁时的照片绘制其画像；Lin Yu……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T10",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F10寻找第二个独立来源：4月，警方告知Li先生及其妻子，DNA样本检测已有匹配结果。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T11",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F11寻找第二个独立来源：经确认，Li夫妇的儿子是一名26岁的男子，姓Liu，现居河北省武安市。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T12",
+      "case_id": "CASE-DRAFT-6c31bb54",
+      "question": "为证据F12寻找第二个独立来源：团聚时，Pengpeng告诉父母，他已经结婚并有两个孩子。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    }
+  ],
+  "review": {
+    "case_id": "CASE-DRAFT-6c31bb54",
+    "findings": [
+      {
+        "role": "source",
+        "finding": "证据F01只有一个来源：Li Mingzhao与妻子Chen Zhen自1996年起……",
+        "severity": "warning",
+        "cites": [
+          "F01"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F02只有一个来源：母亲记得Pengpeng的眉骨上有一道疤痕，并称他两岁时曾跌……",
+        "severity": "warning",
+        "cites": [
+          "F02"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F03只有一个来源：Li先生回忆称，他把儿子Pengpeng带到水泥厂工作，一名……",
+        "severity": "warning",
+        "cites": [
+          "F03"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F04只有一个来源：Pengpeng那天晚上没有回家。……",
+        "severity": "warning",
+        "cites": [
+          "F04"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F05只有一个来源：夫妇二人去了Mr Yang的家中，但他已经逃走。……",
+        "severity": "warning",
+        "cites": [
+          "F05"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F06只有一个来源：Li先生一直没有更换手机号码，几十年来夫妇二人一直住在同一间……",
+        "severity": "warning",
+        "cites": [
+          "F06"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F07只有一个来源：2010年，警方在四川抓获了绑架者；夫妇二人得知儿子已被卖给……",
+        "severity": "warning",
+        "cites": [
+          "F07"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F08只有一个来源：据警方声明，警方在八年后抓获第二名绑架者，并查明Pengpe……",
+        "severity": "warning",
+        "cites": [
+          "F08"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F09只有一个来源：警方请绘图员Lin Yuhui根据李先生儿子四岁时的照片绘制……",
+        "severity": "warning",
+        "cites": [
+          "F09"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F10只有一个来源：4月，警方告知Li先生及其妻子，DNA样本检测已有匹配结果。……",
+        "severity": "warning",
+        "cites": [
+          "F10"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F11只有一个来源：经确认，Li夫妇的儿子是一名26岁的男子，姓Liu，现居河北……",
+        "severity": "warning",
+        "cites": [
+          "F11"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F12只有一个来源：团聚时，Pengpeng告诉父母，他已经结婚并有两个孩子。……",
+        "severity": "warning",
+        "cites": [
+          "F12"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H1没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H2没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H3没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H4没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H5没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "adversarial",
+        "finding": "反方审查失败：领先假设H1找不到任何反证，审查未真正执行",
+        "severity": "blocker",
+        "cites": []
+      }
+    ],
+    "blockers": 6,
+    "passed": false
+  },
+  "contradictions": [],
+  "gaps": [
+    {
+      "id": "G0",
+      "gap": "本案包为自动生成的草稿，未经人工复核；证据最高C级，假设似然为LLM初拟，结论只作参考。",
+      "needed": "人工复核每条证据的原文与分级，确认假设与似然。"
+    }
+  ],
+  "limits": [
+    "本报告为未审草稿：证据由LLM从公开报道抽取（逐字引用已核验），最高C级；假设先验为均匀分布，似然为LLM初拟；不得据此指认任何人。",
+    "公开资料回答不了的问题必须明说，不得假装还原完整刑侦卷宗。"
+  ],
+  "coverage": {
+    "case_id": "CASE-DRAFT-6c31bb54",
+    "template_version": "1",
+    "total": 22,
+    "covered": 0,
+    "single": 0,
+    "missing": 22,
+    "only_unusable": 0,
+    "score": 0.0,
+    "by_category": {
+      "失踪/案发": {
+        "total": 4,
+        "covered": 0,
+        "single": 0,
+        "missing": 4
+      },
+      "发现": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "身份确认": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "法医/物证": {
+        "total": 3,
+        "covered": 0,
+        "single": 0,
+        "missing": 3
+      },
+      "侦查过程": {
+        "total": 3,
+        "covered": 0,
+        "single": 0,
+        "missing": 3
+      },
+      "作案手法": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "动机": {
+        "total": 1,
+        "covered": 0,
+        "single": 0,
+        "missing": 1
+      },
+      "法律程序": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "家属与当事人": {
+        "total": 1,
+        "covered": 0,
+        "single": 0,
+        "missing": 1
+      },
+      "官方回应": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      }
+    },
+    "missing_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+    ],
+    "single_ids": [],
+    "items": [
+      {
+        "item_id": "C01",
+        "category": "失踪/案发",
+        "title": "被害人身份",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C02",
+        "category": "失踪/案发",
+        "title": "最后行踪",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C03",
+        "category": "失踪/案发",
+        "title": "案发时间窗口",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C04",
+        "category": "失踪/案发",
+        "title": "案发地点/第一现场",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C05",
+        "category": "发现",
+        "title": "发现时间地点与发现者",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C06",
+        "category": "发现",
+        "title": "现场状况",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C07",
+        "category": "身份确认",
+        "title": "身份确认过程与时间",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C08",
+        "category": "身份确认",
+        "title": "认尸/协查原始材料",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C09",
+        "category": "法医/物证",
+        "title": "法医结论",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C10",
+        "category": "法医/物证",
+        "title": "物证清单与保存现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C11",
+        "category": "法医/物证",
+        "title": "DNA/指纹比对现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C12",
+        "category": "侦查过程",
+        "title": "排查规模与范围",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C13",
+        "category": "侦查过程",
+        "title": "侦查节点",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C14",
+        "category": "侦查过程",
+        "title": "嫌疑人画像/排查方向",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C15",
+        "category": "作案手法",
+        "title": "作案手法特征",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C16",
+        "category": "作案手法",
+        "title": "抛尸/藏匿方式与路线",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C17",
+        "category": "动机",
+        "title": "动机指向",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C18",
+        "category": "法律程序",
+        "title": "诉讼/审判进展",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C19",
+        "category": "法律程序",
+        "title": "追诉时效/立案状态",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C20",
+        "category": "家属与当事人",
+        "title": "家属说法与诉求",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C21",
+        "category": "官方回应",
+        "title": "警方/官方公开回应",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C22",
+        "category": "官方回应",
+        "title": "同期原始报道",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      }
+    ]
+  }
+}

@@ -52,123 +52,6 @@ def save_checkpoint(path, payload):
                     encoding="utf-8")
 
 
-def serialize_plan_tasks(tasks):
-    """Convert InvestigationTask objects into JSON-safe public records."""
-    fields = (
-        "task_id", "case_id", "question", "purpose", "hypotheses",
-        "expected_info", "impact_if_yes", "impact_if_no",
-        "source_or_channel", "estimated_value", "status",
-    )
-    out = []
-    for task in tasks or []:
-        row = {}
-        for name in fields:
-            value = getattr(task, name, None)
-            if isinstance(value, Path):
-                value = str(value)
-            row[name] = value
-        out.append(row)
-    return out
-
-
-def build_timeline_events(evidence):
-    """Build only dates explicitly visible in each verbatim source quote.
-
-    Content summaries and model-suggested event_date values are not used
-    to create timeline dates. A range is preserved as a range.
-    """
-    import re
-    from datetime import date
-
-    def iso(y, m, d):
-        try:
-            return date(int(y), int(m), int(d)).isoformat()
-        except (TypeError, ValueError):
-            return None
-
-    range_re = re.compile(
-        r"(?P<y>\d{4})年(?P<m>\d{1,2})月(?P<d1>\d{1,2})日"
-        r"\s*(?:至|到|—|－|-|~|～)\s*"
-        r"(?:(?P<y2>\d{4})年)?(?:(?P<m2>\d{1,2})月)?"
-        r"(?P<d2>\d{1,2})日?")
-    date_re = re.compile(r"(?P<y>\d{4})年(?P<m>\d{1,2})月(?P<d>\d{1,2})日")
-    iso_re = re.compile(r"(?<!\d)(?P<y>\d{4})-(?P<m>\d{2})-(?P<d>\d{2})(?!\d)")
-    events = []
-    for item in evidence or []:
-        quote = str(item.get("original_quote", ""))
-        if not quote:
-            continue
-        evidence_id = str(item.get("evidence_id", ""))
-        match = range_re.search(quote)
-        if match:
-            y1, m1, d1 = match.group("y", "m", "d1")
-            y2 = match.group("y2") or y1
-            m2 = match.group("m2") or m1
-            start, end = iso(y1, m1, d1), iso(y2, m2, match.group("d2"))
-            if start and end:
-                events.append({
-                    "event_id": f"EVT-{evidence_id}",
-                    "title": str(item.get("content", "")),
-                    "time": {"kind": "range", "label": f"{start}至{end}",
-                             "earliest": start, "latest": end},
-                    "evidence_ids": [evidence_id],
-                    "source_ids": [item.get("source_id", "")] if item.get("source_id") else [],
-                })
-            continue
-        match = date_re.search(quote)
-        if match:
-            y, m, d = match.group("y", "m", "d")
-        else:
-            match = iso_re.search(quote)
-            if not match:
-                continue
-            y, m, d = match.group("y", "m", "d")
-        value = iso(y, m, d)
-        if value:
-            events.append({
-                "event_id": f"EVT-{evidence_id}",
-                "title": str(item.get("content", "")),
-                "time": {"kind": "date", "label": value,
-                         "earliest": value, "latest": value},
-                "evidence_ids": [evidence_id],
-                "source_ids": [item.get("source_id", "")] if item.get("source_id") else [],
-            })
-    events.sort(key=lambda row: (row["time"]["earliest"], row["event_id"]))
-    return events
-
-
-def build_traceability_graph(sources, evidence):
-    """Create source/evidence nodes and citation edges only for known IDs."""
-    source_ids = {str(source.get("source_id", "")) for source in sources or []}
-    entities = []
-    relationships = []
-    for source in sources or []:
-        sid = str(source.get("source_id", ""))
-        if not sid:
-            continue
-        entities.append({
-            "entity_id": f"SRC-{sid}", "kind": "source",
-            "name": str(source.get("title", sid)),
-            "publisher": str(source.get("publisher", "")),
-        })
-    for item in evidence or []:
-        eid = str(item.get("evidence_id", ""))
-        if not eid:
-            continue
-        entities.append({
-            "entity_id": f"EVD-{eid}", "kind": "evidence",
-            "name": str(item.get("content", "")),
-            "grade": str(item.get("grade", "")),
-        })
-        sid = str(item.get("source_id", ""))
-        if sid and sid in source_ids:
-            relationships.append({
-                "from": f"EVD-{eid}", "to": f"SRC-{sid}",
-                "relation": "cites",
-            })
-    return {"entities": entities, "relationships": relationships}
-
-
 def load_checkpoint(path, collected_mtime):
     """A checkpoint is valid only for the collected.json it was built
     from; a re-collection (new mtime) invalidates all of them."""
@@ -179,40 +62,6 @@ def load_checkpoint(path, collected_mtime):
     if data.get("collected_mtime") != collected_mtime:
         return None
     return data
-
-
-def merge_parent_collection(parent_result, new_sources, new_texts):
-    """Carry forward verified source material from the parent run, then add
-    genuinely new origins. Reprints/duplicate URLs are not counted twice.
-    Legacy parents without saved source text remain report-context only.
-    """
-    parent_sources = parent_result.get("sources", []) if isinstance(parent_result, dict) else []
-    parent_texts = parent_result.get("source_texts", {}) if isinstance(parent_result, dict) else {}
-    merged = []
-    texts = {}
-    seen = set()
-
-    def key_for(source):
-        url = str(source.get("origin_url") or source.get("url") or "").strip()
-        if url:
-            return url.split("#", 1)[0].rstrip("/").lower()
-        return "meta:" + "|".join(str(source.get(k, "")).strip().lower()
-                                  for k in ("publisher", "title", "published_at"))
-
-    for source, source_text in (
-        [(s, parent_texts.get(s.get("source_id", ""), "")) for s in parent_sources]
-        + [(s, new_texts.get(s.get("source_id", ""), "")) for s in new_sources]
-    ):
-        key = key_for(source)
-        if key in seen:
-            continue
-        seen.add(key)
-        row = dict(source)
-        row["source_id"] = f"S{len(merged) + 1:02d}"
-        merged.append(row)
-        if source_text:
-            texts[row["source_id"]] = str(source_text)[:12000]
-    return merged, texts
 
 
 def main():
@@ -226,42 +75,12 @@ def main():
         print(f"no collected.json for {job_id}; collect sources first")
         return 1
     data = json.loads(collected_path.read_text(encoding="utf-8"))
-    live = job_get(job_id)
-    direction = data.get("direction") or live.get("direction", "")
-    intake = live.get("intake", {}) if isinstance(live.get("intake"), dict) else {}
-    parent_id = live.get("parent_job_id") or intake.get("parent_job_id")
-    parent = job_get(parent_id) if parent_id else {}
-    parent_result = parent.get("result", {}) if isinstance(parent, dict) else {}
-    if not isinstance(parent_result, dict):
-        parent_result = {}
-    # Older completed jobs did not persist source_texts in KV results.
-    # Reuse their original collected.json from the runner workspace when it
-    # is still available; otherwise the prior report remains context only.
-    parent_collection = {}
-    if parent_id and (not parent_result.get("source_texts") or not parent_result.get("sources")):
-        parent_collected_path = ROOT / "runs" / parent_id / "collected.json"
-        if parent_collected_path.exists():
-            try:
-                parent_collection = json.loads(parent_collected_path.read_text(encoding="utf-8"))
-            except (OSError, json.JSONDecodeError):
-                parent_collection = {}
-    merge_base = dict(parent_result)
-    if parent_collection:
-        merge_base["sources"] = parent_collection.get("sources", [])
-        merge_base["source_texts"] = parent_collection.get("texts", {})
-        merge_base["paths_tried"] = parent_collection.get("paths_tried", [])
-    sources, texts = merge_parent_collection(
-        merge_base, data.get("sources", []), data.get("texts", {}))
-    paths_tried = list(merge_base.get("paths_tried", [])) + list(data.get("paths_tried", []))
-    followup_focus = "\n".join(x for x in [
-        str(intake.get("known_facts", "")).strip(),
-        str(intake.get("questions", "")).strip(),
-        ("用户补充材料（仅作线索）：\n" + str(intake.get("materials", "")).strip()),
-        ("原报告背景（仅作研究上下文，不是证据）：\n" + str(intake.get("parent_report_context", "")).strip())
-    ] if x)
-    extraction_direction = direction
-    if followup_focus:
-        extraction_direction += "\n续办核查重点（仅作待核实线索，不得视为事实）：\n" + followup_focus[:12000]
+    sources = data["sources"]
+    texts = data["texts"]
+    paths_tried = data.get("paths_tried", [])
+    # The job's direction comes from the collected file (written by the
+    # runner from the job doc) so this script never needs the API read.
+    direction = data.get("direction", "")
     short = job_id[:8]
     case_id = f"CASE-DRAFT-{short}"
     collected_mtime = collected_path.stat().st_mtime
@@ -269,8 +88,6 @@ def main():
     ck_likelihoods = run_dir / "likelihoods.json"
     ck_categories = run_dir / "categories.json"
     try:
-        if parent_id and (not parent_result or parent.get("status") != "done"):
-            raise RuntimeError("无法读取已完成的原调查结果，续办任务停止以避免丢失基线")
         # Resume-aware first update: a run killed mid-flight (VM
         # restart) leaves the job at extracting/reasoning; demanding
         # "collecting" would refuse and the checkpoints below would
@@ -296,7 +113,7 @@ def main():
                 if not text:
                     continue
                 try:
-                    got = extract_candidates(text, s["source_id"], extraction_direction)
+                    got = extract_candidates(text, s["source_id"], direction)
                 except Exception as exc:  # noqa: BLE001 - one flaky source
                     # must not kill the whole job; the draft says which
                     # sources contributed nothing.
@@ -356,28 +173,8 @@ def main():
         report_md = md_path.read_text(encoding="utf-8")
         cov = summary["coverage"]
         score_pct = round(cov["score"] * 100, 1)
-        if parent_id:
-            report_md += (
-                "\\n\\n## 续办说明\\n"
-                f"本报告承接任务 {parent_id}。原报告仅作为研究背景，不作为证据。"
-                f"本轮合并可回溯的既有来源 {len(parent_result.get('sources', []))} 个，"
-                f"新增采集来源 {len(data.get('sources', []))} 个；用户补充信息仅作为待核实线索。"
-            )
         result = {
             "case_id": case_id,
-            "parent_job_id": parent_id,
-            "source_count": len(sources),
-            "fact_count": len(candidates),
-            "sources": sources,
-            "source_texts": texts,
-            "paths_tried": paths_tried,
-            "continuation": {
-                "parent_job_id": parent_id,
-                "merged_previous_sources": bool(merge_base.get("source_texts")),
-                "recovered_parent_collection": bool(parent_collection),
-                "parent_report_used_as_context": bool(parent_result.get("report_md")),
-                "user_materials_are_unverified": bool(intake.get("materials") or intake.get("known_facts"))
-            },
             "case_name": direction + "（草稿）",
             "verdict": summary["bayes"]["verdict"],
             "posteriors": [{"hypothesis_id": p["hypothesis_id"],

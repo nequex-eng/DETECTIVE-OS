@@ -5,12 +5,3 @@ reports/*.db
 kaggle/run*-output/detective-os/
 kaggle/run*-monitor.log
 .wrangler/
-
-node_modules/
-dist/
-reports/*-report.json
-reports/*-report.md
-public/data/
-public/workbench-assets/
-
-public/workbench.html

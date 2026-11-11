@@ -1,0 +1,38 @@
+[
+  {
+    "source_id": "S01",
+    "title": "Couple finds kidnapped son after 22 years",
+    "publisher": "China Daily",
+    "published_at": "2018-05-08",
+    "url": "https://www.chinadaily.com.cn/a/201805/08/WS5af14392a3105cdcf651ca36.html",
+    "origin_url": "",
+    "source_type": "news",
+    "is_reprint": true,
+    "reprint_of": "Chinanews (中新社) 2018-05-03 report; photos credited chinanews.com",
+    "notes": "英文主源。关键事实:鹏鹏1992年生,1996-12-15在十堰失踪;同事杨某以带孩子玩为由带走;2010年杨某在四川落网,供称以6600元卖给邯郸孔某;孔某已去世;2018年4月初警方请专家画像,26岁刘姓男子DNA比中,相似度约80%;2018-05-03上午10点十堰团聚。"
+  },
+  {
+    "source_id": "S02",
+    "title": "Touching moment Chinese couple are reunited with their long-lost son 22 years after he was abducted by his father's co-worker",
+    "publisher": "Daily Mail (via Good News Daily reprint)",
+    "published_at": "2018-05-04",
+    "url": "https://goodnewsdaily.com/touching-moment-chinese-couple-are-reunited-with-their-long-lost-son-22-years-after-he-was-abducted-by-his-fathers-co-worker/",
+    "origin_url": "",
+    "source_type": "news",
+    "is_reprint": true,
+    "reprint_of": "Daily Mail",
+    "notes": "第二独立链。补充:水泥厂场景、画像专家林宇辉、武安市刘姓男子、已婚有二孩。但在'卖给谁'一节与S01出入:S02称卖给'另一名也姓杨的人贩子,八年后落网后称卖给一对夫妇',S01称卖给邯郸孔某且孔某已去世。出入已标注,抽取时以S01为准。"
+  },
+  {
+    "source_id": "S03",
+    "title": "Tin người, ông bố lạc mất con trai suốt 22 năm",
+    "publisher": "VnExpress",
+    "published_at": "2018-05-10",
+    "url": "https://vnexpress.net/tin-nguoi-ong-bo-lac-mat-con-trai-suot-22-nam-3747774.html",
+    "origin_url": "",
+    "source_type": "news",
+    "is_reprint": true,
+    "reprint_of": "Chinanews (中新社)",
+    "notes": "与S01同源(中新社通稿),越南语转载,不计独立链,但补充细节:警方曾筛查10000人DNA无果;2018年初深圳警方画像专家受命;鹏鹏2岁摔倒致额头疤痕;4月初在河北找到,时与妻子和2个女儿同住;2018-05-03团聚。"
+  }
+]

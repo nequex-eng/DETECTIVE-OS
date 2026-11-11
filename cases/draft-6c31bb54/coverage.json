@@ -1,0 +1,512 @@
+{
+  "case_id": "CASE-DRAFT-6c31bb54",
+  "template_version": "1",
+  "items": [
+    {
+      "item_id": "C01",
+      "category": "失踪/案发",
+      "title": "被害人身份",
+      "question": "被害人是谁：姓名、年龄、职业或学校、籍贯？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C02",
+      "category": "失踪/案发",
+      "title": "最后行踪",
+      "question": "最后一次被可靠记录的时间、地点、最后接触者？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C03",
+      "category": "失踪/案发",
+      "title": "案发时间窗口",
+      "question": "遇害或案发的时间范围能否确定？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C04",
+      "category": "失踪/案发",
+      "title": "案发地点/第一现场",
+      "question": "第一现场在哪里？有无原始记录？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C05",
+      "category": "发现",
+      "title": "发现时间地点与发现者",
+      "question": "何时、何地、何人发现？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C06",
+      "category": "发现",
+      "title": "现场状况",
+      "question": "发现时遗体或现场的状况如何描述？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C07",
+      "category": "身份确认",
+      "title": "身份确认过程与时间",
+      "question": "如何确认死者身份？何时确认？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C08",
+      "category": "身份确认",
+      "title": "认尸/协查原始材料",
+      "question": "认尸启示、协查通报的原始版面是否收入？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C09",
+      "category": "法医/物证",
+      "title": "法医结论",
+      "question": "死因、死亡时间的法医结论是什么？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C10",
+      "category": "法医/物证",
+      "title": "物证清单与保存现状",
+      "question": "物证有哪些？是否保存、可否复检？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C11",
+      "category": "法医/物证",
+      "title": "DNA/指纹比对现状",
+      "question": "DNA、指纹比对做过没有？结果如何？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C12",
+      "category": "侦查过程",
+      "title": "排查规模与范围",
+      "question": "排查了多少人、多大范围？有无原始说明？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C13",
+      "category": "侦查过程",
+      "title": "侦查节点",
+      "question": "专案组、重启、悬赏等关键节点的时间线？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C14",
+      "category": "侦查过程",
+      "title": "嫌疑人画像/排查方向",
+      "question": "公开的画像或排查方向是什么？（方向不等于指认）",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C15",
+      "category": "作案手法",
+      "title": "作案手法特征",
+      "question": "手法特征的可靠描述有哪些？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C16",
+      "category": "作案手法",
+      "title": "抛尸/藏匿方式与路线",
+      "question": "抛尸或藏匿的方式、顺序、路线？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C17",
+      "category": "动机",
+      "title": "动机指向",
+      "question": "有无经核实的动机指向？无指向本身也要记录。",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C18",
+      "category": "法律程序",
+      "title": "诉讼/审判进展",
+      "question": "诉讼、审判、执行进展如何？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C19",
+      "category": "法律程序",
+      "title": "追诉时效/立案状态",
+      "question": "立案状态与追诉时效的官方说法？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C20",
+      "category": "家属与当事人",
+      "title": "家属说法与诉求",
+      "question": "家属的说法、诉求与时间线？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C21",
+      "category": "官方回应",
+      "title": "警方/官方公开回应",
+      "question": "警方与官方的公开回应及时间？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C22",
+      "category": "官方回应",
+      "title": "同期原始报道",
+      "question": "案发同期的原始报道是否系统收入？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found"
+        },
+        {
+          "path": "web_search",
+          "status": "tried"
+        },
+        {
+          "path": "direct_source",
+          "status": "found"
+        }
+      ],
+      "analyst_note": "DRAFT: auto-linked by category mapping. Raw collection notes: browser.search news vertical: 1996南京父子失踪案 (ok); browser.search news vertical: 1996年南京 父子 失踪 警方 (ok); browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆 (ok); browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝 (ok); browser.search: 南京 1996年 儿子失踪 父亲 寻子 (ok); browser.search: 1996 南京 男孩 失踪 被拐 寻亲 (ok); browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰 (partial); browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元 (ok); browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018 (partial); browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600 (ok); browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018 (ok); direct_source: China Daily 2018-05-08 (2 pages) (found); direct_source: goodnewsdaily (Daily Mail reprint) (found); direct_source: VnExpress (Chinanews reprint, Vietnamese) (found)",
+      "not_applicable": false
+    }
+  ]
+}

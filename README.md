@@ -20,21 +20,23 @@
 
 **T1. Kaggle Notebook推上运行，出评测报告（2026-11-10已完成）。**运行地址：https://www.kaggle.com/code/nequexkaggle/detective-os-t4。共4次运行，版本4全部通过：预检（2张Tesla T4）→实验1去重通过（阈值0.60，10个转载聚为1类）→实验2事实抽取通过（关键词召回8/8=1.0，设备cuda:1）→实验3矛盾识别通过（CT01指出口径差异，未判定撒谎）→CPU复算通过（两案排序一致，数值差0.0）。失败记录：运行1实验1阈值0.85过严（改0.60）；运行2实验2死于hf_device_map验证行bug（改查参数实际所在设备）；运行3 CPU复算数值差6.1e-05（根因：引擎在softmax前把对数后验舍入到4位小数，复算格跳过了这步；补上舍入后差值0.0）。运行4排队约90分钟，内核约157秒。额度合计约0.23 GPU小时。报告在kaggle/run1-output/至run4-output/（每份含T1-RUN*-REPORT.md）。
 
-**T2. 第三个案件（2026-11-11完成）：1970年Isdalen身份未明女性可疑死亡案。**案包`cases/case-no-1970-001/`，6个独立来源（NRK、BBC News、奥斯陆大学研究传播、Journalisten、The Norwegian American、Life in Norway）、16条证据（C15、D1）、7个事件、10个实体、6条有来源关系、4条解释分歧、8项资料缺口、22项覆盖清单（18项适用）。四个竞争解释：自杀、他杀、协助自杀/第三方参与、意外死亡；没有建立嫌疑人节点。引擎实跑：贝叶斯H2 28.35%、H1 25.29%、H3 25.27%、H4 21.09%，前两名差0.0306，明确输出undecided；定性分数H3净1.3，两个排序口径并列披露，不把模型分数解释为犯罪概率。资料覆盖41.7%（3项已覆盖/9项单来源/6项缺失）；调查计划11项；独立审查0个blocker。报告和静态案件页已由CI生成并上传artifact。验收：check通过、报告生成、静态站构建通过、全套65项测试通过。CI运行：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
-
-**T3. React+TypeScript研究工作站（2026-11-11生产部署成功）。**新增`workbench.html`与`src/`应用，十个真实导航模块：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。数据全部由案包和结构化引擎报告生成：`scripts/build_site.py`对三个案包只读运行引擎，生成`public/data/cases/*.json`、报告Markdown和案件静态页；React工作站通过这些JSON加载，不写入生产KV、不创建调查任务。证据编号可回链证据详情，来源编号可回链来源档案；F/G/H级无来源记录明确标示，不伪造来源。`deploy.py`现会先安装依赖、TypeScript类型检查、构建Vite，再构建真实案包数据，最后才调用Wrangler。验收：`npm run typecheck`通过、Vite build通过、静态数据构建通过、71项测试全过；CI artifact包含`workbench.html`、assets、三个案包JSON与报告：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42956754165。**生产部署已实核（2026-11-11最终验收）：** GitHub Actions CI run `42964029913`与部署run `42964080879`均成功。Cloudflare Pages生产部署ID `d2f7e6ea-44b5-4fb6-902d-c5d81f25a621`，生产部署URL https://d2f7e6ea.detective-os.pages.dev，主站域名 https://detective-os.pages.dev/；Cloudflare API确认`environment=production`、`branch=main`、`latest_stage.status=success`，生产commit `23b7cc95e10126ea94b1c3c782bfd3e6fe5a04db`与GitHub main一致。部署清单已确认包含`/index.html`、`/investigate.html`、`/workbench.html`、`/workbench-assets/workbench-Bc0-7DVc.css`、`/workbench-assets/workbench-Hn7D8Rda.js`、三个案件JSON及三个报告文件。曾发现Wrangler未指定branch导致部署进入preview，已在`deploy.py`增加`--branch=main`并经本次生产部署验证修复。仓库Secret `CLOUDFLARE_API_TOKEN`仅授予Cloudflare Pages:Edit；Direct Upload项目保持原状。当前生产部署与资源清单均已由Cloudflare API实核；本执行环境的网页抓取与网络请求无法访问Pages域名，因此不虚报浏览器端交互验收。
-
 **V1. 自动调查模式：前端输入调查方向即自动跑（2026-11-11已建成，端到端测试已完成，见下文“自动调查模式V1”与V0）。** intake页`public/investigate.html`→Pages Functions收请求写Cloudflare KV任务→定时跑手每10分钟轮询→`scripts/run_job.py`跑抽取、似然、映射、草稿包、引擎、报告→结果写回KV，前端轮询展示。红线已进代码：抽取证据最高C级、报告带“草稿（未审）”横幅、永不碰两个正式案包、不得按传言指认活人。端到端测试任务c23978f6（1988-2002白银连环杀人案重推）已完成：9个来源、63条事实全C级、结论H3陌生人加技能领先52.45%、覆盖率31.8%、审查6个blocker；断点续跑检查点已生效（两次虚拟机重启未丢进度）。
 
 ### 未完成任务（按顺序做，每项做完要过验收）
 
-**V0. 跑完端到端测试并收尾（2026-11-11已完成，生产收尾项仍待处理）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。实测结果：9个来源（3中文加6英文/维基）、63条事实全C级、似然315对、覆盖映射18条；结论H3陌生人加技能领先52.45%（H1 25.66%、H4 13.56%、H2 8.17%、H5 0.16%，前两名差0.2679），覆盖率31.8%（4项已覆盖/6项单来源/12项缺失，共22项），独立审查6个blocker；报告带草稿横幅，`reports/CASE-DRAFT-c23978f6-report.md`，前端`investigate.html`可见done。注意：草稿的H3（陌生人加技能）与手工白银案包的H1（单人连环、本地、尾随陌生女性）指向一致，都是陌生人加技能方向；手工包H1 69.17%是另一套假设定义下的数，两者不可直接比大小。收尾余项（不阻塞T2）：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
+**V0. 跑完端到端测试并收尾（2026-11-11已完成）。**任务c23978f6-56f1-4789-b488-b36c4b9117a7（方向“1988-2002白银连环杀人案”，语言zh，地区中国甘肃白银）。实测结果：9个来源（3中文加6英文/维基）、63条事实全C级、似然315对、覆盖映射18条；结论H3陌生人加技能领先52.45%（H1 25.66%、H4 13.56%、H2 8.17%、H5 0.16%，前两名差0.2679），覆盖率31.8%（4项已覆盖/6项单来源/12项缺失，共22项），独立审查6个blocker；报告带草稿横幅，`reports/CASE-DRAFT-c23978f6-report.md`，前端`investigate.html`可见done。注意：草稿的H3（陌生人加技能）与手工白银案包的H1（单人连环、本地、尾随陌生女性）指向一致，都是陌生人加技能方向；手工包H1 69.17%是另一套假设定义下的数，两者不可直接比大小。收尾余项（不阻塞T2）：删KV里残留的`probe-direct`探针键（走REST DELETE，不要用wrangler kv命令）；把定时任务`detective-os-job-watch`的正文改成调`scripts/run_job.py <job_id>`（现正文是run_job.py出现之前的旧版分步描述；改前`cron.view`读全文，改后`cron.view`读回确认）。
+
+**T2. 第三个案件（再选一起未侦破案件）。**目的：检验引擎在没有已知答案时的表现（白银案是有答案的校验，南大案与第三案是无答案的实战）。选案标准：公开资料丰富（≥2独立来源、≥1主流或官方）、有明确的矛盾点、不得涉及未成年人隐私细节。做法：照抄案件1的建包流程（先实读来源、再分级证据、再写矛盾与假设）；每条事实都要有证据编号、原文引用、来源位置、可信度理由。验收：`check`通过、测试新增该案的回归测试、报告生成、结论为无法判断时不得强行选定。
+
+**T3. 前端工作站（React加TypeScript）。**10个导航页：案件中心、来源库、证据板、时间线、关系图谱、矛盾实验室、假设实验室、调查计划、审查室、最终报告。风格：专业深色研究工作站；每个结论可点击回溯到证据与来源。数据来源：引擎报告JSON，不得手写假数据、不得做没有实际功能的模块名。
 
 **T4. Workers API + D1 + R2。**Workers API提供案件包的读写接口；D1用本地SQLite的14张表结构（已按D1兼容子集设计）；R2存附件。绑定必须写进`wrangler.toml`（部署会重写后台单独改的绑定），部署完再GET项目核验绑定还在。验收：API返回的数据与本地报告一致；前端可切换线上线下数据源。
 
 **T5. Provider Adapter（LLM接入）。**可切换：MiniMax、OpenAI兼容接口、本地模型。LLM只干四件事：从资料里抽事实进档案、按假设库生成待验证的推论、逐条做反驳检验、把引擎的数字写成人能读的报告。硬约束写进提示词：只许引用档案编号，不许编造新事实，不确定就写未知，数字必须来自引擎输出，LLM自己不许算概率。验收：同一案件换Provider，引擎数字不变；LLM输出逐条可追溯。
 
 **T6. 补1996年原始资料缺口G7、G8。**G7：1996年协查通报与认尸启示原始版面；G8：1996年2月至4月排查同期报道原文。找不到就如实记为缺口，不得用二手转述升级为A级。
+
+**T7. 继续调查功能（2026-11-11用户新令，归GPT做；跑手侧接线由Muse做）。** 每个已跑完的项目（草稿报告页）要能继续调查：用户在页面上添加信源（链接或文本）与补充信息，提交后在已跑过的基础上继续跟进，不从头重跑。做法：前端在任务结果页加“继续调查”表单（信源链接/文本+说明）；API建跟进任务（带parent_job_id，指向原任务）；跑手接跟进任务时从原草稿包续跑——把新信源追加进原collected.json，只对新来源跑抽取，重建草稿包、重跑引擎与覆盖率，报告升版（v2、v3……），原报告与结果保留不覆盖；总结一节随新证据更新。验收：加一个信源后跟进跑通，报告版本号+1、新增证据带新来源编号、原结论与新结论并列可查；两个正式案包永不参与跟进。注：跟进任务的KV文档结构由GPT先定（API与跑手之间的契约），Muse再按契约改定时任务正文接线，改前`cron.view`读全文、改后读回确认。另：定时任务正文已于2026-11-11改为每次跑完必须出案件总结（第7步写总结进报告末尾「## 案件总结」与result.json的summary字段，第8步汇报贴总结全文），`docs/chatgpt-takeover/files/cron-body.txt`已同步为新版正文。
 
 ### 行文与工程规则
 
@@ -55,12 +57,7 @@
 
 ```bash
 python3 -m detective_os.cli check cases/case-cn-1996-001
-python3 -m detective_os.cli check cases/case-no-1970-001
 python3 -m detective_os.cli run cases/case-cn-1996-001
-npm install
-npm run typecheck
-npm run build
-python3 scripts/build_site.py
 python3 -m unittest discover -s tests -v
 ```
 
@@ -87,15 +84,9 @@ cases/case-cn-1996-001/   首个案件包：南大碎尸案（含coverage.json�
 tests/test_acceptance.py  验收测试1-10
 tests/test_coverage.py    覆盖清单测试14项
 tests/test_pipeline.py    管线测试17项（抽取、似然分批、映射、检查点、草稿包）
-tests/test_isdal_case.py  T2第三案7项回归验收
-tests/test_workbench_build.py T3静态数据、10模块、报告回链3项验收
-src/App.tsx                React+TypeScript十模块工作站
-src/style.css              深色研究工作站响应式样式
-workbench.html             Vite工作站入口
-scripts/check_frontend.py 检查当前V1 intake表单、API、进度轮询与内嵌JS
 ```
 
-React+TypeScript研究工作站（T3代码、构建和生产部署已完成）；Cloudflare Workers API、D1、R2（T4待做）；Kaggle双T4实验Notebook已完成T1。
+前端（React加TypeScript）、Cloudflare Workers API、D1、R2、Kaggle双T4实验Notebook按阶段推进，不在本版。
 
 ## 九个模块，全部实际运行
 
@@ -131,21 +122,10 @@ React+TypeScript研究工作站（T3代码、构建和生产部署已完成）�
 
 白银案新发现的矛盾（5条）：部督年份2001年8月与2004年8月说法不一；重启侦查年份2015年3月与2016年3月说法不一；白银与包头分布9加2与10加1说法不一（总数11起一致）；作案时段白天与夜间说法不一；首案月份1988年5月与6月说法不一。均已并存记录，未强行取舍。校验脚本：`python3 scripts/validate_baiyin.py`。
 
-## 第三个案件：CASE-NO-1970-001
-
-1970年挪威卑尔根Isdalen身份未明女性可疑死亡案（Isdal Woman）。本案不预设谋杀成立：警方当年倾向自杀，但前办案人员后来表达怀疑；公开材料无法确定死者身份、死亡方式或是否有第三方参与。没有建立任何嫌疑人节点。
-
-来源：5个独立出版来源（NRK、BBC News、奥斯陆大学研究传播、Journalisten、The Norwegian American）。证据：16条（C级15条、D级1条），全部带逐字引文、来源位置与可信度理由。结构：7个时间线事件、10个实体、6条有来源的关系、4条解释分歧、8项缺口、22项覆盖清单（4项不适用，18项适用）。
-
-竞争假设：H1自杀、H2他杀、H3协助自杀/第三方参与、H4意外死亡。贝叶斯排序H2 28.35%、H1 25.29%、H3 25.27%、H4 21.09%；前两名差0.0306，输出undecided，不选定赢家。定性打分H3净1.3领先；两种排序不一致，报告并列保留。似然为分析者主观判断，非经校准的犯罪概率。独立审查0个blocker，通过；调查计划11项。资料覆盖41.7%（3项已覆盖/9项单来源/6项缺失，共18项适用）。
-
-验收：CLI check通过；CLI报告生成；静态站构建通过；65项单元与验收测试全部通过。报告和public/case-no-1970-001.html作为GitHub Actions artifact保存：https://github.com/nequex-eng/DETECTIVE-OS/actions/runs/42955826149。
-
 ## 资料覆盖（模块9实测数）
 
 - 南大案CASE-CN-1996-001：覆盖率65.9%（10项已覆盖/9项单来源/3项缺失，共22项）。缺失：C03案发时间窗口、C10物证清单与保存现状、C11 DNA/指纹比对现状。
 - 白银案CASE-CN-1988-001：覆盖率52.4%（7项已覆盖/8项单来源/6项缺失，共21项，C16抛尸方式不适用已排除）。缺失：C05发现过程、C07身份确认过程、C17动机指向、C18诉讼进展、C20家属说法、C22同期原始报道（只有H级待核实材料，不计入覆盖）。
-- Isdal案CASE-NO-1970-001：覆盖率41.7%（3项已覆盖/9项单来源/6项缺失，共18项适用；4项因尚未确认犯罪成立而标记不适用）。缺失集中于身份确认、原始协查材料、动机/家属信息与同期原始报道。
 
 ## 自动调查模式V1（2026-11-11，端到端测试中）
 
@@ -192,7 +172,7 @@ React+TypeScript研究工作站（T3代码、构建和生产部署已完成）�
 ## 未完成事项
 
 - V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
-- T3前端工作站（React+TypeScript，10个导航页）已部署到Cloudflare Pages生产环境；页面真实交互仍需浏览器端验收
+- 前端工作站（React加TypeScript，10个导航页）未做
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）

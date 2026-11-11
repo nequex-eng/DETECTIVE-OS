@@ -121,9 +121,8 @@ def extract_candidates(source_text: str, source_id: str, direction: str,
     `caller` defaults to the retrying MiniMax caller; tests pass a stub.
     Every returned item passed verify_quote against the source text.
     """
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     user = (f"调查方向：{direction}\n来源编号：{source_id}\n"
             f"报道原文：\n{source_text[:12000]}")
     raw = caller([{"role": "system", "content": EXTRACT_SYSTEM},
@@ -176,9 +175,8 @@ def propose_likelihoods(evidence: list, caller=None,
     from M3 (it chokes on the long JSON output); batches of 10 stay
     reliable.
     """
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     if not evidence:
         return {}
     hyps = "\n".join(f"{h}：{d}" for h, d, *_ in HYPOTHESIS_TEMPLATE)
@@ -236,9 +234,8 @@ def map_categories(evidence: list, caller=None,
     {evidence_id: [item_id, ...]}; anything invalid is dropped.
     """
     from detective_os.coverage import template_items
-    if caller is None:
-        from detective_os.llm import call_minimax_retry
-        caller = call_minimax_retry
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
     if not evidence:
         return {}
     items = template_items()

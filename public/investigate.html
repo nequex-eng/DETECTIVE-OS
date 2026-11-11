@@ -11,38 +11,24 @@ td,th{border:1px solid #333;padding:6px 10px;text-align:left}
 .stage{color:#e8b64c}.draft{color:#ff7b72;font-weight:bold}
 pre{white-space:pre-wrap;word-break:break-word;background:#161d27;padding:14px;
 border:1px solid #333;font-size:14px;line-height:1.6}
-li{margin:4px 0}.ops-shell{max-width:1120px;margin:0 auto;padding:26px 28px 60px}body{max-width:1180px;margin:0 auto;padding:24px;background:radial-gradient(ellipse at 85% 0%,#1c2d3a 0,transparent 42%),#08121d;color:#dce5ed}body>p:first-of-type{max-width:1120px;margin:20px auto 0;padding:0 28px}h1{font:500 clamp(28px,4vw,42px)/1.15 Georgia,serif;letter-spacing:.2px;margin:16px 0 10px}h2{font:500 19px Georgia,serif;color:#e0c17e;border-bottom:1px solid #2b4052;padding-bottom:10px;margin:30px 0 15px}.note{color:#92a6b8;line-height:1.8}.draft{color:#e3bd75}form,#job{background:linear-gradient(145deg,#122333,#0d1925);border:1px solid #30475b;border-radius:3px;padding:22px;margin:15px 0 25px}label{display:block;color:#a9bac8;font-size:11px;letter-spacing:.5px;margin:13px 0 5px}input,select,textarea{background:#091521;border:1px solid #344b60;border-radius:2px;color:#e0e8ef;padding:11px 12px;margin:0;outline:none}input:focus,select:focus,textarea:focus{border-color:#b18d51}button{background:#c5a05e;color:#111a22;border:1px solid #dfbd7c;border-radius:2px;padding:11px 20px;font-size:11px;font-weight:800;letter-spacing:.8px}button:disabled{opacity:.5}#job{border-left:3px solid #c5a05e}#jobId{font:10px ui-monospace,monospace;color:#9bb4c9}#jobStatus{color:#e2c17b;font-size:11px}#events{padding-left:18px;color:#94a9bb;font-size:11px;line-height:1.8}#result{border-top:1px solid #2c4051;margin-top:15px;padding-top:15px;color:#d2dde7;font-size:12px;line-height:1.8}#result table{margin:12px 0}#result th{color:#e2c17b;background:#172838}#history{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#history li{margin:0;background:#111f2d;border:1px solid #2c4255;padding:13px 15px;color:#9bafc0;font-size:11px;line-height:1.7}#history a{color:#e0c17e;font-weight:700}a{color:#a8c9e7}a:hover{color:#e2c17b}.stage{color:#e2c17b}@media(max-width:700px){.ops-shell{padding:18px 14px 40px}body>p:first-of-type{padding:0 14px}form,#job{padding:16px}#history{grid-template-columns:1fr}}
-.continue-banner{margin:20px 0;padding:18px 20px;background:linear-gradient(115deg,#1b2e3d,#111e2a);border:1px solid #526079;border-left:3px solid #c6a15f}.continue-banner h2{margin:6px 0 8px!important}.continue-banner p{color:#9fb1c0;font-size:11px;line-height:1.8}.parent-summary{color:#d4b879;font-size:10px}.form-help{color:#8fa4b6;font-size:10px;line-height:1.7}.history-item{display:flex;flex-direction:column;gap:8px}.history-actions{display:flex;gap:14px;flex-wrap:wrap}.history-actions a{font-size:10px;color:#d8b875}.history-actions a:first-child{color:#a9c6df}.followup-flag{font-size:9px;color:#d8b875;letter-spacing:.8px}
-</style></head><body>
+li{margin:4px 0}</style></head><body>
 <p><a href="index.html">← 案件中心</a></p>
 <h1>DETECTIVE OS — 自动调查</h1>
 <p class="note">输入一个调查方向，引擎自动跑：收集公开报道 → 去重 → 抽取事实 → 推理 → 出草稿报告。
 出的是<span class="draft">未审草稿</span>：证据最高C级，假设似然为初拟，结论只作参考，不得据此指认任何人。</p>
 
-<div id="continueBanner" class="continue-banner" style="display:none">
-  <span class="eyebrow">FOLLOW-UP CASEWORK / 续办调查</span>
-  <h2>在原调查基础上继续跟进</h2>
-  <p>原报告和可回溯的既有来源将作为研究基线。你新增的线索会被标记为待核实信息，不会直接作为事实或证据。</p>
-  <div id="parentSummary"></div>
-</div>
-<h2 id="formHeading">开始新的调查</h2>
+<h2>开始新的调查</h2>
 <form id="form">
-<label>调查方向（必填）</label>
+<label>调查方向（必填，例如：1996年南大碎尸案）</label>
 <input id="direction" maxlength="500" required placeholder="案件名或一句话调查方向">
 <label>主要语言</label>
 <select id="language"><option value="zh">中文</option><option value="en">English</option>
 <option value="ja">日本語</option><option value="es">Español</option>
 <option value="fr">Français</option><option value="de">Deutsch</option></select>
-<label>地区（可选）</label>
+<label>地区（可选，例如：中国南京 / 美国加州）</label>
 <input id="region" maxlength="200">
-<label>新增信源 URL（续办时填写，可多条，每行一个）</label>
-<textarea id="sourceUrls" rows="3" placeholder="https://example.com/report-1&#10;https://example.com/report-2"></textarea>
-<label>新增信息 / 线索（可选，请注明信息来自哪里、是否亲历或转述）</label>
-<textarea id="materials" rows="4" maxlength="12000" placeholder="粘贴新发现的资料、访谈摘要、档案内容或其他线索。系统会标记为用户提供、尚未独立核实。"></textarea>
-<label>本轮希望重点核查的问题</label>
-<textarea id="questions" rows="3" maxlength="5000" placeholder="例如：这条新报道是否与原时间线冲突？是否有独立来源可以交叉验证？"></textarea>
-<label>其他调查提示</label>
-<textarea id="hints" rows="2" maxlength="500" placeholder="时间范围、地区、排除方向等"></textarea>
+<label>补充提示（可选：已知关键信息、时间范围、不要查的方向）</label>
+<textarea id="hints" rows="3" maxlength="500"></textarea>
 <button type="submit" id="submitBtn">开始调查</button>
 </form>
 <p id="formMsg" class="note"></p>
@@ -56,96 +42,92 @@ li{margin:4px 0}.ops-shell{max-width:1120px;margin:0 auto;padding:26px 28px 60px
 </div>
 
 <h2>最近的任务</h2>
-<ul id="history" class="history-grid"><li class="note">加载中……</li></ul>
+<ul id="history"><li class="note">加载中……</li></ul>
 
 <script>
 const $ = id => document.getElementById(id);
 let pollTimer = null;
-let parentJob = null;
-const params = new URLSearchParams(location.search);
-const continueId = params.get("continue");
-const requestedJob = params.get("job");
+
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function mdToHtml(md){
-  const lines=String(md).split("\n");let html="",inList=false;
+  const lines = String(md).split("\n"); let html = "", inList = false;
   for(const line of lines){
-    if(/^#{1,3} /.test(line)){if(inList){html+="</ul>";inList=false;}const lvl=line.match(/^#+/)[0].length;html+=`<h${lvl+1}>${esc(line.replace(/^#+\\s*/,""))}</h${lvl+1}>`;}
-    else if(/^- /.test(line)){if(!inList){html+="<ul>";inList=true;}html+=`<li>${esc(line.replace(/^- /,""))}</li>`;}
-    else if(!line.trim()){if(inList){html+="</ul>";inList=false;}}
-    else{if(inList){html+="</ul>";inList=false;}html+=`<p>${esc(line)}</p>`;}
+    if(/^#{1,3} /.test(line)){
+      if(inList){html+="</ul>";inList=false;}
+      const lvl = line.match(/^#+/)[0].length;
+      html += `<h${lvl+1}>${esc(line.replace(/^#+\s*/,""))}</h${lvl+1}>`;
+    } else if(/^- /.test(line)){
+      if(!inList){html+="<ul>";inList=true;}
+      html += `<li>${esc(line.replace(/^- /,""))}</li>`;
+    } else if(line.trim()===""){
+      if(inList){html+="</ul>";inList=false;}
+    } else {
+      if(inList){html+="</ul>";inList=false;}
+      html += `<p>${esc(line)}</p>`;
+    }
   }
-  if(inList)html+="</ul>";return html;
+  if(inList) html+="</ul>";
+  return html;
 }
 function showJob(j){
-  $("job").style.display="block";$("jobId").textContent=j.job_id;
-  $("jobStatus").textContent=j.status+" / "+j.stage;$("jobNote").textContent=j.stage_note||"";
+  $("job").style.display="block";
+  $("jobId").textContent=j.job_id;
+  $("jobStatus").textContent=j.status+" / "+j.stage;
+  $("jobNote").textContent=j.stage_note||"";
   $("events").innerHTML=(j.events||[]).map(e=>`<li>${esc(e.t||"")} — ${esc(e.message||"")}</li>`).join("");
   const r=$("result");
   if(j.status==="done"&&j.result){
-    const res=j.result;let h=`<h2>调查报告</h2><p class="draft">未审草稿：证据最高C级，假设似然为初拟，结论只作参考。</p>`;
-    if(res.verdict)h+=`<p>结论：${esc(res.verdict)}</p>`;
-    if(res.source_count!=null)h+=`<p>纳入来源：${esc(res.source_count)} 个；抽取事实：${esc(res.fact_count||0)} 条</p>`;
-    if(res.posteriors)h+=`<table><tr><th>假设</th><th>后验</th><th>先验</th></tr>`+res.posteriors.map(p=>`<tr><td>${esc(p.hypothesis_id)}</td><td>${esc(p.posterior)}</td><td>${esc(p.prior)}</td></tr>`).join("")+"</table>";
-    if(res.coverage)h+=`<p>资料覆盖：${esc(res.coverage.score_pct)}%（${esc(res.coverage.covered)}项已覆盖/${esc(res.coverage.single)}项单来源/${esc(res.coverage.missing)}项缺失，共${esc(res.coverage.total)}项）</p>`;
-    if(res.review_blockers!=null)h+=`<p>独立审查：${esc(res.review_blockers)}个blocker</p>`;
-    if(res.report_md)h+=mdToHtml(res.report_md);
-    h+=`<p><a class="continue-action" href="investigate.html?continue=${encodeURIComponent(j.job_id)}">＋ 继续调查：添加新信源和线索 →</a></p>`;
+    const res=j.result;
+    let h=`<h2>草稿报告</h2><p class="draft">未审草稿：证据最高C级，假设似然为初拟，结论只作参考。</p>`;
+    if(res.verdict) h+=`<p>结论：${esc(res.verdict)}</p>`;
+    if(res.posteriors) h+=`<table><tr><th>假设</th><th>后验</th><th>先验</th></tr>`+
+      res.posteriors.map(p=>`<tr><td>${esc(p.hypothesis_id)}</td><td>${esc(p.posterior)}</td><td>${esc(p.prior)}</td></tr>`).join("")+"</table>";
+    if(res.coverage) h+=`<p>资料覆盖：${esc(res.coverage.score_pct)}%（${esc(res.coverage.covered)}项已覆盖/${esc(res.coverage.single)}项单来源/${esc(res.coverage.missing)}项缺失，共${esc(res.coverage.total)}项）</p>`;
+    if(res.review_blockers!=null) h+=`<p>独立审查：${esc(res.review_blockers)}个blocker</p>`;
+    if(res.report_md) h+=mdToHtml(res.report_md);
     r.innerHTML=h;
-  }else if(j.status==="failed"){r.innerHTML=`<p class="draft">任务失败：${esc(j.error||"未知原因")}</p>`;}
-  else r.innerHTML="";
+  } else if(j.status==="failed"){
+    r.innerHTML=`<p class="draft">任务失败：${esc(j.error||"未知原因")}</p>`;
+  } else r.innerHTML="";
 }
 async function loadJob(id){
-  try{const res=await fetch("/api/jobs?id="+encodeURIComponent(id)+"&ts="+Date.now(),{cache:"no-store"});
+  try{
+    const res=await fetch("/api/jobs?id="+encodeURIComponent(id));
     if(res.status===404){$("jobNote").textContent="任务已不存在。";return false;}
-    const j=await res.json();showJob(j);return j.status==="done"||j.status==="failed";
+    const j=await res.json(); showJob(j);
+    return j.status==="done"||j.status==="failed";
   }catch(e){$("jobNote").textContent="读取进度失败，请稍后刷新页面。";return false;}
 }
 function startPolling(id){
-  if(pollTimer)clearInterval(pollTimer);
-  loadJob(id).then(done=>{if(done)return;pollTimer=setInterval(async()=>{const done2=await loadJob(id);if(done2)clearInterval(pollTimer);},5000);});
-}
-async function prepareContinuation(id){
-  try{
-    const res=await fetch("/api/jobs?id="+encodeURIComponent(id)+"&ts="+Date.now(),{cache:"no-store"});
-    if(!res.ok)throw Error("读取原调查失败");
-    parentJob=await res.json();
-    if(parentJob.status!=="done"||!parentJob.result)throw Error("原调查尚未完成，暂不能续办");
-    $("continueBanner").style.display="block";$("formHeading").textContent="继续调查";
-    $("direction").value=parentJob.direction||"";$("direction").readOnly=true;
-    $("language").value=parentJob.language||"zh";$("region").value=parentJob.region||"";
-    $("submitBtn").textContent="提交续办委托";
-    $("parentSummary").innerHTML='<div class="parent-summary">承接任务：'+esc(parentJob.job_id)+' · '+esc(parentJob.direction)+' · 原始状态：已完成</div>';
-    $("formMsg").textContent="添加本轮新信源、补充信息或核查问题，然后提交。";
-  }catch(e){$("formMsg").textContent=e.message||"无法载入原调查。";}
+  if(pollTimer) clearInterval(pollTimer);
+  loadJob(id).then(done=>{ if(done) return;
+    pollTimer=setInterval(async()=>{ const done2=await loadJob(id); if(done2) clearInterval(pollTimer); },5000);
+  });
 }
 $("form").addEventListener("submit",async ev=>{
-  ev.preventDefault();const btn=$("submitBtn");btn.disabled=true;$("formMsg").textContent="正在提交……";
+  ev.preventDefault();
+  const btn=$("submitBtn"); btn.disabled=true; $("formMsg").textContent="正在提交……";
   try{
-    const isFollowup=!!parentJob;
-    const urls=$("sourceUrls").value.split("\n").map(x=>x.trim()).filter(Boolean);
-    const body=isFollowup?{
-      parent_job_id:parentJob.job_id,source_urls:urls,materials:$("materials").value.trim(),
-      questions:$("questions").value.trim(),known_facts:$("hints").value.trim()
-    }:{
-      direction:$("direction").value.trim(),language:$("language").value,
-      region:$("region").value.trim(),hints:$("hints").value.trim()
-    };
-    const requestOptions={method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)};
-    const res=isFollowup?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
+    const res=await fetch("/api/investigate",{method:"POST",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify({direction:$("direction").value.trim(),
+        language:$("language").value, region:$("region").value.trim(),
+        hints:$("hints").value.trim()})});
     const d=await res.json();
     if(!res.ok){$("formMsg").textContent=d.error||"提交失败";btn.disabled=false;return;}
-    $("formMsg").textContent=isFollowup?"续办任务已创建，原调查记录保持不变。跑手接手后会采集新增信源并重新分析。":"任务已创建，等待跑手接手。";
-    btn.disabled=false;loadHistory();history.replaceState(null,"","investigate.html?job="+encodeURIComponent(d.job_id));startPolling(d.job_id);
+    $("formMsg").textContent="任务已创建，开始自动跑。页面会每5秒刷新进度。";
+    btn.disabled=false; loadHistory(); startPolling(d.job_id);
   }catch(e){$("formMsg").textContent="提交失败，请检查网络后重试。";btn.disabled=false;}
 });
 async function loadHistory(){
   try{
-    const res=await fetch("/api/jobs",{cache:"no-store"});const d=await res.json();
-    $("history").innerHTML=(d.jobs||[]).map(j=>`<li class="history-item"><div><a href="investigate.html?job=${encodeURIComponent(j.job_id)}" data-id="${esc(j.job_id)}">${esc(j.direction)}</a> — ${esc(j.status)} / ${esc(j.stage)}（${esc(j.created_at||"")}）</div><div class="history-actions"><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">查看任务</a>${j.status==="done"?'<a href="investigate.html?continue='+encodeURIComponent(j.job_id)+'">＋ 继续调查</a>':""}</div></li>`).join("")||"<li class='note'>还没有任务。</li>";
+    const res=await fetch("/api/jobs"); const d=await res.json();
+    $("history").innerHTML=(d.jobs||[]).map(j=>
+      `<li><a href="#" data-id="${esc(j.job_id)}">${esc(j.direction)}</a> — ${esc(j.status)} / ${esc(j.stage)}（${esc(j.created_at||"")}）</li>`).join("")||"<li class='note'>还没有任务。</li>";
+    document.querySelectorAll("#history a").forEach(a=>a.addEventListener("click",ev=>{
+      ev.preventDefault(); startPolling(a.dataset.id);}));
   }catch(e){$("history").innerHTML="<li class='note'>加载失败。</li>";}
 }
 loadHistory();
-if(continueId)prepareContinuation(continueId);
-if(requestedJob)startPolling(requestedJob);
 </script>
 </body></html>

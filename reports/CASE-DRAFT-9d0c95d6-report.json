@@ -1,0 +1,2021 @@
+{
+  "case_id": "CASE-DRAFT-9d0c95d6",
+  "bayesian": {
+    "posteriors": [
+      {
+        "hypothesis_id": "H1",
+        "log_posterior": -12.252,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.6051
+      },
+      {
+        "hypothesis_id": "H2",
+        "log_posterior": -13.1889,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.75,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.8,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.2371
+      },
+      {
+        "hypothesis_id": "H5",
+        "log_posterior": -14.3073,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.55,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.6,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0775
+      },
+      {
+        "hypothesis_id": "H3",
+        "log_posterior": -14.554,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.7,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.65,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0605
+      },
+      {
+        "hypothesis_id": "H4",
+        "log_posterior": -15.6694,
+        "prior": 0.2,
+        "trace": [
+          {
+            "evidence_id": "F01",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F02",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F03",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F04",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F05",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F06",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F07",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F08",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F09",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F10",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F11",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F12",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F13",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F14",
+            "grade": "C",
+            "likelihood": 0.35,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F15",
+            "grade": "C",
+            "likelihood": 0.45,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F16",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F17",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F18",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F19",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F20",
+            "grade": "C",
+            "likelihood": 0.3,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F21",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F22",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F23",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F24",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F25",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F26",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F27",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F28",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F29",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F30",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          },
+          {
+            "evidence_id": "F31",
+            "grade": "C",
+            "likelihood": 0.5,
+            "weight": 0.6
+          }
+        ],
+        "posterior": 0.0198
+      }
+    ],
+    "disclosure": "Bayesian output is a model ranking under stated priors and likelihoods, not a probability of guilt. Priors are subjective starting points; likelihoods are analyst judgments stored in the case file. No reliable data exists to calibrate them against solved cases.",
+    "verdict": "leading: H1 (margin 0.3680)"
+  },
+  "qualitative": {
+    "H1": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H2": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H3": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H4": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    },
+    "H5": {
+      "support_weight": 0,
+      "oppose_weight": 0,
+      "net": 0,
+      "unexplained": 0,
+      "status": "open"
+    }
+  },
+  "plan": [
+    {
+      "task_id": "T01",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F01寻找第二个独立来源：NVIDIA董事会启动了一项独立调查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T02",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F02寻找第二个独立来源：由独立董事组成的委员会将在外部独立法律顾问协助下监督调查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T03",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F03寻找第二个独立来源：董事会的调查将审查所有可获得的信息。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T04",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F04寻找第二个独立来源：Jensen支持此次审查并承诺配合调查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T05",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F05寻找第二个独立来源：英伟达表示，在媒体报道创始人兼首席执行官黄仁勋成为外国情报行动目标后，公司启动了……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T06",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F06寻找第二个独立来源：美国众议院高层共和党议员要求黄仁勋本月向国会说明《纽约时报》有关他与一名向北京传……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T07",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F07寻找第二个独立来源：英伟达称，其董事会没有理由认为美国国家安全或英伟达机密遭到泄露，但调查将审查所有……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T08",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F08寻找第二个独立来源：英伟达表示，黄仁勋完全支持此次审查，并承诺配合调查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T09",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F09寻找第二个独立来源：黄仁勋在一封由路透看到的邮件草稿中称，他对妻子不忠、伤害了妻子和孩子，并表示自己……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T10",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F10寻找第二个独立来源：英伟达没有立即回应有关Axios报道的置评请求。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T11",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F11寻找第二个独立来源：《紐約時報》報導，黃仁勳於11月8日承認與黃樂有婚外情，輝達董事會已展開調查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T12",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F12寻找第二个独立来源：黃樂是中國大陸公民，曾任Megaspeed高管。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T13",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F13寻找第二个独立来源：Megaspeed將輝達晶片提供的運算能力出租給阿里巴巴等中國企業。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T14",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F14寻找第二个独立来源：2024年6月台北國際電腦展期間，黃樂在台北一間酒吧與科技業高層聚會，黃仁勳隨後……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T15",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F15寻找第二个独立来源：黃樂據報促成Megaspeed向輝達採購約20億美元GPU。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T16",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F16寻找第二个独立来源：2025年5月22日晚間，黃仁勳在台北三六食府宴客，黃樂與黃仁勳搭肩說話。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T17",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F17寻找第二个独立来源：2026年春天，魯比歐監督起草高度機密備忘錄，該備忘錄在川普5月訪中前不久分送相……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T18",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F18寻找第二个独立来源：《紐時》報導，川普約一年前已聽取黃仁勳與黃樂相關情報的簡報，但選擇不採取行動。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T19",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F19寻找第二个独立来源：2026年10月29日，《紐時》披露美國情報機構認定黃樂向北京傳遞情報，輝達與黃……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T20",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F20寻找第二个独立来源：11月7日，《金融時報》披露美方情報相信黃樂與黃仁勳有親密關係，美國眾議員發函要……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T21",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F21寻找第二个独立来源：11月8日，黃仁勳發出內部信承認婚外情並致歉，輝達董事會同日宣布調查，黃仁勳在調……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T22",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F22寻找第二个独立来源：輝達董事會展開內部調查，美國眾議院3個委員會的共和黨籍主席要求黃仁勳出席閉門簡報……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T23",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F23寻找第二个独立来源：中国周一驳斥了针对英伟达首席执行官黄仁勋的间谍行动指控，并称有关中国情报阴谋的报……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T24",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F24寻找第二个独立来源：中国外交部发言人郭嘉昆称，所谓中国间谍叙事是毫无根据的指控、诽谤和抹黑。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T25",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F25寻找第二个独立来源：英伟达宣布对黄仁勋成为“外国情报行动目标”的报道开展独立调查。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T26",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F26寻找第二个独立来源：《纽约时报》此前报道称，美国情报官员认定黄仁勋与Alice Huang建立了密切……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T27",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F27寻找第二个独立来源：黄仁勋在周日给英伟达员工的一封信中承认了婚外情。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T28",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F28寻找第二个独立来源：黄仁勋承诺配合公司的调查，并强调自己对美国国家安全的承诺。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T29",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F29寻找第二个独立来源：北京也反对更广泛的报道，一些中国国有媒体暗示这些指控旨在破坏美中关系。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T30",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F30寻找第二个独立来源：中国国有《环球时报》写道，每当中美关系开始改善时，往往就会有人在暗处开枪。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    },
+    {
+      "task_id": "T31",
+      "case_id": "CASE-DRAFT-9d0c95d6",
+      "question": "为证据F31寻找第二个独立来源：英伟达董事会表示，没有理由相信国家安全或公司机密受到损害。……",
+      "purpose": "单来源主张是全案最脆弱的环节",
+      "hypotheses": [],
+      "expected_info": "独立来源或否定",
+      "impact_if_yes": "该事实升级为已确认",
+      "impact_if_no": "该事实降级，不得再支撑假设",
+      "source_or_channel": "公开报道、官方公告、法院文书",
+      "estimated_value": "high: 单来源事实支撑着假设排序",
+      "status": "open"
+    }
+  ],
+  "review": {
+    "case_id": "CASE-DRAFT-9d0c95d6",
+    "findings": [
+      {
+        "role": "source",
+        "finding": "证据F01只有一个来源：NVIDIA董事会启动了一项独立调查。……",
+        "severity": "warning",
+        "cites": [
+          "F01"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F02只有一个来源：由独立董事组成的委员会将在外部独立法律顾问协助下监督调查。……",
+        "severity": "warning",
+        "cites": [
+          "F02"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F03只有一个来源：董事会的调查将审查所有可获得的信息。……",
+        "severity": "warning",
+        "cites": [
+          "F03"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F04只有一个来源：Jensen支持此次审查并承诺配合调查。……",
+        "severity": "warning",
+        "cites": [
+          "F04"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F05只有一个来源：英伟达表示，在媒体报道创始人兼首席执行官黄仁勋成为外国情报行……",
+        "severity": "warning",
+        "cites": [
+          "F05"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F06只有一个来源：美国众议院高层共和党议员要求黄仁勋本月向国会说明《纽约时报》……",
+        "severity": "warning",
+        "cites": [
+          "F06"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F07只有一个来源：英伟达称，其董事会没有理由认为美国国家安全或英伟达机密遭到泄……",
+        "severity": "warning",
+        "cites": [
+          "F07"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F08只有一个来源：英伟达表示，黄仁勋完全支持此次审查，并承诺配合调查。……",
+        "severity": "warning",
+        "cites": [
+          "F08"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F09只有一个来源：黄仁勋在一封由路透看到的邮件草稿中称，他对妻子不忠、伤害了妻……",
+        "severity": "warning",
+        "cites": [
+          "F09"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F10只有一个来源：英伟达没有立即回应有关Axios报道的置评请求。……",
+        "severity": "warning",
+        "cites": [
+          "F10"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F11只有一个来源：《紐約時報》報導，黃仁勳於11月8日承認與黃樂有婚外情，輝達……",
+        "severity": "warning",
+        "cites": [
+          "F11"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F12只有一个来源：黃樂是中國大陸公民，曾任Megaspeed高管。……",
+        "severity": "warning",
+        "cites": [
+          "F12"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F13只有一个来源：Megaspeed將輝達晶片提供的運算能力出租給阿里巴巴等中……",
+        "severity": "warning",
+        "cites": [
+          "F13"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F14只有一个来源：2024年6月台北國際電腦展期間，黃樂在台北一間酒吧與科技業……",
+        "severity": "warning",
+        "cites": [
+          "F14"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F15只有一个来源：黃樂據報促成Megaspeed向輝達採購約20億美元GPU。……",
+        "severity": "warning",
+        "cites": [
+          "F15"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F16只有一个来源：2025年5月22日晚間，黃仁勳在台北三六食府宴客，黃樂與黃……",
+        "severity": "warning",
+        "cites": [
+          "F16"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F17只有一个来源：2026年春天，魯比歐監督起草高度機密備忘錄，該備忘錄在川普……",
+        "severity": "warning",
+        "cites": [
+          "F17"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F18只有一个来源：《紐時》報導，川普約一年前已聽取黃仁勳與黃樂相關情報的簡報，……",
+        "severity": "warning",
+        "cites": [
+          "F18"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F19只有一个来源：2026年10月29日，《紐時》披露美國情報機構認定黃樂向北……",
+        "severity": "warning",
+        "cites": [
+          "F19"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F20只有一个来源：11月7日，《金融時報》披露美方情報相信黃樂與黃仁勳有親密關……",
+        "severity": "warning",
+        "cites": [
+          "F20"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F21只有一个来源：11月8日，黃仁勳發出內部信承認婚外情並致歉，輝達董事會同日……",
+        "severity": "warning",
+        "cites": [
+          "F21"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F22只有一个来源：輝達董事會展開內部調查，美國眾議院3個委員會的共和黨籍主席要……",
+        "severity": "warning",
+        "cites": [
+          "F22"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F23只有一个来源：中国周一驳斥了针对英伟达首席执行官黄仁勋的间谍行动指控，并称……",
+        "severity": "warning",
+        "cites": [
+          "F23"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F24只有一个来源：中国外交部发言人郭嘉昆称，所谓中国间谍叙事是毫无根据的指控、……",
+        "severity": "warning",
+        "cites": [
+          "F24"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F25只有一个来源：英伟达宣布对黄仁勋成为“外国情报行动目标”的报道开展独立调查……",
+        "severity": "warning",
+        "cites": [
+          "F25"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F26只有一个来源：《纽约时报》此前报道称，美国情报官员认定黄仁勋与Alice ……",
+        "severity": "warning",
+        "cites": [
+          "F26"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F27只有一个来源：黄仁勋在周日给英伟达员工的一封信中承认了婚外情。……",
+        "severity": "warning",
+        "cites": [
+          "F27"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F28只有一个来源：黄仁勋承诺配合公司的调查，并强调自己对美国国家安全的承诺。……",
+        "severity": "warning",
+        "cites": [
+          "F28"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F29只有一个来源：北京也反对更广泛的报道，一些中国国有媒体暗示这些指控旨在破坏……",
+        "severity": "warning",
+        "cites": [
+          "F29"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F30只有一个来源：中国国有《环球时报》写道，每当中美关系开始改善时，往往就会有……",
+        "severity": "warning",
+        "cites": [
+          "F30"
+        ]
+      },
+      {
+        "role": "source",
+        "finding": "证据F31只有一个来源：英伟达董事会表示，没有理由相信国家安全或公司机密受到损害。……",
+        "severity": "warning",
+        "cites": [
+          "F31"
+        ]
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H1没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H2没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H3没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H4没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "evidence",
+        "finding": "假设H5没有任何支持证据",
+        "severity": "blocker",
+        "cites": []
+      },
+      {
+        "role": "adversarial",
+        "finding": "反方审查失败：领先假设H1找不到任何反证，审查未真正执行",
+        "severity": "blocker",
+        "cites": []
+      }
+    ],
+    "blockers": 6,
+    "passed": false
+  },
+  "contradictions": [],
+  "gaps": [
+    {
+      "id": "G0",
+      "gap": "本案包为自动生成的草稿，未经人工复核；证据最高C级，假设似然为LLM初拟，结论只作参考。",
+      "needed": "人工复核每条证据的原文与分级，确认假设与似然。"
+    }
+  ],
+  "limits": [
+    "本报告为未审草稿：证据由LLM从公开报道抽取（逐字引用已核验），最高C级；假设先验为均匀分布，似然为LLM初拟；不得据此指认任何人。",
+    "公开资料回答不了的问题必须明说，不得假装还原完整刑侦卷宗。"
+  ],
+  "coverage": {
+    "case_id": "CASE-DRAFT-9d0c95d6",
+    "template_version": "1",
+    "total": 22,
+    "covered": 0,
+    "single": 0,
+    "missing": 22,
+    "only_unusable": 0,
+    "score": 0.0,
+    "by_category": {
+      "失踪/案发": {
+        "total": 4,
+        "covered": 0,
+        "single": 0,
+        "missing": 4
+      },
+      "发现": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "身份确认": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "法医/物证": {
+        "total": 3,
+        "covered": 0,
+        "single": 0,
+        "missing": 3
+      },
+      "侦查过程": {
+        "total": 3,
+        "covered": 0,
+        "single": 0,
+        "missing": 3
+      },
+      "作案手法": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "动机": {
+        "total": 1,
+        "covered": 0,
+        "single": 0,
+        "missing": 1
+      },
+      "法律程序": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      },
+      "家属与当事人": {
+        "total": 1,
+        "covered": 0,
+        "single": 0,
+        "missing": 1
+      },
+      "官方回应": {
+        "total": 2,
+        "covered": 0,
+        "single": 0,
+        "missing": 2
+      }
+    },
+    "missing_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+    ],
+    "single_ids": [],
+    "items": [
+      {
+        "item_id": "C01",
+        "category": "失踪/案发",
+        "title": "被害人身份",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C02",
+        "category": "失踪/案发",
+        "title": "最后行踪",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C03",
+        "category": "失踪/案发",
+        "title": "案发时间窗口",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C04",
+        "category": "失踪/案发",
+        "title": "案发地点/第一现场",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C05",
+        "category": "发现",
+        "title": "发现时间地点与发现者",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C06",
+        "category": "发现",
+        "title": "现场状况",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C07",
+        "category": "身份确认",
+        "title": "身份确认过程与时间",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C08",
+        "category": "身份确认",
+        "title": "认尸/协查原始材料",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C09",
+        "category": "法医/物证",
+        "title": "法医结论",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C10",
+        "category": "法医/物证",
+        "title": "物证清单与保存现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C11",
+        "category": "法医/物证",
+        "title": "DNA/指纹比对现状",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C12",
+        "category": "侦查过程",
+        "title": "排查规模与范围",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C13",
+        "category": "侦查过程",
+        "title": "侦查节点",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C14",
+        "category": "侦查过程",
+        "title": "嫌疑人画像/排查方向",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C15",
+        "category": "作案手法",
+        "title": "作案手法特征",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C16",
+        "category": "作案手法",
+        "title": "抛尸/藏匿方式与路线",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C17",
+        "category": "动机",
+        "title": "动机指向",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C18",
+        "category": "法律程序",
+        "title": "诉讼/审判进展",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C19",
+        "category": "法律程序",
+        "title": "追诉时效/立案状态",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C20",
+        "category": "家属与当事人",
+        "title": "家属说法与诉求",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C21",
+        "category": "官方回应",
+        "title": "警方/官方公开回应",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      },
+      {
+        "item_id": "C22",
+        "category": "官方回应",
+        "title": "同期原始报道",
+        "status": "missing",
+        "origins": 0,
+        "only_unusable": false,
+        "evidence_ids": []
+      }
+    ]
+  }
+}

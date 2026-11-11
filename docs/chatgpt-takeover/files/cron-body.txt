@@ -1,4 +1,4 @@
-# 定时任务 detective-os-job-watch —— 完整定义（2026-11-11 11:35读回，全文照录）
+# 定时任务 detective-os-job-watch —— 完整定义（2026-11-11 14:14读回，全文照录）
 
 - 任务id：`detective-os-job-watch`
 - 标题：DETECTIVE OS自动调查跑手
@@ -25,12 +25,12 @@ DETECTIVE OS自动调查跑手：每10分钟检查一次有没有待处理的自
 4. 一次只跑一个任务。先`python3 scripts/job.py update <job_id> --status collecting --stage collecting --note "正在收集来源" --event "开始收集"`。
 5. 收集：用`detective_os.pipeline.plan_queries(方向, 语言, 地区)`生成查询清单，用browser.search（新闻类加news vertical）+browser.open逐个查，优先新华社/人民日报/澎湃/中新社/警方公开信息/法院文书等权威来源，非中文案件优先本地语言报道。至少3个独立来源；转载只算一个来源（同一消息20家转载=1个来源）。把每个来源的原文存到`runs/<job_id>/collected.json`（source_id、title、publisher、published_at、url、text）。
 6. 抽取：对每个来源跑`detective_os.pipeline.extract_candidates(text, source_id, 方向)`（走MiniMax-M3，逐字引用核验在代码里）。再用`build_draft_pack`+`write_draft_pack`生成`cases/draft-<job_id前8位>/`草稿包，`run_draft`跑引擎+覆盖率，报告写`reports/`。
-7. 收尾：把结果写进`runs/<job_id>/result.json`，格式{"case_id","case_name","verdict","posteriors":[{"hypothesis_id","posterior","prior"}],"coverage":{"score_pct","covered","single","missing","total"},"review_blockers":数字,"report_md":报告全文}，然后`python3 scripts/job.py update <job_id> --status done --stage done --note "草稿报告已生成" --event "草稿报告已生成" --result runs/<job_id>/result.json`。
-8. 完成后在本对话汇报：任务编号、调查方向、结论、覆盖率、独立审查blocker数、前端链接https://detective-os.pages.dev/investigate.html。
+7. 案件总结与收尾：根据收集的来源原文和报告，写一段简明中文案件总结（只写来源里有的事实，不得编造）：（a）事件背景——这个调查方向说的是什么事；（b）已核实的关键事实——最重要的几条；（c）引擎结论及其含义——结论是什么、说明什么，模板不匹配或覆盖率异常时要直说；（d）主要缺口与注意事项。把总结追加为报告末尾的「## 案件总结」一节（注明为跑手据来源所写，非引擎输出），同时把总结写进`runs/<job_id>/result.json`的`summary`字段（其余字段格式不变：{"case_id","case_name","verdict","posteriors":[{"hypothesis_id","posterior","prior"}],"coverage":{"score_pct","covered","single","missing","total"},"review_blockers":数字,"report_md":报告全文}）。然后`python3 scripts/job.py update <job_id> --status done --stage done --note "草稿报告已生成" --event "草稿报告已生成" --result runs/<job_id>/result.json`。
+8. 完成后在本对话汇报：任务编号、调查方向、案件总结（全文）、结论、覆盖率、独立审查blocker数、前端链接https://detective-os.pages.dev/investigate.html。汇报里不只给数字，必须把案件总结全文贴出来。
 9. 任何一步失败：`python3 scripts/job.py update <job_id> --status failed --stage failed --error "原因"`，并在本对话报告失败原因，不得静默吞掉。
 
 红线（代码已强制，跑手也不得绕过）：抽取的证据最高C级，永不给A/B；不得根据网络传言指认现实中的活人为凶手；报告带草稿横幅；不得修改cases/case-cn-1996-001与cases/case-cn-1988-001两个正式案包及它们的报告；不得编造事实，引用必须逐字出自来源原文。
 
 ## 注意：正文与实际执行路径的差异（已记录，待改）
 
-正文第6、7步写的是旧版分步描述（抽取→build_draft_pack→run_draft→手写result.json→job.py update），写于`scripts/run_job.py`出现之前。当前实际执行路径是：收集→写`runs/<job_id>/collected.json`→调`scripts/run_job.py <job_id>`（它内部完成抽取、似然拟合、覆盖映射、草稿包、引擎、报告、result.json、状态回写，带断点续跑检查点）。README「接手任务书」V0收尾余项已登记：把本任务正文改成调`run_job.py`（改前`cron.view`读全文，改后`cron.view`读回确认）。在改之前，以上正文是实际保存的版本，执行时以`run_job.py`为准。
+正文第6步写的是旧版分步描述（抽取→build_draft_pack→run_draft→手写result.json→job.py update），写于`scripts/run_job.py`出现之前；第7、8步是2026-11-11 14:14新增的案件总结要求（用户令：每次跑完必须出案件总结）。当前实际执行路径是：收集→写`runs/<job_id>/collected.json`→调`scripts/run_job.py <job_id>`（它内部完成抽取、似然拟合、覆盖映射、草稿包、引擎、报告、result.json、状态回写，带断点续跑检查点）。README「接手任务书」V0收尾余项已登记：把本任务正文改成调`run_job.py`（改前`cron.view`读全文，改后`cron.view`读回确认）。在改之前，以上正文是实际保存的版本，执行时以`run_job.py`为准。

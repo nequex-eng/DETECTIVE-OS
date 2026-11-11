@@ -1,0 +1,119 @@
+{
+  "direction": "1996南京父子失踪案",
+  "case_identification_note": "方向写'南京',但多轮搜索未找到1996年南京本地父子失踪案;唯一与'1996年父子失踪'吻合且有公开报道的案件是湖北十堰李明朝/陈珍夫妇之子鹏鹏案(1996-12-15失踪,2018-05-03 DNA认亲团聚)。本草稿按此案调查,并在报告中明确标注地点不符的存疑,不得把十堰案说成南京案。另有一例2026-10-20绵阳龙文益案(2004年失踪,南京警方采血比中)与1996年份不符,未采用。",
+  "paths_tried": [
+    {
+      "path": "browser.search news vertical: 1996南京父子失踪案",
+      "status": "ok",
+      "note": "返回李明朝/鹏鹏案(VnExpress转中新社)为首要匹配;无南京本地1996案"
+    },
+    {
+      "path": "browser.search news vertical: 1996年南京 父子 失踪 警方",
+      "status": "ok",
+      "note": "同上;其余为河北南宫、山东张来玉(2000年南京失踪)等不相关案"
+    },
+    {
+      "path": "browser.search: 李明朝 鹏鹏 1996 儿子 被拐 22年 团圆",
+      "status": "ok",
+      "note": "确认案件主体:中国日报2018-05-08、Daily Mail系;地点为湖北十堰,非南京"
+    },
+    {
+      "path": "browser.search: 1996年 南京 工地 4岁 儿子 被拐 22年后团圆 李明朝",
+      "status": "ok",
+      "note": "同上;另见2026-10龙文益案(2004年失踪,南京采血),年份不符未采用"
+    },
+    {
+      "path": "browser.search: 南京 1996年 儿子失踪 父亲 寻子",
+      "status": "ok",
+      "note": "无南京1996案;返回鹏鹏案、郭刚堂(1997山东)等"
+    },
+    {
+      "path": "browser.search: 1996 南京 男孩 失踪 被拐 寻亲",
+      "status": "ok",
+      "note": "无南京1996案;返回鹏鹏案、叶某冲(1996广州)等"
+    },
+    {
+      "path": "browser.search: 中新网 2018年5月 李明朝 鹏鹏 22年 团聚 十堰",
+      "status": "partial",
+      "note": "未直接返回中新网原文链接;改用中国日报(配图注chinanews.com)+VnExpress(明引Chinanews)"
+    },
+    {
+      "path": "browser.search: 十堰 李明朝 儿子 鹏鹏 1996年12月15日 被拐 6600元",
+      "status": "ok",
+      "note": "中国日报+Daily Mail系全文确认关键事实"
+    },
+    {
+      "path": "browser.search: 林宇辉 模拟画像 鹏鹏 十堰 寻子 2018",
+      "status": "partial",
+      "note": "未返回鹏鹏专条;林宇辉跨年龄画像背景见S02/S03"
+    },
+    {
+      "path": "browser.search: 鹏鹏 十堰 22年 寻子 2018 5月 团聚 6600",
+      "status": "ok",
+      "note": "中国日报+Daily Mail系再次确认"
+    },
+    {
+      "path": "browser.search: Pengpeng Shiyan couple reunited son 22 years Daily Mail 2018",
+      "status": "ok",
+      "note": "英文检索未返回新链;确认无第三独立英文链"
+    },
+    {
+      "path": "direct_source: China Daily 2018-05-08 (2 pages)",
+      "status": "found",
+      "note": "全文已读,配图注chinanews.com"
+    },
+    {
+      "path": "direct_source: goodnewsdaily (Daily Mail reprint)",
+      "status": "found",
+      "note": "全文已读;与中国日报在'卖给谁'一节有出入,已标注"
+    },
+    {
+      "path": "direct_source: VnExpress (Chinanews reprint, Vietnamese)",
+      "status": "found",
+      "note": "全文已读;补充DNA筛查10000人、深圳画像专家、额头疤痕等细节"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "S01",
+      "title": "Couple finds kidnapped son after 22 years",
+      "publisher": "China Daily",
+      "published_at": "2018-05-08",
+      "url": "https://www.chinadaily.com.cn/a/201805/08/WS5af14392a3105cdcf651ca36.html",
+      "origin_url": "",
+      "source_type": "news",
+      "is_reprint": true,
+      "reprint_of": "Chinanews (中新社) 2018-05-03 report; photos credited chinanews.com",
+      "notes": "英文主源。关键事实:鹏鹏1992年生,1996-12-15在十堰失踪;同事杨某以带孩子玩为由带走;2010年杨某在四川落网,供称以6600元卖给邯郸孔某;孔某已去世;2018年4月初警方请专家画像,26岁刘姓男子DNA比中,相似度约80%;2018-05-03上午10点十堰团聚。"
+    },
+    {
+      "source_id": "S02",
+      "title": "Touching moment Chinese couple are reunited with their long-lost son 22 years after he was abducted by his father's co-worker",
+      "publisher": "Daily Mail (via Good News Daily reprint)",
+      "published_at": "2018-05-04",
+      "url": "https://goodnewsdaily.com/touching-moment-chinese-couple-are-reunited-with-their-long-lost-son-22-years-after-he-was-abducted-by-his-fathers-co-worker/",
+      "origin_url": "",
+      "source_type": "news",
+      "is_reprint": true,
+      "reprint_of": "Daily Mail",
+      "notes": "第二独立链。补充:水泥厂场景、画像专家林宇辉、武安市刘姓男子、已婚有二孩。但在'卖给谁'一节与S01出入:S02称卖给'另一名也姓杨的人贩子,八年后落网后称卖给一对夫妇',S01称卖给邯郸孔某且孔某已去世。出入已标注,抽取时以S01为准。"
+    },
+    {
+      "source_id": "S03",
+      "title": "Tin người, ông bố lạc mất con trai suốt 22 năm",
+      "publisher": "VnExpress",
+      "published_at": "2018-05-10",
+      "url": "https://vnexpress.net/tin-nguoi-ong-bo-lac-mat-con-trai-suot-22-nam-3747774.html",
+      "origin_url": "",
+      "source_type": "news",
+      "is_reprint": true,
+      "reprint_of": "Chinanews (中新社)",
+      "notes": "与S01同源(中新社通稿),越南语转载,不计独立链,但补充细节:警方曾筛查10000人DNA无果;2018年初深圳警方画像专家受命;鹏鹏2岁摔倒致额头疤痕;4月初在河北找到,时与妻子和2个女儿同住;2018-05-03团聚。"
+    }
+  ],
+  "texts": {
+    "S01": "The boards Chen Zhen carries provide detailed information of her missing son, Pengpeng. [Photo/chinanews.com]\nA couple in Central China's Hubei province kept living in their old building for 22 years and did not change their phone number in the hope of reuniting with their son who went missing more than two decades ago.\nOn May 2, they received the news they had long been waiting for. On that day, police informed the couple, Li Mingchao and Chen Zhen, in Shiyan that a man's DNA in North China's Hebei province matched with theirs, and their long-lost son Pengpeng had been found.\nPengpeng, born in 1992, went missing on Dec 15, 1996, when his father's colleague surnamed Yang said he would take him to play outside.\n\"I was working when my colleague Yang handed me a cigarette, and said he wanted to take my son to play outside. I didn't think too much and agreed. Although, I did not know him well,\" Li Mingchao said as he recalled the scene with regret.\nPengpeng didn't return home that night. And when the couple went to Yang's home, Yang had already run away. Later it was confirmed by the police that the boy had been abducted by Yang. From that moment on, the couple started the journey of finding their son.\nChen Zhen (right) and Pengpeng (left 2). [Photo/chinanews.com]\n\"We went to Yang's hometown and asked around countless times, but ended up with nothing,\" the mother said. In order to find their son, they went to many places in North China, but returned empty handed.\nPengpeng had a brother, three years younger than him. But in Nov 2014, he died in a motorcycle accident. The unfortunate experience made the couple's desire for finding Pengpeng even stronger.\nAfter 22 years, the couple still lives in the low-ceilinged and damp brick house. \"We thought what if my son came back for us?\" Li Mingchao said. \"I haven't changed my phone number for over a decade, because I was afraid of missing anything about him.\"\nIn 2010, Yang finally got arrested after 14 years of run. According to Yang, he sold Pengpeng to Kong, a local resident of Handan, Hebei province, for 6,600 yuan ($1,037).\nThe police traced the information about Kong in early April. But unfortunately, Kong had died a long time ago. Police asked experts to draw a portrait of the son so that they could check their database.\nTo everyone's surprise, the 26-year-old Liu in Hebei province was confirmed to be related by blood with the couple in a DNA test. His appearance was about 80 percent similar to the portrait drawn by experts.\nThe police called Chen Zhen on May 2 to tell her to pick up their long-lost son the next day. \"I was awake the whole night. I kept thinking about meeting my son, and I have thousands of questions to ask him,\" the mother said excitedly.\nAt 10 am on May 3, after 8,000 days and nights, the couple finally met their son. \"You have no idea how much we've missed you!\" they said through tears. After two decades of separation, the family finally got reunited.\nKnowing that Pengpeng had already set up his own family, Chen Zhen was quite excited for she is a grandparent now. \"I hope my son would come back home and live with us. But I won't force them, I just hope he can visit us more,\" she said.\nPengpeng said he would treat and support Li Mingchao and Chen Zhen like the way he did to his foster parents.",
+    "S02": "This is the heartwarming moment a couple finally meet their long-lost son after a 22-year search across China.\nLi Mingzhao and his wife, Chen Zhen, have spent all their savings looking for their son since he was snatched away by a co-worker of Li's on a construction site in 1996.\nWith the help of police and volunteers across provinces, the family got together through a DNA match test.\nThe moment they saw each other, they hugged and cried in joyful tears.\n'I remember this scar he had on the brow bone. He fell on the ground when he was two,' said the mother.\nMr Li recalled the fateful day when he lost his son, known as Pengpeng. He brought Pengpeng to a cement factory to work and a colleague, surnamed Yang, volunteered to look after Pengpeng.\nHowever, Pengpeng did not go home that night.\nThe couple went to Mr Yang's home, but he had already fled.\nMr Li had not changed his mobile phone number ever since and the couple stayed in the same shabby brick house over the decades hoping to wait for their son's return.\nIn 2010, police caught the abductor in Sichuan. The couple has learnt that their son was sold to another abductor, who is also surnamed Yang.\nThe police caught the second abductor eight years after and found out Pengpeng got sold to a couple, according to the police statement.\nPolice officer also asked their sketch artist, Lin Yuhui, who previously helped a taxi driver found his long-lost daughter, to sketch Mr Li's son based on the then four-year-old boy's picture.\nIn April, Mr Li and his wife were told by the police that they had a match in a DNA sample test.\nIt's confirmed that their son to be a 26-year-old man, surnamed Liu, living in Wuan city of Hebei Province.\nDuring the reunion, Pengpeng mentioned to his parents that he is married and has two children.\nMr Li told China News: 'We won't ask him to move back and live with us. We understand that he has his job and his own family in Hebei Province.'\nPengpeng said he would take care of his parents the way as he looks after his adopted parents.",
+    "S03": "Tin người, ông bố lạc mất con trai suốt 22 năm\nĐôi vợ chồng già phải bán hết nhà cửa, vay nợ để tìm con trai khắp nơi.\nTheo Chinanews, năm 1996, ông Li Mingzhao đưa con trai 4 tuổi Peng Peng đến công trường làm việc cùng mình. Khi đang bận việc, một người đàn ông tên Yang, nói sẽ dẫn cậu bé ra kia chơi một chút cho đỡ nguy hiểm. Thấy người này mặc áo công nhân giống mình, lại đang bận nên ông Li đồng ý. Ông không thể ngờ sau đó, Yang đã mang theo bé Peng bỏ trốn.\nHóa ra Yang là một kẻ bắt cóc trẻ em. Sau khi mang bé Peng Peng đi, ông ta đã bán cậu bé cho một gia đình ở tỉnh khác với giá 6.600 nhân dân tệ (khoảng 23,5 triệu đồng).\nVợ chồng ông Li đoàn tụ con trai sau 22 năm. Ảnh: Chinanews.\nQuá đau khổ vì mất con, gia đình ông Li một mặt báo cảnh sát, mặt khác hai vợ chồng ông lặn lội khắp nơi để tìm con. Họ sau đó sinh thêm một bé trai nữa nhưng em bé không may qua đời vì tai nạn. Vì vậy, ông Li và vợ càng khát khao tìm lại đứa con đã mất tích. Họ bán hết tài sản, vay nợ, nhưng cứ năm này qua năm khác, việc tìm con trai trở nên vô vọng.\nNăm 2010, hy vọng nhen nhóm trở lại khi cảnh sát cuối cùng đã bắt được kẻ bắt cóc tên Yang, sau gần 14 năm lẩn trốn. Tuy nhiên họ cũng không tìm lại được gia đình đã mua cậu bé Peng vì họ đã chuyển đi chỗ khác, không có manh mối gì. Yang bị kết án 8 năm tù giam.\nCảnh sát sau đó tiếp tục tiến hành sàng lọc ADN của 10.000 người nhưng không có kết quả. Đầu năm 2018, một chuyên gia vẽ chân dung của cảnh sát Thâm Quyến được giao nhiệm vụ phác họa hình ảnh của bé Peng 22 năm trước và dự đoán hình ảnh hiện tại.\nHình ảnh anh Peng được cảnh sát phác họa từ lúc nhỏ tới lúc lớn. Ảnh: Chinanews.\nCác cơ quan chức năng dựa vào hình ảnh đó để tìm kiếm và đăng tải trên nhiều phương tiện. Có một điểm đáng chú ý được cảnh sát nhấn mạnh đó là Peng có một vết sẹo trên trán, sau lần ngã năm 2 tuổi.\nĐầu tháng 4, cảnh sát cuối cùng đã tìm lại được Peng Peng, người đang sống ở Hà Bắc cùng vợ và 2 con gái. Peng đã tiến hành xét nghiệm ADN với ông Li Mingzhao để xác nhận quan hệ huyết thống. Ngày 3/5, đôi vợ chồng già mừng rơi nước mắt vì cuối cùng cũng được đoàn tụ con trai sau 22 năm."
+  }
+}

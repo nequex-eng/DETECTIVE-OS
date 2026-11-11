@@ -131,35 +131,6 @@ class TestCheckpoints(unittest.TestCase):
             self.assertIsNone(mod.load_checkpoint(Path(td) / "nope.json",
                                                   123.0))
 
-    def test_followup_merges_parent_sources_and_deduplicates_urls(self):
-        mod = self._load_run_job()
-        parent = {
-            "sources": [
-                {"source_id": "S01", "title": "Original", "url": "https://example.com/a"},
-                {"source_id": "S02", "title": "Second", "url": "https://example.com/b"}
-            ],
-            "source_texts": {"S01": "old source A", "S02": "old source B"}
-        }
-        new_sources = [
-            {"source_id": "S01", "title": "Duplicate", "url": "https://example.com/a#top"},
-            {"source_id": "S02", "title": "New", "url": "https://example.com/c"}
-        ]
-        sources, texts = mod.merge_parent_collection(
-            parent, new_sources, {"S01": "duplicate text", "S02": "new source C"})
-        self.assertEqual([s["url"] for s in sources],
-                         ["https://example.com/a", "https://example.com/b", "https://example.com/c"])
-        self.assertEqual([s["source_id"] for s in sources], ["S01", "S02", "S03"])
-        self.assertEqual(texts, {"S01": "old source A", "S02": "old source B", "S03": "new source C"})
-
-    def test_legacy_parent_without_raw_text_is_not_fabricated(self):
-        mod = self._load_run_job()
-        sources, texts = mod.merge_parent_collection(
-            {"report_md": "old report only"}, 
-            [{"source_id": "S01", "url": "https://example.com/new"}],
-            {"S01": "new source"})
-        self.assertEqual(len(sources), 1)
-        self.assertEqual(texts, {"S01": "new source"})
-
 
 class TestNormalizePaths(unittest.TestCase):
     def test_freeform_notes_become_valid_paths(self):
