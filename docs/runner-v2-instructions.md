@@ -43,8 +43,8 @@ The API mirrors structured intake fields into `hints` for compatibility with old
 - Open the underlying pages and collect substantive text, not just search snippets. Aim for multiple independent origins, but never inflate source counts with reprints.
 - Record the actual publisher, title, author when available, publication date, canonical URL, source type, whether it is a reprint, and its original source when known.
 - If several outlets reproduce the same original report, set `reprint_of` or `origin_url` so the engine counts the cluster as one independent origin.
-- User-pasted `intake.materials` are automatically added later by `run_job.py` as source `USR01`, grade H, weight zero. Do not duplicate that material as a public source and do not claim it has been independently verified.
-- If `intake.parent_job_id` exists, the previous AI report is automatically included later as `PAR01`, grade G, weight zero. It is context only, never evidence. Use it to identify gaps and questions, not as a factual source.
+- Treat `intake.materials` and `intake.known_facts` as unverified user leads only. Never add them to `sources` or `texts`, never extract evidence from them, and never present them as independently verified.
+- If `intake.parent_job_id` exists, use the prior report and its gaps to guide collection, but do not treat the report as a source or evidence. `run_job.py` merges the parent result’s saved source records and raw source text (when available), deduplicates canonical URLs, and re-runs extraction across the carried-forward corpus plus new sources. Legacy parent jobs that lack saved raw source text are report-context only; do not invent or reconstruct their source texts.
 - If no reliable public source can be found, record the failed search paths and explain the limitation. Do not fabricate a result.
 
 ## Required collected file
