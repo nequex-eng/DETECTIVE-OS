@@ -36,7 +36,7 @@ The API also mirrors these fields into `hints` under `[STRUCTURED USER INTAKE V2
 
 - Open and inspect every valid user-specified `source_urls` URL first. Record failures honestly; do not silently discard inaccessible URLs.
 - Use `intake.objective`, `time_range`, `known_facts`, and `questions` to refine the search plan. Known facts are leads to verify, not established facts.
-- Apply `intake.exclusions` strictly.
+- Apply `intake.exclusions` strictly.\n- If `intake.evidence_cutoff_date` is set, exclude all sources and information published after that date from the reasoning corpus. Do not use later information to shape hypotheses or collection conclusions; record the cutoff in the collected file notes.
 - Search in the requested language and, where useful, English or the relevant local language. Search official sources, court records, contemporaneous reporting, and independent reputable media before secondary summaries.
 - Open the underlying pages and collect substantive text, not just search snippets. Aim for multiple independent origins, but never inflate source counts with reprints.
 - Record the actual publisher, title, author when available, publication date, canonical URL, source type, whether it is a reprint, and its original source when known.
