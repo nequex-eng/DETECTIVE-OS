@@ -77,10 +77,12 @@ table{border-collapse:collapse;width:100%}td,th{border:1px solid #2a4053;padding
 <script>
 const $ = id => document.getElementById(id);
 let pollTimer = null;
-let parentJob = null;\nlet parentCase = null;
+let parentJob = null;
+let parentCase = null;
 const params = new URLSearchParams(location.search);
 const continueId = params.get("continue");
-const requestedJob = params.get("job");\nconst requestedCase = params.get("case");
+const requestedJob = params.get("job");
+const requestedCase = params.get("case");
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function mdToHtml(md){
   const lines=String(md).split("\n");let html="",inList=false;
@@ -185,7 +187,8 @@ async function loadHistory(){
   }catch(e){$("history").innerHTML="<li class='note'>加载失败。</li>";}
 }
 loadHistory();
-if(continueId)prepareContinuation(continueId);\nif(requestedCase)prepareCaseContinuation(requestedCase);
+if(continueId)prepareContinuation(continueId);
+if(requestedCase)prepareCaseContinuation(requestedCase);
 if(requestedJob)startPolling(requestedJob);
 </script>
 </main></body></html>
