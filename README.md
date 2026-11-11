@@ -158,7 +158,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，19项，全部通过（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。此前基线合计50项全过；V2新增用户供料H级回归测试1项，尚待CI实际运行后确认：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，20项（V2新增用户供料H级回归测试1项，待运行）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。此前基线合计50项全过；V2新增1项用户供料H级回归测试，CI工作流已添加，但尚未取得运行结果，不将其记为通过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
