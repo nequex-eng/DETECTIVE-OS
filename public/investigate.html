@@ -121,7 +121,7 @@ async function prepareContinuation(id){
     parentJob=await res.json();
     if(parentJob.status!=="done"||!parentJob.result)throw Error("只有已完成的调查才能继续");
     $("continueBanner").style.display="block";$("continuationFields").style.display="block";
-    $("formHeading").textContent="继续调查 · v"+(Number(parentJob.result.version||1)+1);
+    $("formHeading").textContent="继续调查";
     $("direction").value=parentJob.direction||"";$("direction").readOnly=true;
     $("language").value=parentJob.language||"zh";$("region").value=parentJob.region||"";
     $("submitBtn").textContent="提交续办委托";
