@@ -1,0 +1,80 @@
+[
+  {
+    "contradiction_id": "CT01",
+    "ctype": "logic",
+    "evidence_ids": [
+      "F03",
+      "F12"
+    ],
+    "source_ids": [
+      "S02",
+      "S03"
+    ],
+    "wording_a": "警方1970年倾向自杀结论",
+    "wording_b": "前办案警方法律顾问不相信是自杀",
+    "quote_a": "Politiet var usikre om de stod overfor drap eller selvdrap, og konkluderte med det siste rett før jul.",
+    "quote_b": "I do not believe it was suicide",
+    "could_be_drift": "这是对同一组有限公开材料的解释分歧：警方当年作出自杀结论，前办案人员多年后表达个人怀疑；不等于两份法医事实相互矛盾。",
+    "needs_what": "完整尸检、毒理数据、现场照片及原始结案文件。",
+    "resolvable_now": false,
+    "resolution": "尚不能仅凭公开报道裁定。"
+  },
+  {
+    "contradiction_id": "CT02",
+    "ctype": "media",
+    "evidence_ids": [
+      "F09"
+    ],
+    "source_ids": [
+      "S02",
+      "S03"
+    ],
+    "wording_a": "1970年警方初始年龄估计25至40岁",
+    "wording_b": "后续牙齿同位素研究推测出生于1930年前后（约±4年）",
+    "quote_a": "She appeared to be aged between 25 and 40 years",
+    "quote_b": "tyder på at hun ble født rundt 1930",
+    "could_be_drift": "估计区间部分重叠，且采用外观判断与牙齿同位素两种不同方法；不应写成确定的年龄冲突。",
+    "needs_what": "原始警方年龄评估、完整同位素报告及其误差范围。",
+    "resolvable_now": false,
+    "resolution": "现有公开材料只能并列记录。"
+  },
+  {
+    "contradiction_id": "CT03",
+    "ctype": "logic",
+    "evidence_ids": [
+      "F08",
+      "F13"
+    ],
+    "source_ids": [
+      "S02",
+      "S04"
+    ],
+    "wording_a": "冷战背景与POT文件引发间谍猜测",
+    "wording_b": "警方对笔记的解读更接近旅行路线记录",
+    "quote_a": "There were several rumours that the woman was a spy.",
+    "quote_b": "it appears to be a record of the places the woman visited.",
+    "could_be_drift": "间谍说法主要来自当时传闻与后续推测；笔记被解释为行程表并不完全排除其他可能，但现有公开证据不足以证明情报身份。",
+    "needs_what": "POT文件原件、笔记原件及独立档案学复核。",
+    "resolvable_now": false,
+    "resolution": "未证实间谍理论，亦不把其当作已排除的事实。"
+  },
+  {
+    "contradiction_id": "CT04",
+    "ctype": "physical",
+    "evidence_ids": [
+      "F02",
+      "F04"
+    ],
+    "source_ids": [
+      "S02"
+    ],
+    "wording_a": "尸体正面严重烧伤，背部烧伤较轻",
+    "wording_b": "颈部瘀伤可能来自击打或跌倒",
+    "quote_a": "The body was burned all over the front",
+    "quote_b": "could have been the result of a blow or a fall.",
+    "could_be_drift": "两项观察可以同时成立；关键争议是其形成机制与先后顺序，而不是观察本身互斥。",
+    "needs_what": "原始现场照片、尸检图谱、组织学和火场重建资料。",
+    "resolvable_now": false,
+    "resolution": "公开材料不足以确定瘀伤与火灾的先后关系。"
+  }
+]
