@@ -322,6 +322,8 @@ def main():
 
     data = load_json(collected_path, {})
     live = job_get(job_id)
+    if live.get("job_id") != job_id:
+        raise RuntimeError("无法读取当前任务KV文档，停止执行以防止续办任务被误当成新案件")
     intake = live.get("intake", {}) if isinstance(live.get("intake"), dict) else {}
     parent_id = live.get("parent_job_id") or intake.get("parent_job_id")
     direction = data.get("direction") or live.get("direction", "")
