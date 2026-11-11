@@ -20,7 +20,7 @@ export async function onRequestGet(context) {
     if (!raw) return json({ error: "没有这个任务" }, 404);
     return json(JSON.parse(raw));
   }
-  const list = await env.JOBS.list({ prefix: "job:", limit: 50 });
+  const list = await env.JOBS.list({ prefix: "job:", limit: 1000 });
   const jobs = [];
   for (const k of list.keys) {
     const raw = await env.JOBS.get(k.name);
@@ -34,7 +34,7 @@ export async function onRequestGet(context) {
                 created_at: j.created_at, updated_at: j.updated_at });
   }
   jobs.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
-  return json({ jobs: jobs.slice(0, 20) });
+  return json({ jobs: jobs.slice(0, 1000) });
 }
 
 export async function onRequest(context) {
