@@ -60,6 +60,10 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertIn("结构化案卷完整度：未完成", index)
 
     def test_archived_case_pages_deep_link_to_case_specific_analysis_modules(self):
+        app = (ROOT / "src" / "App.tsx").read_text(encoding="utf-8")
+        self.assertIn('new URLSearchParams(window.location.search)', app)
+        self.assertIn('params.get("case")', app)
+        self.assertIn('params.get("tab")', app)
         for case_id in ("case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"):
             page = (PUBLIC / (case_id + ".html")).read_text(encoding="utf-8")
             self.assertIn("workbench.html?case=CASE-", page)
