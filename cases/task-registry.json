@@ -1,0 +1,16 @@
+[
+  {
+    "job_id": "e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1",
+    "case_id": "CASE-DRAFT-e5b884e5",
+    "name": "张俊杰（草稿任务记录）",
+    "status": "draft-unreviewed",
+    "created_at": "2026-11-11T06:33:19.288Z",
+    "stage_note": "草稿报告已生成；尚未恢复为完整结构化案包",
+    "source_count": 6,
+    "fact_count": 30,
+    "review_blockers": 6,
+    "coverage_pct": 0,
+    "verdict": "leading: H5 (margin 0.7661)",
+    "limitations": "当前仅能确认任务记录及其草稿报告；KV任务记录未保存完整 sources/evidence/entities 结构，不能伪装成正式案卷或归档。"
+  }
+]
