@@ -52,6 +52,8 @@ class TestWorkbenchBuild(unittest.TestCase):
     def test_recovered_task_drafts_are_discoverable_without_faking_case_packs(self):
         index = (PUBLIC / "index.html").read_text(encoding="utf-8")
         self.assertIn("张俊杰（草稿任务记录）", index)
+        self.assertIn('href="draft-9d0c95d6.html"', index)
+        self.assertIn('href="draft-6c31bb54.html"', index)
         self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
         self.assertIn("不能伪装成正式案卷或归档", index)
 
