@@ -255,7 +255,7 @@ export default function App() {
             return <g key={i}><line x1={x1} y1={y1} x2={x2} y2={y2} /><text x={(x1+x2)/2} y={(y1+y2)/2-6}>{edge.relation}</text></g>;
           })}
         </svg>
-        {entities.map((entity, i) => {
+        {entities.map((entity) => {
           const pos = positions.get(entity.entity_id)!;
           const linked = relationships.filter((r) => r.from_id === entity.entity_id || r.to_id === entity.entity_id);
           return <button key={entity.entity_id} className={"graph-node kind-" + entity.kind} style={{ left: pos.x, top: pos.y }}
@@ -304,7 +304,7 @@ export default function App() {
             <div><b>反对</b><div className="ref-line">{(h.opposes || []).map((id: string) => renderEvidenceRef(id))}</div></div>
             <div><b>未解释</b><div className="ref-line">{(h.unexplained || []).map((id: string) => renderEvidenceRef(id))}</div></div>
           </div>}
-          {h?.predictions?.length > 0 && <details><summary>可验证预测与证伪条件</summary><ul>{h.predictions.map((x: string, j: number) => <li key={j}>{x}</li>)}</ul><ul>{(h.falsifiers || []).map((x: string, j: number) => <li key={j}>证伪：{x}</li>)}</ul></details>}
+          {h && h.predictions?.length > 0 && <details><summary>可验证预测与证伪条件</summary><ul>{h.predictions.map((x: string, j: number) => <li key={j}>{x}</li>)}</ul><ul>{(h.falsifiers || []).map((x: string, j: number) => <li key={j}>证伪：{x}</li>)}</ul></details>}
         </article>;
       })}</div>
       {!posteriors.length && <Empty title="尚未生成假设排序" detail="当前报告没有贝叶斯后验数据。" />}
