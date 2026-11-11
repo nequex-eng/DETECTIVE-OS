@@ -2,7 +2,7 @@ name: DETECTIVE OS CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, "t2-**"]
   pull_request:
     branches: [main]
 
