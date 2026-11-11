@@ -149,23 +149,28 @@ async function prepareContinuation(id){
 $("form").addEventListener("submit",async ev=>{
   ev.preventDefault();const btn=$("submitBtn");btn.disabled=true;$("formMsg").textContent="正在提交……";
   try{
-    const isFollowup=!!parentJob;
-    const body=isFollowup?{
-      parent_job_id:parentJob.job_id,
+    const isFollowup=!!parentJob||!!parentCase;
+    const uploaded=[...($("sourceFiles").files||[])];
+    const uploadedText=await Promise.all(uploaded.map(async file=>"\n\n【上传文件："+file.name+"】\n"+(await file.text())));
+    const combinedSourceText=[$("sourceText").value.trim(),...uploadedText].filter(Boolean).join("\n");
+    if(combinedSourceText.length>20000)throw Error("粘贴文本与上传文件合计超过20000字，请拆分后提交");
+    const common={
       source_urls:$("sourceUrls").value.split("\n").map(x=>x.trim()).filter(Boolean),
-      source_text:combinedSourceText,materials:$("materials").value.trim()+(uploaded.length?"\n上传文件："+uploaded.map(f=>f.name).join("、"):""),
+      source_text:combinedSourceText,
+      materials:$("materials").value.trim()+(uploaded.length?"\n上传文件："+uploaded.map(f=>f.name).join("、"):""),
       questions:$("questions").value.trim(),known_facts:$("hints").value.trim()
-    }:{
+    };
+    const body=parentCase?{case_id:requestedCase,...common}:parentJob?{parent_job_id:parentJob.job_id,...common}:{
       direction:$("direction").value.trim(),language:$("language").value,
       region:$("region").value.trim(),hints:$("hints").value.trim()
     };
     const requestOptions={method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)};
-    const res=parentCase?await fetch("/api/continue-case",requestOptions):isFollowup?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
+    const res=parentCase?await fetch("/api/continue-case",requestOptions):parentJob?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
     const d=await res.json();
     if(!res.ok){$("formMsg").textContent=d.error||"提交失败";btn.disabled=false;return;}
-    $("formMsg").textContent=isFollowup?"续办任务已创建，等待跑手接手。原任务和报告保持不变。":"任务已创建，等待跑手接手。";
+    $("formMsg").textContent=isFollowup?"续办任务已创建，等待跑手接手。原案卷和原报告保持不变。":"任务已创建，等待跑手接手。";
     btn.disabled=false;loadHistory();history.replaceState(null,"","investigate.html?job="+encodeURIComponent(d.job_id));startPolling(d.job_id);
-  }catch(e){$("formMsg").textContent="提交失败，请检查网络后重试。";btn.disabled=false;}
+  }catch(e){$("formMsg").textContent=e.message||"提交失败，请检查网络后重试。";btn.disabled=false;}
 });
 async function loadHistory(){
   try{
@@ -174,7 +179,7 @@ async function loadHistory(){
   }catch(e){$("history").innerHTML="<li class='note'>加载失败。</li>";}
 }
 loadHistory();
-if(continueId)prepareContinuation(continueId);
+if(continueId)prepareContinuation(continueId);\nif(requestedCase)prepareCaseContinuation(requestedCase);
 if(requestedJob)startPolling(requestedJob);
 </script>
 </body></html>
