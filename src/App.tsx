@@ -96,7 +96,15 @@ export default function App() {
       .then((r) => { if (!r.ok) throw new Error("案件目录暂不可用"); return r.json(); })
       .then((rows: CaseIndexItem[]) => {
         setIndex(rows);
-        if (rows.length) setActiveCaseId(rows[0].case_id);
+        const params = new URLSearchParams(window.location.search);
+        const requestedCase = params.get("case");
+        const requestedTab = params.get("tab") as TabId | null;
+        const validTabs: TabId[] = ["cases", "sources", "evidence", "timeline", "graph", "contradictions", "hypotheses", "plan", "review", "report"];
+        if (requestedTab && validTabs.includes(requestedTab)) setTab(requestedTab);
+        if (rows.length) {
+          const matched = rows.find((row) => row.case_id === requestedCase);
+          setActiveCaseId(matched ? matched.case_id : rows[0].case_id);
+        }
         setLoading(false);
       })
       .catch((e: Error) => { setError(e.message); setLoading(false); });
