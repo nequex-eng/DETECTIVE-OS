@@ -28,6 +28,9 @@ export async function onRequestGet(context) {
     const j = JSON.parse(raw);
     jobs.push({ job_id: j.job_id, direction: j.direction, language: j.language,
                 status: j.status, stage: j.stage, stage_note: j.stage_note,
+                parent_job_id: j.parent_job_id || null,
+                source_count: j.result?.source_count ?? null,
+                fact_count: j.result?.fact_count ?? null,
                 created_at: j.created_at, updated_at: j.updated_at });
   }
   jobs.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
