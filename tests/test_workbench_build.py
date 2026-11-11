@@ -59,6 +59,14 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
         self.assertIn("结构化案卷完整度：未完成", index)
 
+    def test_archived_case_pages_deep_link_to_case_specific_analysis_modules(self):
+        for case_id in ("case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"):
+            page = (PUBLIC / (case_id + ".html")).read_text(encoding="utf-8")
+            self.assertIn("workbench.html?case=CASE-", page)
+            self.assertIn("tab=timeline", page)
+            self.assertIn("tab=graph", page)
+            self.assertIn("tab=contradictions", page)
+
     def test_isdal_workbench_payload_contains_six_sources_and_sixteen_evidence(self):
         payload = json.loads((DATA / "CASE-NO-1970-001.json").read_text(encoding="utf-8"))
         self.assertEqual(len(payload["sources"]), 6)
