@@ -130,8 +130,8 @@ $("form").addEventListener("submit",async ev=>{
       direction:$("direction").value.trim(),language:$("language").value,
       region:$("region").value.trim(),hints:$("hints").value.trim()
     };
-    const res=await fetch(isFollowup?"/api/continue":"/api/investigate",{
-      method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
+    const requestOptions={method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)};
+    const res=isFollowup?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
     const d=await res.json();
     if(!res.ok){$("formMsg").textContent=d.error||"提交失败";btn.disabled=false;return;}
     $("formMsg").textContent=isFollowup?"续办任务已创建，原调查记录保持不变。跑手接手后会采集新增信源并重新分析。":"任务已创建，等待跑手接手。";
