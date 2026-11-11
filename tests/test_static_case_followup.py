@@ -13,7 +13,7 @@ class StaticCaseFollowupTests(unittest.TestCase):
         for slug in ("case-cn-1996-001", "case-cn-1988-001", "case-no-1970-001"):
             with self.subTest(case=slug):
                 (collected, sources, texts, candidates, likelihoods,
-                 categories, report, case) = read_static_case_checkpoint(slug)
+                 categories, report, case, hypotheses) = read_static_case_checkpoint(slug)
 
                 self.assertEqual(report["case_id"], case["case_id"])
                 self.assertTrue(report["verdict"])
@@ -22,6 +22,9 @@ class StaticCaseFollowupTests(unittest.TestCase):
                 self.assertGreater(len(candidates), 0)
                 self.assertTrue(all(c["source_id"].startswith("S") for c in candidates))
                 self.assertTrue(all(c["quote"] for c in candidates))
+                self.assertTrue(all(c["baseline_grade"] in "ABCDE" for c in candidates))
+                self.assertTrue(hypotheses)
+                self.assertTrue(all(h.get("prior") is not None for h in hypotheses))
                 original = __import__("json").loads(
                     (ROOT / "cases" / slug / "evidence.json").read_text(encoding="utf-8"))
                 eligible = [e for e in original
