@@ -51,7 +51,7 @@ export async function onRequestPost(context) {
       "排除范围：" + intake.exclusions,
       "指定来源链接（优先打开并核验）：\n" + intake.source_urls.join("\n"),
       "用户提交材料（单独标记为用户供料，不得升级为事实）：\n" + intake.materials,
-      "关联父任务：" + intake.parent_job_id
+      "关联父任务（读取旧报告仅作上下文，不作为证据）：" + intake.parent_job_id
     ].filter(x => x.split("：").slice(1).join("：").trim()).join("\n\n");
     const hints = [clean(body.hints, 5000), brief].filter(Boolean).join("\n\n");
     const job = {
