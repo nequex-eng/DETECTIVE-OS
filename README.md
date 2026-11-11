@@ -158,7 +158,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 ## 验收测试
 
-`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，21项（含V2用户供料H级、父任务AI报告G级回归测试）（含抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。2026-11-11 GitHub Actions CI实跑52项全部通过（commit `1c01e2d1c2b82de213db8d68b92aaccb99c533ef`，run `42950019414`）；南大案、白银案案包校验也全部通过：
+`tests/test_acceptance.py`，11项（含1项护栏测试），全部通过；`tests/test_baiyin_validation.py`，6项，全部通过；`tests/test_coverage.py`，14项，全部通过；`tests/test_pipeline.py`，21项（含V2用户供料H级、父任务AI报告G级回归测试、抽取逐字核验、似然分批、映射分批、失败批次跳过、检查点存取与mtime失效、覆盖路径归一化、草稿包端到端）。2026-11-11 GitHub Actions CI实跑52项全部通过（commit `1c01e2d1c2b82de213db8d68b92aaccb99c533ef`，run `42950019414`）；南大案、白银案案包校验也全部通过：
 
 1. 同一新闻10个转载版本只算1个独立来源
 2. 两篇报道时间说法不同，两种说法都保留
@@ -175,7 +175,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 ## 未完成事项
 
-- V0收尾余项：删除KV探针键`probe-direct`；将`detective-os-job-watch`正文替换为`docs/runner-v2-instructions.md)，读回确认并完成无新案件模拟任务。
+- V0收尾余项：删除KV探针键`probe-direct`；将`detective-os-job-watch`正文替换为`docs/runner-v2-instructions.md`，读回确认并完成无新案件模拟任务。
 - 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、Cloudflare Pages生产部署与真实用户端验收仍未完成。
 - 自动跑手：完整V2任务正文已在`docs/runner-v2-instructions.md`；仍需同步到定时任务并实测后台实际读取V2结构化委托、优先打开指定来源链接并处理调查问题。
 - V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。
