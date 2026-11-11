@@ -18,7 +18,18 @@ export async function onRequestPost(context) {
     const supported = {
       "case-cn-1996-001": {
         case_id: "CASE-CN-1996-001",
-        direction: "1996南京大学刁爱青遇害案"
+        direction: "1996南京大学刁爱青遇害案",
+        region: "南京，中国"
+      },
+      "case-cn-1988-001": {
+        case_id: "CASE-CN-1988-001",
+        direction: "1988-2002甘肃白银连环杀人案",
+        region: "白银，甘肃，中国"
+      },
+      "case-no-1970-001": {
+        case_id: "CASE-NO-1970-001",
+        direction: "1970年Isdalen身份未明女性可疑死亡案（Isdal Woman）",
+        region: "卑尔根，挪威"
       }
     };
     const baseline = supported[caseId];
@@ -66,7 +77,7 @@ export async function onRequestPost(context) {
       job_id: crypto.randomUUID(),
       direction: baseline.direction,
       language: "zh",
-      region: "南京，中国",
+      region: baseline.region,
       hints: "【继续调查】基于既有案卷版本进行增量跟进；只处理新增信源，不得重跑旧来源。",
       version,
       parent_job_id: parentJobId,
