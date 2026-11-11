@@ -132,6 +132,47 @@ class TestCheckpoints(unittest.TestCase):
                                                   123.0))
 
 
+class TestFollowupMerge(unittest.TestCase):
+    @staticmethod
+    def _load_run_job():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "run_job_followup", ROOT / "scripts" / "run_job.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+    def test_append_only_sources_keep_old_ids_and_skip_duplicates(self):
+        mod = self._load_run_job()
+        parent_sources = [
+            {"source_id": "S01", "title": "Original A", "url": "https://example.com/a"},
+            {"source_id": "S02", "title": "Original B", "url": "https://example.com/b"}
+        ]
+        parent_texts = {"S01": "old A text", "S02": "old B text"}
+        new_sources = [
+            {"source_id": "S01", "title": "Duplicate A", "url": "https://example.com/a#top"},
+            {"source_id": "S02", "title": "New C", "url": "https://example.com/c"}
+        ]
+        sources, texts, new_ids, remap = mod.merge_followup_sources(
+            parent_sources, parent_texts, new_sources,
+            {"S01": "duplicate text", "S02": "new C text"})
+        self.assertEqual([x["source_id"] for x in sources], ["S01", "S02", "S03"])
+        self.assertEqual(new_ids, ["S03"])
+        self.assertEqual(texts, {
+            "S01": "old A text", "S02": "old B text", "S03": "new C text"})
+        self.assertEqual(remap, {"S02": "S03"})
+
+    def test_case_summary_marks_facts_as_candidates_and_states_version(self):
+        mod = self._load_run_job()
+        summary = mod.build_case_summary(
+            "测试案件", [{"content": "原文可核验内容", "source_id": "S03"}],
+            "undecided", {"score_pct": 25, "covered": 1, "single": 2, "missing": 19},
+            3, 2, 1)
+        self.assertIn("案件总结（v2）", summary)
+        self.assertIn("仍待人工复核", summary)
+        self.assertIn("原文可核验内容", summary)
+
+
 class TestNormalizePaths(unittest.TestCase):
     def test_freeform_notes_become_valid_paths(self):
         from detective_os.coverage import COLLECTION_PATHS, PATH_STATUSES
