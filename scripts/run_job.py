@@ -87,12 +87,12 @@ def build_timeline_events(evidence):
             return None
 
     range_re = re.compile(
-        r"(?P<y>\\d{4})年(?P<m>\\d{1,2})月(?P<d1>\\d{1,2})日"
-        r"\\s*(?:至|到|—|－|-|~|～)\\s*"
-        r"(?:(?P<y2>\\d{4})年)?(?:(?P<m2>\\d{1,2})月)?"
-        r"(?P<d2>\\d{1,2})日?")
-    date_re = re.compile(r"(?P<y>\\d{4})年(?P<m>\\d{1,2})月(?P<d>\\d{1,2})日")
-    iso_re = re.compile(r"(?<!\\d)(?P<y>\\d{4})-(?P<m>\\d{2})-(?P<d>\\d{2})(?!\\d)")
+        r"(?P<y>\d{4})年(?P<m>\d{1,2})月(?P<d1>\d{1,2})日"
+        r"\s*(?:至|到|—|－|-|~|～)\s*"
+        r"(?:(?P<y2>\d{4})年)?(?:(?P<m2>\d{1,2})月)?"
+        r"(?P<d2>\d{1,2})日?")
+    date_re = re.compile(r"(?P<y>\d{4})年(?P<m>\d{1,2})月(?P<d>\d{1,2})日")
+    iso_re = re.compile(r"(?<!\d)(?P<y>\d{4})-(?P<m>\d{2})-(?P<d>\d{2})(?!\d)")
     events = []
     for item in evidence or []:
         quote = str(item.get("original_quote", ""))
