@@ -164,11 +164,33 @@ def main():
     (cases_dir / "index.json").write_text(
         json.dumps(index_rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    links = "".join(
-        f"<li><a href=\"{esc(row['case_id'].lower().replace('case-', 'case-'))}.html\">"
-        f"{esc(row['name'])}</a> — {esc(row['case_id'])}，"
-        f"结论：{esc(row['verdict'])}，证据{row['evidence_count']}条</li>"
-        for row in index_rows)
+    def lifecycle(row):
+        if str(row.get("status", "")).startswith("draft"):
+            return "draft"
+        if row.get("review_passed") and row.get("evidence_count", 0) and row.get("source_count", 0):
+            return "archived"
+        return "review"
+
+    def render_case_rows(rows):
+        if not rows:
+            return '<div class="empty">当前分类暂无案件。</div>'
+        cards = []
+        for row in rows:
+            href = row["case_id"].lower() + ".html"
+            stage = {"draft": "草稿 · 待调查", "review": "调查资料已生成 · 待复核", "archived": "阶段归档 · 可继续增量调查"}[lifecycle(row)]
+            cards.append(
+                f'<a class="archive-card" href="{esc(href)}">'
+                f'<small>{esc(row["case_id"])} · {stage}</small>'
+                f'<b>{esc(row["name"])}</b>'
+                f'<span>来源 {row["source_count"]} · 证据 {row["evidence_count"]} · '
+                f'复核{"通过" if row["review_passed"] else "未通过/未完成"}</span>'
+                f'<em>引擎输出：{esc(row["verdict"])}</em></a>'
+            )
+        return "".join(cards)
+
+    drafts = [x for x in index_rows if lifecycle(x) == "draft"]
+    review_queue = [x for x in index_rows if lifecycle(x) == "review"]
+    archived = [x for x in index_rows if lifecycle(x) == "archived"]
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08121d">
 <title>DETECTIVE OS — Intelligence Operations</title>
@@ -202,8 +224,13 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 <div class="actions"><a class="action" href="investigate.html">＋ CREATE INVESTIGATION</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
 <div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
-<div class="section"><div><div class="eyebrow">CASE REGISTRY</div><h2>案件档案</h2></div><span>{len(index_rows)} REGISTERED CASES</span></div>
-<div class="archive-grid">{links}</div>
+<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 01</div><h2>待调查 · 草稿案卷</h2></div><span>{len(drafts)} DRAFTS</span></div>
+<div class="archive-grid">{render_case_rows(drafts)}</div>
+<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 02</div><h2>调查完成 · 等待复核</h2></div><span>{len(review_queue)} IN REVIEW</span></div>
+<div class="archive-grid">{render_case_rows(review_queue)}</div>
+<div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 03</div><h2>阶段归档 · 可追溯案卷</h2></div><span>{len(archived)} ARCHIVED</span></div>
+<div class="archive-grid">{render_case_rows(archived)}</div>
+<p class="note">归档表示本阶段资料、报告和复核已满足归档条件，不代表案件已经侦破。未破案件也可以形成阶段归档；新增资料通过“继续调查”建立新版本，不覆盖旧案卷。</p>
 <div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于真实犯罪概率。证据不足时允许不作结论。</div>
 </div>
 <script>
