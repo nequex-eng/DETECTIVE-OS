@@ -191,6 +191,16 @@ def main():
     drafts = [x for x in index_rows if lifecycle(x) == "draft"]
     review_queue = [x for x in index_rows if lifecycle(x) == "review"]
     archived = [x for x in index_rows if lifecycle(x) == "archived"]
+    task_drafts = read_json(ROOT / "cases" / "task-registry.json")
+    task_draft_cards = "".join(
+        f'<a class="archive-card" href="investigate.html?job={esc(task["job_id"])}">'
+        f'<small>{esc(task["case_id"])} · 自动调查任务草稿 · 待人工复核</small>'
+        f'<b>{esc(task["name"])}</b>'
+        f'<span>来源记录 {task["source_count"]} · 抽取事实 {task["fact_count"]} · '
+        f'复核阻断项 {task["review_blockers"]} · 覆盖率 {task["coverage_pct"]}%</span>'
+        f'<em>{esc(task["limitations"])}　打开原始任务报告 →</em></a>'
+        for task in task_drafts
+    )
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08121d">
 <title>DETECTIVE OS — Intelligence Operations</title>
@@ -226,6 +236,8 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
 <div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 01</div><h2>待调查 · 草稿案卷</h2></div><span>{len(drafts)} DRAFTS</span></div>
 <div class="archive-grid">{render_case_rows(drafts)}</div>
+<div class="section"><div><div class="eyebrow">TASK RECORDS / RECOVERED</div><h2>已完成任务 · 尚未形成完整案卷</h2></div><span>{len(task_drafts)} TASK DRAFTS</span></div>
+<div class="archive-grid">{task_draft_cards or '<div class="empty">暂无待恢复的调查任务记录。</div>'}</div>
 <div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 02</div><h2>调查完成 · 等待复核</h2></div><span>{len(review_queue)} IN REVIEW</span></div>
 <div class="archive-grid">{render_case_rows(review_queue)}</div>
 <div class="section"><div><div class="eyebrow">CASE LIFECYCLE / 03</div><h2>阶段归档 · 可追溯案卷</h2></div><span>{len(archived)} ARCHIVED</span></div>
