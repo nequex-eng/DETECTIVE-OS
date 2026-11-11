@@ -2,10 +2,10 @@
   {
     "job_id": "e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1",
     "case_id": "CASE-DRAFT-e5b884e5",
-    "name": "张俊杰（草稿任务记录）",
-    "status": "draft-unreviewed",
+    "name": "张俊杰（已完成任务）",
+    "status": "complete",
     "created_at": "2026-11-11T06:33:19.288Z",
-    "stage_note": "草稿报告已生成；尚未恢复为完整结构化案包",
+    "stage_note": "任务执行完成，已自动归档；结构化案卷尚未完整恢复",
     "source_count": 6,
     "fact_count": 30,
     "review_blockers": 6,
