@@ -36,12 +36,12 @@ export async function onRequestPost(context) {
     const nextVersion = Number(parent.result.version || 1) + 1;
     const followupHints = [
       "【继续调查】原任务：" + parentId + "；目标版本：v" + nextVersion,
-      sourceUrls.length ? "【新增信源URL】\\n" + sourceUrls.join("\\n") : "",
-      sourceText ? "【用户粘贴的信源文本：仅作待核实线索】\\n" + sourceText : "",
-      questions ? "【重点问题】\\n" + questions : "",
-      knownFacts ? "【补充线索：未核实】\\n" + knownFacts : "",
-      materials ? "【补充材料：未核实】\\n" + materials : ""
-    ].filter(Boolean).join("\\n\\n");
+      sourceUrls.length ? "【新增信源URL】\n" + sourceUrls.join("\n") : "",
+      sourceText ? "【用户粘贴的信源文本：仅作待核实线索】\n" + sourceText : "",
+      questions ? "【重点问题】\n" + questions : "",
+      knownFacts ? "【补充线索：未核实】\n" + knownFacts : "",
+      materials ? "【补充材料：未核实】\n" + materials : ""
+    ].filter(Boolean).join("\n\n");
     const job = {
       job_id: crypto.randomUUID(),
       direction: parent.direction,
