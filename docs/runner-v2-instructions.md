@@ -28,7 +28,7 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
    - `intake.questions`
    - `intake.exclusions`
    - `intake.source_urls`
-   - `intake.materials`
+   - `intake.user_source_text`\n   - `intake.materials`
    - `intake.parent_job_id`
    - `intake.parent_report_context`
 
@@ -44,8 +44,10 @@ Treat the structured `intake` object as authoritative; legacy `hints` is only a 
 - Open the underlying pages and collect substantive text, not just search snippets. Aim for multiple independent origins, but never inflate source counts with reprints.
 - Record the actual publisher, title, author when available, publication date, canonical URL, source type, whether it is a reprint, and its original source when known.
 - If several outlets reproduce the same original report, set `reprint_of` or `origin_url` so the engine counts the cluster as one independent origin.
-- Treat `intake.materials` and `intake.known_facts` as unverified user leads only. Never add them to `sources` or `texts`, never extract evidence from them, and never present them as independently verified.
-- If `intake.parent_job_id` exists, use the prior report and its gaps to guide collection, but do not treat the report as a source or evidence. `run_job.py` merges the parent result’s saved source records and raw source text (when available), deduplicates canonical URLs, and re-runs extraction across the carried-forward corpus plus new sources. Legacy parent jobs that lack saved raw source text in KV may still be recovered from `runs/<parent_job_id>/collected.json` in the runner workspace. If that file is unavailable, use the prior report as context only; do not invent or reconstruct source texts.
+- Treat `intake.user_source_text`, `intake.materials`, and `intake.known_facts` as user-provided leads. They are not independently verified evidence. Use them to locate and verify the original source; never create a grade-C fact from pasted text alone.
+- If `intake.parent_job_id` exists, this is an incremental continuation. Read the parent task with `python3 scripts/job.py get <parent_job_id>`, then inspect `runs/<parent_job_id>/collected.json` and `runs/<parent_job_id>/candidates.json`. Use the parent report and summary to identify gaps. Open `intake.source_urls` first, then search for additional independent sources relevant to `intake.questions`, `known_facts`, and the prior report gaps.
+- For a follow-up job, write only newly inspected source records and their texts into the child `runs/<job_id>/collected.json`; do not copy the old corpus into the child file. Use temporary source IDs S01, S02, etc. `run_job.py` appends these to the parent corpus, deduplicates canonical URLs, assigns stable new source IDs after the parent IDs, and extracts facts only from the new sources. It then combines old and new candidates and reruns the engine/coverage.
+- Never change the parent job, parent collected file, parent candidate checkpoints, original draft pack, or original report. Each follow-up creates a new version (v2, v3, ...) and preserves the previous result. A follow-up with no new independent source must fail honestly rather than re-run the old corpus.
 - If no reliable public source can be found, record the failed search paths and explain the limitation. Do not fabricate a result.
 
 ## Required collected file
@@ -85,13 +87,13 @@ Create `runs/<job_id>/collected.json` with this structure:
 }
 ```
 
-Use unique source IDs. Each `texts` key must match a source ID. For follow-up jobs, keep the parent source corpus intact and add only newly inspected sources; `run_job.py` performs canonical-URL deduplication and stable source-ID reassignment.
+Use unique source IDs. Each `texts` key must match a source ID. For follow-up jobs, this file must contain only newly inspected sources; the parent corpus is read from the parent job folder and merged by `run_job.py`.
 
 The accepted collection path names are: `web_search`, `direct_source`, `news_db`, `web_archive`, `court_db`, `local_language`, `books_media`, `user_supplied`, `community_lead`, `foia`. Status values: `tried`, `found`, `nothing`, `not_applicable`. The normalizer can repair free-form path notes, but use canonical values when possible.
 
 ## Execute and verify
 
-1. After writing `collected.json`, update the task note/event to say collection is complete and include the real source count.
+1. After writing `collected.json`, update the task note/event to say collection is complete and include the number of newly inspected sources. For a follow-up, include the parent and child task IDs in the event.
 2. Run exactly: `python3 scripts/run_job.py <job_id>`.
 3. Let the script perform extraction, quote verification, likelihood proposals, category mapping, draft-pack generation, engine checks, coverage calculation, independent review, report writing, and final KV update.
 4. If interrupted, do not delete checkpoints. Rerun `run_job.py`; it resumes from valid checkpoints tied to the `collected.json` modification time.
@@ -101,4 +103,4 @@ The accepted collection path names are: `web_search`, `direct_source`, `news_db`
 
 ## User-facing output
 
-Report the task ID, sources collected, facts extracted, evidence-grade distribution, verdict, posterior table, coverage (covered/single/missing), review blockers, and report path. Always call it an unreviewed draft. Explain that the posterior is a relative model ranking, not the probability that any named person committed the crime.
+Report the task ID, parent task ID when applicable, version number, newly collected sources, newly extracted facts, total corpus size, evidence-grade distribution, previous verdict and current verdict, posterior table, coverage (covered/single/missing), review blockers, and versioned report path. Always call it an unreviewed draft. Explain that the posterior is a relative model ranking, not the probability that any named person committed the crime.
