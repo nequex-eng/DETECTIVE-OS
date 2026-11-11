@@ -27,7 +27,7 @@ class TestIsdalWomanCase(unittest.TestCase):
     def test_case_pack_loads_and_has_independent_sources(self):
         self.assertEqual(self.case["case_id"], "CASE-NO-1970-001")
         registry = self.loaded["registry"]
-        self.assertGreaterEqual(len(registry.sources), 4)
+        self.assertGreaterEqual(len(registry.sources), 6)
         self.assertGreaterEqual(
             registry.independent_source_count(list(registry.sources)), 3)
         self.assertIn("NRK", {s.publisher for s in registry.sources.values()})
@@ -44,6 +44,9 @@ class TestIsdalWomanCase(unittest.TestCase):
             self.assertIn(ev.grade, ("B", "C", "D", "E"))
         self.assertFalse(any(e.grade in ("A", "B") for e in board.items.values()),
                          "secondary reporting must not be upgraded to A/B")
+        self.assertEqual(board.items["F02"].content, "遗体正面严重烧伤。")
+        self.assertIn("标签", board.items["F16"].content)
+        self.assertEqual(board.items["F16"].source_id, "S06")
 
     def test_no_person_is_falsely_marked_as_suspect(self):
         self.assertTrue(self.loaded["graph"].entities)
