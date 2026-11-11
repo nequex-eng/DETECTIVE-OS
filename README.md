@@ -182,6 +182,7 @@ V2委托字段：`intake.objective`、`time_range`、`evidence_cutoff_date`、`k
 - 新增tests/test_result_serialization.py，验证调查计划对象可序列化为前端可消费的JSON记录。
 - 上述结果工作区提交62856a9d的GitHub Actions CI通过；前序结构化数据工作区提交f0c96449的CI也通过。之后8dca0423又更新了案件中心页面，其CI当时仍在运行，必须以最新运行结果为准。
 
+- 新增scripts/check_frontend.py，并在GitHub Actions中加入Node.js语法检查与11个结果工作区的DOM配对检查，防止前端脚本语法错误或导航页缺失。
 **尚未完成：**后台定时跑手正文是否已同步docs/runner-v2-instructions.md，以及指定URL优先采集、自动搜索、断点恢复的无新案件模拟验收；前端工作站尚未完成生产部署和浏览器实测。当前自动采集仍由外部跑手负责，run_job.py只处理已收集的collected.json，不可宣称Pages页面本身会直接搜索网页。
 ## 未完成事项
 
