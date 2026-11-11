@@ -62,7 +62,7 @@ def main():
     env["CLOUDFLARE_API_TOKEN"] = token
     env["CLOUDFLARE_ACCOUNT_ID"] = str(env.get("CLOUDFLARE_ACCOUNT_ID", DEFAULT_ACCOUNT_ID))
     cmd = ["npx", "-y", "wrangler@4", "pages", "deploy", "public",
-           "--project-name=detective-os", "--commit-dirty=true"]
+           "--project-name=detective-os", "--branch=main", "--commit-dirty=true"]
     proc = subprocess.run(cmd, cwd=ROOT, env=env)
     print("deploy: wrangler exit code=" + str(proc.returncode))
     return proc.returncode
