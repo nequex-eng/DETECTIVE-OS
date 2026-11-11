@@ -107,7 +107,7 @@ def case_page(data):
                      if coverage else "资料覆盖尚未计算")
     page = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080f19"><title>DETECTIVE OS — {esc(case['name'])}</title>{STYLE}</head><body><div class="shell">
-<header class="site-header"><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><nav class="nav"><a href="index.html">案件中心</a><a href="workbench.html">研究工作站</a><a href="investigate.html">自动调查</a></nav></header>
+<header class="site-header"><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><nav class="nav"><a href="index.html">案件中心</a><a href="workbench.html?case={esc(case['case_id'])}&amp;tab=cases">研究工作站</a><a href="workbench.html?case={esc(case['case_id'])}&amp;tab=timeline">时间线</a><a href="workbench.html?case={esc(case['case_id'])}&amp;tab=graph">关系图谱</a><a href="workbench.html?case={esc(case['case_id'])}&amp;tab=contradictions">矛盾实验室</a><a href="investigate.html">自动调查</a></nav></header>
 <div class="eyebrow">CASE FILE / COMPLETE · AUTO-ARCHIVED</div>
 <h1 class="page-title">{esc(case['name'])}</h1>
 <p class="meta">案件编号：{esc(case['case_id'])}　｜　案件状态：{esc(case['status'])}　｜　调查任务：COMPLETE · 自动归档</p>
