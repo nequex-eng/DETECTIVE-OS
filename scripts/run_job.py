@@ -64,6 +64,133 @@ def load_checkpoint(path, collected_mtime):
     return data
 
 
+def load_json(path, default=None):
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, ValueError):
+        return {} if default is None else default
+
+
+def source_key(source):
+    """Canonical identity for deduplicating reprints across follow-up runs."""
+    url = str(source.get("origin_url") or source.get("url") or "").strip()
+    if url:
+        return url.split("#", 1)[0].rstrip("/").lower()
+    return "meta:" + "|".join(
+        str(source.get(k, "")).strip().lower()
+        for k in ("publisher", "title", "published_at"))
+
+
+def merge_followup_sources(parent_sources, parent_texts,
+                           new_sources, new_texts):
+    """Keep the old corpus and append only genuinely new source origins.
+
+    Existing source IDs stay stable. New source IDs are assigned after the
+    existing corpus so old candidate references remain valid.
+    """
+    merged = []
+    texts = {}
+    seen = set()
+    for source in parent_sources or []:
+        row = dict(source)
+        sid = str(row.get("source_id") or f"S{len(merged) + 1:02d}")
+        row["source_id"] = sid
+        key = source_key(row)
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(row)
+        old_text = (parent_texts or {}).get(source.get("source_id", ""), "")
+        if old_text:
+            texts[sid] = str(old_text)[:12000]
+
+    new_ids = []
+    remap = {}
+    for source in new_sources or []:
+        old_id = str(source.get("source_id", ""))
+        key = source_key(source)
+        if key in seen:
+            continue
+        seen.add(key)
+        sid = f"S{len(merged) + 1:02d}"
+        row = dict(source)
+        row["source_id"] = sid
+        merged.append(row)
+        remap[old_id] = sid
+        new_ids.append(sid)
+        value = (new_texts or {}).get(old_id, "")
+        if value:
+            texts[sid] = str(value)[:12000]
+    return merged, texts, new_ids, remap
+
+
+def build_case_summary(direction, candidates, verdict, coverage,
+                       review_blockers, version, new_fact_count):
+    facts = candidates[-min(len(candidates), 6):]
+    fact_lines = "\n".join(
+        f"- {item.get('content', '')}（来源：{item.get('source_id', '未知')}）"
+        for item in facts if item.get("content"))
+    if not fact_lines:
+        fact_lines = "- 本轮没有可逐字引用核验的新增候选事实。"
+    return (
+        f"## 案件总结（v{version}）\n\n"
+        "本节由跑手依据已采集来源与引擎输出整理，非引擎原生结论。\n\n"
+        f"### 事件背景\n调查方向：{direction}。本轮为既有调查的增量跟进。\n\n"
+        "### 来源原文抽取的关键事实（仍待人工复核）\n"
+        f"{fact_lines}\n\n"
+        "### 引擎结论及其含义\n"
+        f"{verdict}。这是竞争性假设的相对模型排序，不代表任何个人的犯罪概率；"
+        "若排序差距不足或证据不足，应保留无法判断。\n\n"
+        "### 主要缺口与注意事项\n"
+        f"资料覆盖：{coverage.get('score_pct', 0)}%；"
+        f"已覆盖{coverage.get('covered', 0)}项、单来源{coverage.get('single', 0)}项、"
+        f"缺失{coverage.get('missing', 0)}项；独立审查blocker：{review_blockers}。"
+        f"本版本新增抽取{new_fact_count}条候选事实。所有自动抽取仍需人工复核，"
+        "用户提供的文字与线索不直接作为证据。"
+    )
+
+
+def read_parent_checkpoint(parent_run_dir, parent_result):
+    """Recover the parent source corpus and candidate checkpoints.
+
+    Prefer workspace checkpoints (which preserve exact source text); fall
+    back to the previous KV result for runs created by newer versions.
+    """
+    collected = load_json(parent_run_dir / "collected.json", {})
+    candidates_doc = load_json(parent_run_dir / "candidates.json", {})
+    likelihoods_doc = load_json(parent_run_dir / "likelihoods.json", {})
+    categories_doc = load_json(parent_run_dir / "categories.json", {})
+
+    parent_sources = collected.get("sources") or parent_result.get("sources") or []
+    parent_texts = collected.get("texts") or parent_result.get("source_texts") or {}
+    parent_candidates = candidates_doc.get("candidates") or parent_result.get("candidates") or []
+    parent_likelihoods = likelihoods_doc.get("likelihoods") or parent_result.get("likelihoods") or {}
+    parent_categories = categories_doc.get("categories") or parent_result.get("categories") or {}
+
+    if not parent_candidates:
+        draft_path = parent_result.get("draft_pack_path")
+        if draft_path:
+            pack_dir = ROOT / draft_path
+        else:
+            pack_dir = ROOT / "cases" / f"draft-{parent_run_dir.name[:8]}"
+        evidence = load_json(pack_dir / "evidence.json", [])
+        parent_candidates = [{
+            "content": e.get("content", ""),
+            "quote": e.get("original_quote", ""),
+            "source_location": e.get("source_location", ""),
+            "evidence_type": e.get("evidence_type", "fact"),
+            "event_date": e.get("event_date", ""),
+            "category": "",
+            "source_id": e.get("source_id", "")
+        } for e in evidence]
+    if not parent_candidates:
+        raise RuntimeError(
+            "原调查的候选事实检查点与草稿证据档案均不可用，无法增量续办；"
+            "为避免伪造或从零重跑，任务已停止。")
+    return (collected, parent_sources, parent_texts, parent_candidates,
+            parent_likelihoods, parent_categories)
+
+
 def main():
     if len(sys.argv) < 2:
         print("usage: run_job.py <job_id>")
@@ -74,24 +201,76 @@ def main():
     if not collected_path.exists():
         print(f"no collected.json for {job_id}; collect sources first")
         return 1
-    data = json.loads(collected_path.read_text(encoding="utf-8"))
-    sources = data["sources"]
-    texts = data["texts"]
-    paths_tried = data.get("paths_tried", [])
-    # The job's direction comes from the collected file (written by the
-    # runner from the job doc) so this script never needs the API read.
-    direction = data.get("direction", "")
-    short = job_id[:8]
-    case_id = f"CASE-DRAFT-{short}"
+
+    data = load_json(collected_path, {})
+    live = job_get(job_id)
+    intake = live.get("intake", {}) if isinstance(live.get("intake"), dict) else {}
+    parent_id = live.get("parent_job_id") or intake.get("parent_job_id")
+    direction = data.get("direction") or live.get("direction", "")
+    if not direction:
+        raise RuntimeError("任务缺少调查方向")
+
+    parent = {}
+    parent_result = {}
+    parent_candidates = []
+    parent_likelihoods = {}
+    parent_categories = {}
+    parent_sources = []
+    parent_texts = {}
+    parent_paths = []
+    previous_verdict = None
+    root_job_id = job_id
+    version = 1
+    if parent_id:
+        parent = job_get(parent_id)
+        if parent.get("status") != "done" or not parent.get("result"):
+            raise RuntimeError("原调查任务不存在或未完成，不能继续调查")
+        parent_result = parent["result"]
+        if not isinstance(parent_result, dict):
+            raise RuntimeError("原调查结果格式异常，不能继续调查")
+        parent_run_dir = ROOT / "runs" / parent_id
+        (parent_collected, parent_sources, parent_texts, parent_candidates,
+         parent_likelihoods, parent_categories) = read_parent_checkpoint(
+            parent_run_dir, parent_result)
+        parent_paths = parent_collected.get("paths_tried", [])
+        previous_verdict = parent_result.get("verdict")
+        root_job_id = parent_result.get("root_job_id") or parent_id
+        version = int(parent_result.get("version") or parent.get("version") or 1) + 1
+
+    new_sources = data.get("sources", [])
+    new_texts = data.get("texts", {})
+    if parent_id:
+        sources, texts, new_source_ids, remap = merge_followup_sources(
+            parent_sources, parent_texts, new_sources, new_texts)
+        if not new_source_ids:
+            raise RuntimeError(
+                "本轮没有新增的独立来源。请跑手继续搜索并打开新来源；"
+                "重复转载或仅有用户粘贴文本不能作为新增证据。")
+        paths_tried = list(parent_paths) + list(data.get("paths_tried", []))
+        data = {
+            "direction": direction, "sources": sources, "texts": texts,
+            "paths_tried": paths_tried, "parent_job_id": parent_id,
+            "new_source_ids": new_source_ids, "source_id_remap": remap
+        }
+        collected_path.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        case_id = parent_result.get("case_id") or f"CASE-DRAFT-{root_job_id[:8]}"
+        case_name = parent_result.get("case_name") or direction + "（草稿）"
+    else:
+        sources, texts = new_sources, new_texts
+        new_source_ids = [str(s.get("source_id")) for s in sources if s.get("source_id")]
+        paths_tried = data.get("paths_tried", [])
+        case_id = f"CASE-DRAFT-{job_id[:8]}"
+        case_name = direction + "（草稿）"
+
     collected_mtime = collected_path.stat().st_mtime
     ck_candidates = run_dir / "candidates.json"
     ck_likelihoods = run_dir / "likelihoods.json"
     ck_categories = run_dir / "categories.json"
+
     try:
-        # Resume-aware first update: a run killed mid-flight (VM
-        # restart) leaves the job at extracting/reasoning; demanding
-        # "collecting" would refuse and the checkpoints below would
-        # never be reached. A fresh run still goes through collecting.
+        if parent_id and (not parent_result or parent.get("status") != "done"):
+            raise RuntimeError("无法读取原调查基线，停止续办以避免覆盖或丢失原结果")
         live = job_get(job_id)
         if live.get("status") in ("extracting", "reasoning"):
             job_update(job_id, "--note", "断点续跑：从检查点继续",
@@ -99,105 +278,148 @@ def main():
         else:
             job_update(job_id, "--status", "extracting", "--stage", "extracting",
                        "--expect-status", "collecting",
-                       "--note", "正在抽取事实", "--event", "开始抽取：逐字引用核验")
+                       "--note", "正在抽取新增来源", "--event", "开始抽取新增来源：逐字引用核验")
+
         ck = load_checkpoint(ck_candidates, collected_mtime)
         if ck is not None:
             candidates = ck["candidates"]
-            failed_sources = ck["failed_sources"]
+            failed_sources = ck.get("failed_sources", [])
+            new_fact_count = ck.get("new_fact_count", 0)
             print(f"resumed: {len(candidates)} candidates from checkpoint")
         else:
-            candidates = []
+            candidates = list(parent_candidates)
             failed_sources = []
-            for s in sources:
-                text = texts.get(s["source_id"], "")
-                if not text:
+            new_candidates = []
+            for sid in new_source_ids:
+                source_text = texts.get(sid, "")
+                if not source_text:
+                    failed_sources.append(sid)
                     continue
                 try:
-                    got = extract_candidates(text, s["source_id"], direction)
-                except Exception as exc:  # noqa: BLE001 - one flaky source
-                    # must not kill the whole job; the draft says which
-                    # sources contributed nothing.
-                    print(f"{s['source_id']}: extraction failed ({exc}); skipping")
-                    failed_sources.append(s["source_id"])
+                    got = extract_candidates(
+                        source_text, sid,
+                        direction + "\n本轮补充核查重点（仅作待核实线索）：\n"
+                        + str(intake.get("questions", "")) + "\n"
+                        + str(intake.get("known_facts", "")) + "\n"
+                        + str(intake.get("materials", "")) + "\n"
+                        + str(intake.get("user_source_text", ""))[:10000])
+                except Exception as exc:  # noqa: BLE001
+                    print(f"{sid}: extraction failed ({exc}); skipping")
+                    failed_sources.append(sid)
                     continue
-                print(f"{s['source_id']}: {len(got)} candidates verified")
-                candidates.extend(got)
-            if not candidates:
-                raise RuntimeError(
-                    f"no verified facts extracted from any source "
-                    f"(failed: {failed_sources or 'none'})")
+                print(f"{sid}: {len(got)} new candidates verified")
+                new_candidates.extend(got)
+            new_fact_count = len(new_candidates)
+            if not new_candidates:
+                raise RuntimeError("新增来源未抽取出任何可逐字引用核验的候选事实")
+            candidates.extend(new_candidates)
             save_checkpoint(ck_candidates, {
                 "collected_mtime": collected_mtime,
-                "candidates": candidates, "failed_sources": failed_sources})
+                "candidates": candidates, "failed_sources": failed_sources,
+                "new_fact_count": new_fact_count, "new_source_ids": new_source_ids})
+
         if failed_sources:
             print(f"note: sources with no extraction: {failed_sources}")
-        pack = build_draft_pack(case_id, direction + "（草稿）", direction,
-                                job_id, sources, candidates, paths_tried)
-        job_update(job_id, "--note", "正在拟合假设似然与覆盖映射",
-                   "--expect-status", "extracting",
-                   "--event", f"抽取完成：{len(candidates)}条事实，拟合似然与覆盖映射")
-        likelihoods = None
+
+        # Build once to obtain the final stable evidence IDs, then only ask
+        # the LLM to score/map the newly added evidence.
+        draft = build_draft_pack(
+            case_id, case_name, direction, job_id, sources, candidates, paths_tried,
+            likelihoods=parent_likelihoods, categories=parent_categories)
+        old_count = len(parent_candidates)
+        new_evidence = draft["evidence"][old_count:]
+
         ck = load_checkpoint(ck_likelihoods, collected_mtime)
         if ck is not None:
-            likelihoods = {(k.split("|", 1)[0], k.split("|", 1)[1]): v
-                           for k, v in ck["likelihoods"].items()}
-            print(f"resumed: {len(likelihoods)} likelihood pairs "
-                  f"from checkpoint")
+            likelihoods = {
+                (k.split("|", 1)[0], k.split("|", 1)[1]): v
+                for k, v in ck["likelihoods"].items()
+            }
         else:
-            likelihoods = propose_likelihoods(pack["evidence"])
-            print(f"likelihood proposals: {len(likelihoods)} pairs")
+            likelihoods = {
+                (k.split("|", 1)[0], k.split("|", 1)[1]): v
+                for k, v in parent_likelihoods.items()
+                if "|" in k
+            }
+            likelihoods.update(propose_likelihoods(new_evidence))
             save_checkpoint(ck_likelihoods, {
                 "collected_mtime": collected_mtime,
-                "likelihoods": {f"{h}|{e}": v
-                                for (h, e), v in likelihoods.items()}})
-        cats = None
+                "likelihoods": {f"{h}|{e}": v for (h, e), v in likelihoods.items()}})
+
         ck = load_checkpoint(ck_categories, collected_mtime)
         if ck is not None:
-            cats = ck["categories"]
-            print(f"resumed: {len(cats)} category mappings from checkpoint")
+            categories = ck["categories"]
         else:
-            cats = map_categories(pack["evidence"])
-            print(f"category mappings: {len(cats)} evidence items mapped")
+            categories = dict(parent_categories)
+            categories.update(map_categories(new_evidence))
             save_checkpoint(ck_categories, {
-                "collected_mtime": collected_mtime, "categories": cats})
-        pack = build_draft_pack(case_id, direction + "（草稿）", direction,
-                                job_id, sources, candidates, paths_tried,
-                                likelihoods=likelihoods, categories=cats)
-        case_dir = write_draft_pack(ROOT / "cases" / f"draft-{short}", pack)
+                "collected_mtime": collected_mtime, "categories": categories})
+
+        pack = build_draft_pack(
+            case_id, case_name, direction, job_id, sources, candidates, paths_tried,
+            likelihoods=likelihoods, categories=categories)
+
+        if parent_id:
+            root_short = root_job_id[:8]
+            draft_dir_name = f"draft-{root_short}-v{version}"
+            out_dir = ROOT / "reports" / "versions" / case_id / f"v{version}"
+        else:
+            draft_dir_name = f"draft-{job_id[:8]}"
+            out_dir = ROOT / "reports"
+
+        case_dir = write_draft_pack(ROOT / "cases" / draft_dir_name, pack)
         job_update(job_id, "--status", "reasoning", "--stage", "reasoning",
                    "--expect-status", "extracting",
-                   "--note", "正在推理与覆盖检查",
-                   "--event", "草稿包已生成，开始引擎推理")
-        out_dir = ROOT / "reports"
-        md_path, summary = run_draft(case_dir, out_dir)
-        report_md = md_path.read_text(encoding="utf-8")
-        cov = summary["coverage"]
+                   "--note", f"正在生成v{version}报告与复核",
+                   "--event", "增量草稿包已生成，开始重跑引擎与覆盖率")
+        md_path, engine_summary = run_draft(case_dir, out_dir)
+        cov = engine_summary["coverage"]
         score_pct = round(cov["score"] * 100, 1)
+        posteriors = [{
+            "hypothesis_id": p["hypothesis_id"],
+            "posterior": p["posterior"], "prior": p["prior"]
+        } for p in engine_summary["bayes"]["posteriors"]]
+        verdict = engine_summary["bayes"]["verdict"]
+        coverage = {
+            "score_pct": score_pct, "covered": cov["covered"],
+            "single": cov["single"], "missing": cov["missing"],
+            "total": cov["total"]
+        }
+        case_summary = build_case_summary(
+            direction, candidates, verdict, coverage,
+            engine_summary["review"]["blockers"], version, new_fact_count)
+        report_md = md_path.read_text(encoding="utf-8")
+        report_md += "\n\n" + case_summary + "\n"
+        md_path.write_text(report_md, encoding="utf-8")
+
         result = {
-            "case_id": case_id,
-            "case_name": direction + "（草稿）",
-            "verdict": summary["bayes"]["verdict"],
-            "posteriors": [{"hypothesis_id": p["hypothesis_id"],
-                            "posterior": p["posterior"], "prior": p["prior"]}
-                           for p in summary["bayes"]["posteriors"]],
-            "coverage": {"score_pct": score_pct,
-                         "covered": cov["covered"],
-                         "single": cov["single"], "missing": cov["missing"],
-                         "total": cov["total"]},
-            "review_blockers": summary["review"]["blockers"],
-            "report_md": report_md,
+            "case_id": case_id, "case_name": case_name,
+            "root_job_id": root_job_id, "parent_job_id": parent_id,
+            "version": version, "previous_verdict": previous_verdict,
+            "verdict": verdict, "posteriors": posteriors,
+            "coverage": coverage,
+            "review_blockers": engine_summary["review"]["blockers"],
+            "source_count": len(sources), "new_source_count": len(new_source_ids),
+            "fact_count": len(candidates), "new_fact_count": new_fact_count,
+            "draft_pack_path": str(case_dir.relative_to(ROOT)),
+            "report_path": str(md_path.relative_to(ROOT)),
+            "sources": sources, "source_texts": texts,
+            "candidates": candidates,
+            "likelihoods": {f"{h}|{e}": v for (h, e), v in likelihoods.items()},
+            "categories": categories, "paths_tried": paths_tried,
+            "summary": case_summary, "report_md": report_md
         }
         (run_dir / "result.json").write_text(
             json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         job_update(job_id, "--status", "done", "--stage", "done",
                    "--expect-status", "reasoning",
-                   "--note", "草稿报告已生成",
-                   "--event", f"完成：{len(candidates)}条事实，覆盖{score_pct}%",
+                   "--note", f"v{version}增量报告已生成",
+                   "--event", f"完成v{version}：新增来源{len(new_source_ids)}个，新增事实{new_fact_count}条，覆盖{score_pct}%",
                    "--result", str(run_dir / "result.json"))
-        print(f"done: {case_id}, verdict={summary['bayes']['verdict']}, "
-              f"coverage={score_pct}%")
+        print(f"done: {case_id} v{version}, verdict={verdict}, "
+              f"coverage={score_pct}%, new_facts={new_fact_count}")
         return 0
-    except Exception as exc:  # noqa: BLE001 - report and mark failed
+    except Exception as exc:  # noqa: BLE001
         job_update(job_id, "--status", "failed", "--stage", "failed",
                    "--note", "任务失败", "--error", str(exc)[:500])
         print(f"failed: {exc}")
