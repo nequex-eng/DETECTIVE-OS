@@ -27,6 +27,11 @@ export async function onRequestPost(context) {
     const lang = clean(body.language, 5);
     const language = /^[a-z]{2,5}$/.test(lang) ? lang : "zh";
     const now = new Date().toISOString();
+    const sourceUrls = lines(body.source_urls, 21, 1000);
+    if (sourceUrls.length > 20) return json({ error: "指定来源最多20条" }, 400);
+    if (sourceUrls.some(u => !u.startsWith("https://") && !u.startsWith("http://"))) {
+      return json({ error: "来源链接必须以http://或https://开头" }, 400);
+    }
     const intake = {
       version: 2,
       objective: clean(body.objective, 2000),
@@ -35,8 +40,7 @@ export async function onRequestPost(context) {
       known_facts: clean(body.known_facts, 5000),
       questions: clean(body.questions, 5000),
       exclusions: clean(body.exclusions, 2000),
-      source_urls: lines(body.source_urls, 20, 1000).filter(u =>
-        u.startsWith("https://") || u.startsWith("http://")),
+      source_urls: sourceUrls,
       materials: clean(body.materials, 30000),
       parent_job_id: clean(body.parent_job_id, 80),
       submitted_at: now
