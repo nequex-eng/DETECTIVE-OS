@@ -177,7 +177,7 @@ V2委托字段：`intake.objective`、`time_range`、`known_facts`、`questions`
 
 - V0收尾余项：删KV探针键`probe-direct`、定时任务`detective-os-job-watch`正文改成调`scripts/run_job.py`
 - 前端工作站：V2调查委托页与结果工作区首轮已写入GitHub；React加TypeScript的10导航页、Cloudflare Pages生产部署与真实用户端验收仍未完成。
-- 自动跑手：需检查并更新`detective-os-job-watch`任务正文，确保它实际读取V2结构化委托、优先打开指定来源链接并处理调查问题；否则只能保证任务入队，不能保证后台采纳所有新字段。\n- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。\n- Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
+- 自动跑手：需检查并更新`detective-os-job-watch`任务正文，确保它实际读取V2结构化委托、优先打开指定来源链接并处理调查问题；否则只能保证任务入队，不能保证后台采纳所有新字段。\n- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。\n- 自动跑手：需检查并更新`detective-os-job-watch`任务正文，确保它实际读取V2结构化委托、优先打开指定来源链接并处理调查问题；否则只能保证任务入队，不能保证后台采纳所有新字段。\n- V2前端尚未部署：Cloudflare Pages生产环境当前仍是旧部署（部署commit `5993c85e`），需在项目工作机执行`python3 deploy.py`后实核`/investigate.html`和`/api/investigate`。\n- Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计；Cloudflare token目前无D1/R2权限；V1任务库先用KV顶着）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，LLM只在自动调查管线里做抽取、似然拟合与覆盖映射
 - Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）
 - GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
