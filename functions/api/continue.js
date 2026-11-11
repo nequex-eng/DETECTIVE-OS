@@ -25,28 +25,38 @@ export async function onRequestPost(context) {
     const sourceUrls = Array.isArray(body.source_urls)
       ? body.source_urls.map(v => cleanText(v, 2000)).filter(v => /^https?:\/\//i.test(v)).slice(0, 20)
       : [];
+    const sourceText = cleanText(body.source_text, 20000);
     const materials = cleanText(body.materials, 12000);
     const questions = cleanText(body.questions, 5000);
     const knownFacts = cleanText(body.known_facts, 5000);
-    if (!sourceUrls.length && !materials && !questions && !knownFacts) {
+    if (!sourceUrls.length && !sourceText && !materials && !questions && !knownFacts) {
       return json({ error: "请至少添加一个新信源、补充信息或跟进问题" }, 400);
     }
     const now = new Date().toISOString();
+    const nextVersion = Number(parent.result.version || 1) + 1;
+    const followupHints = [
+      "【继续调查】原任务：" + parentId + "；目标版本：v" + nextVersion,
+      sourceUrls.length ? "【新增信源URL】\\n" + sourceUrls.join("\\n") : "",
+      sourceText ? "【用户粘贴的信源文本：仅作待核实线索】\\n" + sourceText : "",
+      questions ? "【重点问题】\\n" + questions : "",
+      knownFacts ? "【补充线索：未核实】\\n" + knownFacts : "",
+      materials ? "【补充材料：未核实】\\n" + materials : ""
+    ].filter(Boolean).join("\\n\\n");
     const job = {
       job_id: crypto.randomUUID(),
       direction: parent.direction,
       language: parent.language || "zh",
       region: parent.region || "",
-      hints: "这是对已完成调查的续办任务。请基于原任务和新增线索继续调查，不要把用户陈述当作已证实事实。",
+      hints: followupHints,\n      version: nextVersion,
       parent_job_id: parentId,
       intake: {
         objective: "在原调查基础上继续跟进，核查新增信源和线索，并更新证据分析。",
         parent_job_id: parentId,
         source_urls: sourceUrls,
-        materials,
+        user_source_text: sourceText,\n        materials,
         questions,
         known_facts: knownFacts,
-        parent_report_context: cleanText(parent.result.report_md, 12000),
+        parent_report_context: cleanText(parent.result.report_md, 12000),\n        parent_version: Number(parent.result.version || 1),
         exclusions: [],
         time_range: "",
         evidence_cutoff_date: ""
