@@ -1,0 +1,124 @@
+{
+  "entities": [
+    {
+      "entity_id": "P01",
+      "kind": "person",
+      "name": "身份未明女性（Isdal Woman）",
+      "is_suspect": false,
+      "notes": "1970年11月29日在Isdalen发现的死者；真实身份未知。"
+    },
+    {
+      "entity_id": "P02",
+      "kind": "person",
+      "name": "Carl Halvor Aas",
+      "is_suspect": false,
+      "notes": "当年参与现场调查的前警方法律顾问；其对自杀结论的质疑是个人陈述。"
+    },
+    {
+      "entity_id": "O01",
+      "kind": "org",
+      "name": "Bergen Police",
+      "is_suspect": false,
+      "notes": "1970年初始调查机关。"
+    },
+    {
+      "entity_id": "O02",
+      "kind": "org",
+      "name": "NRK",
+      "is_suspect": false,
+      "notes": "2016年起开展公开档案与生物痕迹调查的挪威公共广播机构。"
+    },
+    {
+      "entity_id": "O03",
+      "kind": "org",
+      "name": "Kripos",
+      "is_suspect": false,
+      "notes": "挪威国家刑事调查局，参与后续身份与法医研究。"
+    },
+    {
+      "entity_id": "O04",
+      "kind": "org",
+      "name": "University of Oslo",
+      "is_suspect": false,
+      "notes": "牙科与法医齿科研究专家来源。"
+    },
+    {
+      "entity_id": "L01",
+      "kind": "place",
+      "name": "Isdalen, Bergen",
+      "is_suspect": false,
+      "notes": "遗体发现地点。"
+    },
+    {
+      "entity_id": "L02",
+      "kind": "place",
+      "name": "Bergen railway station",
+      "is_suspect": false,
+      "notes": "警方找到两只与死者关联行李箱的地点。"
+    },
+    {
+      "entity_id": "L03",
+      "kind": "place",
+      "name": "Hotel Hordaheimen, Bergen",
+      "is_suspect": false,
+      "notes": "死者最后一次已知住宿地点。"
+    },
+    {
+      "entity_id": "L04",
+      "kind": "place",
+      "name": "Møllendal cemetery",
+      "is_suspect": false,
+      "notes": "后续报道提及的埋葬地点；本案不推断埋葬过程细节。"
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "P01",
+      "to_id": "L01",
+      "relation": "found-at",
+      "source_id": "S02",
+      "evidence_id": "F01",
+      "notes": "遗体发现地点。"
+    },
+    {
+      "from_id": "P01",
+      "to_id": "L02",
+      "relation": "linked-to",
+      "source_id": "S02",
+      "evidence_id": "F05",
+      "notes": "行李眼镜指纹与死者匹配。"
+    },
+    {
+      "from_id": "P01",
+      "to_id": "L03",
+      "relation": "stayed-at",
+      "source_id": "S02",
+      "evidence_id": "F07",
+      "notes": "最后一次已知旅馆住宿。"
+    },
+    {
+      "from_id": "P02",
+      "to_id": "O01",
+      "relation": "worked-with",
+      "source_id": "S02",
+      "evidence_id": "F12",
+      "notes": "受访者称其参与早期现场调查。"
+    },
+    {
+      "from_id": "O02",
+      "to_id": "O03",
+      "relation": "collaborated-with",
+      "source_id": "S03",
+      "evidence_id": "F14",
+      "notes": "后续生物痕迹调查的公开报道。"
+    },
+    {
+      "from_id": "O04",
+      "to_id": "P01",
+      "relation": "examined-remains",
+      "source_id": "S03",
+      "evidence_id": "F10",
+      "notes": "专家通过死者牙科资料进行分析。"
+    }
+  ]
+}
