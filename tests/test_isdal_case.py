@@ -63,7 +63,7 @@ class TestIsdalWomanCase(unittest.TestCase):
         contra = self.loaded["contradictions"].items
         self.assertGreaterEqual(len(contra), 3)
         self.assertIn("不等于", contra["CT01"].could_be_drift)
-        self.assertIn("不能", contra["CT03"].could_be_drift)
+        self.assertIn("不足以证明", contra["CT03"].could_be_drift)
         for c in contra.values():
             self.assertTrue(c.quote_a and c.quote_b)
             self.assertTrue(c.source_ids)
