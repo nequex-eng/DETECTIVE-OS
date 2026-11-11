@@ -1,7 +1,7 @@
-"""Static checks for the public investigation workspace.
+"""Static checks for the current V1 public investigation intake.
 
-Extract inline JavaScript and ask Node to parse it. Also assert that
-every result workspace has both a tab and a corresponding pane.
+The V1 page is an intake/progress/report view. The 10-workspace React
+workstation is T3 and must not be treated as implemented by this check.
 """
 from html.parser import HTMLParser
 from pathlib import Path
@@ -41,19 +41,32 @@ def main():
     parser.feed(source)
     if not parser.parts:
         raise SystemExit("No inline JavaScript found in investigate.html")
-    required = ("summary", "hypotheses", "sources", "coverage", "timeline",
-                "graph", "contradictions", "plan", "review", "report", "events")
-    for name in required:
-        if f'data-tab="{name}"' not in source:
-            raise SystemExit(f"Missing result tab: {name}")
-        if f'id="pane-{name}"' not in source:
-            raise SystemExit(f"Missing result pane: {name}")
-    traceability_contract = ("function evidenceRef", "function sourceRef",
-                             'tab("sources")', "scrollIntoView",
-                             "trace-focus")
-    for marker in traceability_contract:
+
+    required_elements = (
+        "form", "direction", "language", "region", "hints", "submitBtn",
+        "formMsg", "job", "jobId", "jobStatus", "jobNote", "events",
+        "result", "history",
+    )
+    for element_id in required_elements:
+        if f'id="{element_id}"' not in source:
+            raise SystemExit(f"Missing V1 intake element: {element_id}")
+
+    required_behaviors = (
+        'fetch("/api/investigate"',
+        'fetch("/api/jobs"',
+        'fetch("/api/jobs?id="',
+        'function showJob',
+        'function loadJob',
+        'function startPolling',
+        'function loadHistory',
+        'setInterval(',
+        'j.status==="done"&&j.result',
+        'j.status==="failed"',
+    )
+    for marker in required_behaviors:
         if marker not in source:
-            raise SystemExit(f"Missing evidence navigation behavior: {marker}")
+            raise SystemExit(f"Missing V1 investigation behavior: {marker}")
+
     with tempfile.TemporaryDirectory() as td:
         for index, code in enumerate(parser.parts):
             target = Path(td) / f"inline-{index}.js"
@@ -64,7 +77,8 @@ def main():
             if result.returncode:
                 raise SystemExit(result.stderr or result.stdout)
     print(f"frontend checks passed: {len(parser.parts)} inline script(s), "
-          f"{len(required)} result workspaces")
+          f"{len(required_elements)} V1 intake elements, "
+          f"{len(required_behaviors)} API/progress behaviors")
 
 
 if __name__ == "__main__":
