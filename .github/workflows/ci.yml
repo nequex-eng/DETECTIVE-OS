@@ -2,7 +2,7 @@ name: DETECTIVE OS CI
 
 on:
   push:
-    branches: [main, "t2-**"]
+    branches: [main, t2-isdal-woman-casepack]
   pull_request:
     branches: [main]
 
