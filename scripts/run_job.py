@@ -70,21 +70,31 @@ def main():
         return 1
     job_id = sys.argv[1]
     run_dir = ROOT / "runs" / job_id
+    run_dir.mkdir(parents=True, exist_ok=True)
     collected_path = run_dir / "collected.json"
+    # Read the structured user intake before requiring agent-collected data.
+    live = job_get(job_id)
+    intake = live.get("intake", {}) if isinstance(live, dict) else {}
+    material = str(intake.get("materials", "")).strip()
     if not collected_path.exists():
-        print(f"no collected.json for {job_id}; collect sources first")
-        return 1
+        if not material:
+            print(f"no collected.json for {job_id}; public-source collection is still required")
+            return 1
+        # A user can submit source text without URLs and still run the
+        # engine. It is kept as unverified manual input (H-grade), never C.
+        seed = {"direction": live.get("direction", ""),
+                "sources": [], "texts": {},
+                "paths_tried": [{"path": "user_supplied", "status": "tried",
+                                 "note": "仅有用户供料；尚无独立公开来源"}]}
+        collected_path.write_text(json.dumps(seed, ensure_ascii=False, indent=2),
+                                  encoding="utf-8")
     data = json.loads(collected_path.read_text(encoding="utf-8"))
     sources = list(data["sources"])
     texts = dict(data["texts"])
     paths_tried = list(data.get("paths_tried", []))
-    # Read the structured user intake as well as the agent-collected sources.
+    direction = data.get("direction") or live.get("direction", "")
     # User text is preserved as a separate manual source and later graded H
     # until an independent public source verifies it.
-    live = job_get(job_id)
-    intake = live.get("intake", {}) if isinstance(live, dict) else {}
-    direction = data.get("direction") or live.get("direction", "")
-    material = str(intake.get("materials", "")).strip()
     if material and not any(s.get("source_id") == "USR01" for s in sources):
         sources.append({
             "source_id": "USR01", "title": "用户提交的补充材料",
