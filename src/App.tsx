@@ -285,37 +285,38 @@ export default function App() {
   function GraphPage() {
     const entities = data?.entities || [];
     const relationships = data?.relationships || [];
-    const positions = new Map<string, { x: number; y: number }>();
-    entities.forEach((entity, i) => positions.set(entity.entity_id, {
-      x: 135 + (i % 3) * 310, y: 85 + Math.floor(i / 3) * 150
-    }));
+    const [graphQuery, setGraphQuery] = useState("");
+    const [kindFilter, setKindFilter] = useState("ALL");
+    const [showLabels, setShowLabels] = useState(true);
     const selectedEntity = entities.find((entity) => entity.entity_id === selectedEntityId);
-    const selectedEdges = relationships.filter((edge) => edge.from_id === selectedEntityId || edge.to_id === selectedEntityId);
-    const height = Math.max(260, (Math.ceil(entities.length / 3) * 150) + 40);
+    const kinds = Array.from(new Set(entities.map((x) => String(x.kind || "unknown"))));
+    const visible = entities.filter((x) => (kindFilter === "ALL" || x.kind === kindFilter) &&
+      (!graphQuery || (String(x.name || "") + " " + String(x.entity_id || "")).toLowerCase().includes(graphQuery.toLowerCase())));
+    const ids = new Set(visible.map((x) => x.entity_id));
+    const edges = relationships.filter((x) => ids.has(x.from_id) && ids.has(x.to_id));
+    const degree = new Map<string,number>();
+    edges.forEach((x) => { degree.set(x.from_id,(degree.get(x.from_id)||0)+1); degree.set(x.to_id,(degree.get(x.to_id)||0)+1); });
+    const ordered = [...visible].sort((x,y)=>(degree.get(y.entity_id)||0)-(degree.get(x.entity_id)||0));
+    const W=1200,H=820,cx=600,cy=410;
+    const pos = new Map<string,{x:number;y:number}>();
+    ordered.forEach((x,i) => { const ring=Math.floor(i/10)+1, n=Math.min(10,ordered.length-(ring-1)*10), angle=(i%10)/Math.max(1,n)*Math.PI*2-1.57+ring*.12, radius=90+ring*115; pos.set(x.entity_id,{x:cx+Math.cos(angle)*radius,y:cy+Math.sin(angle)*radius}); });
+    const linked = selectedEntity ? relationships.filter((x)=>x.from_id===selectedEntityId||x.to_id===selectedEntityId) : [];
+    const tone=(x:Row)=>/推断|inferred/i.test(String(x.status||x.confidence||""))?"inferred":/争议|disputed/i.test(String(x.status||x.confidence||""))?"disputed":/待核|unverified|reported/i.test(String(x.status||x.confidence||""))?"unverified":"documented";
     return <>
-      <SectionHeading eyebrow="ENTITY NETWORK / 05" title="关系图谱" description="节点和连线来自案包关系记录。每条关系显示来源或证据编号；没有边就不推断关系。" />
-      {entities.length ? <div className="graph-scroll"><div className="graph-canvas" style={{ height }}>
-        <svg className="graph-lines" width="1060" height={height} viewBox={"0 0 1060 " + height}>
-          {relationships.map((edge, i) => {
-            const a = positions.get(edge.from_id), b = positions.get(edge.to_id);
-            if (!a || !b) return null;
-            const x1 = a.x + 85, y1 = a.y + 34, x2 = b.x + 85, y2 = b.y + 34;
-            return <g key={i}><line x1={x1} y1={y1} x2={x2} y2={y2} /><text x={(x1+x2)/2} y={(y1+y2)/2-6}>{edge.relation}</text></g>;
-          })}
-        </svg>
-        {entities.map((entity) => {
-          const pos = positions.get(entity.entity_id)!;
-          const linked = relationships.filter((r) => r.from_id === entity.entity_id || r.to_id === entity.entity_id);
-          return <button key={entity.entity_id} className={"graph-node kind-" + entity.kind} style={{ left: pos.x, top: pos.y }}
-            onClick={() => setSelectedEntityId(entity.entity_id)}>
-            <span>{entity.kind}</span><b>{entity.name}</b><small>{entity.entity_id} · {linked.length}关系</small>
-          </button>;
-        })}
-      </div></div> : <Empty title="尚无关系节点" detail="当前案包没有关系图谱数据。" />}
-      {selectedEntity && <div className="panel detail-panel"><div className="panel-title"><h3>{selectedEntity.name}</h3><button className="quiet-button" onClick={() => setSelectedEntityId("")}>关闭</button></div><p className="muted">{selectedEntity.entity_id} · {selectedEntity.kind} · {selectedEntity.notes || "无补充说明"}</p><div className="ref-line">{selectedEdges.map((edge, i) => <span key={i}>{edge.relation} {edge.evidence_id ? renderEvidenceRef(edge.evidence_id) : null}{edge.source_id ? renderSourceRef(edge.source_id) : null}</span>)}</div></div>}
-      <div className="relationship-list">{relationships.map((r, i) => <div key={i} className="list-row">
-        <b>{r.from_id} → {r.to_id}</b><span>{r.relation}</span>{r.source_id && renderSourceRef(r.source_id)}{r.evidence_id && renderEvidenceRef(r.evidence_id)}
-      </div>)}</div>
+      <SectionHeading eyebrow="INTELLIGENCE LINK ANALYSIS / 05" title="关系图谱" description="实体网络、关系溯源与实体档案。只显示案包中有记录的关系；推断、争议和待核实关系使用独立样式。" />
+      <div className="graph-command"><input value={graphQuery} onChange={(e)=>setGraphQuery(e.target.value)} placeholder="搜索实体名称或编号…"/><select value={kindFilter} onChange={(e)=>setKindFilter(e.target.value)}><option value="ALL">全部实体类型</option>{kinds.map(k=><option key={k} value={k}>{k}</option>)}</select><button className="quiet-button" onClick={()=>{setGraphQuery("");setKindFilter("ALL");setSelectedEntityId("");}}>重置</button></div>
+      <div className="graph-kpis"><span>实体 <b>{visible.length}</b> / {entities.length}</span><span>关系 <b>{edges.length}</b> / {relationships.length}</span><span>孤立节点 <b>{visible.filter(x=>!(degree.get(x.entity_id)||0)).length}</b></span><span>核心实体 <b>{ordered.slice(0,3).map(x=>x.name).join("、")||"—"}</b></span></div>
+      {entities.length ? <div className="intel-graph-layout">
+        <aside className="graph-entity-rail"><div className="graph-rail-title">ENTITY INDEX</div>{visible.map(x=><button key={x.entity_id} className={"graph-entity-row "+(selectedEntityId===x.entity_id?"active":"")} onClick={()=>setSelectedEntityId(x.entity_id)}><b>{x.name}</b><small>{x.kind||"unknown"} · {degree.get(x.entity_id)||0} links</small></button>)}</aside>
+        <div className="graph-stage"><div className="graph-legend"><span><i className="edge-documented"/>有来源记录</span><span><i className="edge-unverified"/>待核实</span><span><i className="edge-inferred"/>推断</span><span><i className="edge-disputed"/>争议</span></div>
+          <div className="graph-viewport"><svg viewBox={"0 0 "+W+" "+H} role="img" aria-label="案件关系网络"><defs><pattern id="intelGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#203247"/></pattern></defs><rect width={W} height={H} fill="url(#intelGrid)"/>
+            {edges.map((x,i)=>{const p=pos.get(x.from_id),q=pos.get(x.to_id);if(!p||!q)return null;const mx=(p.x+q.x)/2,my=(p.y+q.y)/2-24;return <g key={i} className={"graph-edge "+tone(x)}><path d={"M"+p.x+" "+p.y+" Q"+mx+" "+my+" "+q.x+" "+q.y}/>{showLabels&&<text x={mx} y={my-6}>{String(x.relation||"关联").slice(0,16)}</text>}</g>;})}
+            {visible.map(x=>{const p=pos.get(x.entity_id)!;const n=degree.get(x.entity_id)||0;return <g key={x.entity_id} className={"graph-entity-node "+(selectedEntityId===x.entity_id?"selected":"")} transform={"translate("+p.x+" "+p.y+")"} onClick={()=>setSelectedEntityId(x.entity_id)} role="button" tabIndex={0} onKeyDown={(e)=>{if(e.key==="Enter")setSelectedEntityId(x.entity_id);}}><circle r={Math.min(37,25+n*2)}/><text y="-3" className="node-name">{String(x.name||"未命名").slice(0,13)}</text><text y="14" className="node-kind">{String(x.kind||"ENTITY")} · {n}</text></g>;})}
+          </svg></div><div className="graph-stage-foot"><span>CASE-SCOPED LINK ANALYSIS</span><label><input type="checkbox" checked={showLabels} onChange={e=>setShowLabels(e.target.checked)}/> 显示关系标签</label></div>
+        </div>
+        <aside className="graph-intel-panel"><div className="graph-rail-title">ENTITY DOSSIER</div>{selectedEntity?<><div className="dossier-type">{selectedEntity.kind||"ENTITY"}</div><h3>{selectedEntity.name}</h3><code>{selectedEntity.entity_id}</code><p>{selectedEntity.notes||"案包未提供补充描述。"}</p><div className="dossier-stats"><span>关系数<strong>{linked.length}</strong></span><span>直接邻居<strong>{new Set(linked.map(x=>x.from_id===selectedEntityId?x.to_id:x.from_id)).size}</strong></span></div><h4>关系与来源</h4>{linked.map((x,i)=><div className="dossier-link" key={i}><b>{x.relation}</b><span>{x.from_id} → {x.to_id}</span><div>{x.evidence_id?renderEvidenceRef(x.evidence_id):null}{x.source_id?renderSourceRef(x.source_id):null}</div><small>{x.status||x.confidence||"状态未标注"}</small></div>)}</>:<div className="graph-select-empty">选择节点查看实体档案、直接关系与证据来源。</div>}</aside>
+      </div> : <Empty title="当前案卷没有结构化关系数据" detail="当前案包尚未录入实体和关系。没有关系记录不代表没有关系；请补充资料后再建立可溯源连线，系统不会凭空推断。" />}
+      <div className="relationship-list"><h3>关系明细 / TRACEABLE LINKS</h3>{edges.map((x,i)=><div className="list-row" key={i}><b>{x.from_id} → {x.to_id}</b><span>{x.relation}</span><span className={"link-status "+tone(x)}>{x.status||x.confidence||"未标注"}</span>{x.source_id?renderSourceRef(x.source_id):null}{x.evidence_id?renderEvidenceRef(x.evidence_id):null}</div>)}</div>
     </>;
   }
 
