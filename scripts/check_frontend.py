@@ -48,6 +48,12 @@ def main():
             raise SystemExit(f"Missing result tab: {name}")
         if f'id="pane-{name}"' not in source:
             raise SystemExit(f"Missing result pane: {name}")
+    traceability_contract = ("function evidenceRef", "function sourceRef",
+                             'tab("sources")', "scrollIntoView",
+                             "trace-focus")
+    for marker in traceability_contract:
+        if marker not in source:
+            raise SystemExit(f"Missing evidence navigation behavior: {marker}")
     with tempfile.TemporaryDirectory() as td:
         for index, code in enumerate(parser.parts):
             target = Path(td) / f"inline-{index}.js"
