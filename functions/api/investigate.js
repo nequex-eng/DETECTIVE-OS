@@ -31,6 +31,7 @@ export async function onRequestPost(context) {
       version: 2,
       objective: clean(body.objective, 2000),
       time_range: clean(body.time_range, 200),
+      evidence_cutoff_date: clean(body.evidence_cutoff_date, 10),
       known_facts: clean(body.known_facts, 5000),
       questions: clean(body.questions, 5000),
       exclusions: clean(body.exclusions, 2000),
@@ -40,12 +41,14 @@ export async function onRequestPost(context) {
       parent_job_id: clean(body.parent_job_id, 80),
       submitted_at: now
     };
+    if (intake.evidence_cutoff_date && !/^\\d{4}-\\d{2}-\\d{2}$/.test(intake.evidence_cutoff_date)) return json({ error: "资料截止日期格式应为YYYY-MM-DD" }, 400);
     // Mirror structured intake into hints for compatibility with existing
     // scheduled runners that already read the V1 job.hints field.
     const brief = [
       "[STRUCTURED USER INTAKE V2]",
       "调查目标：" + intake.objective,
       "调查时间范围：" + intake.time_range,
+      "证据截止日期（不得使用此日期之后的信息）：" + intake.evidence_cutoff_date,
       "已知背景（仅作线索，需独立核验）：" + intake.known_facts,
       "待回答问题：" + intake.questions,
       "排除范围：" + intake.exclusions,
