@@ -4,7 +4,7 @@
     "title": "Tidslinje: Slik etterforsket politiet Isdalssaken",
     "publisher": "NRK",
     "author": "NRK",
-    "published_at": "2016-10-21",
+    "published_at": "",
     "url": "https://www.nrk.no/tidslinje---gaten-i-isdalen-1.13180269",
     "source_type": "news",
     "accessible": true,
@@ -78,5 +78,21 @@
     "reliability": "medium",
     "last_verified": "2026-11-11",
     "notes": "独立英文报道，综合NRK/BBC与法医研究；适合交叉核对DNA和同位素研究的公开摘要，不作为原始检测报告。"
+  },
+  {
+    "source_id": "S06",
+    "title": "The Unsolved Mystery of the Isdal Woman",
+    "publisher": "Life in Norway",
+    "author": "David Nikel",
+    "published_at": "2024-09-01",
+    "url": "https://www.lifeinnorway.net/isdal-woman/",
+    "source_type": "news",
+    "accessible": true,
+    "is_reprint": false,
+    "reprint_of": "",
+    "origin_url": "",
+    "reliability": "medium",
+    "last_verified": "2026-11-11",
+    "notes": "挪威本地英文媒体的独立回顾，提供衣物标签被移除的具体报道；作为C级二手报道，不替代警方物证清单。"
   }
 ]
