@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 type TabId =
   | "cases" | "sources" | "evidence" | "timeline" | "graph"
@@ -67,7 +67,7 @@ function Empty({ title, detail }: { title: string; detail: string }) {
   return <div className="empty-state"><span className="empty-mark">∅</span><b>{title}</b><p>{detail}</p></div>;
 }
 function SectionHeading({ eyebrow, title, description, right }: {
-  eyebrow: string; title: string; description?: string; right?: React.ReactNode;
+  eyebrow: string; title: string; description?: string; right?: ReactNode;
 }) {
   return <div className="section-heading"><div><div className="eyebrow">{eyebrow}</div><h2>{title}</h2>{description && <p>{description}</p>}</div>{right}</div>;
 }
@@ -86,6 +86,7 @@ export default function App() {
   const [grade, setGrade] = useState("ALL");
   const [selectedEvidence, setSelectedEvidence] = useState("");
   const [selectedSource, setSelectedSource] = useState("");
+  const [selectedEntityId, setSelectedEntityId] = useState("");
 
   useEffect(() => {
     fetch("/data/cases/index.json")
@@ -228,9 +229,12 @@ export default function App() {
   function GraphPage() {
     const entities = data?.entities || [];
     const relationships = data?.relationships || [];
-    const positions = new Map(entities.map((entity, i) => [entity.entity_id, {
+    const positions = new Map<string, { x: number; y: number }>();
+    entities.forEach((entity, i) => positions.set(entity.entity_id, {
       x: 135 + (i % 3) * 310, y: 85 + Math.floor(i / 3) * 150
-    }]));
+    }));
+    const selectedEntity = entities.find((entity) => entity.entity_id === selectedEntityId);
+    const selectedEdges = relationships.filter((edge) => edge.from_id === selectedEntityId || edge.to_id === selectedEntityId);
     const height = Math.max(260, (Math.ceil(entities.length / 3) * 150) + 40);
     return <>
       <SectionHeading eyebrow="ENTITY NETWORK / 05" title="关系图谱" description="节点和连线来自案包关系记录。每条关系显示来源或证据编号；没有边就不推断关系。" />
@@ -247,11 +251,12 @@ export default function App() {
           const pos = positions.get(entity.entity_id)!;
           const linked = relationships.filter((r) => r.from_id === entity.entity_id || r.to_id === entity.entity_id);
           return <button key={entity.entity_id} className={"graph-node kind-" + entity.kind} style={{ left: pos.x, top: pos.y }}
-            onClick={() => { const edge = linked.find((r) => r.evidence_id); if (edge?.evidence_id) openEvidence(edge.evidence_id); else setQuery(entity.name); }}>
+            onClick={() => setSelectedEntityId(entity.entity_id)}>
             <span>{entity.kind}</span><b>{entity.name}</b><small>{entity.entity_id} · {linked.length}关系</small>
           </button>;
         })}
       </div></div> : <Empty title="尚无关系节点" detail="当前案包没有关系图谱数据。" />}
+      {selectedEntity && <div className="panel detail-panel"><div className="panel-title"><h3>{selectedEntity.name}</h3><button className="quiet-button" onClick={() => setSelectedEntityId("")}>关闭</button></div><p className="muted">{selectedEntity.entity_id} · {selectedEntity.kind} · {selectedEntity.notes || "无补充说明"}</p><div className="ref-line">{selectedEdges.map((edge, i) => <span key={i}>{edge.relation} {edge.evidence_id ? renderEvidenceRef(edge.evidence_id) : null}{edge.source_id ? renderSourceRef(edge.source_id) : null}</span>)}</div></div>}
       <div className="relationship-list">{relationships.map((r, i) => <div key={i} className="list-row">
         <b>{r.from_id} → {r.to_id}</b><span>{r.relation}</span>{r.source_id && renderSourceRef(r.source_id)}{r.evidence_id && renderEvidenceRef(r.evidence_id)}
       </div>)}</div>
@@ -340,7 +345,7 @@ export default function App() {
     </>;
   }
 
-  let content: React.ReactNode = null;
+  let content: ReactNode = null;
   if (loading && !data) content = <Empty title="正在载入案件数据" detail="从静态案包与引擎报告读取，不使用演示数据。" />;
   else if (error && !data) content = <Empty title="数据载入失败" detail={error} />;
   else if (!data) content = <Empty title="没有可展示的数据" detail="请先在案件中心选择一个已构建的案包。" />;
