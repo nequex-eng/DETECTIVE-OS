@@ -240,10 +240,11 @@ def build_case_summary(direction, candidates, verdict, coverage,
         for item in facts if item.get("content"))
     if not fact_lines:
         fact_lines = "- 本轮没有可逐字引用核验的新增候选事实。"
+    phase_note = "本轮为既有调查的增量跟进。" if version > 1 else "本轮为初始公开资料调查。"
     return (
         f"## 案件总结（v{version}）\n\n"
         "本节由跑手依据已采集来源与引擎输出整理，非引擎原生结论。\n\n"
-        f"### 事件背景\n调查方向：{direction}。本轮为既有调查的增量跟进。\n\n"
+        f"### 事件背景\n调查方向：{direction}。{phase_note}\n\n"
         "### 来源原文抽取的关键事实（仍待人工复核）\n"
         f"{fact_lines}\n\n"
         "### 引擎结论及其含义\n"
