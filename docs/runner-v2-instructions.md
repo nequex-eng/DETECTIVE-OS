@@ -29,7 +29,8 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
    - `intake.exclusions`
    - `intake.source_urls`
    - `intake.materials`
-   - `intake.parent_job_id`\n   - `intake.parent_report_context`
+   - `intake.parent_job_id`
+   - `intake.parent_report_context`
 
 The API mirrors structured intake fields into `hints` for compatibility with older runner instructions. Treat the structured `intake` object as authoritative. A follow-up job is a new linked job with `parent_job_id`; never overwrite or mark the parent job running.
 
