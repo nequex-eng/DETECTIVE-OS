@@ -178,11 +178,11 @@ V2委托字段：`intake.objective`、`time_range`、`evidence_cutoff_date`、`k
 本轮在不启动任何新案件的前提下完成以下改造：
 
 - 自动调查结果JSON现在额外暴露结构化假设档案（描述、预测、证伪条件、逐证据似然）、时间线事件、实体与关系、矛盾记录、调查计划。字段来自真实引擎草稿包；当前草稿生成器尚未建立的时间线、关系、矛盾会返回空数组，前端明确显示“尚未生成”，不填充演示数据。
-- public/investigate.html新增时间线、关系图谱、矛盾、调查计划四个结果工作区；假设工作区增加预测、证伪条件和逐证据似然展开。来源、证据和报告仍保持原有引用链。
+- public/investigate.html新增时间线、关系图谱、矛盾、调查计划四个结果工作区；假设工作区增加预测、证伪条件和逐证据似然展开。时间线只从原文引文中能识别的日期生成，范围保留范围精度；关系图先建立来源—证据追溯边，不猜测人物或地点关系。来源、证据和报告仍保持原有引用链。
 - 新增tests/test_result_serialization.py，验证调查计划对象可序列化为前端可消费的JSON记录。
 - 上述结果工作区、案件中心页面和前端检查均已通过最新GitHub Actions CI（run `42951144953`）：54项测试通过，11个结果工作区的JavaScript语法与DOM配对检查通过。
 
-- 新增scripts/check_frontend.py，并在GitHub Actions中加入Node.js语法检查与11个结果工作区的DOM配对检查，防止前端脚本语法错误或导航页缺失。
+- 案件中心首页改为工作站入口，scripts/build_site.py负责生成首页和案件页；deploy.py现会先自动生成静态页面再部署。新增scripts/check_frontend.py，并在GitHub Actions中加入Node.js语法检查与11个结果工作区的DOM配对检查，防止前端脚本语法错误或导航页缺失。
 **尚未完成：**后台定时跑手正文是否已同步docs/runner-v2-instructions.md，以及指定URL优先采集、自动搜索、断点恢复的无新案件模拟验收；前端工作站尚未完成生产部署和浏览器实测。当前自动采集仍由外部跑手负责，run_job.py只处理已收集的collected.json，不可宣称Pages页面本身会直接搜索网页。
 ## 未完成事项
 
