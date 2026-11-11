@@ -17,7 +17,7 @@ class TestScheduledRunnerContract(unittest.TestCase):
             "intake.evidence_cutoff_date", "intake.known_facts",
             "intake.questions", "intake.exclusions",
             "intake.source_urls", "intake.materials",
-            "intake.parent_job_id",
+            "intake.parent_job_id", "intake.parent_report_context",
         ):
             with self.subTest(field=field):
                 self.assertIn(field, self.text)
@@ -40,8 +40,9 @@ class TestScheduledRunnerContract(unittest.TestCase):
 
     def test_evidence_cutoff_and_unverified_material_safeguards(self):
         self.assertIn("exclude all sources and information published after that date", self.text)
-        self.assertIn("grade H, weight zero", self.text)
-        self.assertIn("grade G, weight zero", self.text)
+        self.assertIn("unverified user leads only", self.text)
+        self.assertIn("never add them to `sources` or `texts`", self.text)
+        self.assertIn("report-context only", self.text)
         self.assertIn("Never identify a real person as the perpetrator", self.text)
 
 
