@@ -1,0 +1,450 @@
+{
+  "case_id": "CASE-NO-1970-001",
+  "template_version": "1",
+  "items": [
+    {
+      "item_id": "C01",
+      "category": "失踪/案发",
+      "title": "被害人身份",
+      "question": "被害人是谁：姓名、年龄、职业或学校、籍贯？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C02",
+      "category": "失踪/案发",
+      "title": "最后行踪",
+      "question": "最后一次被可靠记录的时间、地点、最后接触者？",
+      "evidence_ids": [
+        "F07"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C03",
+      "category": "失踪/案发",
+      "title": "案发时间窗口",
+      "question": "遇害或案发的时间范围能否确定？",
+      "evidence_ids": [
+        "F07",
+        "F01"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C04",
+      "category": "失踪/案发",
+      "title": "案发地点/第一现场",
+      "question": "第一现场在哪里？有无原始记录？",
+      "evidence_ids": [
+        "F01",
+        "F02"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C05",
+      "category": "发现",
+      "title": "发现时间地点与发现者",
+      "question": "何时、何地、何人发现？",
+      "evidence_ids": [
+        "F01"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C06",
+      "category": "发现",
+      "title": "现场状况",
+      "question": "发现时遗体或现场的状况如何描述？",
+      "evidence_ids": [
+        "F02",
+        "F04"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C07",
+      "category": "身份确认",
+      "title": "身份确认过程与时间",
+      "question": "如何确认死者身份？何时确认？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C08",
+      "category": "身份确认",
+      "title": "认尸/协查原始材料",
+      "question": "认尸启示、协查通报的原始版面是否收入？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C09",
+      "category": "法医/物证",
+      "title": "法医结论",
+      "question": "死因、死亡时间的法医结论是什么？",
+      "evidence_ids": [
+        "F03",
+        "F04",
+        "F11"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C10",
+      "category": "法医/物证",
+      "title": "物证清单与保存现状",
+      "question": "物证有哪些？是否保存、可否复检？",
+      "evidence_ids": [
+        "F05"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C11",
+      "category": "法医/物证",
+      "title": "DNA/指纹比对现状",
+      "question": "DNA、指纹比对做过没有？结果如何？",
+      "evidence_ids": [
+        "F05",
+        "F14"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C12",
+      "category": "侦查过程",
+      "title": "排查规模与范围",
+      "question": "排查了多少人、多大范围？有无原始说明？",
+      "evidence_ids": [
+        "F13"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C13",
+      "category": "侦查过程",
+      "title": "侦查节点",
+      "question": "专案组、重启、悬赏等关键节点的时间线？",
+      "evidence_ids": [
+        "F11",
+        "F14",
+        "F15"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C14",
+      "category": "侦查过程",
+      "title": "嫌疑人画像/排查方向",
+      "question": "公开的画像或排查方向是什么？（方向不等于指认）",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "尚未确认犯罪成立，公开资料没有可靠嫌疑人画像；不适用为指认对象，不代表已排除第三方参与。",
+      "not_applicable": true
+    },
+    {
+      "item_id": "C15",
+      "category": "作案手法",
+      "title": "作案手法特征",
+      "question": "手法特征的可靠描述有哪些？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "尚未确认犯罪成立，不能将死亡现场特征直接定义为作案手法。",
+      "not_applicable": true
+    },
+    {
+      "item_id": "C16",
+      "category": "作案手法",
+      "title": "抛尸/藏匿方式与路线",
+      "question": "抛尸或藏匿的方式、顺序、路线？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "公开材料未证明存在抛尸或藏匿行为。",
+      "not_applicable": true
+    },
+    {
+      "item_id": "C17",
+      "category": "动机",
+      "title": "动机指向",
+      "question": "有无经核实的动机指向？无指向本身也要记录。",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C18",
+      "category": "法律程序",
+      "title": "诉讼/审判进展",
+      "question": "诉讼、审判、执行进展如何？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "没有公开刑事审判或定罪资料；本案是身份未明与可疑死亡研究。",
+      "not_applicable": true
+    },
+    {
+      "item_id": "C19",
+      "category": "法律程序",
+      "title": "追诉时效/立案状态",
+      "question": "立案状态与追诉时效的官方说法？",
+      "evidence_ids": [
+        "F11"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C20",
+      "category": "家属与当事人",
+      "title": "家属说法与诉求",
+      "question": "家属的说法、诉求与时间线？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C21",
+      "category": "官方回应",
+      "title": "警方/官方公开回应",
+      "question": "警方与官方的公开回应及时间？",
+      "evidence_ids": [
+        "F11"
+      ],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "found",
+          "note": "公开搜索找到对应报道，证据编号见evidence_ids。"
+        },
+        {
+          "path": "direct_source",
+          "status": "found",
+          "note": "已读取本案收录来源的对应段落；原始警方/法医卷宗未取得。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    },
+    {
+      "item_id": "C22",
+      "category": "官方回应",
+      "title": "同期原始报道",
+      "question": "案发同期的原始报道是否系统收入？",
+      "evidence_ids": [],
+      "paths_tried": [
+        {
+          "path": "web_search",
+          "status": "tried",
+          "note": "已搜索公开资料，未找到足以回答该项的可靠材料。"
+        }
+      ],
+      "analyst_note": "",
+      "not_applicable": false
+    }
+  ]
+}
