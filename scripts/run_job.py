@@ -234,9 +234,25 @@ def main():
     parent_result = parent.get("result", {}) if isinstance(parent, dict) else {}
     if not isinstance(parent_result, dict):
         parent_result = {}
+    # Older completed jobs did not persist source_texts in KV results.
+    # Reuse their original collected.json from the runner workspace when it
+    # is still available; otherwise the prior report remains context only.
+    parent_collection = {}
+    if parent_id and (not parent_result.get("source_texts") or not parent_result.get("sources")):
+        parent_collected_path = ROOT / "runs" / parent_id / "collected.json"
+        if parent_collected_path.exists():
+            try:
+                parent_collection = json.loads(parent_collected_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                parent_collection = {}
+    merge_base = dict(parent_result)
+    if parent_collection:
+        merge_base["sources"] = parent_collection.get("sources", [])
+        merge_base["source_texts"] = parent_collection.get("texts", {})
+        merge_base["paths_tried"] = parent_collection.get("paths_tried", [])
     sources, texts = merge_parent_collection(
-        parent_result, data.get("sources", []), data.get("texts", {}))
-    paths_tried = list(parent_result.get("paths_tried", [])) + list(data.get("paths_tried", []))
+        merge_base, data.get("sources", []), data.get("texts", {}))
+    paths_tried = list(merge_base.get("paths_tried", [])) + list(data.get("paths_tried", []))
     followup_focus = "\n".join(x for x in [
         str(intake.get("known_facts", "")).strip(),
         str(intake.get("questions", "")).strip(),
@@ -357,7 +373,7 @@ def main():
             "paths_tried": paths_tried,
             "continuation": {
                 "parent_job_id": parent_id,
-                "merged_previous_sources": bool(parent_result.get("source_texts")),
+                "merged_previous_sources": bool(merge_base.get("source_texts")),\n                "recovered_parent_collection": bool(parent_collection),
                 "parent_report_used_as_context": bool(parent_result.get("report_md")),
                 "user_materials_are_unverified": bool(intake.get("materials") or intake.get("known_facts"))
             },
