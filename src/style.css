@@ -29,3 +29,8 @@
 .live-job-card h4{font-size:13px;line-height:1.6;margin:13px 0 5px;color:#e2e9ef}.live-job-card p{min-height:34px;font-size:10px;line-height:1.7;color:#8fa3b6;margin:0 0 12px}.live-job-bottom{border-top:1px solid #263747;padding-top:9px;color:#778da2;font:9px ui-monospace,monospace}.job-result-hint{margin-top:10px;color:#8dc5a5;font-size:10px}.job-result-hint.failed{color:#d9948f}
 .ops-empty{display:grid;justify-items:start;gap:8px;padding:23px;background:#0d1925;border:1px dashed #3a4c5e;color:#9eafbd}.ops-empty b{font:600 15px Georgia,serif;color:#dce5ef}.ops-empty span{font-size:11px;line-height:1.6}.ops-empty a{margin-top:4px;color:#d9b775;font-size:10px}.archive-head{margin-top:30px}
 @media(max-width:760px){.ops-banner{align-items:flex-start;flex-direction:column;padding:18px}.ops-banner h3{font-size:19px}.ops-primary{width:100%;text-align:center}.live-job-grid{grid-template-columns:1fr}.ops-section-head{align-items:flex-start}}
+
+.live-job-wrap{display:flex;flex-direction:column;min-width:0;background:linear-gradient(145deg,#111f2d,#0d1824);border:1px solid #2a4053;border-radius:3px;overflow:hidden}
+.live-job-wrap .live-job-card{border:0;border-radius:0;flex:1}
+.continue-job-link{display:block;padding:10px 15px;border-top:1px solid #2a4053;color:#d8b875;font-size:10px;letter-spacing:.35px;background:#142333}
+.continue-job-link:hover{background:#1b3042;color:#f0d49a}
