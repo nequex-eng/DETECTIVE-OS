@@ -41,7 +41,7 @@ export async function onRequestPost(context) {
       parent_job_id: clean(body.parent_job_id, 80),
       submitted_at: now
     };
-    if (intake.evidence_cutoff_date && !/^\\d{4}-\\d{2}-\\d{2}$/.test(intake.evidence_cutoff_date)) return json({ error: "资料截止日期格式应为YYYY-MM-DD" }, 400);
+    if (intake.evidence_cutoff_date && !/^\d{4}-\d{2}-\d{2}$/.test(intake.evidence_cutoff_date)) return json({ error: "资料截止日期格式应为YYYY-MM-DD" }, 400);
     // Mirror structured intake into hints for compatibility with existing
     // scheduled runners that already read the V1 job.hints field.
     const brief = [
