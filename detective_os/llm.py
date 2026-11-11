@@ -20,7 +20,10 @@ import sys
 import urllib.request
 
 sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
-from dynamic_credentials import add_surrogate_to_request  # noqa: E402
+try:
+    from dynamic_credentials import add_surrogate_to_request  # noqa: E402
+except ImportError:  # CI and local unit tests do not have Muse authd.
+    add_surrogate_to_request = None
 
 MODEL = "MiniMax-M3"
 URL = "https://api.minimaxi.com/v1/text/chatcompletion_v2"
@@ -43,6 +46,9 @@ def call_minimax(messages, max_tokens=2048, temperature=0.2):
     # The credential is attached as a surrogate by dynamic_credentials
     # and swapped in by authd only for a registered host. Never put the
     # key in code, env, args or logs.
+    if add_surrogate_to_request is None:
+        raise RuntimeError(
+            "MiniMax dynamic credentials are unavailable outside the Muse runtime")
     add_surrogate_to_request(req, CREDENTIAL, allowed_hosts=HOSTS)
     # No redirects: an authenticated request must never leak the key.
     class NoRedirect(urllib.request.HTTPRedirectHandler):
