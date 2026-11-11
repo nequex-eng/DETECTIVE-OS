@@ -28,7 +28,8 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
    - `intake.questions`
    - `intake.exclusions`
    - `intake.source_urls`
-   - `intake.user_source_text`\n   - `intake.materials`
+   - `intake.user_source_text`
+   - `intake.materials`
    - `intake.parent_job_id`
    - `intake.parent_report_context`
 
