@@ -16,6 +16,7 @@ job status done (or failed). Usage:
 It never touches the two real case packs. Evidence is capped at C.
 """
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -59,6 +60,105 @@ def serialize_plan_tasks(tasks):
               "source_or_channel", "estimated_value", "status")
     return [{key: getattr(task, key, None) for key in fields}
             for task in (tasks or [])]
+
+
+def build_timeline_events(evidence):
+    """Build only date-anchored events from verified verbatim source quotes.
+
+    The model's event_date field is not trusted on its own. A date must be
+    visibly present in the quote; precision is kept at the level the quote
+    actually supports.
+    """
+    events = []
+    patterns = [
+        ("day_range", re.compile(r"(\\d{4})年(\\d{1,2})月(\\d{1,2})日?\\s*(?:至|到|[-—])\\s*(\\d{1,2})日")),
+        ("month_range", re.compile(r"(\\d{4})年(\\d{1,2})月\\s*(?:至|到|[-—])\\s*(\\d{1,2})月")),
+        ("day", re.compile(r"(\\d{4})年(\\d{1,2})月(\\d{1,2})日")),
+        ("iso", re.compile(r"(\\d{4})-(\\d{2})-(\\d{2})")),
+        ("month", re.compile(r"(\\d{4})年(\\d{1,2})月")),
+    ]
+    for item in evidence or []:
+        quote = str(item.get("original_quote", ""))
+        found = None
+        for kind, pattern in patterns:
+            match = pattern.search(quote)
+            if match:
+                values = [int(x) for x in match.groups()]
+                if kind == "day_range":
+                    year, month, start, end = values
+                    label = f"{year:04d}-{month:02d}-{start:02d} 至 {year:04d}-{month:02d}-{end:02d}"
+                    sort_key = (year, month, start)
+                    precision = "range"
+                elif kind == "month_range":
+                    year, start, end = values
+                    label = f"{year:04d}-{start:02d} 至 {year:04d}-{end:02d}"
+                    sort_key = (year, start, 1)
+                    precision = "range"
+                elif kind in ("day", "iso"):
+                    year, month, day = values
+                    label = f"{year:04d}-{month:02d}-{day:02d}"
+                    sort_key = (year, month, day)
+                    precision = "date"
+                else:
+                    year, month = values
+                    label = f"{year:04d}-{month:02d}"
+                    sort_key = (year, month, 1)
+                    precision = "month"
+                found = (sort_key, label, precision)
+                break
+        if not found:
+            continue
+        sort_key, label, precision = found
+        events.append({
+            "event_id": f"EV{len(events) + 1:02d}",
+            "description": str(item.get("content", "")),
+            "time": {"kind": precision, "label": label},
+            "evidence_ids": [item.get("evidence_id", "")],
+            "source_ids": [item.get("source_id", "")],
+            "original_quote": quote,
+        })
+        events[-1]["_sort_key"] = sort_key
+    events.sort(key=lambda event: event["_sort_key"])
+    for event in events:
+        event.pop("_sort_key", None)
+    for index, event in enumerate(events, 1):
+        event["event_id"] = f"EV{index:02d}"
+    return events
+
+
+def build_traceability_graph(sources, evidence):
+    """Create a factual source↔evidence graph, not speculative people links."""
+    nodes = []
+    edges = []
+    source_ids = set()
+    for source in sources or []:
+        sid = str(source.get("source_id", ""))
+        if not sid:
+            continue
+        source_ids.add(sid)
+        nodes.append({
+            "entity_id": "SRC-" + sid,
+            "name": str(source.get("title") or source.get("publisher") or sid),
+            "kind": "source",
+        })
+    for item in evidence or []:
+        eid = str(item.get("evidence_id", ""))
+        sid = str(item.get("source_id", ""))
+        if not eid:
+            continue
+        nodes.append({
+            "entity_id": "EVD-" + eid,
+            "name": f"{eid} [{item.get('grade', 'H')}] " + str(item.get("content", ""))[:100],
+            "kind": "evidence",
+        })
+        if sid in source_ids:
+            edges.append({
+                "from": "EVD-" + eid,
+                "relation": "cites_source",
+                "to": "SRC-" + sid,
+                "evidence_ids": [eid],
+            })
+    return {"entities": nodes, "relationships": edges}
 
 
 def load_checkpoint(path, collected_mtime):
@@ -261,8 +361,13 @@ def main():
             # intentional: the draft collector must not fabricate timeline,
             # graph edges, or contradictions it has not actually established.
             "hypotheses_detail": pack["case"].get("hypotheses", []),
-            "timeline_events": pack.get("events", []),
-            "entities": pack.get("entities", {"entities": [], "relationships": []}),
+            "timeline_events": pack.get("events") or build_timeline_events(pack.get("evidence", [])),
+            "entities": {
+                "entities": (pack.get("entities") or {}).get("entities", []) +
+                            build_traceability_graph(sources, pack.get("evidence", []))["entities"],
+                "relationships": (pack.get("entities") or {}).get("relationships", []) +
+                                 build_traceability_graph(sources, pack.get("evidence", []))["relationships"],
+            },
             "contradictions": pack.get("contradictions", []),
             "investigation_plan": serialize_plan_tasks(summary.get("plan_tasks", [])),
             "report_md": report_md,
