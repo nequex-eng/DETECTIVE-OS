@@ -335,7 +335,8 @@ def _normalize_paths(paths_tried):
 def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
                      sources: list, candidates: list, paths_tried: list,
                      likelihoods: dict | None = None,
-                     categories: dict | None = None) -> dict:
+                     categories: dict | None = None,
+                     baseline_hypotheses: list | None = None) -> dict:
     """Assemble a draft case pack (dicts, not files) from collected
     sources and verified candidates.
 
@@ -364,26 +365,47 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             "source_location": c.get("source_location", ""),
             "publication_date": "",
             "event_date": c.get("event_date", ""),
-            "grade": "C",
-            "reliability_assessment": "草稿：LLM从报道原文抽取，逐字引用已核验，待人工复核定级。",
-            "verification_status": "single-source",
-            "supports": [], "contradicts": [],
-            "analyst_notes": "DRAFT: auto-extracted, unreviewed.",
+            "grade": (str(c.get("baseline_grade", "C")).upper()
+                      if str(c.get("baseline_grade", "C")).upper() in ("A", "B", "C", "D", "E")
+                      else "C"),
+            "reliability_assessment": c.get("baseline_reliability_assessment")
+                or "草稿：LLM从报道原文抽取，逐字引用已核验，待人工复核定级。",
+            "verification_status": c.get("baseline_verification_status") or "single-source",
+            "supports": list(c.get("baseline_supports") or []),
+            "contradicts": list(c.get("baseline_contradicts") or []),
+            "analyst_notes": c.get("baseline_analyst_notes") or "DRAFT: auto-extracted, unreviewed.",
             "_categories": list(cats or []),
         })
     hypotheses = []
-    for hid, desc, prior, preds, fals in HYPOTHESIS_TEMPLATE:
-        lik = {}
-        for ev in evidence:
-            v = likelihoods.get((hid, ev["evidence_id"]), 0.5)
-            lik[ev["evidence_id"]] = max(0.2, min(0.8, float(v)))
-        hypotheses.append({
-            "hypothesis_id": hid, "description": desc,
-            "supports": [], "opposes": [], "unexplained": [],
-            "prerequisites": [], "predictions": list(preds),
-            "falsifiers": list(fals),
-            "prior": prior, "likelihoods": lik, "status": "open",
-        })
+    if baseline_hypotheses:
+        for baseline in baseline_hypotheses:
+            row = dict(baseline)
+            hid = str(row.get("hypothesis_id", ""))
+            old_likelihoods = row.get("likelihoods") or {}
+            lik = {}
+            for ev in evidence:
+                value = likelihoods.get(
+                    (hid, ev["evidence_id"]),
+                    old_likelihoods.get(ev["evidence_id"], 0.5))
+                lik[ev["evidence_id"]] = max(0.2, min(0.8, float(value)))
+            row["likelihoods"] = lik
+            row["supports"] = list(row.get("supports") or [])
+            row["opposes"] = list(row.get("opposes") or [])
+            row["unexplained"] = list(row.get("unexplained") or [])
+            hypotheses.append(row)
+    else:
+        for hid, desc, prior, preds, fals in HYPOTHESIS_TEMPLATE:
+            lik = {}
+            for ev in evidence:
+                v = likelihoods.get((hid, ev["evidence_id"]), 0.5)
+                lik[ev["evidence_id"]] = max(0.2, min(0.8, float(v)))
+            hypotheses.append({
+                "hypothesis_id": hid, "description": desc,
+                "supports": [], "opposes": [], "unexplained": [],
+                "prerequisites": [], "predictions": list(preds),
+                "falsifiers": list(fals),
+                "prior": prior, "likelihoods": lik, "status": "open",
+            })
     case = {
         "case_id": case_id, "name": name, "status": "draft-unreviewed",
         "direction": direction, "job_id": job_id,
