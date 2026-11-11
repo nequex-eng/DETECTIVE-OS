@@ -209,13 +209,13 @@ export default function App() {
       {selected && <div className="panel detail-panel focus-panel"><div className="panel-title"><h3>{selected.evidence_id} · 证据原文</h3><button className="quiet-button" onClick={() => setSelectedEvidence("")}>关闭</button></div>
         <p className="evidence-content">{selected.content}</p><blockquote>{selected.original_quote}</blockquote>
         <p className="muted">{selected.source_location} · {selected.publication_date || "日期未列"}</p>
-        <p>{renderSourceRef(selected.source_id)}</p><p className="muted">{selected.reliability_assessment}</p>
+        <p>{selected.source_id ? renderSourceRef(selected.source_id) : <span className="muted">无可引用来源；F/G/H级记录不作为事实或覆盖证据。</span>}</p><p className="muted">{selected.reliability_assessment}</p>
         {selected.analyst_notes && <p className="notice">{selected.analyst_notes}</p>}
       </div>}
       <div className="evidence-grid">{rows.map((e) => <article className="panel evidence-card" key={e.evidence_id}>
         <div className="evidence-top"><b>{e.evidence_id}</b><span className={"grade " + (gradeTone[e.grade] || "")}>{gradeLabel(e.grade)}</span><span className="verification">{e.verification_status || "状态未标"}</span></div>
         <p>{e.content}</p><blockquote>{e.original_quote}</blockquote>
-        <div className="evidence-foot"><span>{e.source_location}</span>{renderSourceRef(e.source_id)}</div>
+        <div className="evidence-foot"><span>{e.source_location}</span>{e.source_id ? renderSourceRef(e.source_id) : <span className="no-source">无可引用来源</span>}</div>
         <button className="text-action" onClick={() => setSelectedEvidence(e.evidence_id)}>查看完整档案 →</button>
       </article>)}</div>
       {!rows.length && <Empty title="没有匹配证据" detail="更换等级或搜索词。" />}
