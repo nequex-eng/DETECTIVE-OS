@@ -201,27 +201,16 @@ def source_key(source):
 
 def merge_followup_sources(parent_sources, parent_texts,
                            new_sources, new_texts):
-    """Keep the old corpus and append only genuinely new source origins.
-
-    Existing source IDs stay stable. New source IDs are assigned after the
-    existing corpus so old candidate references remain valid.
-    """
-    merged = []
-    texts = {}
-    seen = set()
-    for source in parent_sources or []:
-        row = dict(source)
-        sid = str(row.get("source_id") or f"S{len(merged) + 1:02d}")
-        row["source_id"] = sid
-        key = source_key(row)
-        if key in seen:
-            continue
-        seen.add(key)
-        merged.append(row)
-        old_text = (parent_texts or {}).get(source.get("source_id", ""), "")
-        if old_text:
-            texts[sid] = str(old_text)[:12000]
-
+    """Preserve every old source ID; append only new independent origins."""
+    merged = [dict(source) for source in (parent_sources or [])]
+    texts = dict(parent_texts or {})
+    seen = {source_key(source) for source in merged}
+    existing_numbers = []
+    for source in merged:
+        sid = str(source.get("source_id", ""))
+        if sid.startswith("S") and sid[1:].isdigit():
+            existing_numbers.append(int(sid[1:]))
+    next_number = max(existing_numbers, default=0) + 1
     new_ids = []
     remap = {}
     for source in new_sources or []:
@@ -230,7 +219,8 @@ def merge_followup_sources(parent_sources, parent_texts,
         if key in seen:
             continue
         seen.add(key)
-        sid = f"S{len(merged) + 1:02d}"
+        sid = f"S{next_number:02d}"
+        next_number += 1
         row = dict(source)
         row["source_id"] = sid
         merged.append(row)
