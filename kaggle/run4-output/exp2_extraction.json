@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "gold_hit": 4,
+      "gold_total": 4,
+      "generation": "受害人遗体碎片在其失踪9天后被发现。\n当年1月19日清晨，受害人遗体碎片在南京华侨路被一名清洁工发现。\n凶手将尸体切割成2000片以上。\n凶手将尸体加热至熟以消灭作案痕迹。"
+    },
+    {
+      "gold_hit": 4,
+      "gold_total": 4,
+      "generation": "1988年至2002年期间，甘肃省白银市发生了9起女性遇害案件。\n1988年至2002年期间，内蒙古包头市发生了2起女性遇害案件。\n在这些案件中，部分受害女性曾遭受性侵害。"
+    }
+  ],
+  "summary": {
+    "model": "unsloth/Qwen2.5-7B-Instruct-bnb-4bit",
+    "device": "cuda:1",
+    "keyword_recall": 1.0,
+    "pass": true
+  }
+}

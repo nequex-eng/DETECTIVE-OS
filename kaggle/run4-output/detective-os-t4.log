@@ -1,0 +1,71 @@
+[{"stream_name":"stderr","time":8.756026427,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.756095449,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.756103502,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.756108211,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.479051176,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.479085965,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.479092229,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.479096591,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":18.702500347,"data":"python 3.13.16\n"}
+,{"stream_name":"stdout","time":18.702540241,"data":"torch 2.11.0+cu130 cuda True\n"}
+,{"stream_name":"stdout","time":18.702546023,"data":"cuda device count: 2\n"}
+,{"stream_name":"stdout","time":18.946656818,"data":"gpu0: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":18.946694399,"data":"gpu1: Tesla T4 total=14.56GB free=14.46GB\n"}
+,{"stream_name":"stdout","time":18.946700781,"data":"PREFLIGHT OK: T4x2 confirmed, preflight.json written\n"}
+,{"stream_name":"stdout","time":19.146605206,"data":"missing: ['bitsandbytes']\n"}
+,{"stream_name":"stdout","time":25.621731963,"data":"installed: ['bitsandbytes']\n"}
+,{"stream_name":"stderr","time":65.214749892,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":65.214812784,"data":"\n"}
+,{"stream_name":"stderr","time":65.214820223,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":70.729780598,"data":"clusters: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]]\n"}
+,{"stream_name":"stdout","time":70.729826407,"data":"EXP1 clusters OK {'threshold': 0.6, 'clusters': [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]], 'reprint_min_pairwise_sim': 0.6683523654937744, 'cross_max_sim': 0.44565773010253906, 'reprints_one_cluster': True, 'distinct_stay_separate': True, 'pass': True}\n"}
+,{"stream_name":"stdout","time":70.743020532,"data":"gpu0 free VRAM after unload: 14.41GB (was 14.32GB)\n"}
+,{"stream_name":"stdout","time":72.775273197,"data":"tokenizer OK: vocab=151643 tokens=25 round-trip preserved\n"}
+,{"stream_name":"stderr","time":115.140643721,"data":"[transformers] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stderr","time":115.140689927,"data":"\n"}
+,{"stream_name":"stderr","time":115.140696684,"data":"[transformers] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stderr","time":115.2884908,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":115.288536919,"data":"\n"}
+,{"stream_name":"stderr","time":115.28856067,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":115.326514248,"data":"hf_device_map devices: ['cuda:1']\n"}
+,{"stream_name":"stdout","time":115.326560535,"data":"first parameter device: cuda:1\n"}
+,{"stream_name":"stdout","time":115.326565026,"data":"after load: gpu0 free=14.4GB gpu1 free=9.3GB\n"}
+,{"stream_name":"stderr","time":121.859891097,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":121.85992894,"data":"\n"}
+,{"stream_name":"stderr","time":121.859970693,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":122.056856446,"data":"keywords 4/4: 受害人遗体碎片在其失踪9天后被发现。\n"}
+,{"stream_name":"stdout","time":122.056896981,"data":"当年1月19日清晨，受害人遗体碎片在南京华侨路被一名清洁工发现。\n"}
+,{"stream_name":"stdout","time":122.056903208,"data":"凶手将尸体切割成2000片以上。\n"}
+,{"stream_name":"stdout","time":122.056907338,"data":"凶手将尸体加热至熟以消灭作案痕迹。\n"}
+,{"stream_name":"stdout","time":128.172004272,"data":"keywords 4/4: 1988年至2002年期间，甘肃省白银市发生了9起女性遇害案件。\n"}
+,{"stream_name":"stdout","time":128.17203722,"data":"1988年至2002年期间，内蒙古包头市发生了2起女性遇害案件。\n"}
+,{"stream_name":"stdout","time":128.172042158,"data":"在这些案件中，部分受害女性曾遭受性侵害。\n"}
+,{"stream_name":"stdout","time":128.172052364,"data":"EXP2 {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'keyword_recall': 1.0, 'pass': True}\n"}
+,{"stream_name":"stderr","time":128.203989809,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stderr","time":128.204058393,"data":"\n"}
+,{"stream_name":"stderr","time":128.204064933,"data":"[transformers] Both `max_new_tokens` (=200) and `max_length`(=32768) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)\n"}
+,{"stream_name":"stdout","time":145.914423912,"data":"这两种说法之间存在细微的差异，但并不构成事实矛盾。具体分析如下：\n"}
+,{"stream_name":"stdout","time":145.914465811,"data":"\n"}
+,{"stream_name":"stdout","time":145.914471236,"data":"说法A指出被害人的年龄为19岁，而说法B则提到受害者是“当时年方20岁”。这里的关键在于“当时”这个词，它暗示了时间上的变化或背景信息。在说法B中，“当时年方20岁”可能意味着受害者在事件发生时的实际年龄是20岁，这可能是由于某种原因（如生日临近）使得她的实际年龄与陈述的时间点不完全一致。\n"}
+,{"stream_name":"stdout","time":145.914477496,"data":"\n"}
+,{"stream_name":"stdout","time":145.914498898,"data":"因此，这种差异更倾向于是一种“口径差异”，而不是事实矛盾或转述漂移。两种说法都指出了受害者是刁爱青，且年龄接近，只是表述方式和时间点上略有不同。如果能够确认事件发生的具体日期，可以进一步验证这两种说法中的哪一个更准确。\n"}
+,{"stream_name":"stdout","time":145.914504588,"data":"EXP3 {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'mentions_calibre': True, 'accuses_lying': False, 'pass': True}\n"}
+,{"stream_name":"stdout","time":145.969683151,"data":"gpu1 free VRAM after unload: 14.41GB\n"}
+,{"stream_name":"stdout","time":146.636096083,"data":"CASE-CN-1988-001 order_match: True max_diff: 0.0\n"}
+,{"stream_name":"stdout","time":146.636126256,"data":"CASE-CN-1996-001 order_match: True max_diff: 0.0\n"}
+,{"stream_name":"stdout","time":146.656049195,"data":"/kaggle/working/preflight.json -\u003e {'torch': '2.11.0+cu130', 'cuda_devices': 2, 'gpus': [{'index': 0, 'name': 'Tesla T4', 'total_gb': 14.56, 'free_gb': 14.46}, {'index': 1, 'name': 'Tesla T4', 'total_gb': 14.56, 'free_gb': 14.46}], 'is_t4x2': True}\n"}
+,{"stream_name":"stdout","time":146.656081643,"data":"/kaggle/working/exp1_dedup.json -\u003e {'threshold': 0.6, 'clusters': [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [10], [11], [12]], 'reprint_min_pairwise_sim': 0.6683523654937744, 'cross_max_sim': 0.44565773010253906, 'reprints_one_cluster': True, 'distinct_stay_separate': True, 'pass': True, 'vram_free_gb_before_unload': 14.32, 'vram_free_gb_after_unload': 14.41, 'unloaded': True}\n"}
+,{"stream_name":"stdout","time":146.65608957,"data":"/kaggle/working/exp2_extraction.json -\u003e {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'keyword_recall': 1.0, 'pass': True}\n"}
+,{"stream_name":"stdout","time":146.656095441,"data":"/kaggle/working/exp3_contradiction.json -\u003e {'model': 'unsloth/Qwen2.5-7B-Instruct-bnb-4bit', 'device': 'cuda:1', 'mentions_calibre': True, 'accuses_lying': False, 'pass': True, 'vram_free_gb_after_unload': 14.41}\n"}
+,{"stream_name":"stdout","time":146.656105498,"data":"/kaggle/working/exp_cpu_recompute.json -\u003e {'cloned': True, 'cases': [{'case_id': 'CASE-CN-1988-001', 'recomputed': {'H1': 0.6917, 'H2': 0.2656, 'H3': 0.0209, 'H4': 0.0193, 'H5': 0.0025}, 'reference': {'H1': 0.6917, 'H2': 0.2656, 'H3': 0.0209, 'H4': 0.0193, 'H5': 0.0025}, 'order_match': True, 'max_abs_diff': 0.0, 'pass': True}, {'case_id': 'CASE-CN-1996-001', 'recomputed': {'H1': 0.443, 'H3': 0.4329, 'H5': 0.0621, 'H2': 0.0391, 'H4': 0.0229}, 'reference': {'H1': 0.443, 'H3': 0.4329, 'H5': 0.0621, 'H2': 0.0391, 'H4': 0.0229}, 'order_match': True, 'max_abs_diff': 0.0, 'pass': True}], 'pass': True}\n"}
+,{"stream_name":"stdout","time":146.656121524,"data":"SUMMARY: [('preflight.json', True), ('exp1_dedup.json', True), ('exp2_extraction.json', True), ('exp3_contradiction.json', True), ('exp_cpu_recompute.json', True)]\n"}
+,{"stream_name":"stdout","time":146.656127089,"data":"ALL EXPERIMENTS PASSED (measured, not printed)\n"}
+,{"stream_name":"stderr","time":152.703205067,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":152.703244051,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":152.887861593,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":152.887895869,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":153.747568925,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":153.873912319,"data":"[NbConvertApp] Writing 322341 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":156.743166692,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":157.431646209,"data":"[NbConvertApp] Writing 589721 bytes to __results__.html\n"}
+]

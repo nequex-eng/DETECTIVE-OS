@@ -16,9 +16,11 @@
 4. 贝叶斯输出必须公开先验、似然、来源与不确定性；前两名差距小于0.1时结论为“无法判断”，拒绝过早选定。
 5. 公开资料回答不了的问题必须明说，不得假装还原完整刑侦卷宗。
 
-### 未完成任务（按顺序做，每项做完要过验收）
+### 已完成任务
 
-**T1. Kaggle Notebook推上运行，出评测报告。**文件已在`kaggle/`，推送命令见`kaggle/README.md`（`kaggle kernels push`，只上传定义、不耗额度）。跑之前确认加速器为GPU T4x2、联网开启；账号nequexkaggle，每周30小时额度，单次最长12小时。Notebook结构：预检门（GPU数量与显存、分词器烟雾测试，不过就停）→实验1去重（BAAI/bge-small-zh-v1.5）→实验2事实抽取（Qwen2.5-7B-Instruct 4-bit，关键词召回≥0.75算通过）→实验3矛盾识别（南大案CT01，合格答案必须指出口径差异、不得判定撒谎）→CPU复算。验收：三项实验的`/kaggle/working/exp*.json`评测报告齐全，写入仓库`kaggle/`并更新README；额度消耗如实记录。
+**T1. Kaggle Notebook推上运行，出评测报告（2026-11-10已完成）。**运行地址：https://www.kaggle.com/code/nequexkaggle/detective-os-t4。共4次运行，版本4全部通过：预检（2张Tesla T4）→实验1去重通过（阈值0.60，10个转载聚为1类）→实验2事实抽取通过（关键词召回8/8=1.0，设备cuda:1）→实验3矛盾识别通过（CT01指出口径差异，未判定撒谎）→CPU复算通过（两案排序一致，数值差0.0）。失败记录：运行1实验1阈值0.85过严（改0.60）；运行2实验2死于hf_device_map验证行bug（改查参数实际所在设备）；运行3 CPU复算数值差6.1e-05（根因：引擎在softmax前把对数后验舍入到4位小数，复算格跳过了这步；补上舍入后差值0.0）。运行4排队约90分钟，内核约157秒。额度合计约0.23 GPU小时。报告在kaggle/run1-output/至run4-output/（每份含T1-RUN*-REPORT.md）。
+
+### 未完成任务（按顺序做，每项做完要过验收）
 
 **T2. 第三个案件（再选一起未侦破案件）。**目的：检验引擎在没有已知答案时的表现（白银案是有答案的校验，南大案与第三案是无答案的实战）。选案标准：公开资料丰富（≥2独立来源、≥1主流或官方）、有明确的矛盾点、不得涉及未成年人隐私细节。做法：照抄案件1的建包流程（先实读来源、再分级证据、再写矛盾与假设）；每条事实都要有证据编号、原文引用、来源位置、可信度理由。验收：`check`通过、测试新增该案的回归测试、报告生成、结论为无法判断时不得强行选定。
 
@@ -133,7 +135,7 @@ tests/test_coverage.py    覆盖清单测试14项
 - 前端工作站（React加TypeScript，10个导航页）未做
 - Workers API、D1正式库、R2附件库未接（本地SQLite先行，结构已按D1兼容子集设计）
 - Provider Adapter（MiniMax、OpenAI兼容接口、本地模型）未做；本版推理为纯结构化计算，无LLM
-- Kaggle Notebook已建成（`kaggle/detective-os-experiments.ipynb`，12格，AST校验通过；预检门加实验1去重、实验2事实抽取、实验3矛盾识别、CPU复算），尚未推上Kaggle运行（需用户点头，消耗GPU额度；推送命令见`kaggle/README.md`）
+- Kaggle Notebook T1已完成（2026-11-10，版本4全部通过；报告在`kaggle/run1-output/`至`kaggle/run4-output/`；额度合计约0.23 GPU小时）
 - GitHub仓库：https://github.com/nequex-eng/DETECTIVE-OS（公开，main分支，已推送）
 - 1996年协查通报与认尸启示原始版面、1996年2月至4月排查同期报道原文尚未收入（已记为缺口G7、G8）
 

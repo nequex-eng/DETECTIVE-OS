@@ -1,0 +1,46 @@
+{
+  "cloned": true,
+  "cases": [
+    {
+      "case_id": "CASE-CN-1988-001",
+      "recomputed": {
+        "H1": 0.6917,
+        "H2": 0.2656,
+        "H3": 0.0209,
+        "H4": 0.0193,
+        "H5": 0.0025
+      },
+      "reference": {
+        "H1": 0.6917,
+        "H2": 0.2656,
+        "H3": 0.0209,
+        "H4": 0.0193,
+        "H5": 0.0025
+      },
+      "order_match": true,
+      "max_abs_diff": 0.0,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-CN-1996-001",
+      "recomputed": {
+        "H1": 0.443,
+        "H3": 0.4329,
+        "H5": 0.0621,
+        "H2": 0.0391,
+        "H4": 0.0229
+      },
+      "reference": {
+        "H1": 0.443,
+        "H3": 0.4329,
+        "H5": 0.0621,
+        "H2": 0.0391,
+        "H4": 0.0229
+      },
+      "order_match": true,
+      "max_abs_diff": 0.0,
+      "pass": true
+    }
+  ],
+  "pass": true
+}
