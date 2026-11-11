@@ -16,7 +16,7 @@ class TestScheduledRunnerContract(unittest.TestCase):
             "intake.objective", "intake.time_range",
             "intake.evidence_cutoff_date", "intake.known_facts",
             "intake.questions", "intake.exclusions",
-            "intake.source_urls", "intake.materials",
+            "intake.source_urls", "intake.user_source_text", "intake.materials",
             "intake.parent_job_id", "intake.parent_report_context",
         ):
             with self.subTest(field=field):
@@ -40,9 +40,10 @@ class TestScheduledRunnerContract(unittest.TestCase):
 
     def test_evidence_cutoff_and_unverified_material_safeguards(self):
         self.assertIn("exclude all sources and information published after that date", self.text)
-        self.assertIn("unverified user leads only", self.text)
-        self.assertIn("Never add them to `sources` or `texts`", self.text)
-        self.assertIn("report-context only", self.text)
+        self.assertIn("user-provided leads", self.text)
+        self.assertIn("never create a grade-C fact from pasted text alone", self.text)
+        self.assertIn("incremental continuation", self.text)
+        self.assertIn("preserves the previous result", self.text)
         self.assertIn("Never identify a real person as the perpetrator", self.text)
 
 
