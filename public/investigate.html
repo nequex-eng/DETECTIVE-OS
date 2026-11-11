@@ -11,7 +11,7 @@ td,th{border:1px solid #333;padding:6px 10px;text-align:left}
 .stage{color:#e8b64c}.draft{color:#ff7b72;font-weight:bold}
 pre{white-space:pre-wrap;word-break:break-word;background:#161d27;padding:14px;
 border:1px solid #333;font-size:14px;line-height:1.6}
-li{margin:4px 0}</style></head><body>
+li{margin:4px 0}.ops-shell{max-width:1120px;margin:0 auto;padding:26px 28px 60px}body{max-width:none;padding:0;background:radial-gradient(ellipse at 85% 0%,#1c2d3a 0,transparent 42%),#08121d;color:#dce5ed}body>p:first-of-type{max-width:1120px;margin:20px auto 0;padding:0 28px}h1{font:500 clamp(28px,4vw,42px)/1.15 Georgia,serif;letter-spacing:.2px;margin:16px 0 10px}h2{font:500 19px Georgia,serif;color:#e0c17e;border-bottom:1px solid #2b4052;padding-bottom:10px;margin:30px 0 15px}.note{color:#92a6b8;line-height:1.8}.draft{color:#e3bd75}form,#job{background:linear-gradient(145deg,#122333,#0d1925);border:1px solid #30475b;border-radius:3px;padding:22px;margin:15px 0 25px}label{display:block;color:#a9bac8;font-size:11px;letter-spacing:.5px;margin:13px 0 5px}input,select,textarea{background:#091521;border:1px solid #344b60;border-radius:2px;color:#e0e8ef;padding:11px 12px;margin:0;outline:none}input:focus,select:focus,textarea:focus{border-color:#b18d51}button{background:#c5a05e;color:#111a22;border:1px solid #dfbd7c;border-radius:2px;padding:11px 20px;font-size:11px;font-weight:800;letter-spacing:.8px}button:disabled{opacity:.5}#job{border-left:3px solid #c5a05e}#jobId{font:10px ui-monospace,monospace;color:#9bb4c9}#jobStatus{color:#e2c17b;font-size:11px}#events{padding-left:18px;color:#94a9bb;font-size:11px;line-height:1.8}#result{border-top:1px solid #2c4051;margin-top:15px;padding-top:15px;color:#d2dde7;font-size:12px;line-height:1.8}#result table{margin:12px 0}#result th{color:#e2c17b;background:#172838}#history{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#history li{margin:0;background:#111f2d;border:1px solid #2c4255;padding:13px 15px;color:#9bafc0;font-size:11px;line-height:1.7}#history a{color:#e0c17e;font-weight:700}a{color:#a8c9e7}a:hover{color:#e2c17b}.stage{color:#e2c17b}@media(max-width:700px){.ops-shell{padding:18px 14px 40px}body>p:first-of-type{padding:0 14px}form,#job{padding:16px}#history{grid-template-columns:1fr}}</style></head><body>
 <p><a href="index.html">← 案件中心</a></p>
 <h1>DETECTIVE OS — 自动调查</h1>
 <p class="note">输入一个调查方向，引擎自动跑：收集公开报道 → 去重 → 抽取事实 → 推理 → 出草稿报告。
@@ -42,7 +42,7 @@ li{margin:4px 0}</style></head><body>
 </div>
 
 <h2>最近的任务</h2>
-<ul id="history"><li class="note">加载中……</li></ul>
+<ul id="history" class="history-grid"><li class="note">加载中……</li></ul>
 
 <script>
 const $ = id => document.getElementById(id);
