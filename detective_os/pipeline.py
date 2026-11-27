@@ -113,9 +113,18 @@ EXTRACT_SYSTEM = """你是一名刑事案件档案员，只做一件事：从给
 - 不要输出结论、不要输出假设、不要输出嫌疑人指认。
 - 最多输出12项。没有可抽的事实就输出[]。"""
 
+GENERAL_EXTRACT_SYSTEM = """你是一名严谨的通用调查资料分析员，不预设这是刑事案件。
+从给定原文中抽取与调查主题直接相关、可核验的事实，包括人物、组织、制度、决策、时间、地点、数据、过程、利益关系、公开声明、历史背景等。
+硬规则：
+- 只输出JSON数组，每项：{"content":"一句话事实","quote":"原文逐字引用","source_location":"段落或位置","evidence_type":"fact或statement或document或data","event_date":"YYYY-MM-DD或空"}。
+- 不得假定存在被害人、犯罪、嫌疑人、警方或违法行为；原文没有就不能引入。
+- content只复述quote，不添加解释、因果推断或评价。
+- quote必须能在原文中逐字核验；不得改写、拼接或编造。
+- 最多输出12项；没有可抽取事实则输出[]。"""
+
 
 def extract_candidates(source_text: str, source_id: str, direction: str,
-                       caller=None) -> list:
+                       caller=None, investigation_mode: str = "criminal") -> list:
     """Extract candidate facts from one source text via the LLM.
 
     `caller` defaults to the retrying MiniMax caller; tests pass a stub.
@@ -125,7 +134,9 @@ def extract_candidates(source_text: str, source_id: str, direction: str,
     caller = caller or call_minimax_retry
     user = (f"调查方向：{direction}\n来源编号：{source_id}\n"
             f"报道原文：\n{source_text[:12000]}")
-    raw = caller([{"role": "system", "content": EXTRACT_SYSTEM},
+    system_prompt = (GENERAL_EXTRACT_SYSTEM if investigation_mode == "general"
+                     else EXTRACT_SYSTEM)
+    raw = caller([{"role": "system", "content": system_prompt},
                   {"role": "user", "content": user}],
                  max_tokens=8192, temperature=0.2)
     m = re.search(r"\[.*\]", raw, re.S)
@@ -150,7 +161,7 @@ def extract_candidates(source_text: str, source_id: str, direction: str,
             "source_location": str(it.get("source_location", "")),
             "evidence_type": str(it.get("evidence_type", "fact")),
             "event_date": str(it.get("event_date", "")),
-            "category": cat if cat in CATEGORIES else "",
+            "category": cat if investigation_mode == "criminal" and cat in CATEGORIES else "",
             "source_id": source_id,
         })
     return out
@@ -164,8 +175,69 @@ LIKELIHOOD_SYSTEM = """你是一名刑事案件分析员，只做一件事：给
 - 不要输出解释、不要输出结论、不要输出嫌疑人指认。"""
 
 
+def generate_investigation_hypotheses(direction: str, evidence: list,
+                                       context: str = "", caller=None) -> list:
+    """Generate topic-specific, falsifiable hypotheses for non-criminal investigations.
+
+    This function deliberately has no criminal fallback. If the model cannot
+    produce at least two relevant hypotheses, the run must stop rather than
+    silently switching to a crime template.
+    """
+    from detective_os.llm import call_minimax_retry
+    caller = caller or call_minimax_retry
+    facts = "\\n".join(
+        f"{e.get('evidence_id')}: {e.get('content')}" for e in evidence[:60])
+    system = """你是跨领域调查研究员。根据调查主题和已核验事实，提出3至5个彼此有区别、可以被证据检验的竞争性解释或调查假设。
+绝不默认这是刑事案件；不得擅自引入被害人、嫌疑人、作案方式、犯罪动机、警方等概念。
+假设必须紧扣调查对象与问题，可以是不同成因、机制、决策路径、组织角色、数据解释、历史解释或其他与主题相符的可能性。
+只输出JSON数组，每项字段：hypothesis_id(H1起)、description(具体假设)、predictions(2条可观察预测)、falsifiers(至少2条可证伪条件)。
+不得把事实写成假设，不得把未经证实的可能性写成结论。不同假设应尽量互斥或解释重点不同。"""
+    user = (f"调查主题：{direction}\\n补充调查要求：{context[:5000]}\\n"
+            f"已核验候选事实（仅作背景，不代表最终确认）：\\n{facts or '暂无候选事实'}")
+    raw = caller([{"role":"system","content":system},
+                  {"role":"user","content":user}],
+                 max_tokens=5000, temperature=0.2)
+    match = re.search(r"\\[.*\\]", raw, re.S)
+    if not match:
+        raise ValueError("纯调查模式未能生成结构化假设；已停止，不会套用刑事案件假设模板。")
+    try:
+        rows = json.loads(match.group(0))
+    except json.JSONDecodeError as exc:
+        raise ValueError("纯调查假设格式无效；已停止，不会套用刑事案件假设模板。") from exc
+    valid = []
+    seen = set()
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        desc = str(row.get("description", "")).strip()
+        preds = [str(x).strip() for x in row.get("predictions", []) if str(x).strip()]
+        fals = [str(x).strip() for x in row.get("falsifiers", []) if str(x).strip()]
+        if not desc or len(preds) < 1 or len(fals) < 2:
+            continue
+        if any(term in desc for term in ("熟人作案", "陌生人作案", "团伙作案", "被害人", "凶手", "作案手法")):
+            continue
+        key = desc.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        valid.append({
+            "hypothesis_id": f"H{len(valid)+1}",
+            "description": desc, "supports": [], "opposes": [],
+            "unexplained": [], "prerequisites": [],
+            "predictions": preds[:4], "falsifiers": fals[:4],
+            "prior": 1.0, "likelihoods": {}, "status": "open",
+        })
+    if len(valid) < 2:
+        raise ValueError("纯调查模式至少需要两个相关且可证伪的假设；已停止，不会套用刑事案件模板。")
+    prior = 1.0 / len(valid)
+    for row in valid:
+        row["prior"] = prior
+    return valid
+
+
 def propose_likelihoods(evidence: list, caller=None,
-                        batch_size: int = 10) -> dict:
+                        batch_size: int = 10, hypotheses: list | None = None,
+                        investigation_mode: str = "criminal") -> dict:
     """One LLM call per batch of evidence, proposing P(evidence |
     hypothesis) for the draft's 5-archetype hypotheses. Returns
     {(hid, eid): float}. Values are clamped to [0.2, 0.8] by
@@ -336,7 +408,9 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
                      sources: list, candidates: list, paths_tried: list,
                      likelihoods: dict | None = None,
                      categories: dict | None = None,
-                     baseline_hypotheses: list | None = None) -> dict:
+                     baseline_hypotheses: list | None = None,
+                     investigation_mode: str = "criminal",
+                     hypothesis_specs: list | None = None) -> dict:
     """Assemble a draft case pack (dicts, not files) from collected
     sources and verified candidates.
 
@@ -394,6 +468,18 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             row["opposes"] = list(row.get("opposes") or [])
             row["unexplained"] = list(row.get("unexplained") or [])
             hypotheses.append(row)
+    elif investigation_mode == "general":
+        if not hypothesis_specs or len(hypothesis_specs) < 2:
+            raise ValueError("纯调查模式缺少至少两个主题相关假设；拒绝使用刑事模板")
+        for spec in hypothesis_specs:
+            row = dict(spec)
+            hid = str(row.get("hypothesis_id", ""))
+            row["likelihoods"] = {
+                ev["evidence_id"]: max(0.2, min(0.8, float(
+                    likelihoods.get((hid, ev["evidence_id"]), 0.5))))
+                for ev in evidence
+            }
+            hypotheses.append(row)
     else:
         for hid, desc, prior, preds, fals in HYPOTHESIS_TEMPLATE:
             lik = {}
@@ -410,17 +496,21 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
     case = {
         "case_id": case_id, "name": name, "status": "draft-unreviewed",
         "direction": direction, "job_id": job_id,
+        "investigation_mode": investigation_mode,
         "gaps": [{"id": "G0", "gap": "本案包为自动生成的草稿，未经人工复核；"
                   "证据最高C级，假设似然为LLM初拟，结论只作参考。",
                   "needed": "人工复核每条证据的原文与分级，确认假设与似然。"}],
-        "limits": ["本报告为未审草稿：证据由LLM从公开报道抽取（逐字引用已核验），"
+        "limits": (["本报告为未审草稿：证据由LLM从公开来源抽取（逐字引用已核验），"
+                   "最高C级；主题假设由模型根据调查问题生成，先验均匀，似然为初拟；须人工复核。"]
+                  if investigation_mode == "general" else
+                  ["本报告为未审草稿：证据由LLM从公开报道抽取（逐字引用已核验），"
                    "最高C级；假设先验为均匀分布，似然为LLM初拟；不得据此指认任何人。",
-                   "公开资料回答不了的问题必须明说，不得假装还原完整刑侦卷宗。"],
+                   "公开资料回答不了的问题必须明说，不得假装还原完整刑侦卷宗。"]),
         "hypotheses": hypotheses,
     }
     coverage_items = []
     norm_paths, raw_paths = _normalize_paths(paths_tried)
-    for t in template_items():
+    for t in (template_items() if investigation_mode == "criminal" else []):
         linked = [e["evidence_id"] for e in evidence
                   if t["item_id"] in e.get("_categories", [])]
         coverage_items.append({
@@ -438,8 +528,8 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
         "case": case, "sources": sources, "evidence": evidence,
         "events": [], "entities": {"entities": [], "relationships": []},
         "contradictions": [],
-        "coverage": {"case_id": case_id, "template_version": "1",
-                     "items": coverage_items},
+        "coverage": ({"case_id": case_id, "template_version": "1",
+                      "items": coverage_items} if investigation_mode == "criminal" else None),
     }
 
 
@@ -457,8 +547,12 @@ def write_draft_pack(case_dir: Path, pack: dict) -> Path:
     (case_dir / "entities.json").write_text(
         json.dumps(pack["entities"], ensure_ascii=False, indent=2), encoding="utf-8")
     (case_dir / "contradictions.json").write_text("[]", encoding="utf-8")
-    (case_dir / "coverage.json").write_text(
-        json.dumps(pack["coverage"], ensure_ascii=False, indent=2), encoding="utf-8")
+    coverage_path = case_dir / "coverage.json"
+    if pack.get("coverage") is not None:
+        coverage_path.write_text(
+            json.dumps(pack["coverage"], ensure_ascii=False, indent=2), encoding="utf-8")
+    elif coverage_path.exists():
+        coverage_path.unlink()
     return case_dir
 
 
