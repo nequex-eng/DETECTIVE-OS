@@ -25,7 +25,7 @@ sys.path.insert(0, str(ROOT))
 
 from detective_os.pipeline import (  # noqa: E402
     build_draft_pack, extract_candidates, map_categories,
-    propose_likelihoods, run_draft, write_draft_pack)
+    propose_likelihoods, generate_investigation_hypotheses, run_draft, write_draft_pack)
 
 
 def job_update(job_id, *args):
@@ -233,7 +233,8 @@ def merge_followup_sources(parent_sources, parent_texts,
 
 
 def build_case_summary(direction, candidates, verdict, coverage,
-                       review_blockers, version, new_fact_count):
+                       review_blockers, version, new_fact_count,
+                       investigation_mode="criminal"):
     facts = candidates[-min(len(candidates), 6):]
     fact_lines = "\n".join(
         f"- {item.get('content', '')}（来源：{item.get('source_id', '未知')}）"
@@ -241,6 +242,13 @@ def build_case_summary(direction, candidates, verdict, coverage,
     if not fact_lines:
         fact_lines = "- 本轮没有可逐字引用核验的新增候选事实。"
     phase_note = "本轮为既有调查的增量跟进。" if version > 1 else "本轮为初始公开资料调查。"
+    general = investigation_mode == "general"
+    coverage_note = ("纯调查模式不使用刑事案件覆盖清单。" if coverage is None else
+        f"资料覆盖：{coverage.get('score_pct', 0)}%；已覆盖{coverage.get('covered', 0)}项、"
+        f"单来源{coverage.get('single', 0)}项、缺失{coverage.get('missing', 0)}项。")
+    meaning = ("这是对调查解释的相对排序，不代表事实已被证实；假设与似然均须人工复核。"
+               if general else
+               "这是竞争性假设的相对模型排序，不代表任何个人的犯罪概率；若排序差距不足或证据不足，应保留无法判断。")
     return (
         f"## 案件总结（v{version}）\n\n"
         "本节由跑手依据已采集来源与引擎输出整理，非引擎原生结论。\n\n"
@@ -248,12 +256,9 @@ def build_case_summary(direction, candidates, verdict, coverage,
         "### 来源原文抽取的关键事实（仍待人工复核）\n"
         f"{fact_lines}\n\n"
         "### 引擎结论及其含义\n"
-        f"{verdict}。这是竞争性假设的相对模型排序，不代表任何个人的犯罪概率；"
-        "若排序差距不足或证据不足，应保留无法判断。\n\n"
+        f"{verdict}。{meaning}\n\n"
         "### 主要缺口与注意事项\n"
-        f"资料覆盖：{coverage.get('score_pct', 0)}%；"
-        f"已覆盖{coverage.get('covered', 0)}项、单来源{coverage.get('single', 0)}项、"
-        f"缺失{coverage.get('missing', 0)}项；独立审查blocker：{review_blockers}。"
+        f"{coverage_note}独立审查blocker：{review_blockers}。"
         f"本版本新增抽取{new_fact_count}条候选事实。所有自动抽取仍需人工复核，"
         "用户提供的文字与线索不直接作为证据。"
     )
@@ -407,6 +412,9 @@ def main():
     intake = live.get("intake", {}) if isinstance(live.get("intake"), dict) else {}
     parent_id = live.get("parent_job_id") or intake.get("parent_job_id")
     direction = data.get("direction") or live.get("direction", "")
+    investigation_mode = live.get("investigation_mode") or intake.get("investigation_mode") or "criminal"
+    if investigation_mode not in ("criminal", "general"):
+        raise RuntimeError("未知调查模式，拒绝自动回退到刑事调查")
     if not direction:
         raise RuntimeError("任务缺少调查方向")
 
@@ -443,6 +451,7 @@ def main():
             parent_result = parent["result"]
             if not isinstance(parent_result, dict):
                 raise RuntimeError("原调查结果格式异常，不能继续调查")
+            investigation_mode = parent_result.get("investigation_mode") or parent.get("investigation_mode") or investigation_mode
             parent_run_dir = ROOT / "runs" / parent_id
             (parent_collected, parent_sources, parent_texts, parent_candidates,
              parent_likelihoods, parent_categories) = read_parent_checkpoint(
@@ -526,7 +535,8 @@ def main():
                         + str(intake.get("questions", "")) + "\n"
                         + str(intake.get("known_facts", "")) + "\n"
                         + str(intake.get("materials", "")) + "\n"
-                        + str(intake.get("user_source_text", ""))[:10000])
+                        + str(intake.get("user_source_text", ""))[:10000],
+                        investigation_mode=investigation_mode)
                 except Exception as exc:  # noqa: BLE001
                     print(f"{sid}: extraction failed ({exc}); skipping")
                     failed_sources.append(sid)
@@ -545,12 +555,34 @@ def main():
         if failed_sources:
             print(f"note: sources with no extraction: {failed_sources}")
 
-        # Build once to obtain the final stable evidence IDs, then only ask
-        # the LLM to score/map the newly added evidence.
+        # Pure investigations create topic-specific hypotheses; never fall back
+        # to the criminal archetype template.
+        hypothesis_specs = parent_hypotheses or []
+        if investigation_mode == "general" and not hypothesis_specs:
+            ck_hypotheses = run_dir / "hypotheses.json"
+            hypothesis_checkpoint = load_checkpoint(ck_hypotheses, collected_mtime)
+            if hypothesis_checkpoint:
+                hypothesis_specs = hypothesis_checkpoint.get("hypotheses", [])
+            else:
+                context = "\\n".join([
+                    str(intake.get("questions", "")),
+                    str(intake.get("known_facts", "")),
+                    str(intake.get("materials", "")),
+                    str(intake.get("user_source_text", ""))[:5000],
+                ])
+                hypothesis_specs = generate_investigation_hypotheses(
+                    direction, candidates, context=context)
+                save_checkpoint(ck_hypotheses, {
+                    "collected_mtime": collected_mtime,
+                    "hypotheses": hypothesis_specs})
+
+        # Build once to obtain stable evidence IDs before scoring.
         draft = build_draft_pack(
             case_id, case_name, direction, job_id, sources, candidates, paths_tried,
             likelihoods=parent_likelihoods, categories=parent_categories,
-            baseline_hypotheses=parent_hypotheses or None)
+            baseline_hypotheses=parent_hypotheses or None,
+            investigation_mode=investigation_mode,
+            hypothesis_specs=hypothesis_specs or None)
         old_count = len(parent_candidates)
         new_evidence = draft["evidence"][old_count:]
 
@@ -566,7 +598,9 @@ def main():
                 for k, v in parent_likelihoods.items()
                 if "|" in k
             }
-            likelihoods.update(propose_likelihoods(new_evidence))
+            likelihoods.update(propose_likelihoods(
+                new_evidence, hypotheses=hypothesis_specs or None,
+                investigation_mode=investigation_mode))
             save_checkpoint(ck_likelihoods, {
                 "collected_mtime": collected_mtime,
                 "likelihoods": {f"{h}|{e}": v for (h, e), v in likelihoods.items()}})
@@ -576,14 +610,17 @@ def main():
             categories = ck["categories"]
         else:
             categories = dict(parent_categories)
-            categories.update(map_categories(new_evidence))
+            if investigation_mode == "criminal":
+                categories.update(map_categories(new_evidence))
             save_checkpoint(ck_categories, {
                 "collected_mtime": collected_mtime, "categories": categories})
 
         pack = build_draft_pack(
             case_id, case_name, direction, job_id, sources, candidates, paths_tried,
             likelihoods=likelihoods, categories=categories,
-            baseline_hypotheses=parent_hypotheses or None)
+            baseline_hypotheses=parent_hypotheses or None,
+            investigation_mode=investigation_mode,
+            hypothesis_specs=hypothesis_specs or None)
 
         if parent_id:
             root_short = root_job_id[:8]
@@ -600,20 +637,21 @@ def main():
                    "--event", "增量草稿包已生成，开始重跑引擎与覆盖率")
         md_path, engine_summary = run_draft(case_dir, out_dir)
         cov = engine_summary["coverage"]
-        score_pct = round(cov["score"] * 100, 1)
+        score_pct = round(cov["score"] * 100, 1) if cov else None
         posteriors = [{
             "hypothesis_id": p["hypothesis_id"],
             "posterior": p["posterior"], "prior": p["prior"]
         } for p in engine_summary["bayes"]["posteriors"]]
         verdict = engine_summary["bayes"]["verdict"]
-        coverage = {
+        coverage = ({
             "score_pct": score_pct, "covered": cov["covered"],
             "single": cov["single"], "missing": cov["missing"],
             "total": cov["total"]
-        }
+        } if cov else None)
         case_summary = build_case_summary(
             direction, candidates, verdict, coverage,
-            engine_summary["review"]["blockers"], version, new_fact_count)
+            engine_summary["review"]["blockers"], version, new_fact_count,
+            investigation_mode=investigation_mode)
         report_md = md_path.read_text(encoding="utf-8")
         first_line, separator, remainder = report_md.partition("\n")
         version_line = f"> 报告版本：v{version}；承接任务：{parent_id}" if parent_id else "> 报告版本：v1（初始调查）"
@@ -623,6 +661,7 @@ def main():
 
         result = {
             "case_id": case_id, "case_name": case_name,
+            "investigation_mode": investigation_mode,
             "root_job_id": root_job_id, "parent_job_id": parent_id,
             "version": version, "previous_verdict": previous_verdict,
             "verdict": verdict, "posteriors": posteriors,
@@ -644,10 +683,11 @@ def main():
         job_update(job_id, "--status", "done", "--stage", "done",
                    "--expect-status", "reasoning",
                    "--note", f"v{version}增量报告已生成",
-                   "--event", f"完成v{version}：新增来源{len(new_source_ids)}个，新增事实{new_fact_count}条，覆盖{score_pct}%",
+                   "--event", (f"完成v{version}：新增来源{len(new_source_ids)}个，新增事实{new_fact_count}条"
+                               + (f"，覆盖{score_pct}%" if score_pct is not None else "，纯调查模式无刑事覆盖清单")),
                    "--result", str(run_dir / "result.json"))
-        print(f"done: {case_id} v{version}, verdict={verdict}, "
-              f"coverage={score_pct}%, new_facts={new_fact_count}")
+        print(f"done: {case_id} v{version}, mode={investigation_mode}, verdict={verdict}, "
+              f"coverage={score_pct if score_pct is not None else 'n/a'}, new_facts={new_fact_count}")
         return 0
     except Exception as exc:  # noqa: BLE001
         job_update(job_id, "--status", "failed", "--stage", "failed",
