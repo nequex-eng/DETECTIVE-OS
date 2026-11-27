@@ -221,15 +221,15 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 @media(max-width:700px){{.shell{{padding:18px 15px 40px}}header{{align-items:flex-start}}.hero{{grid-template-columns:1fr;padding:38px 0 25px;gap:15px}}.hero-side{{border-left:0;border-top:1px solid #405163;padding:12px 0 0}}.live-grid,.archive-grid{{grid-template-columns:1fr}}.classified{{font-size:8px}}}}
 </style></head><body><div class="shell">
 <header><div class="brand"><div class="seal">D·OS</div><div><b>DETECTIVE OS</b><small>REAL CASE INTELLIGENCE & INVESTIGATION</small></div></div><div class="classified">RESEARCH OPERATIONS / OPEN SOURCE</div></header>
-<section class="hero"><div><div class="eyebrow">INTELLIGENCE OPERATIONS CENTER</div><h1>Evidence first.<br>Conclusions earned.</h1><p>面向真实历史案件的公开资料调查与证据分析工作站。统一管理调查委托、资料采集、证据链、竞争性假设与独立审查。事实、报道、推断与未知严格区分。</p></div><div class="hero-side">CASE INTELLIGENCE DIVISION<br>OPEN-SOURCE RESEARCH DESK<br>TRACEABLE · AUDITABLE · EVIDENCE-LED</div></section>
-<div class="actions"><a class="action" href="investigate.html">＋ CREATE INVESTIGATION</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
+<section class="hero"><div><div class="eyebrow">INTELLIGENCE OPERATIONS CENTER</div><h1>Evidence first.<br>Conclusions earned.</h1><p>面向刑事案件与非刑事议题的公开资料调查工作站。统一管理调查委托、资料采集、证据链、竞争性假设与独立审查。事实、报道、推断与未知严格区分。</p></div><div class="hero-side">INVESTIGATION RESEARCH DESK<br>CRIMINAL + GENERAL INQUIRIES<br>TRACEABLE · AUDITABLE · EVIDENCE-LED</div></section>
+<div class="actions"><a class="action" href="investigate.html?mode=criminal">＋ 刑事调查</a><a class="action secondary" href="investigate.html?mode=general">＋ 纯调查</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
 <div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
 <div class="section"><div><div class="eyebrow">COMPLETED INVESTIGATIONS / AUTO ARCHIVE</div><h2>已完成调查 · 自动归档</h2></div><span>{len(archived) + len(task_drafts)} COMPLETE</span></div>
 <div class="archive-grid">{render_case_rows(archived)}{task_archive_cards}</div>
 <div class="archive-grid" id="completedJobs"></div>
 <p class="note">任务显示 COMPLETE 即自动归档，不设置人工复核队列。归档只表示本阶段调查任务已结束，不代表案件已经侦破。案件仍可保持未破、身份未明或其他真实状态；继续调查会建立新版本，不覆盖原始记录。部分旧任务可能只有报告记录，未必已恢复成完整结构化案卷。</p>
-<div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于真实犯罪概率。证据不足时允许不作结论。</div>
+<div class="notice">研究边界：公开资料不等于完整警方卷宗。来源相关性不等于独立佐证；模型推断不等于事实；假设权重不等于事实确定性。证据不足时允许不作结论。</div>
 </div>
 <script>
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}}[c]));
