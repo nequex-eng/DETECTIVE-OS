@@ -21,11 +21,13 @@ export async function onRequestPost(context) {
     const language = typeof body.language === "string" && /^[a-z]{2,5}$/.test(body.language.trim())
       ? body.language.trim() : "zh";
     const region = typeof body.region === "string" ? body.region.trim().slice(0, 200) : "";
-    const hints = typeof body.hints === "string" ? body.hints.trim().slice(0, 500) : "";
+    const hints = typeof body.hints === "string" ? body.hints.trim().slice(0, 5000) : "";
+    const investigationMode = body.investigation_mode === "general" ? "general" : "criminal";
     const now = new Date().toISOString();
     const job = {
       job_id: crypto.randomUUID(),
       direction, language, region, hints,
+      investigation_mode: investigationMode,
       status: "queued", stage: "queued",
       stage_note: "已收到，等待跑手接手",
       events: [{ t: now, stage: "queued", message: "任务已创建，等待跑手接手" }],
