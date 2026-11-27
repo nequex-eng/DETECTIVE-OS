@@ -20,7 +20,7 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
 3. If another runner has already moved the task beyond `queued`, do not start a duplicate collection process. Resume only if the job is in a recoverable state and no other process is working on it.
 4. Move the job from `queued` to `collecting` using `job.py update`, with an explanatory note and event.
 5. Read all of:
-   - `direction`, `region`, `language`, `hints`
+   - `direction`, `region`, `language`, `hints`, `investigation_mode`
    - `intake.objective`
    - `intake.time_range`
    - `intake.evidence_cutoff_date`
@@ -36,6 +36,17 @@ This file is the complete task body for the existing `detective-os-job-watch` ru
 Treat the structured `intake` object as authoritative; legacy `hints` is only a compatibility field and may not contain every structured value. A follow-up job is a new linked job with `parent_job_id`; never overwrite or mark the parent job running.
 
 ## Collection instructions
+
+### Select the correct investigation framework
+
+- Read `investigation_mode` from the job document. Allowed values: `criminal` and `general`; legacy jobs without the field default to `criminal`.
+- For `criminal`, use the existing criminal-case research procedure and criminal-specific source angles.
+- For `general` (纯调查), investigate the stated subject without assuming a crime, victim, suspect, perpetrator, police involvement, or criminal motive. Search for the topic's actual domain: organizations, people, public records, policies, business filings, financial disclosures, historical archives, datasets, academic work, official statements, timelines, decisions, and independent reporting as appropriate.
+- In `general` mode, the objective is to test explanations of the user's actual question. Do not use disappearance, forensic, suspect-profile, victim, crime-scene, or homicide query templates unless the subject itself explicitly requires them.
+- The mechanical runner generates 3–5 topic-specific, falsifiable hypotheses from the investigation direction, user questions, and extracted facts. It scores those hypotheses and deliberately refuses to fall back to the criminal archetype template if valid general hypotheses cannot be produced.
+- General-mode extraction is neutral: capture relevant facts, statements, records, dates, data and organizational/process details from exact source quotations. Do not add criminal categories.
+- General mode does not use the 22-item homicide/criminal coverage checklist. Its report must say that checklist is not applicable rather than showing a misleading criminal coverage score.
+- Follow-up jobs must inherit the parent's investigation mode and preserve its original hypothesis set; do not switch frameworks between versions.
 
 - Open and inspect every valid user-specified `source_urls` URL first. Record failures honestly; do not silently discard inaccessible URLs.
 - Use `intake.objective`, `time_range`, `known_facts`, and `questions` to refine the search plan. Known facts are leads to verify, not established facts.
@@ -97,7 +108,7 @@ The accepted collection path names are: `web_search`, `direct_source`, `news_db`
 
 1. After writing `collected.json`, update the task note/event to say collection is complete and include the number of newly inspected sources. For a follow-up, include the parent and child task IDs in the event.
 2. Run exactly: `python3 scripts/run_job.py <job_id>`.
-3. Let the script perform extraction, quote verification, likelihood proposals, category mapping, draft-pack generation, engine checks, coverage calculation, independent review, report writing, and final KV update.
+3. Let the script perform mode-aware extraction, quote verification, topic-specific hypothesis generation (general mode), likelihood proposals, applicable category mapping, draft-pack generation, engine checks, applicable coverage calculation, independent review, report writing, and final KV update.
 4. If interrupted, do not delete checkpoints. Rerun `run_job.py`; it resumes from valid checkpoints tied to the `collected.json` modification time.
 5. If it fails, report the exact error and leave the task in the state written by the script. Do not forge a result or manually mark it done.
 6. Verify the final task by reading it again with `job.py get`. Confirm `status=done`, a non-null result, and that the result's source/fact counts and coverage match the generated files.
@@ -105,4 +116,4 @@ The accepted collection path names are: `web_search`, `direct_source`, `news_db`
 
 ## User-facing output
 
-Report the task ID, parent task ID when applicable, version number, newly collected sources, newly extracted facts, total corpus size, evidence-grade distribution, previous verdict and current verdict, posterior table, coverage (covered/single/missing), review blockers, and versioned report path. Always call it an unreviewed draft. Explain that the posterior is a relative model ranking, not the probability that any named person committed the crime.
+Report the task ID, parent task ID when applicable, version number, newly collected sources, newly extracted facts, total corpus size, evidence-grade distribution, previous verdict and current verdict, posterior table, coverage (covered/single/missing, criminal mode only; general mode reports no criminal checklist), review blockers, and versioned report path. Always call it an unreviewed draft. Explain that the posterior is a relative model ranking, not the probability that any named person committed the crime.
