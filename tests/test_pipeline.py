@@ -49,6 +49,12 @@ class TestPlanQueries(unittest.TestCase):
         self.assertTrue(any("白银连环杀人案 police" in q for q in qs))
         self.assertEqual(len(qs), len(set(qs)))
 
+    def test_general_mode_uses_neutral_search_angles(self):
+        qs = plan_queries("某组织的发展历程", "zh", investigation_mode="general")
+        self.assertTrue(any("官方文件" in q for q in qs))
+        self.assertTrue(any("financial filings" in q for q in qs))
+        self.assertFalse(any("嫌疑人画像" in q or "suspect sketch" in q for q in qs))
+
 
 class TestVerifyQuote(unittest.TestCase):
     def test_verbatim_with_whitespace_difference(self):
