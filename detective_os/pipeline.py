@@ -177,42 +177,36 @@ LIKELIHOOD_SYSTEM = """你是一名刑事案件分析员，只做一件事：给
 
 def generate_investigation_hypotheses(direction: str, evidence: list,
                                        context: str = "", caller=None) -> list:
-    """Generate topic-specific, falsifiable hypotheses for non-criminal investigations.
-
-    This function deliberately has no criminal fallback. If the model cannot
-    produce at least two relevant hypotheses, the run must stop rather than
-    silently switching to a crime template.
-    """
+    """Generate topic-specific, falsifiable hypotheses for non-criminal investigations."""
     from detective_os.llm import call_minimax_retry
     caller = caller or call_minimax_retry
-    facts = "\\n".join(
+    facts = "\n".join(
         f"{e.get('evidence_id')}: {e.get('content')}" for e in evidence[:60])
     system = """你是跨领域调查研究员。根据调查主题和已核验事实，提出3至5个彼此有区别、可以被证据检验的竞争性解释或调查假设。
 绝不默认这是刑事案件；不得擅自引入被害人、嫌疑人、作案方式、犯罪动机、警方等概念。
 假设必须紧扣调查对象与问题，可以是不同成因、机制、决策路径、组织角色、数据解释、历史解释或其他与主题相符的可能性。
-只输出JSON数组，每项字段：hypothesis_id(H1起)、description(具体假设)、predictions(2条可观察预测)、falsifiers(至少2条可证伪条件)。
-不得把事实写成假设，不得把未经证实的可能性写成结论。不同假设应尽量互斥或解释重点不同。"""
-    user = (f"调查主题：{direction}\\n补充调查要求：{context[:5000]}\\n"
-            f"已核验候选事实（仅作背景，不代表最终确认）：\\n{facts or '暂无候选事实'}")
-    raw = caller([{"role":"system","content":system},
-                  {"role":"user","content":user}],
+只输出JSON数组，每项字段：hypothesis_id(H1起)、description(具体假设)、predictions(至少1条可观察预测)、falsifiers(至少2条可证伪条件)。
+不得把事实写成假设，不得把未经证实的可能性写成结论。不同假设应尽量互相区分。"""
+    user = (f"调查主题：{direction}\n补充调查要求：{context[:5000]}\n"
+            f"已核验候选事实（仅作背景，不代表最终确认）：\n{facts or '暂无候选事实'}")
+    raw = caller([{"role": "system", "content": system},
+                  {"role": "user", "content": user}],
                  max_tokens=5000, temperature=0.2)
-    match = re.search(r"\\[.*\\]", raw, re.S)
+    match = re.search(r"\[.*\]", raw, re.S)
     if not match:
         raise ValueError("纯调查模式未能生成结构化假设；已停止，不会套用刑事案件假设模板。")
     try:
         rows = json.loads(match.group(0))
     except json.JSONDecodeError as exc:
         raise ValueError("纯调查假设格式无效；已停止，不会套用刑事案件假设模板。") from exc
-    valid = []
-    seen = set()
+    valid, seen = [], set()
     for row in rows if isinstance(rows, list) else []:
         if not isinstance(row, dict):
             continue
         desc = str(row.get("description", "")).strip()
         preds = [str(x).strip() for x in row.get("predictions", []) if str(x).strip()]
         fals = [str(x).strip() for x in row.get("falsifiers", []) if str(x).strip()]
-        if not desc or len(preds) < 1 or len(fals) < 2:
+        if not desc or not preds or len(fals) < 2:
             continue
         if any(term in desc for term in ("熟人作案", "陌生人作案", "团伙作案", "被害人", "凶手", "作案手法")):
             continue
@@ -221,57 +215,54 @@ def generate_investigation_hypotheses(direction: str, evidence: list,
             continue
         seen.add(key)
         valid.append({
-            "hypothesis_id": f"H{len(valid)+1}",
-            "description": desc, "supports": [], "opposes": [],
-            "unexplained": [], "prerequisites": [],
+            "hypothesis_id": f"H{len(valid)+1}", "description": desc,
+            "supports": [], "opposes": [], "unexplained": [], "prerequisites": [],
             "predictions": preds[:4], "falsifiers": fals[:4],
             "prior": 1.0, "likelihoods": {}, "status": "open",
         })
     if len(valid) < 2:
         raise ValueError("纯调查模式至少需要两个相关且可证伪的假设；已停止，不会套用刑事案件模板。")
-    prior = 1.0 / len(valid)
     for row in valid:
-        row["prior"] = prior
+        row["prior"] = 1.0 / len(valid)
     return valid
-
 
 def propose_likelihoods(evidence: list, caller=None,
                         batch_size: int = 10, hypotheses: list | None = None,
                         investigation_mode: str = "criminal") -> dict:
-    """One LLM call per batch of evidence, proposing P(evidence |
-    hypothesis) for the draft's 5-archetype hypotheses. Returns
-    {(hid, eid): float}. Values are clamped to [0.2, 0.8] by
-    build_draft_pack; 0.5 is the default.
-
-    Batched because a single call for 70 evidence items returns empty
-    from M3 (it chokes on the long JSON output); batches of 10 stay
-    reliable.
-    """
+    """Propose disclosed likelihoods for the supplied hypotheses."""
     from detective_os.llm import call_minimax_retry
     caller = caller or call_minimax_retry
     if not evidence:
         return {}
-    hyps = "\n".join(f"{h}：{d}" for h, d, *_ in HYPOTHESIS_TEMPLATE)
-    valid_h = {h for h, *_ in HYPOTHESIS_TEMPLATE}
+    if hypotheses:
+        hyps = "\n".join(f"{h.get('hypothesis_id')}：{h.get('description')}"
+                         for h in hypotheses)
+        valid_h = {h.get("hypothesis_id") for h in hypotheses}
+    else:
+        hyps = "\n".join(f"{h}：{d}" for h, d, *_ in HYPOTHESIS_TEMPLATE)
+        valid_h = {h for h, *_ in HYPOTHESIS_TEMPLATE}
     out = {}
     for start in range(0, len(evidence), batch_size):
         chunk = evidence[start:start + batch_size]
         lines = [f"{ev['evidence_id']}：{ev['content']}" for ev in chunk]
-        user = (f"假设：\n{hyps}\n\n证据：\n" + "\n".join(lines))
+        user = (f"调查模式：{'纯调查' if investigation_mode == 'general' else '刑事调查'}\n"
+                f"假设：\n{hyps}\n\n证据：\n" + "\n".join(lines))
+        system_prompt = ("""你是通用调查分析员。评估每条事实在各竞争性假设成立时出现的相对可能性。
+不得预设犯罪、被害人、嫌疑人或作案方式。只输出JSON对象：假设编号 -> 证据编号 -> 0.2至0.8的数值。
+0.5代表中性或无法判断；没有依据时使用0.5，不得编造事实或输出结论。""" if investigation_mode == "general"
+                         else LIKELIHOOD_SYSTEM)
         try:
-            raw = caller([{"role": "system", "content": LIKELIHOOD_SYSTEM},
+            raw = caller([{"role": "system", "content": system_prompt},
                           {"role": "user", "content": user}],
                          max_tokens=8192, temperature=0.2)
-        except Exception as exc:  # noqa: BLE001 - one flaky batch must
-            # not kill the run; its pairs stay at the 0.5 default.
-            print(f"likelihood batch {start}-{start + len(chunk) - 1} "
-                  f"failed ({exc}); skipping")
+        except Exception as exc:  # noqa: BLE001
+            print(f"likelihood batch {start}-{start + len(chunk) - 1} failed ({exc}); skipping")
             continue
-        m = re.search(r"\{.*\}", raw, re.S)
-        if not m:
+        match = re.search(r"\{.*\}", raw, re.S)
+        if not match:
             continue
         try:
-            data = json.loads(m.group(0))
+            data = json.loads(match.group(0))
         except json.JSONDecodeError:
             continue
         if not isinstance(data, dict):
@@ -279,13 +270,12 @@ def propose_likelihoods(evidence: list, caller=None,
         for hid, mapping in data.items():
             if hid not in valid_h or not isinstance(mapping, dict):
                 continue
-            for eid, v in mapping.items():
+            for eid, value in mapping.items():
                 try:
-                    out[(hid, eid)] = float(v)
+                    out[(hid, eid)] = float(value)
                 except (TypeError, ValueError):
                     continue
     return out
-
 
 CATEGORY_MAP_SYSTEM = """你是一名刑事案件档案员，只做一件事：把每条证据对应到资料覆盖清单的条目上。
 硬规则：
