@@ -89,6 +89,13 @@ const params = new URLSearchParams(location.search);
 const continueId = params.get("continue");
 const requestedJob = params.get("job");
 const requestedCase = params.get("case");
+const requestedMode = params.get("mode");
+if (!continueId && !requestedJob && !requestedCase && ["criminal", "general"].includes(requestedMode)) {
+  $("investigationMode").value = requestedMode;
+  $("modeNote").textContent = requestedMode === "general"
+    ? "纯调查不预设犯罪、被害人或嫌疑人；假设根据本次调查主题与核验事实动态生成，不使用刑事案件假设模板或刑事案件覆盖清单。"
+    : "刑事调查使用犯罪案件专用分析框架。";
+}
 $("investigationMode").addEventListener("change", () => {
   $("modeNote").textContent = $("investigationMode").value === "general"
     ? "纯调查不预设犯罪、被害人或嫌疑人；假设将根据本次调查主题与核验事实动态生成，不使用刑事案件假设模板或刑事案件覆盖清单。"
