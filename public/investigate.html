@@ -38,7 +38,13 @@ table{border-collapse:collapse;width:100%}td,th{border:1px solid #2a4053;padding
 <h2 id="formHeading">开始新的调查</h2>
 <form id="form">
 <label>调查方向（必填）</label>
-<input id="direction" maxlength="500" required placeholder="案件名或一句话调查方向">
+<input id="direction" maxlength="500" required placeholder="例如：调查某组织决策机制、某历史事件的真实经过、某市场现象的成因">
+<label>调查类型</label>
+<select id="investigationMode">
+  <option value="criminal">刑事调查（犯罪案件、被害人、嫌疑人、物证等）</option>
+  <option value="general">纯调查（人物、组织、事件、商业、历史、社会现象及其他非刑事问题）</option>
+</select>
+<p class="note" id="modeNote">刑事调查使用犯罪案件专用分析框架。</p>
 <label>主要语言</label>
 <select id="language"><option value="zh">中文</option><option value="en">English</option>
 <option value="ja">日本語</option><option value="es">Español</option>
@@ -83,6 +89,11 @@ const params = new URLSearchParams(location.search);
 const continueId = params.get("continue");
 const requestedJob = params.get("job");
 const requestedCase = params.get("case");
+$("investigationMode").addEventListener("change", () => {
+  $("modeNote").textContent = $("investigationMode").value === "general"
+    ? "纯调查不预设犯罪、被害人或嫌疑人；假设将根据本次调查主题与核验事实动态生成，使用通用调查方向与覆盖逻辑。"
+    : "刑事调查使用犯罪案件专用分析框架。";
+});
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function mdToHtml(md){
   const lines=String(md).split("\n");let html="",inList=false;
@@ -101,12 +112,13 @@ function showJob(j){
   const r=$("result");
   if(j.status==="done"&&j.result){
     const res=j.result;const version=res.version||1;
-    let h=`<div class="version-line">报告版本：v${esc(version)} · 本轮新增来源：${esc(res.new_source_count||0)}个 · 新增事实：${esc(res.new_fact_count||0)}条 · 总来源：${esc(res.source_count||"—")}个</div>`;
+    let h=`<div class="version-line">${res.investigation_mode==="general"?"纯调查":"刑事调查"} · 报告版本：v${esc(version)} · 本轮新增来源：${esc(res.new_source_count||0)}个 · 新增事实：${esc(res.new_fact_count||0)}条 · 总来源：${esc(res.source_count||"—")}个</div>`;
     if(res.parent_job_id)h+=`<p>承接原任务：<a href="investigate.html?job=${encodeURIComponent(res.parent_job_id)}">${esc(res.parent_job_id)}</a></p><p>原结论：${esc(res.previous_verdict||"未记录")}<br>本轮结论：${esc(res.verdict||"未记录")}</p>`;
     else if(res.verdict)h+=`<p>结论：${esc(res.verdict)}</p>`;
     h+=`<h2>调查报告 v${esc(version)}</h2><p class="draft">未审草稿：证据最高C级，假设似然为初拟，结论只作参考。</p>`;
     if(res.posteriors)h+=`<table><tr><th>假设</th><th>后验</th><th>先验</th></tr>`+res.posteriors.map(p=>`<tr><td>${esc(p.hypothesis_id)}</td><td>${esc(p.posterior)}</td><td>${esc(p.prior)}</td></tr>`).join("")+"</table>";
     if(res.coverage)h+=`<p>资料覆盖：${esc(res.coverage.score_pct)}%（${esc(res.coverage.covered)}项已覆盖/${esc(res.coverage.single)}项单来源/${esc(res.coverage.missing)}项缺失，共${esc(res.coverage.total)}项）</p>`;
+    else if(res.investigation_mode==="general")h+=`<p class="note">纯调查模式：未使用刑事案件专用覆盖清单。</p>`;
     if(res.review_blockers!=null)h+=`<p>独立审查：${esc(res.review_blockers)}个blocker</p>`;
     if(res.report_md)h+=mdToHtml(res.report_md);
     h+=`<p><a class="continue-action" href="investigate.html?continue=${encodeURIComponent(j.job_id)}">＋ 继续调查：添加新信源和线索 →</a></p>`;
@@ -132,6 +144,7 @@ async function prepareCaseContinuation(id){
     parentCase=pack;
     $("continueBanner").style.display="block";$("continuationFields").style.display="block";
     $("formHeading").textContent="继续调查 · "+(pack.case?.name||id);
+    $("investigationMode").value="criminal";$("investigationMode").disabled=true;
     $("direction").value=pack.case?.name||id;$("direction").readOnly=true;
     $("language").value="zh";$("region").value=({
       "case-cn-1996-001":"南京，中国",
@@ -151,6 +164,8 @@ async function prepareContinuation(id){
     if(parentJob.status!=="done"||!parentJob.result)throw Error("只有已完成的调查才能继续");
     $("continueBanner").style.display="block";$("continuationFields").style.display="block";
     $("formHeading").textContent="继续调查";
+    $("investigationMode").value=parentJob.result?.investigation_mode||parentJob.investigation_mode||"criminal";
+    $("investigationMode").disabled=true;
     $("direction").value=parentJob.direction||"";$("direction").readOnly=true;
     $("language").value=parentJob.language||"zh";$("region").value=parentJob.region||"";
     $("submitBtn").textContent="提交续办委托";
@@ -174,7 +189,8 @@ $("form").addEventListener("submit",async ev=>{
     };
     const body=parentCase?{case_id:requestedCase,...common}:parentJob?{parent_job_id:parentJob.job_id,...common}:{
       direction:$("direction").value.trim(),language:$("language").value,
-      region:$("region").value.trim(),hints:$("hints").value.trim()
+      region:$("region").value.trim(),hints:$("hints").value.trim(),
+      investigation_mode:$("investigationMode").value
     };
     const requestOptions={method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)};
     const res=parentCase?await fetch("/api/continue-case",requestOptions):parentJob?await fetch("/api/continue",requestOptions):await fetch("/api/investigate",requestOptions);
@@ -187,7 +203,7 @@ $("form").addEventListener("submit",async ev=>{
 async function loadHistory(){
   try{
     const res=await fetch("/api/jobs",{cache:"no-store"});const d=await res.json();
-    $("history").innerHTML=(d.jobs||[]).map(j=>`<li class="history-item"><div><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">${esc(j.direction)}</a> — ${esc(j.status)} / ${esc(j.stage)}（v${esc(j.version||1)}）</div><div class="history-actions"><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">查看报告</a>${j.status==="done"?'<a href="investigate.html?continue='+encodeURIComponent(j.job_id)+'">＋ 继续调查</a>':""}</div></li>`).join("")||"<li class='note'>还没有任务。</li>";
+    $("history").innerHTML=(d.jobs||[]).map(j=>`<li class="history-item"><div><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">${esc(j.direction)}</a> — ${j.investigation_mode==="general"?"纯调查":"刑事调查"} · ${esc(j.status)} / ${esc(j.stage)}（v${esc(j.version||1)}）</div><div class="history-actions"><a href="investigate.html?job=${encodeURIComponent(j.job_id)}">查看报告</a>${j.status==="done"?'<a href="investigate.html?continue='+encodeURIComponent(j.job_id)+'">＋ 继续调查</a>':""}</div></li>`).join("")||"<li class='note'>还没有任务。</li>";
   }catch(e){$("history").innerHTML="<li class='note'>加载失败。</li>";}
 }
 loadHistory();
