@@ -22,7 +22,10 @@ export async function onRequestPost(context) {
       ? body.language.trim() : "zh";
     const region = typeof body.region === "string" ? body.region.trim().slice(0, 200) : "";
     const hints = typeof body.hints === "string" ? body.hints.trim().slice(0, 5000) : "";
-    const investigationMode = body.investigation_mode === "general" ? "general" : "criminal";
+    const investigationMode = body.investigation_mode || "criminal";
+    if (!["criminal", "general"].includes(investigationMode)) {
+      return json({ error: "调查类型无效，请选择刑事调查或纯调查" }, 400);
+    }
     const now = new Date().toISOString();
     const job = {
       job_id: crypto.randomUUID(),
