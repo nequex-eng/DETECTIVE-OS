@@ -564,7 +564,7 @@ def main():
             if hypothesis_checkpoint:
                 hypothesis_specs = hypothesis_checkpoint.get("hypotheses", [])
             else:
-                context = "\\n".join([
+                context = "\n".join([
                     str(intake.get("questions", "")),
                     str(intake.get("known_facts", "")),
                     str(intake.get("materials", "")),
@@ -575,6 +575,8 @@ def main():
                 save_checkpoint(ck_hypotheses, {
                     "collected_mtime": collected_mtime,
                     "hypotheses": hypothesis_specs})
+        if investigation_mode == "general" and not parent_hypotheses:
+            parent_hypotheses = hypothesis_specs
 
         # Build once to obtain stable evidence IDs before scoring.
         draft = build_draft_pack(
