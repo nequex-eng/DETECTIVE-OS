@@ -128,14 +128,27 @@ function showJob(j){
     else if(res.investigation_mode==="general")h+=`<p class="note">纯调查模式：未使用刑事案件专用覆盖清单。</p>`;
     if(res.review_blockers!=null)h+=`<p>独立审查：${esc(res.review_blockers)}个blocker</p>`;
     if(res.report_md)h+=mdToHtml(res.report_md);
-    h+=`<p><a class="continue-action" href="investigate.html?continue=${encodeURIComponent(j.job_id)}">＋ 继续调查：添加新信源和线索 →</a></p>`;
+    if(!j.archived_static)h+=`<p><a class="continue-action" href="investigate.html?continue=${encodeURIComponent(j.job_id)}">＋ 继续调查：添加新信源和线索 →</a></p>`;
     r.innerHTML=h;
   }else if(j.status==="failed"){r.innerHTML=`<p class="draft">任务失败：${esc(j.error||"未知原因")}</p>`;}
   else r.innerHTML="";
 }
 async function loadJob(id){
   try{const res=await fetch("/api/jobs?id="+encodeURIComponent(id)+"&ts="+Date.now(),{cache:"no-store"});
-    if(res.status===404){$("jobNote").textContent="任务已不存在。";return false;}
+    if(res.status===404){
+      const archived=await fetch("/data/reports/run-"+encodeURIComponent(id)+".json",{cache:"no-store"});
+      if(archived.ok){
+        const saved=await archived.json();
+        showJob({job_id:id,direction:saved.case_name||saved.case_id,status:"done",stage:"archived",
+          stage_note:"静态历史报告：原始KV任务记录不可用，但已保存的报告快照仍可读取。",
+          archived_static:true,result:{version:1,investigation_mode:"criminal",report_md:saved.report_md,
+            posteriors:saved.posteriors||[],coverage:saved.coverage||null,
+            review_blockers:saved.review_blockers,case_id:saved.case_id}});
+        return true;
+      }
+      $("jobNote").textContent="实时任务记录不存在，且没有找到对应的静态报告归档。";
+      return false;
+    }
     const j=await res.json();showJob(j);return j.status==="done"||j.status==="failed";
   }catch(e){$("jobNote").textContent="读取进度失败，请稍后刷新页面。";return false;}
 }
