@@ -250,7 +250,7 @@ def build_case_summary(direction, candidates, verdict, coverage,
                if general else
                "这是竞争性假设的相对模型排序，不代表任何个人的犯罪概率；若排序差距不足或证据不足，应保留无法判断。")
     return (
-        f"## 案件总结（v{version}）\n\n"
+        f"## {'调查总结' if general else '案件总结'}（v{version}）\n\n"
         "本节由跑手依据已采集来源与引擎输出整理，非引擎原生结论。\n\n"
         f"### 事件背景\n调查方向：{direction}。{phase_note}\n\n"
         "### 来源原文抽取的关键事实（仍待人工复核）\n"
