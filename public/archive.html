@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080f19">
+<title>DETECTIVE OS — 已完成调查报告</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#080f19;color:#dce5ef}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#17283a 0,transparent 40%),#080f19;line-height:1.75}
+main{max-width:1050px;margin:auto;padding:28px 22px 70px}a{color:#91bff1;text-decoration:none}
+header{border-bottom:1px solid #2a4053;padding-bottom:18px;margin-bottom:26px}
+h1{font-size:clamp(24px,4vw,34px);margin:10px 0}h2{font-size:19px;color:#dfc17e;margin-top:28px}
+.meta{font-size:12px;color:#91a5b8}.warning{padding:12px 15px;border-left:3px solid #c6a15f;background:#142333;color:#c5d1dd;font-size:12px;margin:18px 0}
+#report{background:#101b29;border:1px solid #2a4053;border-radius:6px;padding:22px;overflow-wrap:anywhere}
+#report h1,#report h2,#report h3{color:#dfc17e}#report p,#report li{margin:8px 0}#report pre{white-space:pre-wrap}
+#error{color:#e69a91}
+@media(max-width:600px){main{padding:18px 14px 45px}#report{padding:15px}}
+</style></head>
+<body><main>
+<header><a href="index.html">← 返回调查中心</a><h1 id="title">已完成调查报告</h1><div class="meta" id="meta">正在读取静态归档……</div></header>
+<div class="warning">这是已保存的历史报告快照。它不依赖实时任务库，因此即使原任务KV记录已经过期，报告仍可打开。报告中的分析状态和审查限制以归档内容为准。</div>
+<div id="report"></div><p id="error"></p>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function md(s){
+ const lines=String(s||"").split(/\r?\n/);let out="",list=false;
+ for(const line of lines){
+  if(/^### /.test(line)){if(list){out+="</ul>";list=false;}out+="<h3>"+esc(line.slice(4))+"</h3>";}
+  else if(/^## /.test(line)){if(list){out+="</ul>";list=false;}out+="<h2>"+esc(line.slice(3))+"</h2>";}
+  else if(/^# /.test(line)){if(list){out+="</ul>";list=false;}out+="<h2>"+esc(line.slice(2))+"</h2>";}
+  else if(/^[-*] /.test(line)){if(!list){out+="<ul>";list=true;}out+="<li>"+esc(line.slice(2))+"</li>";}
+  else if(/^\d+\. /.test(line)){if(!list){out+="<ol>";list=true;}out+="<li>"+esc(line.replace(/^\d+\. /,""))+"</li>";}
+  else{if(list){out+="</ul>";list=false;}if(line.trim())out+="<p>"+esc(line)+"</p>";}
+ }
+ if(list)out+="</ul>";return out;
+}
+(async()=>{
+ const id=new URLSearchParams(location.search).get("run");
+ if(!id||!/^[a-f0-9-]{20,40}$/i.test(id)){document.getElementById("error").textContent="归档编号无效。";return;}
+ try{
+  const r=await fetch("/data/reports/run-"+encodeURIComponent(id)+".json",{cache:"no-store"});
+  if(!r.ok)throw Error("静态报告文件不存在（HTTP "+r.status+"）");
+  const d=await r.json();
+  document.getElementById("title").textContent=d.case_name||d.case_id||"已完成调查报告";
+  document.getElementById("meta").textContent=(d.case_id||"")+" · "+id+" · 历史报告";
+  document.getElementById("report").innerHTML=md(d.report_md||"报告正文为空。");
+ }catch(e){document.getElementById("error").textContent="报告暂时无法打开："+e.message;}
+})();
+</script></main></body></html>
