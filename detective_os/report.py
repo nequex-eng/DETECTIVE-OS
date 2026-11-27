@@ -6,7 +6,7 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources,
                     coverage_lines=None):
     L = []
     general = case.get("investigation_mode") == "general"
-    L.append(f"# {'调查分析报告' if general else '案件分析报告'}：{case['name']}")
+    L.append(f"# {'纯调查草稿 — 调查分析报告' if general else '案件分析报告'}：{case['name']}")
     L.append("")
     L.append(f"调查编号：{case['case_id']}｜状态：{case['status']}｜"
              f"公开资料数：{len(sources)}｜本报告只依据已收集并注明来源的资料。")
