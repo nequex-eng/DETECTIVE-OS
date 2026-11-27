@@ -463,6 +463,11 @@ def main():
                 parent_run_dir, parent_result)
             if investigation_mode == parent_mode:
                 parent_hypotheses = parent_result.get("baseline_hypotheses") or []
+        # Static archived packs also default to the criminal baseline; switching modes
+        # requires fresh, mode-specific hypotheses while retaining all source/evidence data.
+        parent_mode = parent_result.get("investigation_mode") or parent.get("investigation_mode") or "criminal"
+        if investigation_mode != parent_mode:
+            parent_hypotheses = []
         parent_paths = parent_collected.get("paths_tried", [])
         previous_verdict = parent_result.get("verdict")
         root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or live.get("root_job_id") or parent_id
