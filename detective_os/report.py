@@ -14,7 +14,9 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources,
     L.append("## 分析结果（定性为主）")
     L.append("")
     if bayes:
-        L.append(f"贝叶斯排序（先验与似然见档案，属模型排序，非破案概率）：{bayes['verdict']}。")
+        qualification = ("属模型排序，不代表解释已被证实" if general
+                         else "属模型排序，非破案概率")
+        L.append(f"贝叶斯排序（先验与似然见档案，{qualification}）：{bayes['verdict']}。")
         for s in bayes["posteriors"]:
             L.append(f"- {s['hypothesis_id']}：后验{s['posterior']}（先验{s['prior']}）")
         L.append("")
