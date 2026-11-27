@@ -22,6 +22,12 @@ export async function onRequestPost(context) {
     if (parent.status !== "done" || !parent.result) {
       return json({ error: "只有已经完成且有报告的调查才能继续跟进" }, 409);
     }
+    const requestedMode = body.investigation_mode;
+    if (requestedMode !== undefined && !["criminal", "general"].includes(requestedMode)) {
+      return json({ error: "调查模式无效，请选择刑事调查或纯调查" }, 400);
+    }
+    const parentMode = parent.result.investigation_mode || parent.investigation_mode || "criminal";
+    const investigationMode = requestedMode || parentMode;
     const rootJobId = parent.result.root_job_id || parent.root_job_id || parentId;
     const taskKeys = await env.JOBS.list({ prefix: "job:", limit: 1000 });
     const lineage = [];
@@ -77,7 +83,8 @@ export async function onRequestPost(context) {
     const job = {
       job_id: crypto.randomUUID(),
       direction: parent.direction,
-      investigation_mode: parent.result.investigation_mode || parent.investigation_mode || "criminal",
+      investigation_mode: investigationMode,
+      mode_switch_from: investigationMode !== parentMode ? parentMode : null,
       language: parent.language || "zh",
       region: parent.region || "",
       hints: followupHints,
