@@ -457,6 +457,11 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
             row["supports"] = list(row.get("supports") or [])
             row["opposes"] = list(row.get("opposes") or [])
             row["unexplained"] = list(row.get("unexplained") or [])
+            if investigation_mode == "general":
+                row["supports"] = sorted(set(row["supports"]) | {
+                    eid for eid, value in lik.items() if value >= 0.6})
+                row["opposes"] = sorted(set(row["opposes"]) | {
+                    eid for eid, value in lik.items() if value <= 0.4})
             hypotheses.append(row)
     elif investigation_mode == "general":
         if not hypothesis_specs or len(hypothesis_specs) < 2:
