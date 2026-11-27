@@ -8,10 +8,10 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources,
     general = case.get("investigation_mode") == "general"
     L.append(f"# {'调查分析报告' if general else '案件分析报告'}：{case['name']}")
     L.append("")
-    L.append(f"案件编号：{case['case_id']}｜状态：{case['status']}｜"
-             f"公开资料数：{len(sources)}｜本报告只依据公开资料，不代表警方卷宗。")
+    L.append(f"调查编号：{case['case_id']}｜状态：{case['status']}｜"
+             f"公开资料数：{len(sources)}｜本报告只依据已收集并注明来源的资料。")
     L.append("")
-    L.append("## 结论（定性为主）")
+    L.append("## 分析结果（定性为主）")
     L.append("")
     if bayes:
         L.append(f"贝叶斯排序（先验与似然见档案，属模型排序，非破案概率）：{bayes['verdict']}。")
@@ -32,7 +32,7 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources,
     L.append("")
     if coverage_lines:
         L.extend(coverage_lines)
-    L.append("## 矛盾")
+    L.append("## 资料矛盾与差异")
     L.append("")
     for c in contra:
         d = c.to_dict()
