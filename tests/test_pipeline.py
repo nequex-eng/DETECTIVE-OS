@@ -14,8 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from detective_os.pipeline import (  # noqa: E402
-    build_draft_pack, extract_candidates, map_categories, plan_queries,
-    propose_likelihoods, run_draft, verify_quote, write_draft_pack)
+    build_draft_pack, extract_candidates, generate_investigation_hypotheses,
+    map_categories, plan_queries, propose_likelihoods, run_draft,
+    verify_quote, write_draft_pack)
 
 SOURCE_TEXT = ("1988年至2002年，甘肃省白银市发生系列强奸杀人案，作案跨度14年，"
                "多名年轻女性被害；2004年白银市公安局公布详细案情并悬赏20万元征集线索。")
