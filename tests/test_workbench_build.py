@@ -55,9 +55,15 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertIn("COMPLETE · 自动归档", index)
         self.assertNotIn("待调查 · 草稿案卷", index)
         self.assertNotIn("调查完成 · 等待复核", index)
-        self.assertIn("张俊杰（已完成任务）", index)
-        self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
-        self.assertIn("结构化案卷完整度：未完成", index)
+        self.assertIn("archive.html?run=", index)
+        self.assertIn("6c31bb54-ddea-40ea-b5dd-7dac9acede94", index)
+        self.assertIn("9d0c95d6-47d9-4085-813a-140a2195381d", index)
+        self.assertIn("c23978f6-56f1-4789-b488-b36c4b9117a7", index)
+        archive = (PUBLIC / "archive.html").read_text(encoding="utf-8")
+        self.assertIn("/data/reports/run-", archive)
+        build_script = (ROOT / "scripts" / "build_site.py").read_text(encoding="utf-8")
+        self.assertIn('runs_dir.glob("*/result.json")', build_script)
+        self.assertIn('archive_name = f"run-{run_id}.json"', build_script)
 
     def test_homepage_has_separate_criminal_and_general_investigation_entries(self):
         index = (PUBLIC / "index.html").read_text(encoding="utf-8")
