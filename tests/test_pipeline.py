@@ -288,5 +288,77 @@ class TestMapCategories(unittest.TestCase):
             self.assertEqual(summary["coverage"]["total"], 22)
 
 
+
+
+class TestGeneralInvestigationMode(unittest.TestCase):
+    def test_general_extraction_uses_neutral_prompt_and_no_crime_categories(self):
+        calls = []
+        def stub(messages, **kwargs):
+            calls.append(messages[0]["content"])
+            return json.dumps([{
+                "content": "该机构于2020年成立。",
+                "quote": "该机构于2020年成立。",
+                "source_location": "第2段",
+                "evidence_type": "fact", "event_date": "2020-01-01"
+            }], ensure_ascii=False)
+        got = extract_candidates(
+            "背景资料：该机构于2020年成立。", "S01", "调查某机构的组织沿革",
+            caller=stub, investigation_mode="general")
+        self.assertEqual(len(got), 1)
+        self.assertEqual(got[0]["category"], "")
+        self.assertIn("不预设这是刑事案件", calls[0])
+        self.assertNotIn("刑事案件档案员", calls[0])
+
+    def test_general_hypotheses_are_topic_specific_and_falsifiable(self):
+        payload = [
+            {"hypothesis_id":"H1","description":"该组织的扩张主要由政策变化推动。",
+             "predictions":["扩张节点应与政策发布时间相近。"],
+             "falsifiers":["政策变化前已完成主要扩张。","相似政策地区没有出现同类变化。"]},
+            {"hypothesis_id":"H2","description":"该组织的扩张主要由内部资本投入推动。",
+             "predictions":["扩张前应出现资本投入增加。"],
+             "falsifiers":["财务记录显示投入未增加。","扩张时间早于相关资本流入。"]}
+        ]
+        got = generate_investigation_hypotheses(
+            "调查某组织近十年的扩张原因", [], caller=lambda *a, **k: json.dumps(payload, ensure_ascii=False))
+        self.assertEqual(len(got), 2)
+        self.assertAlmostEqual(sum(x["prior"] for x in got), 1.0)
+        self.assertIn("政策变化", got[0]["description"])
+
+    def test_general_mode_rejects_criminal_template_output(self):
+        payload = [
+            {"description":"熟人作案，具备专业技能","predictions":["a"],"falsifiers":["b","c"]},
+            {"description":"陌生人作案，无专业技能","predictions":["a"],"falsifiers":["b","c"]}
+        ]
+        with self.assertRaisesRegex(ValueError, "不会套用刑事案件假设模板"):
+            generate_investigation_hypotheses(
+                "调查一个非刑事组织问题", [],
+                caller=lambda *a, **k: json.dumps(payload, ensure_ascii=False))
+
+    def test_general_pack_has_no_criminal_checklist_or_crime_hypotheses(self):
+        hypotheses = [
+            {"hypothesis_id":"H1","description":"原因A","predictions":["预测A"],
+             "falsifiers":["反证A","反证B"],"prior":0.5},
+            {"hypothesis_id":"H2","description":"原因B","predictions":["预测B"],
+             "falsifiers":["反证C","反证D"],"prior":0.5}
+        ]
+        pack = build_draft_pack(
+            "CASE-DRAFT-GENERAL", "组织发展研究", "研究某组织发展原因", "job-general",
+            [{"source_id":"S01","title":"来源","publisher":"机构",
+              "published_at":"","url":"https://example.com","source_type":"official",
+              "is_reprint":False,"reprint_of":"","notes":""}],
+            [{"content":"组织于2020年成立。","quote":"组织于2020年成立。",
+              "source_id":"S01","source_location":"第1段","evidence_type":"fact",
+              "event_date":"","category":""}],
+            [], investigation_mode="general", hypothesis_specs=hypotheses)
+        self.assertEqual(pack["case"]["investigation_mode"], "general")
+        self.assertIsNone(pack["coverage"])
+        self.assertEqual([h["description"] for h in pack["case"]["hypotheses"]],
+                         ["原因A","原因B"])
+        self.assertFalse(any("作案" in h["description"] for h in pack["case"]["hypotheses"]))
+        with tempfile.TemporaryDirectory() as d:
+            case_dir = write_draft_pack(Path(d) / "case", pack)
+            self.assertFalse((case_dir / "coverage.json").exists())
+
+
 if __name__ == "__main__":
     unittest.main()
