@@ -1,5 +1,5 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<title>DETECTIVE OS — 自动调查</title>
+<title>DETECTIVE OS — 调查工作台</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#dce5ef;background:#080f19;--panel:#101b29;--line:#23364a;--muted:#8ea0b4;--gold:#d9ae58}
 *{box-sizing:border-box}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 80% 0%,#17283a 0,transparent 40%),#080f19;color:#dce5ef;font:14px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -25,9 +25,9 @@ table{border-collapse:collapse;width:100%}td,th{border:1px solid #2a4053;padding
 @media(max-width:640px){.shell{padding:18px 14px 40px}.site-header{align-items:flex-start;flex-direction:column}form,.panel,#job{padding:15px}}
 </style></head><body>
 <p><a href="index.html">← 案件中心</a></p>
-<h1>DETECTIVE OS — 自动调查</h1>
-<p class="note">输入一个调查方向，引擎自动跑：收集公开报道 → 去重 → 抽取事实 → 推理 → 出草稿报告。
-出的是<span class="draft">未审草稿</span>：证据最高C级，假设似然为初拟，结论只作参考，不得据此指认任何人。</p>
+<h1>DETECTIVE OS — 调查工作台</h1>
+<p class="note">选择刑事调查或纯调查。引擎自动收集公开资料、核验原文、抽取事实、生成相应假设并输出可追溯的分析草稿。
+所有自动结果均为<span class="draft">未审草稿</span>：证据最高C级，假设与似然为模型初拟，必须人工复核。</p>
 
 <div id="continueBanner" class="continue-banner" style="display:none">
   <span class="eyebrow">FOLLOW-UP CASEWORK / 续办调查</span>
@@ -91,7 +91,7 @@ const requestedJob = params.get("job");
 const requestedCase = params.get("case");
 $("investigationMode").addEventListener("change", () => {
   $("modeNote").textContent = $("investigationMode").value === "general"
-    ? "纯调查不预设犯罪、被害人或嫌疑人；假设将根据本次调查主题与核验事实动态生成，使用通用调查方向与覆盖逻辑。"
+    ? "纯调查不预设犯罪、被害人或嫌疑人；假设将根据本次调查主题与核验事实动态生成，不使用刑事案件假设模板或刑事案件覆盖清单。"
     : "刑事调查使用犯罪案件专用分析框架。";
 });
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
@@ -115,7 +115,7 @@ function showJob(j){
     let h=`<div class="version-line">${res.investigation_mode==="general"?"纯调查":"刑事调查"} · 报告版本：v${esc(version)} · 本轮新增来源：${esc(res.new_source_count||0)}个 · 新增事实：${esc(res.new_fact_count||0)}条 · 总来源：${esc(res.source_count||"—")}个</div>`;
     if(res.parent_job_id)h+=`<p>承接原任务：<a href="investigate.html?job=${encodeURIComponent(res.parent_job_id)}">${esc(res.parent_job_id)}</a></p><p>原结论：${esc(res.previous_verdict||"未记录")}<br>本轮结论：${esc(res.verdict||"未记录")}</p>`;
     else if(res.verdict)h+=`<p>结论：${esc(res.verdict)}</p>`;
-    h+=`<h2>调查报告 v${esc(version)}</h2><p class="draft">未审草稿：证据最高C级，假设似然为初拟，结论只作参考。</p>`;
+    h+=`<h2>${res.investigation_mode==="general"?"纯调查报告":"刑事调查报告"} v${esc(version)}</h2><p class="draft">未审草稿：证据最高C级，假设似然为初拟，结论只作参考。</p>`;
     if(res.posteriors)h+=`<table><tr><th>假设</th><th>后验</th><th>先验</th></tr>`+res.posteriors.map(p=>`<tr><td>${esc(p.hypothesis_id)}</td><td>${esc(p.posterior)}</td><td>${esc(p.prior)}</td></tr>`).join("")+"</table>";
     if(res.coverage)h+=`<p>资料覆盖：${esc(res.coverage.score_pct)}%（${esc(res.coverage.covered)}项已覆盖/${esc(res.coverage.single)}项单来源/${esc(res.coverage.missing)}项缺失，共${esc(res.coverage.total)}项）</p>`;
     else if(res.investigation_mode==="general")h+=`<p class="note">纯调查模式：未使用刑事案件专用覆盖清单。</p>`;
