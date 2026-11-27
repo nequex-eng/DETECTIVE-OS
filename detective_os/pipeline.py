@@ -61,7 +61,8 @@ _QUERY_WORDS = {
 }
 
 
-def plan_queries(direction: str, language: str = "zh", region: str = "") -> list:
+def plan_queries(direction: str, language: str = "zh", region: str = "",
+                 investigation_mode: str = "criminal") -> list:
     """Systematic query plan for a direction.
 
     Base query + one per checklist angle, in the direction language
@@ -71,9 +72,18 @@ def plan_queries(direction: str, language: str = "zh", region: str = "") -> list
     """
     direction = direction.strip()
     langs = [language] if language == "en" else [language, "en"]
+    general_words = {
+        "zh": ["官方文件", "公开记录", "研究报告", "统计数据", "历史档案",
+               "组织架构", "决策过程", "财务披露", "政策背景"],
+        "en": ["official records", "public documents", "research report",
+               "statistics", "historical archives", "organization structure",
+               "decision process", "financial filings", "policy background"],
+    }
     queries = []
     for lang in langs:
-        words = _QUERY_WORDS.get(lang, _QUERY_WORDS["en"])
+        words = (general_words.get(lang, general_words["en"])
+                 if investigation_mode == "general"
+                 else _QUERY_WORDS.get(lang, _QUERY_WORDS["en"]))
         queries.append(direction + (f" {region}" if region else ""))
         for w in words:
             queries.append(f"{direction} {w}")
