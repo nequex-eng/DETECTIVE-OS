@@ -451,12 +451,18 @@ def main():
             parent_result = parent["result"]
             if not isinstance(parent_result, dict):
                 raise RuntimeError("原调查结果格式异常，不能继续调查")
-            investigation_mode = parent_result.get("investigation_mode") or parent.get("investigation_mode") or investigation_mode
+            parent_mode = parent_result.get("investigation_mode") or parent.get("investigation_mode") or "criminal"
+            # The follow-up job mode is authoritative: users may explicitly switch modes.
+            if investigation_mode != parent_mode:
+                parent_hypotheses = []  # Never carry incompatible criminal/general hypothesis templates across a mode switch
+            else:
+                parent_hypotheses = parent_result.get("baseline_hypotheses") or []
             parent_run_dir = ROOT / "runs" / parent_id
             (parent_collected, parent_sources, parent_texts, parent_candidates,
              parent_likelihoods, parent_categories) = read_parent_checkpoint(
                 parent_run_dir, parent_result)
-            parent_hypotheses = parent_result.get("baseline_hypotheses") or []
+            if investigation_mode == parent_mode:
+                parent_hypotheses = parent_result.get("baseline_hypotheses") or []
         parent_paths = parent_collected.get("paths_tried", [])
         previous_verdict = parent_result.get("verdict")
         root_job_id = parent_result.get("root_job_id") or parent.get("root_job_id") or live.get("root_job_id") or parent_id
