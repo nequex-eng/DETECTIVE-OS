@@ -5,7 +5,8 @@ from __future__ import annotations
 def render_markdown(case, ranking, bayes, plan, review, contra, sources,
                     coverage_lines=None):
     L = []
-    L.append(f"# 案件分析报告：{case['name']}")
+    general = case.get("investigation_mode") == "general"
+    L.append(f"# {'调查分析报告' if general else '案件分析报告'}：{case['name']}")
     L.append("")
     L.append(f"案件编号：{case['case_id']}｜状态：{case['status']}｜"
              f"公开资料数：{len(sources)}｜本报告只依据公开资料，不代表警方卷宗。")
@@ -54,6 +55,9 @@ def render_markdown(case, ranking, bayes, plan, review, contra, sources,
     L.append("")
     L.append("## 本报告回答不了的问题")
     L.append("")
-    L.append("公开资料无法回答：警方掌握但未公布的证据、法医原始报告、"
-             "完整的排查记录、DNA比对现状。不得据此假装还原完整刑侦卷宗。")
+    if general:
+        L.append("本报告仅反映当前已收集并逐字核验的公开资料。未获得可靠来源支持的因果关系、动机、内部决策、未公开数据及争议说法均保持未知；不得把相关假设写成事实。")
+    else:
+        L.append("公开资料无法回答：警方掌握但未公布的证据、法医原始报告、"
+                 "完整的排查记录、DNA比对现状。不得据此假装还原完整刑侦卷宗。")
     return "\n".join(L) + "\n"
