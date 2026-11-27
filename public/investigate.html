@@ -32,14 +32,14 @@ table{border-collapse:collapse;width:100%}td,th{border:1px solid #2a4053;padding
 <div id="continueBanner" class="continue-banner" style="display:none">
   <span class="eyebrow">FOLLOW-UP CASEWORK / 续办调查</span>
   <h2>在原调查基础上继续跟进</h2>
-  <p>本轮只处理新增信源。系统保留原始来源、证据、结论与报告，生成v2、v3等新版本。粘贴的文字和线索仅作待核实输入，不会直接变成证据。</p>
+  <p>本轮只处理新增信源。可沿用原调查模式，也可切换刑事调查/纯调查；切换只更换推理框架，不删除原始来源、证据和历史报告。粘贴的文字和线索仅作待核实输入。</p>
   <div id="parentSummary" class="parent-summary"></div>
 </div>
 <h2 id="formHeading">开始新的调查</h2>
 <form id="form">
 <label>调查方向（必填）</label>
 <input id="direction" maxlength="500" required placeholder="例如：调查某组织决策机制、某历史事件的真实经过、某市场现象的成因">
-<label>调查类型</label>
+<label>本轮调查模式（可切换）</label>
 <select id="investigationMode">
   <option value="criminal">刑事调查（犯罪案件、被害人、嫌疑人、物证等）</option>
   <option value="general">纯调查（人物、组织、事件、商业、历史、社会现象及其他非刑事问题）</option>
@@ -172,7 +172,7 @@ async function prepareContinuation(id){
     $("continueBanner").style.display="block";$("continuationFields").style.display="block";
     $("formHeading").textContent="继续调查";
     $("investigationMode").value=parentJob.result?.investigation_mode||parentJob.investigation_mode||"criminal";
-    $("investigationMode").disabled=true;
+    $("investigationMode").disabled=false;
     $("direction").value=parentJob.direction||"";$("direction").readOnly=true;
     $("language").value=parentJob.language||"zh";$("region").value=parentJob.region||"";
     $("submitBtn").textContent="提交续办委托";
@@ -194,7 +194,7 @@ $("form").addEventListener("submit",async ev=>{
       materials:$("materials").value.trim()+(uploaded.length?"\n上传文件："+uploaded.map(f=>f.name).join("、"):""),
       questions:$("questions").value.trim(),known_facts:$("hints").value.trim()
     };
-    const body=parentCase?{case_id:requestedCase,...common}:parentJob?{parent_job_id:parentJob.job_id,...common}:{
+    const body=parentCase?{case_id:requestedCase,investigation_mode:$("investigationMode").value,...common}:parentJob?{parent_job_id:parentJob.job_id,investigation_mode:$("investigationMode").value,...common}:{
       direction:$("direction").value.trim(),language:$("language").value,
       region:$("region").value.trim(),hints:$("hints").value.trim(),
       investigation_mode:$("investigationMode").value
