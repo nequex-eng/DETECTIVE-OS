@@ -9,12 +9,23 @@ This is the required one-time update to the existing Muse scheduled task
 
 1. Every 10 minutes run `python3 scripts/job.py poll`. If no queued jobs, exit silently.
 2. For each queued ID, run `python3 scripts/job.py get <job_id>`. Only process a job whose status is exactly `queued`. Process one job at a time.
-3. Read the complete task JSON, including `parent_job_id`, `intake.source_urls`,
+3. Read the complete task JSON, including `investigation_mode`, `parent_job_id`, `intake.source_urls`,
    `intake.user_source_text`, `intake.materials`, `intake.questions`,
    `intake.known_facts`, and `intake.parent_report_context`.
 4. Mark only the child task as collecting:
    `python3 scripts/job.py update <job_id> --status collecting --stage collecting --note "正在收集新增来源" --event "开始收集"`.
 5. If `parent_job_id` is absent, collect sources for a normal new investigation as usual.
+
+### Investigation mode is mandatory
+
+- Read the task's `investigation_mode`; legacy jobs without it are `criminal`.
+- `criminal`: use the existing criminal-case research workflow.
+- `general`: this is 纯调查. Do not assume a crime, victim, suspect, perpetrator, police involvement, or criminal motive. Search according to the actual domain and topic (official records, organizational filings, policy documents, financial disclosures, historical archives, datasets, academic research, independent reporting, etc.).
+- In general mode, do not use criminal search angles such as forensic, victim, suspect profile, homicide, or crime-scene queries unless the user's subject explicitly requires them.
+- The code generates topic-specific, falsifiable hypotheses for general mode. Never manually add the five criminal archetypes or substitute them when generation fails.
+- General mode intentionally has no 22-item criminal coverage checklist.
+- Every follow-up child inherits its parent's mode; do not switch it.
+
 6. If `parent_job_id` is present, this is an incremental continuation:
    - Read the parent task with `python3 scripts/job.py get <parent_job_id>`; require `status=done` and a non-null result.
    - Read the parent report and use its summary/gaps/questions to guide searches.
