@@ -135,6 +135,28 @@ def main():
     cases_dir.mkdir(parents=True, exist_ok=True)
     reports_public.mkdir(parents=True, exist_ok=True)
 
+    # Preserve completed runner reports as static, independently viewable archives.
+    run_archives = []
+    runs_dir = ROOT / "runs"
+    if runs_dir.exists():
+        for result_path in sorted(runs_dir.glob("*/result.json")):
+            try:
+                result = read_json(result_path)
+                if not result.get("case_id") or not result.get("report_md"):
+                    continue
+                run_id = result_path.parent.name
+                archive_name = f"run-{run_id}.json"
+                shutil.copy2(result_path, reports_public / archive_name)
+                run_archives.append({
+                    "run_id": run_id,
+                    "case_id": result["case_id"],
+                    "name": result.get("case_name") or result["case_id"],
+                    "verdict": result.get("verdict", "未生成"),
+                    "review_blockers": result.get("review_blockers"),
+                })
+            except (OSError, ValueError, KeyError):
+                continue
+
     built = []
     index_rows = []
     for case_id in discover_case_ids():
@@ -183,14 +205,13 @@ def main():
     # A generated report marks this investigation stage complete. Archive automatically;
     # whether the underlying case is solved is a separate field and never gates archival.
     archived = list(index_rows)
-    task_drafts = read_json(ROOT / "cases" / "task-registry.json")
     task_archive_cards = "".join(
-        f'<a class="archive-card" href="investigate.html?job={esc(task["job_id"])}">'
-        f'<small>{esc(task["case_id"])} · COMPLETE · 任务自动归档</small>'
+        f'<a class="archive-card" href="archive.html?run={esc(task["run_id"])}">'
+        f'<small>{esc(task["case_id"])} · COMPLETE · 静态报告归档</small>'
         f'<b>{esc(task["name"])}</b>'
-        f'<span>来源记录 {task["source_count"]} · 抽取事实 {task["fact_count"]}</span>'
-        f'<em>任务执行已完成；结构化案卷完整度：未完成。{esc(task["limitations"])}　打开任务报告 →</em></a>'
-        for task in task_drafts
+        f'<span>{esc(task["verdict"])}</span>'
+        f'<em>已保存报告可独立打开，不依赖实时任务KV。审查阻断项：{esc(task["review_blockers"] if task["review_blockers"] is not None else "未记录")}　打开报告 →</em></a>'
+        for task in run_archives
     )
     index = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08121d">
@@ -225,7 +246,7 @@ h1{{font:500 clamp(30px,4vw,48px)/1.12 Georgia,serif;margin:12px 0 13px}}.hero p
 <div class="actions"><a class="action" href="investigate.html?mode=criminal">＋ 刑事调查</a><a class="action secondary" href="investigate.html?mode=general">＋ 纯调查</a><a class="action secondary" href="workbench.html">OPEN INTELLIGENCE WORKBENCH →</a></div>
 <div class="section"><div><div class="eyebrow">LIVE OPERATIONS</div><h2>近期调查任务</h2></div><span id="jobCount">CONNECTING TO TASK REGISTRY</span></div>
 <div class="live-grid" id="jobs"><div class="empty"><b>正在连接任务库</b>读取服务器端调查记录……</div></div>
-<div class="section"><div><div class="eyebrow">COMPLETED INVESTIGATIONS / AUTO ARCHIVE</div><h2>已完成调查 · 自动归档</h2></div><span>{len(archived) + len(task_drafts)} COMPLETE</span></div>
+<div class="section"><div><div class="eyebrow">COMPLETED INVESTIGATIONS / AUTO ARCHIVE</div><h2>已完成调查 · 自动归档</h2></div><span>{len(archived) + len(run_archives)} COMPLETE</span></div>
 <div class="archive-grid">{render_case_rows(archived)}{task_archive_cards}</div>
 <div class="archive-grid" id="completedJobs"></div>
 <p class="note">任务显示 COMPLETE 即自动归档，不设置人工复核队列。归档只表示本阶段调查任务已结束，不代表案件已经侦破。案件仍可保持未破、身份未明或其他真实状态；继续调查会建立新版本，不覆盖原始记录。部分旧任务可能只有报告记录，未必已恢复成完整结构化案卷。</p>
