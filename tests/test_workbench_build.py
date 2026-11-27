@@ -59,6 +59,15 @@ class TestWorkbenchBuild(unittest.TestCase):
         self.assertIn("e5b884e5-e8ac-4cdc-b57f-8aa50d840cb1", index)
         self.assertIn("结构化案卷完整度：未完成", index)
 
+    def test_homepage_has_separate_criminal_and_general_investigation_entries(self):
+        index = (PUBLIC / "index.html").read_text(encoding="utf-8")
+        intake = (PUBLIC / "investigate.html").read_text(encoding="utf-8")
+        self.assertIn('href="investigate.html?mode=criminal"', index)
+        self.assertIn('href="investigate.html?mode=general"', index)
+        self.assertIn('<option value="general">', intake)
+        self.assertIn('params.get("mode")', intake)
+        self.assertIn('investigation_mode:$("investigationMode").value', intake)
+
     def test_archived_case_pages_deep_link_to_case_specific_analysis_modules(self):
         app = (ROOT / "src" / "App.tsx").read_text(encoding="utf-8")
         self.assertIn('new URLSearchParams(window.location.search)', app)
