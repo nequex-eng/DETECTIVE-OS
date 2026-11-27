@@ -102,8 +102,9 @@ class Hypothesis:
 
 
 class HypothesisEngine:
-    def __init__(self, board):
+    def __init__(self, board, investigation_mode: str = "criminal"):
         self.board = board            # EvidenceBoard
+        self.investigation_mode = investigation_mode
         self.items: dict[str, Hypothesis] = {}
 
     def add(self, h: Hypothesis):
@@ -165,11 +166,15 @@ class HypothesisEngine:
             s["posterior"] = round(math.exp(s["log_posterior"] - m) / denom, 4)
         scored.sort(key=lambda s: s["posterior"], reverse=True)
         return {"posteriors": scored,
-                "disclosure": "Bayesian output is a model ranking under stated "
-                "priors and likelihoods, not a probability of guilt. "
-                "Priors are subjective starting points; likelihoods are "
-                "analyst judgments stored in the case file. No reliable "
-                "data exists to calibrate them against solved cases.",
+                "disclosure": (
+                    "Bayesian output is a relative model ranking under stated priors and likelihoods, "
+                    "not proof that any explanation is true. Priors are subjective starting points; "
+                    "likelihoods are analyst judgments stored in the case file and require review."
+                    if self.investigation_mode == "general" else
+                    "Bayesian output is a model ranking under stated priors and likelihoods, not a probability of guilt. "
+                    "Priors are subjective starting points; likelihoods are analyst judgments stored in the case file. "
+                    "No reliable data exists to calibrate them against solved cases."
+                ),
                 "verdict": self._verdict(scored)}
 
     def _verdict(self, scored):
