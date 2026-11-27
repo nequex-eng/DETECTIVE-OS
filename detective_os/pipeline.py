@@ -469,6 +469,8 @@ def build_draft_pack(case_id: str, name: str, direction: str, job_id: str,
                     likelihoods.get((hid, ev["evidence_id"]), 0.5))))
                 for ev in evidence
             }
+            row["supports"] = [eid for eid, value in row["likelihoods"].items() if value >= 0.6]
+            row["opposes"] = [eid for eid, value in row["likelihoods"].items() if value <= 0.4]
             hypotheses.append(row)
     else:
         for hid, desc, prior, preds, fals in HYPOTHESIS_TEMPLATE:
@@ -549,9 +551,8 @@ def write_draft_pack(case_dir: Path, pack: dict) -> Path:
 DRAFT_BANNER = [
     "# 草稿（未审）— 本报告未经人工复核",
     "",
-    "本案包由自动流程生成：公开报道经LLM抽取事实（逐字引用已核验），"
-    "证据最高C级；假设先验为均匀分布，似然为LLM初拟。"
-    "结论只作参考，不得据此指认任何人，不得当作定论引用。",
+    "自动流程从公开来源抽取事实，逐字引用已经核验；证据最高C级。"
+    "假设由模型初拟，先验与似然均需人工复核。不得将假设或模型排序当作已证实事实。",
     "人工复核每条证据的原文与分级后，方可去掉本横幅。",
     "",
 ]
