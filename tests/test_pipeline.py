@@ -359,6 +359,12 @@ class TestGeneralInvestigationMode(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             case_dir = write_draft_pack(Path(d) / "case", pack)
             self.assertFalse((case_dir / "coverage.json").exists())
+            md_path, summary = run_draft(case_dir, Path(d) / "reports")
+            report = md_path.read_text(encoding="utf-8")
+            self.assertIn("纯调查草稿", report)
+            self.assertIn("not proof that any explanation is true", report)
+            self.assertNotIn("probability of guilt", report)
+            self.assertIsNone(summary["coverage"])
 
 
 if __name__ == "__main__":
