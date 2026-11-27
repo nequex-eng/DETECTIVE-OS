@@ -77,6 +77,7 @@ export async function onRequestPost(context) {
     const job = {
       job_id: crypto.randomUUID(),
       direction: parent.direction,
+      investigation_mode: parent.result.investigation_mode || parent.investigation_mode || "criminal",
       language: parent.language || "zh",
       region: parent.region || "",
       hints: followupHints,
