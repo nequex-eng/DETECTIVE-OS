@@ -73,7 +73,7 @@ def load_case(case_dir: Path):
             wording_a=c["wording_a"], wording_b=c["wording_b"],
             could_be_drift=c.get("could_be_drift", ""), needs_what=c.get("needs_what", ""),
             resolvable_now=c.get("resolvable_now", False), resolution=c.get("resolution", "")))
-    hyp = HypothesisEngine(board)
+    hyp = HypothesisEngine(board, case.get("investigation_mode", "criminal"))
     for h in case["hypotheses"]:
         hyp.add(Hypothesis(
             hypothesis_id=h["hypothesis_id"], case_id=case["case_id"],
