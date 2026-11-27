@@ -43,6 +43,7 @@ export async function onRequestGet(context) {
             typeof j.direction !== "string" || !j.direction ||
             typeof j.status !== "string") { skipped++; continue; }
         jobs.push({ job_id: j.job_id, direction: j.direction, language: j.language,
+                    investigation_mode: j.result?.investigation_mode || j.investigation_mode || "criminal",
                     status: j.status, stage: j.stage || "unknown", stage_note: j.stage_note || "",
                     parent_job_id: j.parent_job_id || null,
                     version: j.result?.version || j.version || 1,
