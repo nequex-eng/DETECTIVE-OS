@@ -677,7 +677,7 @@ def main():
             "candidates": candidates,
             "likelihoods": {f"{h}|{e}": v for (h, e), v in likelihoods.items()},
             "categories": categories, "paths_tried": paths_tried,
-            "baseline_hypotheses": parent_hypotheses,
+            "baseline_hypotheses": pack["case"].get("hypotheses", []),
             "summary": case_summary, "report_md": report_md
         }
         (run_dir / "result.json").write_text(
