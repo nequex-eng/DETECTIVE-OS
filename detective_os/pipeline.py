@@ -231,7 +231,7 @@ def generate_investigation_hypotheses(direction: str, evidence: list,
             "prior": 1.0, "likelihoods": {}, "status": "open",
         })
     if len(valid) < 2:
-        raise ValueError("纯调查模式至少需要两个相关且可证伪的假设；已停止，不会套用刑事案件模板。")
+        raise ValueError("纯调查模式至少需要两个相关且可证伪的假设；已停止，不会套用刑事案件假设模板。")
     for row in valid:
         row["prior"] = 1.0 / len(valid)
     return valid
