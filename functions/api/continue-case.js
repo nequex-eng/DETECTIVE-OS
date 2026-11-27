@@ -33,6 +33,8 @@ export async function onRequestPost(context) {
       }
     };
     const baseline = supported[caseId];
+    const investigationMode = body.investigation_mode || "criminal";
+    if (!["criminal", "general"].includes(investigationMode)) return json({ error: "调查模式无效，请选择刑事调查或纯调查" }, 400);
     if (!baseline) return json({ error: "该静态案卷暂不支持增量续办" }, 400);
     const sourceUrls = Array.isArray(body.source_urls)
       ? body.source_urls.map(v => cleanText(v, 2000)).filter(v => /^https?:\/\//i.test(v)).slice(0, 20)
@@ -76,6 +78,8 @@ export async function onRequestPost(context) {
     const job = {
       job_id: crypto.randomUUID(),
       direction: baseline.direction,
+      investigation_mode: investigationMode,
+      mode_switch_from: investigationMode !== "criminal" ? "criminal" : null,
       language: "zh",
       region: baseline.region,
       hints: "【继续调查】基于既有案卷版本进行增量跟进；只处理新增信源，不得重跑旧来源。",
