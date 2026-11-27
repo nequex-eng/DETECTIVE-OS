@@ -356,7 +356,8 @@ class TestGeneralInvestigationMode(unittest.TestCase):
             [{"content":"组织于2020年成立。","quote":"组织于2020年成立。",
               "source_id":"S01","source_location":"第1段","evidence_type":"fact",
               "event_date":"","category":""}],
-            [], investigation_mode="general", hypothesis_specs=hypotheses)
+            [], investigation_mode="general", hypothesis_specs=hypotheses,
+            baseline_hypotheses=hypotheses)
         self.assertEqual(pack["case"]["investigation_mode"], "general")
         self.assertIsNone(pack["coverage"])
         self.assertEqual([h["description"] for h in pack["case"]["hypotheses"]],
